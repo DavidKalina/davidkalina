@@ -12,6 +12,18 @@ const getRandomFloat = (min: number, max: number) => Math.random() * (max - min)
 const getRandomMovement = () => {
   // (These offset numbers push the shape fully offscreen before/after.)
   const offset = 100;
+
+  // Check if window is defined (i.e. code is running in the browser)
+  if (typeof window === "undefined") {
+    // Return default values when server-side rendering.
+    return {
+      start: { x: 0, y: 0 },
+      end: { x: 0, y: 0 },
+      duration: 30,
+    };
+  }
+
+  // (These offset numbers push the shape fully offscreen before/after.)
   const { innerWidth: width, innerHeight: height } = window;
   const edge = Math.floor(Math.random() * 4);
   let start, end;
