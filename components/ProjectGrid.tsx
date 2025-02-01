@@ -73,7 +73,7 @@ const ModernProjectGrid = () => {
   ];
 
   return (
-    <section className="bg-white">
+    <section className="bg-white/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="max-w-2xl">
@@ -114,7 +114,7 @@ const ModernProjectGrid = () => {
                         </div>
                         <div className="hidden lg:block">{project.icon}</div>
                       </div>
-                      <Badge className="bg-white/10 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                      <Badge className="bg-white/80/10 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
                         {project.year}
                       </Badge>
                     </div>
@@ -128,7 +128,7 @@ const ModernProjectGrid = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="p-6 lg:p-8 bg-white">
+                <div className="p-6 lg:p-8 bg-white/80">
                   <div className="space-y-6 lg:space-y-8">
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
@@ -167,7 +167,7 @@ const ModernProjectGrid = () => {
                       </Button>
                       <Button
                         variant="outline"
-                        className="border-2 border-zinc-200 hover:border-black hover:bg-white text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
+                        className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
                       >
                         <Github className="mr-2" size={14} />
                         SOURCE

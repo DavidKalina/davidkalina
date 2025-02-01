@@ -21,7 +21,7 @@ const ModernResume = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white/80 min-h-screen">
       <div className="max-w-5xl mx-auto px-8 py-16">
         {/* Header Section */}
         <div className="relative bg-indigo-500 rounded-3xl p-12 mb-12">
@@ -52,7 +52,7 @@ const ModernResume = () => {
                 </div>
               </div>
               <Button
-                className="bg-white text-indigo-500 hover:bg-white/90 rounded-full px-6 py-6 font-mono text-sm"
+                className="bg-white/80 text-indigo-500 hover:bg-white/80/90 rounded-full px-6 py-6 font-mono text-sm"
                 onClick={() => window.print()}
               >
                 <Download className="mr-2" size={18} />

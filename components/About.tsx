@@ -9,7 +9,7 @@ const ModernAbout = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="bg-white">
+    <section className="bg-white/80/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
@@ -78,7 +78,7 @@ const ModernAbout = () => {
               </Button>
               <Button
                 variant="outline"
-                className="border-2 border-zinc-200 hover:border-black hover:bg-white text-black rounded-full font-mono md:text-md px-6 lg:px-8 py-6 w-full sm:w-auto"
+                className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono md:text-md px-6 lg:px-8 py-6 w-full sm:w-auto"
               >
                 <Github className="mr-2" size={18} />
                 GITHUB
@@ -106,7 +106,7 @@ const ModernAbout = () => {
                 <p className="font-mono md:text-sm lg:md:text-md text-white/60">FEATURED WORK</p>
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <Badge className="bg-white/10 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
+                    <Badge className="bg-white/80/10 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
                       ACME INC
                     </Badge>
                     <span className="font-mono md:text-sm lg:md:text-md text-white/60">2023</span>
@@ -126,7 +126,7 @@ const ModernAbout = () => {
                     "Contributing to open source",
                     "Exploring new technologies",
                   ].map((focus, index) => (
-                    <div key={index} className="bg-white/5 rounded-xl lg:rounded-2xl p-4 lg:p-6">
+                    <div key={index} className="bg-white/80/5 rounded-xl lg:rounded-2xl p-4 lg:p-6">
                       <p className="font-mono md:text-md lg:text-base text-white">{focus}</p>
                     </div>
                   ))}

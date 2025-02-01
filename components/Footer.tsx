@@ -7,7 +7,7 @@ const ModernFooter = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-zinc-100">
+    <footer className="bg-white/80 border-t border-zinc-100">
       <div className="max-w-7xl mx-auto px-8">
         {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -63,7 +63,7 @@ const ModernFooter = () => {
                 className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline group inline-flex items-center"
                 asChild
               >
-                <Link href="mailto:hello@portfolio.dev">
+                <Link href="mailto:davidkalina@proton.me">
                   Email
                   <ArrowUpRight
                     size={14}

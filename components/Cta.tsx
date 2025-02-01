@@ -5,7 +5,7 @@ import { Clock, Mail, Send } from "lucide-react";
 
 const ModernCTA = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white/80">
       <div className="max-w-7xl mx-auto px-8 py-32">
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -70,7 +70,7 @@ const ModernCTA = () => {
                   <div className="space-y-2">
                     <label className="font-mono text-xs text-zinc-500">NAME</label>
                     <Input
-                      className="h-14 px-6 font-mono text-sm bg-white border-2 border-zinc-200 rounded-2xl focus:border-black focus:ring-0 transition-colors duration-300"
+                      className="h-14 px-6 font-mono text-sm bg-white/80 border-2 border-zinc-200 rounded-2xl focus:border-black focus:ring-0 transition-colors duration-300"
                       placeholder="John Doe"
                     />
                   </div>
@@ -78,7 +78,7 @@ const ModernCTA = () => {
                     <label className="font-mono text-xs text-zinc-500">EMAIL</label>
                     <Input
                       type="email"
-                      className="h-14 px-6 font-mono text-sm bg-white border-2 border-zinc-200 rounded-2xl focus:border-black focus:ring-0 transition-colors duration-300"
+                      className="h-14 px-6 font-mono text-sm bg-white/80 border-2 border-zinc-200 rounded-2xl focus:border-black focus:ring-0 transition-colors duration-300"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -86,7 +86,7 @@ const ModernCTA = () => {
                 <div className="space-y-2">
                   <label className="font-mono text-xs text-zinc-500">PROJECT DETAILS</label>
                   <Textarea
-                    className="min-h-[200px] p-6 font-mono text-sm bg-white border-2 border-zinc-200 rounded-2xl focus:border-black focus:ring-0 transition-colors duration-300"
+                    className="min-h-[200px] p-6 font-mono text-sm bg-white/80 border-2 border-zinc-200 rounded-2xl focus:border-black focus:ring-0 transition-colors duration-300"
                     placeholder="Tell me about your project..."
                   />
                 </div>

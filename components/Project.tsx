@@ -61,7 +61,7 @@ const ModernFeaturedProject = () => {
             </div>
 
             {/* Project Details */}
-            <div className="p-6 sm:p-8 lg:p-16 bg-white">
+            <div className="p-6 sm:p-8 lg:p-16 bg-white/80">
               <div className="space-y-8 lg:space-y-12">
                 <div className="space-y-4 lg:space-y-6">
                   <div className="flex flex-wrap gap-2 lg:gap-3">
@@ -102,7 +102,7 @@ const ModernFeaturedProject = () => {
                   </Button>
                   <Button
                     variant="outline"
-                    className="border-2 border-zinc-200 hover:border-black hover:bg-white text-black rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto"
+                    className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto"
                   >
                     <Github className="mr-2" size={18} />
                     SOURCE

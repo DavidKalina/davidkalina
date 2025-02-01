@@ -9,7 +9,7 @@ const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white border-b border-zinc-100">
+    <nav className="bg-white/80 border-b border-zinc-100">
       <div className="px-8 mx-auto max-w-7xl">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
@@ -52,7 +52,7 @@ const ModernNavbar = () => {
             <div className="flex items-center gap-3 pl-6 border-l border-zinc-100">
               <Button
                 variant="outline"
-                className="border-2 border-zinc-200 hover:border-black hover:bg-white text-black rounded-full font-mono text-sm px-6"
+                className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6"
                 asChild
               >
                 <Link href="https://github.com" target="_blank">
@@ -118,7 +118,7 @@ const ModernNavbar = () => {
             <div className="pt-6 border-t border-zinc-100 space-y-3">
               <Button
                 variant="outline"
-                className="w-full border-2 border-zinc-200 hover:border-black hover:bg-white text-black rounded-full font-mono text-sm"
+                className="w-full border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm"
                 asChild
               >
                 <Link href="https://github.com" target="_blank">

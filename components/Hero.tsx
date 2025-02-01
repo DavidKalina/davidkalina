@@ -9,7 +9,7 @@ const ModernHero = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 lg:py-24">
           {/* Content Section */}
@@ -64,7 +64,7 @@ const ModernHero = () => {
               </Button>
               <Button
                 variant="outline"
-                className="border-2 border-zinc-200 hover:border-black hover:bg-white text-black rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
+                className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
               >
                 CONTACT ME
               </Button>
