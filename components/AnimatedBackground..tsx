@@ -63,13 +63,13 @@ const AnimatedBackground = () => {
     },
     {
       shape: "square",
-      className: "w-40 h-40 bg-zinc-500 rotate-12",
+      className: "w-20 h-20 md:w-40 md:h-40 bg-zinc-500 rotate-12",
       animation: "animate-float-medium",
       style: {},
     },
     {
       shape: "rectangle",
-      className: "w-64 h-24 bg-zinc-500 -rotate-6",
+      className: "w-32 h-12 md:w-64 md:h-24 bg-zinc-500 -rotate-6",
       animation: "animate-float-fast",
       style: {},
     },
@@ -81,7 +81,7 @@ const AnimatedBackground = () => {
     },
     {
       shape: "abstract",
-      className: "w-48 h-48 bg-zinc-500",
+      className: "w-24 h-24 md:w-48 md:h-48 bg-zinc-500",
       style: {
         clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
       },

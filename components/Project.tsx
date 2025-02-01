@@ -65,10 +65,10 @@ const ModernFeaturedProject = () => {
               <div className="space-y-8 lg:space-y-12">
                 <div className="space-y-4 lg:space-y-6">
                   <div className="flex flex-wrap gap-2 lg:gap-3">
-                    <Badge className="bg-zinc-100 text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                    <Badge className="bg-zinc-100 hover:text-white text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
                       E-COMMERCE
                     </Badge>
-                    <Badge className="bg-zinc-100 text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                    <Badge className="bg-zinc-100 hover:text-white text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
                       FULL-STACK
                     </Badge>
                   </div>

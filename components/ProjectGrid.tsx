@@ -135,7 +135,7 @@ const ModernProjectGrid = () => {
                       {project.tags.map((tag) => (
                         <Badge
                           key={tag}
-                          className="bg-zinc-100 text-black px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono"
+                          className="bg-zinc-100 text-black hover:text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono"
                         >
                           {tag}
                         </Badge>

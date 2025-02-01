@@ -6,7 +6,7 @@ import { Code2, Database, Laptop, Layers } from "lucide-react";
 const ModernTechStack = () => {
   const technologies = {
     frontend: {
-      icon: <Laptop size={24} className="text-zinc-800" />,
+      icon: <Laptop size={24} />,
       title: "FRONTEND DEVELOPMENT",
       description: "Crafting responsive and intuitive user interfaces with modern web technologies",
       skills: [
@@ -15,7 +15,7 @@ const ModernTechStack = () => {
       ],
     },
     backend: {
-      icon: <Database size={24} className="text-zinc-800" />,
+      icon: <Database size={24} />,
       title: "BACKEND DEVELOPMENT",
       description: "Building robust and scalable server-side applications and APIs",
       skills: [
@@ -24,7 +24,7 @@ const ModernTechStack = () => {
       ],
     },
     database: {
-      icon: <Layers size={24} className="text-zinc-800" />,
+      icon: <Layers size={24} />,
       title: "DATABASE & INFRASTRUCTURE",
       description: "Managing data and infrastructure with modern cloud solutions",
       skills: [{ name: "SUPABASE", level: "Advanced", years: 2 }],
@@ -64,7 +64,7 @@ const ModernTechStack = () => {
                 <div className="p-8 pb-6">
                   <div className="flex items-start gap-6 mb-6">
                     <div className="bg-zinc-100 p-4 rounded-xl group-hover:bg-black transition-colors duration-300">
-                      <div className="group-hover:text-white transition-colors duration-300">
+                      <div className="text-zinc-800 group-hover:text-white transition-colors duration-300">
                         {category.icon}
                       </div>
                     </div>

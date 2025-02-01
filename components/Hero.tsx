@@ -46,7 +46,7 @@ const ModernHero = () => {
               {["TYPESCRIPT", "REACT", "NODE.JS"].map((tech) => (
                 <Badge
                   key={tech}
-                  className="bg-zinc-100 text-black px-3 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono"
+                  className="bg-zinc-100 hover:text-white text-black px-3 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono"
                 >
                   {tech}
                 </Badge>
