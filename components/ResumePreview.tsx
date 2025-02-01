@@ -22,7 +22,7 @@ const ModernResume = () => {
 
   return (
     <div className="bg-white/80 min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
         {/* Header Section */}
         <div className="relative bg-indigo-500 rounded-3xl p-6 sm:p-12 mb-8 sm:mb-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1),rgba(255,255,255,0))] rounded-3xl" />
