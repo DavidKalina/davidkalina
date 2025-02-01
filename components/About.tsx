@@ -99,22 +99,21 @@ const ModernAbout = () => {
           >
             {/* Gradient Overlay */}
             <div
-              className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] transition-opacity duration-500 rounded-2xl lg:rounded-3xl ${
+              className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.08),rgba(255,255,255,0))] transition-opacity duration-500 rounded-2xl lg:rounded-3xl ${
                 isHovered ? "opacity-100" : "opacity-0"
               }`}
             />
-
             {/* Content */}
             <div className="relative z-10 space-y-8 lg:space-y-12">
               {/* Featured Work */}
               <div className="space-y-4">
-                <p className="font-mono md:text-sm lg:md:text-md text-white/60">FEATURED WORK</p>
+                <p className="font-mono md:text-sm lg:md:text-md text-white/90">FEATURED WORK</p>
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <Badge className="bg-white/80/10 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
+                    <Badge className="bg-white/20 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
                       ACME INC
                     </Badge>
-                    <span className="font-mono md:text-sm lg:md:text-md text-white/60">2023</span>
+                    <span className="font-mono md:text-sm lg:md:text-md text-white/90">2023</span>
                   </div>
                   <p className="font-mono md:text-md lg:text-base text-white/80">
                     Led development of e-commerce platform serving 100k+ monthly users
@@ -124,7 +123,7 @@ const ModernAbout = () => {
 
               {/* Current Focus */}
               <div className="space-y-4">
-                <p className="font-mono md:text-sm lg:md:text-md text-white/60">CURRENT FOCUS</p>
+                <p className="font-mono md:text-sm lg:md:text-md text-white/90">CURRENT FOCUS</p>
                 <div className="grid grid-cols-1 gap-3 lg:gap-4">
                   {[
                     "Building scalable React applications",

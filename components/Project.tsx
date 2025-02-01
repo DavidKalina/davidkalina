@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Code2, Github, Network } from "lucide-react";
+import { ArrowRight, Github, Network, Star } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -16,8 +16,8 @@ const ModernFeaturedProject = () => {
       <div className="flex items-center justify-between mb-8 lg:mb-12">
         <div className="flex items-center gap-4 lg:gap-6">
           <div className="bg-zinc-100 p-3 lg:p-4 rounded-2xl">
-            <Code2 size={20} className="text-black lg:hidden" />
-            <Code2 size={24} className="text-black hidden lg:block" />
+            <Star size={20} className="text-black lg:hidden" />
+            <Star size={24} className="text-black hidden lg:block" />
           </div>
           <div>
             <p className="text-xs lg:text-sm font-mono text-zinc-400 mb-1">003 / FEATURED</p>
