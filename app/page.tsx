@@ -7,7 +7,7 @@ import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home | Modern Portfolio",
+  title: "David Kalina | Full Stack Developer",
   description: "Welcome to my modern portfolio showcasing my work and expertise",
 };
 
