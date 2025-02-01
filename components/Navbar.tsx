@@ -28,7 +28,7 @@ const ModernNavbar = () => {
                 className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6"
                 asChild
               >
-                <Link href="https://github.com" target="_blank">
+                <Link href="https://github.com/DavidKalina" target="_blank">
                   <Github className="mr-2" size={16} />
                   GITHUB
                 </Link>
