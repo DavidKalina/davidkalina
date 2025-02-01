@@ -62,8 +62,8 @@ const ModernCTA = () => {
           </div>
 
           {/* Right Column - Form */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(0,0,0,0.02),rgba(0,0,0,0))]" />
+          <div className="relative p-4">
+            <div className="absolute rounded-md inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(0,0,0,0.02),rgba(0,0,0,0))]" />
             <div className="relative space-y-8">
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

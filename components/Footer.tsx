@@ -14,7 +14,7 @@ const ModernFooter = () => {
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="inline-block">
-              <h3 className="font-mono font-bold text-lg">portfolio.dev</h3>
+              <h3 className="font-mono font-bold text-lg">davidkalina</h3>
             </Link>
             <p className="font-mono text-sm text-zinc-600 leading-relaxed">
               Building digital experiences with modern technologies and minimal design.
