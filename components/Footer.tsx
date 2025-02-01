@@ -77,7 +77,7 @@ const ModernFooter = () => {
                 className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline group inline-flex items-center"
                 asChild
               >
-                <Link href="https://linkedin.com" target="_blank">
+                <Link href="https://www.linkedin.com/in/david-kalina-b68854342/" target="_blank">
                   LinkedIn
                   <ArrowUpRight
                     size={14}
@@ -146,7 +146,7 @@ const ModernFooter = () => {
               className="rounded-full h-10 w-10 text-zinc-400 hover:text-black"
               asChild
             >
-              <Link href="https://linkedin.com" target="_blank">
+              <Link href="https://www.linkedin.com/in/david-kalina-b68854342/" target="_blank">
                 <Linkedin size={18} />
               </Link>
             </Button>
