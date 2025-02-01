@@ -27,6 +27,7 @@ const ModernFeaturedProject = () => {
           </div>
         </div>
       </div>
+
       {/* Main Project Display */}
       <Card
         className="border-0 rounded-3xl overflow-hidden transition-all duration-300 bg-zinc-50 hover:shadow-[24px_24px_64px_rgba(0,0,0,0.06)]"
@@ -120,7 +121,8 @@ const ModernFeaturedProject = () => {
           </div>
         </CardContent>
       </Card>
-      Bottom Navigation
+
+      {/* Bottom Navigation
       <div className="flex justify-between items-center mt-8 lg:mt-12 pt-8 lg:pt-12 border-t border-zinc-100">
         <Button
           variant="ghost"
@@ -134,7 +136,7 @@ const ModernFeaturedProject = () => {
         >
           NEXT →
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
