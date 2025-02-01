@@ -18,7 +18,7 @@ const ModernCTA = () => {
                   <Mail size={24} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-mono text-zinc-500 mb-1">004 / CONTACT</p>
+                  <p className="text-sm font-mono text-zinc-500 mb-1">005 / CONTACT</p>
                   <h2 className="text-3xl font-mono font-bold text-zinc-900">
                     Let&apos;s Work Together
                   </h2>
@@ -43,7 +43,7 @@ const ModernCTA = () => {
                 <Mail size={20} className="text-zinc-400" />
                 <div>
                   <p className="font-mono text-sm text-zinc-900 font-bold">Email</p>
-                  <p className="font-mono text-sm text-zinc-600">hello@portfolio.dev</p>
+                  <p className="font-mono text-sm text-zinc-600">davidkalina@proton.me</p>
                 </div>
               </div>
             </div>

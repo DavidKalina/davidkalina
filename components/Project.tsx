@@ -3,7 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Code2, Github, MonitorSmartphone } from "lucide-react";
+import { ArrowRight, Code2, Github, Network } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 const ModernFeaturedProject = () => {
@@ -19,8 +20,10 @@ const ModernFeaturedProject = () => {
             <Code2 size={24} className="text-black hidden lg:block" />
           </div>
           <div>
-            <p className="text-xs lg:text-sm font-mono text-zinc-400 mb-1">001 / FEATURED</p>
-            <h2 className="text-xl lg:text-2xl font-mono font-bold">E-Commerce Platform</h2>
+            <p className="text-xs lg:text-sm font-mono text-zinc-400 mb-1">003 / FEATURED</p>
+            <h2 className="text-xl lg:text-2xl font-mono font-bold">
+              WebMine | Distributed Web Scraping
+            </h2>
           </div>
         </div>
       </div>
@@ -43,17 +46,17 @@ const ModernFeaturedProject = () => {
               <div className="relative z-10 w-full">
                 <div className="space-y-4 lg:space-y-6">
                   <div className="inline-block border-2 border-white/20 rounded-xl lg:rounded-2xl p-2 lg:p-3">
-                    <MonitorSmartphone size={24} className="text-white/80 lg:hidden" />
-                    <MonitorSmartphone size={32} className="text-white/80 hidden lg:block" />
+                    <Network size={24} className="text-white/80 lg:hidden" />
+                    <Network size={32} className="text-white/80 hidden lg:block" />
                   </div>
                   <div>
                     <p className="text-white/60 font-mono text-xs lg:text-sm tracking-wider mb-2 lg:mb-3">
-                      NEXT.JS · TYPESCRIPT · STRIPE
+                      NEXT.JS · TYPESCRIPT · DOCKER · REDIS
                     </p>
                     <h3 className="text-2xl lg:text-4xl text-white font-mono font-bold leading-tight">
-                      Modern solutions for
+                      Distributed web scraping
                       <br />
-                      digital commerce
+                      powerful & simple
                     </h3>
                   </div>
                 </div>
@@ -66,16 +69,19 @@ const ModernFeaturedProject = () => {
                 <div className="space-y-4 lg:space-y-6">
                   <div className="flex flex-wrap gap-2 lg:gap-3">
                     <Badge className="bg-zinc-100 hover:text-white text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
-                      E-COMMERCE
+                      MICROSERVICES
+                    </Badge>
+                    <Badge className="bg-zinc-100 hover:text-white text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                      DISTRIBUTED
                     </Badge>
                     <Badge className="bg-zinc-100 hover:text-white text-black px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
                       FULL-STACK
                     </Badge>
                   </div>
                   <p className="font-mono text-sm lg:text-base text-zinc-600 leading-relaxed">
-                    A cutting-edge platform engineered for scale. Features real-time inventory
-                    tracking, secure payments, and headless CMS integration—all optimized for
-                    performance.
+                    A scalable web scraping platform built with Docker and Redis. Features
+                    distributed task processing, real-time progress tracking, and a modern Next.js
+                    frontend for searching and managing scraped data.
                   </p>
                 </div>
 
@@ -93,13 +99,15 @@ const ModernFeaturedProject = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
-                  <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto">
-                    VIEW PROJECT
-                    <ArrowRight
-                      className="ml-2 transition-transform group-hover:translate-x-1"
-                      size={18}
-                    />
-                  </Button>
+                  <Link href="https://webmine.davidkalina.com" target="_blank">
+                    <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                      VIEW PROJECT
+                      <ArrowRight
+                        className="ml-2 transition-transform group-hover:translate-x-1"
+                        size={18}
+                      />
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline"
                     className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto"

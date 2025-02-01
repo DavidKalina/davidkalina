@@ -16,7 +16,7 @@ const ModernProjectGrid = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Dashboard",
+      title: "WebMine",
       description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT"],
       icon: <Layout size={24} className="text-white" />,
@@ -27,6 +27,7 @@ const ModernProjectGrid = () => {
         uptime: "99.9%",
       },
       year: "2023",
+      href: `https://webmine.davidkalina.com`,
     },
     {
       id: 2,
@@ -83,7 +84,7 @@ const ModernProjectGrid = () => {
               <Wrench size={24} className="text-white hidden lg:block" />
             </div>
             <div>
-              <p className="text-xs lg:text-sm font-mono text-zinc-500 mb-1">003 / WORK</p>
+              <p className="text-xs lg:text-sm font-mono text-zinc-500 mb-1">004 / WORK</p>
               <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900">
                 Recent Projects
               </h2>
