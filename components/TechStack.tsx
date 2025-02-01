@@ -41,7 +41,7 @@ const ModernTechStack = () => {
               <Code2 size={24} className="text-white" />
             </div>
             <div>
-              <p className="text-sm font-mono text-zinc-500 mb-1">002 / EXPERTISE</p>
+              <p className="text-sm font-mono text-zinc-500 mb-1">001 / EXPERTISE</p>
               <h2 className="text-3xl font-mono font-bold text-zinc-900">Technical Expertise</h2>
             </div>
           </div>

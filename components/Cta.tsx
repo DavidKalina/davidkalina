@@ -14,7 +14,7 @@ const ModernCTA = () => {
             {/* Section Header */}
             <div className="space-y-8">
               <div className="flex items-center gap-6">
-                <div className="bg-black p-4 rounded-2xl">
+                <div className="bg-[#38d9a9] p-4 rounded-2xl">
                   <Mail size={24} className="text-white" />
                 </div>
                 <div>

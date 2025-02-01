@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   ArrowRight,
-  Code2,
   Database,
   Github,
   Layers,
   Layout,
   MonitorSmartphone,
+  Wrench,
 } from "lucide-react";
 import React from "react";
 
@@ -78,12 +78,12 @@ const ModernProjectGrid = () => {
         {/* Section Header */}
         <div className="max-w-2xl">
           <div className="flex items-center gap-4 lg:gap-6 mb-6 lg:mb-8">
-            <div className="bg-black p-3 lg:p-4 rounded-xl lg:rounded-2xl">
-              <Code2 size={20} className="text-white lg:hidden" />
-              <Code2 size={24} className="text-white hidden lg:block" />
+            <div className="bg-[#ffd43b] p-3 lg:p-4 rounded-xl lg:rounded-2xl">
+              <Wrench size={20} className="text-white lg:hidden" />
+              <Wrench size={24} className="text-white hidden lg:block" />
             </div>
             <div>
-              <p className="text-xs lg:text-sm font-mono text-zinc-500 mb-1">005 / WORK</p>
+              <p className="text-xs lg:text-sm font-mono text-zinc-500 mb-1">003 / WORK</p>
               <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900">
                 Recent Projects
               </h2>

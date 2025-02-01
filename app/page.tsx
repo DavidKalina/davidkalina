@@ -1,7 +1,6 @@
 import ModernAbout from "@/components/About";
 import ModernCTA from "@/components/Cta";
 import ModernHero from "@/components/Hero";
-import ModernFeaturedProject from "@/components/Project";
 import ModernProjectGrid from "@/components/ProjectGrid";
 import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
@@ -23,7 +22,7 @@ export default function Home() {
       {/* About Section */}
       <ModernAbout />
 
-      <ModernFeaturedProject />
+      {/* <ModernFeaturedProject /> */}
 
       {/* Projects Section */}
       <ModernProjectGrid />

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { User, ArrowRight, Github, Terminal, Coffee } from "lucide-react";
+import Link from "next/link";
 
 const ModernAbout = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -18,7 +19,7 @@ const ModernAbout = () => {
             <User size={24} className="text-white hidden lg:block" />
           </div>
           <div>
-            <p className="md:text-sm lg:md:text-md font-mono text-zinc-500 mb-1">003 / ABOUT</p>
+            <p className="md:text-sm lg:md:text-md font-mono text-zinc-500 mb-1">002 / ABOUT</p>
             <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900">About Me</h2>
           </div>
         </div>
@@ -69,20 +70,24 @@ const ModernAbout = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
-              <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
-                VIEW RESUME
-                <ArrowRight
-                  className="ml-2 transition-transform group-hover:translate-x-1"
-                  size={18}
-                />
-              </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono md:text-md px-6 lg:px-8 py-6 w-full sm:w-auto"
-              >
-                <Github className="mr-2" size={18} />
-                GITHUB
-              </Button>
+              <Link href="/resume" target="_blank">
+                <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                  VIEW RESUME
+                  <ArrowRight
+                    className="ml-2 transition-transform group-hover:translate-x-1"
+                    size={18}
+                  />
+                </Button>
+              </Link>
+              <Link href="https://github.com/DavidKalina" target="_blank">
+                <Button
+                  variant="outline"
+                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono md:text-md px-6 lg:px-8 py-6 w-full sm:w-auto"
+                >
+                  <Github className="mr-2" size={18} />
+                  GITHUB
+                </Button>
+              </Link>
             </div>
           </div>
 
