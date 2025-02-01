@@ -22,33 +22,6 @@ const ModernNavbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <div className="flex items-center gap-6">
-              <Link href="/projects">
-                <Button
-                  variant="ghost"
-                  className="font-mono text-sm text-zinc-600 hover:text-black"
-                >
-                  PROJECTS
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button
-                  variant="ghost"
-                  className="font-mono text-sm text-zinc-600 hover:text-black"
-                >
-                  ABOUT
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  variant="ghost"
-                  className="font-mono text-sm text-zinc-600 hover:text-black"
-                >
-                  CONTACT
-                </Button>
-              </Link>
-            </div>
-
             <div className="flex items-center gap-3 pl-6 border-l border-zinc-100">
               <Button
                 variant="outline"
