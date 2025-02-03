@@ -10,7 +10,7 @@ const ModernAbout = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="bg-white/80/80" id="about">
+    <section className="bg-white/80" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
@@ -30,16 +30,18 @@ const ModernAbout = () => {
           <div className="space-y-6 lg:space-y-8">
             <div className="space-y-4 lg:space-y-6">
               <h3 className="font-mono text-lg lg:text-xl font-bold text-zinc-900">
-                Full-stack developer focused on building products that people love
+                Full-stack developer crafting thoughtful solutions that put people first
               </h3>
               <div className="space-y-4">
                 <p className="font-mono md:text-md lg:text-base text-zinc-600 leading-relaxed">
-                  With over 5 years of experience in web development, I specialize in creating
-                  scalable applications that combine clean code with exceptional user experiences.
+                  I believe in building technology that enhances rather than replaces human
+                  capabilities. With over four years of experience, I focus on creating applications
+                  that are both powerful and intuitive.
                 </p>
                 <p className="font-mono md:text-md lg:text-base text-zinc-600 leading-relaxed">
-                  My journey in tech started with a fascination for building things. Today, I
-                  channel that same passion into crafting digital solutions that make a difference.
+                  My approach combines technical expertise with a deep appreciation for human needs
+                  and experiences. I enjoy mentoring others and building tools that make a real
+                  difference in people&apos;s daily lives.
                 </p>
               </div>
             </div>
@@ -49,11 +51,11 @@ const ModernAbout = () => {
               <div className="space-y-2">
                 <Terminal size={18} className="text-zinc-400 lg:hidden" />
                 <Terminal size={20} className="text-zinc-400 hidden lg:block" />
-                <p className="font-mono md:text-md font-bold text-zinc-900">Background</p>
+                <p className="font-mono md:text-md font-bold text-zinc-900">Core Skills</p>
                 <p className="font-mono md:text-sm lg:md:text-md text-zinc-600">
-                  Computer Science, BSc
+                  React, Next.js, TypeScript
                   <br />
-                  Full-stack Development
+                  Node.js, SQL, Supabase
                 </p>
               </div>
               <div className="space-y-2">
@@ -61,9 +63,9 @@ const ModernAbout = () => {
                 <Coffee size={20} className="text-zinc-400 hidden lg:block" />
                 <p className="font-mono md:text-md font-bold text-zinc-900">Interests</p>
                 <p className="font-mono md:text-sm lg:md:text-md text-zinc-600">
-                  Open Source
+                  Human-Centered Design
                   <br />
-                  UI/UX Design
+                  Tool Creation
                 </p>
               </div>
             </div>
@@ -110,13 +112,14 @@ const ModernAbout = () => {
                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">FEATURED WORK</p>
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <Badge className="bg-white/20 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
-                      ACME INC
+                    <Badge className="bg-black text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
+                      ALFAPHOX/REVIVE
                     </Badge>
-                    <span className="font-mono md:text-sm lg:md:text-md text-white/90">2023</span>
+                    <span className="font-mono md:text-sm lg:md:text-md text-white/90">2024</span>
                   </div>
                   <p className="font-mono md:text-md lg:text-base text-white/80">
-                    Led development of e-commerce platform serving 100k+ monthly users
+                    Designed and launched a white-label review management tool, contributing to a
+                    $400k+ product sale
                   </p>
                 </div>
               </div>
@@ -126,11 +129,11 @@ const ModernAbout = () => {
                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">CURRENT FOCUS</p>
                 <div className="grid grid-cols-1 gap-3 lg:gap-4">
                   {[
-                    "Building scalable React applications",
-                    "Contributing to open source",
-                    "Exploring new technologies",
+                    "Building tools that amplify human capabilities",
+                    "Creating intuitive, accessible interfaces",
+                    "Fostering collaborative development environments",
                   ].map((focus, index) => (
-                    <div key={index} className="bg-white/80/5 rounded-xl lg:rounded-2xl p-4 lg:p-6">
+                    <div key={index} className="bg-black rounded-xl lg:rounded-2xl p-4 lg:p-6">
                       <p className="font-mono md:text-md lg:text-base text-white">{focus}</p>
                     </div>
                   ))}
