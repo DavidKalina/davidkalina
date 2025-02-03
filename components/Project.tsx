@@ -21,7 +21,7 @@ const ModernFeaturedProject = () => {
           </div>
           <div>
             <p className="text-xs lg:text-sm font-mono text-zinc-400 mb-1">003 / FEATURED</p>
-            <h2 className="text-xl lg:text-2xl font-mono font-bold">
+            <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900">
               WebMine | Distributed Web Scraping
             </h2>
           </div>
