@@ -2,6 +2,15 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code2, Database, Laptop, Layers } from "lucide-react";
+import {
+  SiDocker,
+  SiExpress,
+  SiNodedotjs,
+  SiReact,
+  SiSupabase,
+  SiTypescript,
+} from "react-icons/si";
+import ExperienceStats from "./ExperienceStats";
 
 const ModernTechStack = () => {
   const technologies = {
@@ -10,8 +19,18 @@ const ModernTechStack = () => {
       title: "FRONTEND DEVELOPMENT",
       description: "Crafting responsive and intuitive user interfaces with modern web technologies",
       skills: [
-        { name: "TYPESCRIPT", level: "Advanced", years: 4 },
-        { name: "REACT", level: "Advanced", years: 4 },
+        {
+          name: "TYPESCRIPT",
+          level: "Advanced",
+          years: 4,
+          icon: <SiTypescript size={20} className="text-blue-500" />,
+        },
+        {
+          name: "REACT",
+          level: "Advanced",
+          years: 4,
+          icon: <SiReact size={20} className="text-blue-200" />,
+        },
       ],
     },
     backend: {
@@ -19,15 +38,38 @@ const ModernTechStack = () => {
       title: "BACKEND DEVELOPMENT",
       description: "Building robust and scalable server-side applications and APIs",
       skills: [
-        { name: "NODE.JS", level: "Advanced", years: 3 },
-        { name: "EXPRESS", level: "Advanced", years: 3 },
+        {
+          name: "NODE.JS",
+          level: "Advanced",
+          years: 3,
+          icon: <SiNodedotjs size={20} className="text-emerald-500" />,
+        },
+        {
+          name: "EXPRESS",
+          level: "Advanced",
+          years: 3,
+          icon: <SiExpress size={20} className="text-zinc-500" />,
+        },
+        {
+          name: "DOCKER",
+          level: "Advanced",
+          years: 3,
+          icon: <SiDocker size={20} className="text-blue-400" />,
+        },
       ],
     },
     database: {
       icon: <Layers size={24} />,
       title: "DATABASE & INFRASTRUCTURE",
       description: "Managing data and infrastructure with modern cloud solutions",
-      skills: [{ name: "SUPABASE", level: "Advanced", years: 2 }],
+      skills: [
+        {
+          name: "SUPABASE",
+          level: "Advanced",
+          years: 3,
+          icon: <SiSupabase size={20} className="text-emerald-500" />,
+        },
+      ],
     },
   };
 
@@ -57,7 +99,7 @@ const ModernTechStack = () => {
           {Object.entries(technologies).map(([key, category]) => (
             <Card
               key={key}
-              className="border-2 border-zinc-100 rounded-3xl hover:border-black transition-colors duration-300 group overflow-hidden"
+              className={`border-2 border-zinc-100 rounded-3xl hover:border-black transition-colors duration-300 group overflow-hidden`}
             >
               <CardContent className="p-0">
                 {/* Card Header */}
@@ -85,13 +127,14 @@ const ModernTechStack = () => {
                     <div
                       key={skill.name}
                       className={`
-                        p-8 hover:bg-zinc-50 transition-colors duration-300
+                        p-8 hover:bg-zinc-100 transition-colors duration-300
                         ${index !== category.skills.length - 1 ? "border-b border-zinc-100" : ""}
                       `}
                     >
                       <div className="flex items-center justify-between gap-4">
                         <div className="space-y-2">
-                          <Badge className="bg-black text-white px-4 py-2 rounded-full text-xs font-mono">
+                          <Badge className="bg-black text-white px-4 py-2 rounded-full text-xs font-mono flex items-center gap-2">
+                            {skill.icon}
                             {skill.name}
                           </Badge>
                           <p className="font-mono text-xs text-zinc-500 pl-1">
@@ -112,40 +155,7 @@ const ModernTechStack = () => {
 
         {/* Experience Stats */}
         <div className="mt-24 pt-24 border-t border-zinc-100">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div className="space-y-3">
-              <p className="font-mono text-5xl font-bold text-zinc-900">5+</p>
-              <p className="font-mono text-sm text-zinc-500">
-                YEARS OF
-                <br />
-                DEVELOPMENT
-              </p>
-            </div>
-            <div className="space-y-3">
-              <p className="font-mono text-5xl font-bold text-zinc-900">100+</p>
-              <p className="font-mono text-sm text-zinc-500">
-                PROJECTS
-                <br />
-                COMPLETED
-              </p>
-            </div>
-            <div className="space-y-3">
-              <p className="font-mono text-5xl font-bold text-zinc-900">50K+</p>
-              <p className="font-mono text-sm text-zinc-500">
-                LINES OF
-                <br />
-                CODE
-              </p>
-            </div>
-            <div className="space-y-3">
-              <p className="font-mono text-5xl font-bold text-zinc-900">12+</p>
-              <p className="font-mono text-sm text-zinc-500">
-                OPEN SOURCE
-                <br />
-                CONTRIBUTIONS
-              </p>
-            </div>
-          </div>
+          <ExperienceStats />
         </div>
       </div>
     </section>

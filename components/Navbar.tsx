@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Code2, Menu, X, Github, ExternalLink } from "lucide-react";
+import { ExternalLink, Github, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,9 +14,6 @@ const ModernNavbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="bg-zinc-100 p-2 rounded-xl">
-              <Code2 size={20} className="text-black" />
-            </div>
             <span className="font-mono font-bold text-lg">davidkalina</span>
           </Link>
 

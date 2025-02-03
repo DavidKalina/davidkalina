@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code2 } from "lucide-react";
+import AnimatedPieChart from "./AnimatedPieChart";
 
 const ModernHero = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,13 +23,13 @@ const ModernHero = () => {
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="font-mono font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-                Building digital
+              <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+                Bridging Innovation
                 <br />
-                experiences with
+                with Scalable
                 <br />
                 <span className="inline-flex items-center gap-2 sm:gap-4">
-                  precision
+                  Web Solutions
                   <Code2 size={32} className="text-zinc-400 sm:hidden" />
                   <Code2 size={48} className="text-zinc-400 hidden sm:block" />
                 </span>
@@ -37,8 +38,9 @@ const ModernHero = () => {
 
             {/* Description */}
             <p className="font-mono text-base sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
-              Full-stack developer specializing in crafting modern web applications with a focus on
-              performance and user experience.
+              Full-stack developer with expertise in AI-driven solutions, real-time systems, and
+              scalable web applications. Passionate about merging user-centric design with
+              cutting-edge technology to create impactful digital experiences.
             </p>
 
             {/* Tech Stack Pills */}
@@ -73,7 +75,7 @@ const ModernHero = () => {
 
           {/* Visual Section */}
           <div
-            className="relative bg-indigo-500 rounded-3xl p-6 sm:p-8 lg:p-12 min-h-[400px] lg:min-h-[600px] flex items-center"
+            className="relative rounded-3xl p-6 sm:p-8 lg:p-12 min-h-[400px] lg:min-h-[600px] flex flex-col items-center justify-center"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -83,22 +85,9 @@ const ModernHero = () => {
                 isHovered ? "opacity-100" : "opacity-0"
               }`}
             />
-
-            {/* Code Stats */}
-            <div className="relative z-10 w-full grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-              {[
-                { value: "5+", label: "YEARS OF EXPERIENCE" },
-                { value: "50+", label: "PROJECTS COMPLETED" },
-                { value: "98%", label: "CLIENT SATISFACTION" },
-                { value: "12K", label: "GITHUB COMMITS" },
-              ].map((stat) => (
-                <div key={stat.label} className="space-y-1 sm:space-y-2">
-                  <p className="font-mono text-3xl sm:text-4xl lg:text-6xl font-bold text-white">
-                    {stat.value}
-                  </p>
-                  <p className="font-mono text-[10px] sm:text-xs text-white/60">{stat.label}</p>
-                </div>
-              ))}
+            {/* Animated Pie Chart and Title */}
+            <div className="relative z-10">
+              <AnimatedPieChart />
             </div>
           </div>
         </div>

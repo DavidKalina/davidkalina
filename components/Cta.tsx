@@ -49,7 +49,7 @@ const ModernCTA = () => {
             </div>
 
             {/* Current Status */}
-            <div className="bg-zinc-50 rounded-3xl p-8">
+            <div className="bg-zinc-100 rounded-3xl p-8">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <p className="font-mono text-sm font-bold text-zinc-900">CURRENTLY AVAILABLE</p>
