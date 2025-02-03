@@ -11,11 +11,11 @@ const ModernProjectGrid = () => {
       id: 1,
       title: "WebMine",
       description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT"],
+      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
       icon: <Layout size={24} className="text-white" />,
       bgColor: "bg-emerald-500",
       metrics: {
-        integration: "Stripe",
+        technology: "Cutting Edge",
         architecture: "Modular",
         ui: "Modern",
       },
