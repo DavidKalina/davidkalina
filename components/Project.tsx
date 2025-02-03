@@ -45,7 +45,7 @@ const ModernFeaturedProject = () => {
               />
               <div className="relative z-10 w-full">
                 <div className="space-y-4 lg:space-y-6">
-                  <div className="inline-block border-2 border-white/20 rounded-xl lg:rounded-2xl p-2 lg:p-3">
+                  <div className="inline-block bg-black rounded-xl lg:rounded-2xl p-2 lg:p-3">
                     <Network size={24} className="text-white/80 lg:hidden" />
                     <Network size={32} className="text-white/80 hidden lg:block" />
                   </div>
