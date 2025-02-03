@@ -8,6 +8,7 @@ import {
   SiNextdotjs,
   SiNodedotjs,
   SiReact,
+  SiRedis,
   SiSupabase,
   SiTypescript,
 } from "react-icons/si";
@@ -75,6 +76,12 @@ const ModernTechStack = () => {
           level: "Advanced",
           years: 3,
           icon: <SiSupabase size={16} className="text-emerald-500" />,
+        },
+        {
+          name: "REDIS",
+          level: "Advanced",
+          years: 3,
+          icon: <SiRedis size={16} className="text-red-500" />,
         },
       ],
     },
