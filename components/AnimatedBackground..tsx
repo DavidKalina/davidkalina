@@ -75,7 +75,7 @@ const AnimatedBackground = () => {
     },
     {
       shape: "triangle",
-      className: "w-16 h-16 md:w-32 md:h-32 bg-zinc-100",
+      className: "w-16 h-16 md:w-32 md:h-32 bg-zinc-200",
       style: { clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" },
       animation: "animate-float-medium",
     },
