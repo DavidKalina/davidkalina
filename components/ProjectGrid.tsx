@@ -14,9 +14,9 @@ const ModernProjectGrid = () => {
       icon: <Layout size={24} className="text-white" />,
       bgColor: "bg-emerald-500",
       metrics: {
-        users: "50K+",
-        performance: "98",
-        uptime: "99.9%",
+        integration: "Stripe",
+        architecture: "Modular",
+        ui: "Modern",
       },
       year: "2023",
       href: `https://webmine.davidkalina.com`,
