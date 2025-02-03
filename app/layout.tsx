@@ -4,6 +4,7 @@ import "./globals.css";
 import ModernFooter from "@/components/Footer";
 import ModernNavbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackground.";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <AnimatedBackground />
         <ModernNavbar />
         <main className="flex-1">{children}</main>
+        <Analytics />
         <ModernFooter />
       </body>
     </html>
