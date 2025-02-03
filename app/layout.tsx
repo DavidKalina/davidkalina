@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Modern Portfolio",
-  description: "A modern portfolio built with Next.js",
+  title: "David Kalina",
+  description: "Full Stack Developer",
   openGraph: {
-    title: "Modern Portfolio",
-    description: "A modern portfolio built with Next.js",
+    title: "David Kalina",
+    description: "Full Stack Developer",
     type: "website",
   },
 };

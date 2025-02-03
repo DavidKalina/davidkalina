@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "David Kalina | Full Stack Developer",
-  description: "Welcome to my modern portfolio showcasing my work and expertise",
+  description: "Welcome to my portfolio showcasing my work and expertise",
 };
 
 export default function Home() {
