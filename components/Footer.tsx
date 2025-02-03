@@ -1,7 +1,6 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
+import { ArrowUpRight, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
-import { Github, Twitter, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 const ModernFooter = () => {
   const currentYear = new Date().getFullYear();
@@ -25,7 +24,7 @@ const ModernFooter = () => {
           <div className="space-y-6">
             <h4 className="font-mono text-xs text-zinc-400">NAVIGATION</h4>
             <div className="space-y-4">
-              <Link href="/projects">
+              <Link href="#projects">
                 <Button
                   variant="link"
                   className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline"
@@ -34,7 +33,7 @@ const ModernFooter = () => {
                 </Button>
               </Link>
               <br />
-              <Link href="/about">
+              <Link href="#about">
                 <Button
                   variant="link"
                   className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline"
@@ -43,7 +42,7 @@ const ModernFooter = () => {
                 </Button>
               </Link>
               <br />
-              <Link href="/contact">
+              <Link href="#contact">
                 <Button
                   variant="link"
                   className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline"
@@ -86,24 +85,11 @@ const ModernFooter = () => {
                 </Link>
               </Button>
               <br />
-              <Button
-                variant="link"
-                className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline group inline-flex items-center"
-                asChild
-              >
-                <Link href="https://twitter.com" target="_blank">
-                  Twitter
-                  <ArrowUpRight
-                    size={14}
-                    className="ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </Link>
-              </Button>
             </div>
           </div>
 
           {/* Newsletter Section */}
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <h4 className="font-mono text-xs text-zinc-400">NEWSLETTER</h4>
             <p className="font-mono text-sm text-zinc-600">
               Subscribe to get updates about new projects and articles.
@@ -112,7 +98,7 @@ const ModernFooter = () => {
               SUBSCRIBE
               <Mail className="ml-2" size={16} />
             </Button>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Bar */}
@@ -126,18 +112,8 @@ const ModernFooter = () => {
               className="rounded-full h-10 w-10 text-zinc-400 hover:text-black"
               asChild
             >
-              <Link href="https://github.com" target="_blank">
+              <Link href="https://github.com/DavidKalina" target="_blank">
                 <Github size={18} />
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-full h-10 w-10 text-zinc-400 hover:text-black"
-              asChild
-            >
-              <Link href="https://twitter.com" target="_blank">
-                <Twitter size={18} />
               </Link>
             </Button>
             <Button
