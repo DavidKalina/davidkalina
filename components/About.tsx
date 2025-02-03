@@ -134,7 +134,7 @@ const ModernAbout = () => {
                     "Fostering collaborative development environments",
                   ].map((focus, index) => (
                     <div key={index} className="bg-black rounded-xl lg:rounded-2xl p-4 lg:p-6">
-                      <p className="font-mono md:text-md lg:text-base text-white">{focus}</p>
+                      <p className="font-mono md:text-md text-white">{focus}</p>
                     </div>
                   ))}
                 </div>
