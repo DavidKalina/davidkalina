@@ -41,7 +41,7 @@ const ModernCTA = () => {
   };
 
   return (
-    <section className="bg-white/80" id="contact">
+    <section className="bg-white/80">
       <div className="max-w-7xl mx-auto px-8 py-32">
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -98,7 +98,7 @@ const ModernCTA = () => {
           </div>
 
           {/* Right Column - Form */}
-          <div className="relative p-4">
+          <div className="relative p-4" id="contact">
             <div className="absolute rounded-md inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(0,0,0,0.02),rgba(0,0,0,0))]" />
             <form onSubmit={handleSubmit} className="relative space-y-8">
               <div className="space-y-6">
