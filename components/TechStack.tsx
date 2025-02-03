@@ -5,6 +5,7 @@ import { Code2, Database, Laptop, Layers } from "lucide-react";
 import {
   SiDocker,
   SiExpress,
+  SiNextdotjs,
   SiNodedotjs,
   SiReact,
   SiSupabase,
@@ -30,6 +31,12 @@ const ModernTechStack = () => {
           level: "Advanced",
           years: 4,
           icon: <SiReact size={16} className="text-blue-200" />,
+        },
+        {
+          name: "NEXT.JS",
+          level: "Advanced",
+          years: 4,
+          icon: <SiNextdotjs size={16} className="text-white" />,
         },
       ],
     },
