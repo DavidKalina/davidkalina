@@ -1,15 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  ArrowRight,
-  Database,
-  Github,
-  Layers,
-  Layout,
-  MonitorSmartphone,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight, Bell, Brain, Github, Globe, Layout, Mail, Star, Wrench } from "lucide-react";
 import React from "react";
 
 const ModernProjectGrid = () => {
@@ -28,48 +20,85 @@ const ModernProjectGrid = () => {
       },
       year: "2023",
       href: `https://webmine.davidkalina.com`,
+      source: null,
+    },
+    {
+      id: 6,
+      title: "Flowty.io Real-Time Notification Center",
+      description:
+        "Built with Firebase and TypeScript, significantly improving engagement and retention.",
+      tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
+      icon: <Bell size={24} className="text-white" />,
+      bgColor: "bg-orange-500",
+      metrics: {
+        notificationsSent: "1M+",
+        retentionIncrease: "15%",
+      },
+      year: "2022",
+      href: `https://flowty.io`,
+      source: null,
     },
     {
       id: 2,
-      title: "Task Management API",
-      description: "RESTful API service for managing project tasks and team collaboration",
-      tags: ["EXPRESS", "TYPESCRIPT", "POSTGRESQL"],
-      icon: <Database size={24} className="text-white" />,
-      bgColor: "bg-pink-500",
+      title: "AI Content Optimization Tool",
+      description:
+        "AI-powered content categorization tool using OpenAI’s GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
+      tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
+      icon: <Brain size={24} className="text-white" />,
+      bgColor: "bg-blue-500",
       metrics: {
-        requests: "1M+",
-        latency: "120ms",
-        uptime: "99.9%",
+        contentAnalyzed: "100K+",
+        accuracy: "95%",
+        performance: "97",
       },
-      year: "2023",
+      year: "2024",
+      source: null,
     },
     {
       id: 3,
-      title: "Social Platform",
-      description: "Mobile-first social platform for connecting professionals in tech",
-      tags: ["REACT", "NODE.JS", "MONGODB"],
-      icon: <MonitorSmartphone size={24} className="text-white" />,
-      bgColor: "bg-purple-500",
+      title: "Alfaphox/Revive Ratings",
+      description:
+        "A white-label review management tool that contributed to a product sale valued at over $400,000.",
+      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
+      icon: <Star size={24} className="text-white" />,
+      bgColor: "bg-red-500",
       metrics: {
-        users: "10K+",
-        engagement: "85%",
-        retention: "76%",
+        users: "5K+",
+        revenue: "$400K+",
+        retention: "80%",
       },
-      year: "2022",
+      year: "2023",
+      source: null,
     },
     {
       id: 4,
-      title: "Data Pipeline",
-      description: "Automated data processing pipeline for real-time analytics",
-      tags: ["PYTHON", "AWS", "KAFKA"],
-      icon: <Layers size={24} className="text-white" />,
-      bgColor: "bg-cyan-500",
+      title: "Progressive Web App for Maxwell Pipeline Services",
+      description:
+        "A PWA designed to streamline operations, achieving several thousand monthly uses.",
+      tags: ["REACT", "PWA", "SUPABASE"],
+      icon: <Globe size={24} className="text-white" />,
+      bgColor: "bg-green-500",
       metrics: {
-        throughput: "5TB+",
-        latency: "50ms",
-        accuracy: "99.9%",
+        monthlyUsers: "10K+",
+        efficiencyBoost: "40%",
       },
-      year: "2022",
+      year: "2023",
+      source: null,
+    },
+    {
+      id: 5,
+      title: "Automated Email Distribution System",
+      description:
+        "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
+      tags: ["PYTHON", "SENDGRID", "NODE.JS"],
+      icon: <Mail size={24} className="text-white" />,
+      bgColor: "bg-indigo-500",
+      metrics: {
+        emailsProcessed: "500K+",
+        speedImprovement: "10x",
+      },
+      year: "2021",
+      source: null,
     },
   ];
 
@@ -159,20 +188,24 @@ const ModernProjectGrid = () => {
 
                     {/* Actions */}
                     <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
-                      <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
-                        VIEW PROJECT
-                        <ArrowRight
-                          className="ml-2 transition-transform group-hover:translate-x-1"
-                          size={14}
-                        />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
-                      >
-                        <Github className="mr-2" size={14} />
-                        SOURCE
-                      </Button>
+                      {project.href && (
+                        <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
+                          VIEW PROJECT
+                          <ArrowRight
+                            className="ml-2 transition-transform group-hover:translate-x-1"
+                            size={14}
+                          />
+                        </Button>
+                      )}
+                      {project.source && (
+                        <Button
+                          variant="outline"
+                          className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
+                        >
+                          <Github className="mr-2" size={14} />
+                          SOURCE
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
