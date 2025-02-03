@@ -5,7 +5,7 @@ import { Clock, Mail, Send } from "lucide-react";
 
 const ModernCTA = () => {
   return (
-    <section className="bg-white/80">
+    <section className="bg-white/80" id="contact">
       <div className="max-w-7xl mx-auto px-8 py-32">
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">

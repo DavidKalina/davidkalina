@@ -74,7 +74,7 @@ const ModernProjectGrid = () => {
   ];
 
   return (
-    <section className="bg-white/80">
+    <section className="bg-white/80" id="projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="max-w-2xl">

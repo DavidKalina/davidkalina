@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code2 } from "lucide-react";
 import AnimatedPieChart from "./AnimatedPieChart";
+import Link from "next/link";
 
 const ModernHero = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -57,19 +58,23 @@ const ModernHero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto">
-                VIEW PROJECTS
-                <ArrowRight
-                  className="ml-2 transition-transform group-hover:translate-x-1"
-                  size={18}
-                />
-              </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
-              >
-                CONTACT ME
-              </Button>
+              <Link href="#projects">
+                <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto">
+                  VIEW PROJECTS
+                  <ArrowRight
+                    className="ml-2 transition-transform group-hover:translate-x-1"
+                    size={18}
+                  />
+                </Button>
+              </Link>
+              <Link href="#contact">
+                <Button
+                  variant="outline"
+                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
+                >
+                  CONTACT ME
+                </Button>
+              </Link>
             </div>
           </div>
 

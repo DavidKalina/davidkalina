@@ -10,7 +10,7 @@ const ModernAbout = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="bg-white/80/80">
+    <section className="bg-white/80/80" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
