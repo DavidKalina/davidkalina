@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Bell, Brain, Github, Globe, Layout, Mail, Star, Wrench } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const ModernProjectGrid = () => {
@@ -10,11 +11,11 @@ const ModernProjectGrid = () => {
       id: 1,
       title: "WebMine",
       description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT"],
+      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
       icon: <Layout size={24} className="text-white" />,
       bgColor: "bg-emerald-500",
       metrics: {
-        integration: "Stripe",
+        technology: "Cutting Edge",
         architecture: "Modular",
         ui: "Modern",
       },
@@ -189,22 +190,26 @@ const ModernProjectGrid = () => {
                     {/* Actions */}
                     <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
                       {project.href && (
-                        <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
-                          VIEW PROJECT
-                          <ArrowRight
-                            className="ml-2 transition-transform group-hover:translate-x-1"
-                            size={14}
-                          />
-                        </Button>
+                        <Link target="_blank" href={project.href}>
+                          <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
+                            VIEW PROJECT
+                            <ArrowRight
+                              className="ml-2 transition-transform group-hover:translate-x-1"
+                              size={14}
+                            />
+                          </Button>
+                        </Link>
                       )}
                       {project.source && (
-                        <Button
-                          variant="outline"
-                          className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
-                        >
-                          <Github className="mr-2" size={14} />
-                          SOURCE
-                        </Button>
+                        <Link target="_blank" href={project.source}>
+                          <Button
+                            variant="outline"
+                            className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
+                          >
+                            <Github className="mr-2" size={14} />
+                            SOURCE
+                          </Button>
+                        </Link>
                       )}
                     </div>
                   </div>
