@@ -38,10 +38,11 @@ const ModernHero = () => {
             </div>
 
             {/* Description */}
-            <p className="font-mono text-base sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
-              Full-stack developer with expertise in AI-driven solutions, real-time systems, and
-              scalable web applications. Passionate about merging user-centric design with
-              cutting-edge technology to create impactful digital experiences.
+            <p className="font-mono text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
+              Full-stack developer with real-time systems, scalable web applications, intuitive and
+              creative UI/UX experiences, and utilizing the power of AI while retaining the spark of
+              human divinity. Passionate about merging user-centric design with cutting-edge
+              technology to create impactful digital experiences.
             </p>
 
             {/* Tech Stack Pills */}

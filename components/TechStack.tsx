@@ -101,7 +101,7 @@ const ModernTechStack = () => {
               <h2 className="text-3xl font-mono font-bold text-zinc-900">Technical Expertise</h2>
             </div>
           </div>
-          <p className="font-mono text-zinc-600 leading-relaxed mb-16">
+          <p className="font-mono xl:text-lg text-zinc-600 leading-relaxed mb-16">
             Specialized in modern web development with a focus on scalable applications. Experienced
             in both frontend and backend technologies with a strong emphasis on code quality and
             performance.
