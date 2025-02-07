@@ -9,7 +9,7 @@ const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white/80 border-b border-zinc-100">
+    <nav className="bg-white border-b border-zinc-100 fixed w-full z-[999]">
       <div className="px-8 mx-auto max-w-7xl">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
