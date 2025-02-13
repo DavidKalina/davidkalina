@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -88,7 +90,7 @@ const ModernTechStack = () => {
   };
 
   return (
-    <section className="bg-white/80 border-t border-b border-zinc-100">
+    <section className="bg-zinc-50/80">
       <div className="max-w-7xl mx-auto px-8 py-32">
         {/* Section Header */}
         <div className="max-w-2xl">
@@ -113,16 +115,14 @@ const ModernTechStack = () => {
           {Object.entries(technologies).map(([key, category]) => (
             <Card
               key={key}
-              className={`border-2 border-zinc-100 rounded-3xl hover:border-black transition-colors duration-300 group overflow-hidden`}
+              className="bg-white shadow-lg rounded-3xl hover:shadow-xl transition-shadow duration-300 group overflow-hidden"
             >
               <CardContent className="p-0">
                 {/* Card Header */}
                 <div className="p-8 pb-6">
                   <div className="flex items-start gap-6 mb-6">
-                    <div className="bg-zinc-100 p-4 rounded-xl group-hover:bg-black transition-colors duration-300">
-                      <div className="text-zinc-800 group-hover:text-white transition-colors duration-300">
-                        {category.icon}
-                      </div>
+                    <div className="bg-zinc-900 p-4 rounded-xl group-hover:bg-black transition-colors duration-300">
+                      <div className="text-white">{category.icon}</div>
                     </div>
                     <div className="flex-1 pt-2">
                       <h3 className="font-mono text-sm font-bold text-zinc-900 mb-1">
@@ -136,18 +136,18 @@ const ModernTechStack = () => {
                 </div>
 
                 {/* Skills List */}
-                <div className="border-t border-zinc-100">
+                <div className="border-t border-zinc-200">
                   {category.skills.map((skill, index) => (
                     <div
                       key={skill.name}
                       className={`
-                        p-8 hover:bg-zinc-100 transition-colors duration-300
-                        ${index !== category.skills.length - 1 ? "border-b border-zinc-100" : ""}
+                        p-8 hover:bg-zinc-50 transition-colors duration-300
+                        ${index !== category.skills.length - 1 ? "border-b border-zinc-200" : ""}
                       `}
                     >
                       <div className="flex items-center justify-between gap-4">
                         <div className="space-y-2">
-                          <Badge className="bg-black text-white px-4 py-2 rounded-full text-xs font-mono flex items-center gap-2">
+                          <Badge className="bg-zinc-900 text-white px-4 py-2 rounded-full text-xs font-mono flex items-center gap-2 hover:bg-black">
                             {skill.icon}
                             {skill.name}
                           </Badge>
@@ -168,7 +168,7 @@ const ModernTechStack = () => {
         </div>
 
         {/* Experience Stats */}
-        <div className="mt-24 pt-24 border-t border-zinc-100">
+        <div className="mt-24 pt-24 border-t border-zinc-200">
           <ExperienceStats />
         </div>
       </div>
