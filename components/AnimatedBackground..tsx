@@ -57,13 +57,13 @@ const AnimatedBackground = () => {
   const baseShapes = [
     {
       shape: "circle",
-      className: "w-16 h-16 md:w-32 md:h-32 bg-zinc-500 rounded-full",
+      className: "w-16 h-16 md:w-32 md:h-32 bg-zinc-400 rounded-full",
       animation: "animate-float-slow",
       style: {},
     },
     {
       shape: "square",
-      className: "w-20 h-20 md:w-40 md:h-40 bg-zinc-500 rotate-12",
+      className: "w-20 h-20 md:w-40 md:h-40 bg-zinc-300 rotate-12",
       animation: "animate-float-medium",
       style: {},
     },

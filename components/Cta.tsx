@@ -41,7 +41,7 @@ const ModernCTA = () => {
   };
 
   return (
-    <section className="bg-zinc-50/80">
+    <section className="bg-zinc-50/80" id="contact">
       <div className="max-w-7xl mx-auto px-8 py-32">
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">

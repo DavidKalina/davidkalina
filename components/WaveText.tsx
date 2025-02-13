@@ -11,24 +11,36 @@ interface SequentialTextProps {
 
 const WaveText: FC<SequentialTextProps> = ({ text, className = "", addSheen = false }) => {
   return (
-    // The container is set as relative to position the sheen overlay correctly.
     <span className={`relative inline-block ${className}`}>
       {text.split("").map((char, index) => (
         <motion.span
           key={index}
-          // Each letter starts at normal scale and its inherited color.
-          initial={{ scale: 1, color: "inherit" }}
-          // Each letter animates to a scaled-up size and golden color.
+          initial={{
+            scale: 1,
+            color: "inherit",
+            filter: "blur(0px)",
+            textShadow: "none",
+          }}
           animate={{
-            scale: 1.5, // More noticeable scale factor
+            scale: [1, 1.5, 1.2],
             color: "#FFD700",
+            filter: ["blur(0px)", "blur(4px)", "blur(0px)"],
+            textShadow: [
+              "none",
+              "0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6)",
+              "0 0 10px rgba(255, 215, 0, 0.4)",
+            ],
             transition: {
-              duration: 0.2, // Faster animation speed
-              delay: index * 0.1, // Each letter animates sequentially faster
+              duration: 0.8,
+              delay: index * 0.1,
+              times: [0, 0.6, 1],
+              ease: "easeOut",
             },
           }}
-          // Inline-block is required so that scaling applies per letter.
-          style={{ display: "inline-block" }}
+          style={{
+            display: "inline-block",
+            backfaceVisibility: "hidden",
+          }}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>
@@ -41,17 +53,14 @@ const WaveText: FC<SequentialTextProps> = ({ text, className = "", addSheen = fa
             left: 0,
             width: "100%",
             height: "100%",
-            // A diagonal gradient that will create the sheen effect.
             background: "linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent)",
-            pointerEvents: "none", // Allows clicks to pass through.
+            pointerEvents: "none",
+            zIndex: 1,
           }}
-          // Start fully to the left.
           initial={{ x: "-100%" }}
-          // Animate to fully to the right.
           animate={{ x: "100%" }}
           transition={{
-            // Adjust delay so that the sheen starts after all letters animate
-            delay: text.length * 0.1 + 0.1,
+            delay: text.length * 0.1 + 0.4,
             duration: 0.8,
             ease: "easeInOut",
           }}
