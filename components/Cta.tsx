@@ -160,7 +160,7 @@ const ModernCTA = () => {
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="bg-zinc-900 text-white hover:bg-black rounded-full font-mono text-sm px-8 py-6 group disabled:opacity-50"
+                    className="bg-zinc-900 text-white hover:bg-[#333] rounded-full font-mono text-sm px-8 py-6 group disabled:opacity-50"
                   >
                     {isPending ? "SENDING..." : "SEND MESSAGE"}
                     <Send

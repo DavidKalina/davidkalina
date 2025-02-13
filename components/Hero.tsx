@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2 } from "lucide-react";
-import AnimatedPieChart from "./AnimatedPieChart";
 import Link from "next/link";
+import { useState } from "react";
+import AnimatedPieChart from "./AnimatedPieChart";
+import WaveText from "./WaveText";
 
 const ModernHero = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -39,10 +40,11 @@ const ModernHero = () => {
 
             {/* Description */}
             <p className="font-mono text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
-              Full-stack developer with real-time systems, scalable web applications, intuitive and
-              creative UI/UX experiences, and utilizing the power of AI while retaining the spark of
-              human divinity. Passionate about merging user-centric design with cutting-edge
-              technology to create impactful digital experiences.
+              Full-stack developer specializing in developing real-time systems, scalable web
+              applications, intuitive and creative UI/UX experiences, and utilizing the power of AI
+              while retaining the spark of <WaveText text="human divinity" />. Passionate about
+              merging user-centric design with cutting-edge technology to create impactful digital
+              experiences.
             </p>
 
             {/* Tech Stack Pills */}
@@ -60,7 +62,7 @@ const ModernHero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Link href="#projects">
-                <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto">
+                <Button className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto">
                   VIEW PROJECTS
                   <ArrowRight
                     className="ml-2 transition-transform group-hover:translate-x-1"

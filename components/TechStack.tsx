@@ -95,7 +95,7 @@ const ModernTechStack = () => {
         {/* Section Header */}
         <div className="max-w-2xl">
           <div className="flex items-center gap-6 mb-8">
-            <div className="bg-black p-4 rounded-2xl">
+            <div className="bg-[#333] p-4 rounded-2xl">
               <Code2 size={24} className="text-white" />
             </div>
             <div>
@@ -121,7 +121,7 @@ const ModernTechStack = () => {
                 {/* Card Header */}
                 <div className="p-8 pb-6">
                   <div className="flex items-start gap-6 mb-6">
-                    <div className="bg-zinc-900 p-4 rounded-xl group-hover:bg-black transition-colors duration-300">
+                    <div className="bg-zinc-900 p-4 rounded-xl group-hover:bg-[#333] transition-colors duration-300">
                       <div className="text-white">{category.icon}</div>
                     </div>
                     <div className="flex-1 pt-2">
@@ -147,7 +147,7 @@ const ModernTechStack = () => {
                     >
                       <div className="flex items-center justify-between gap-4">
                         <div className="space-y-2">
-                          <Badge className="bg-zinc-900 text-white px-4 py-2 rounded-full text-xs font-mono flex items-center gap-2 hover:bg-black">
+                          <Badge className="bg-zinc-900 text-white px-4 py-2 rounded-full text-xs font-mono flex items-center gap-2 hover:bg-[#333]">
                             {skill.icon}
                             {skill.name}
                           </Badge>

@@ -94,7 +94,7 @@ const ModernFooter = () => {
             <p className="font-mono text-sm text-zinc-600">
               Subscribe to get updates about new projects and articles.
             </p>
-            <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6">
+            <Button className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6">
               SUBSCRIBE
               <Mail className="ml-2" size={16} />
             </Button>

@@ -73,7 +73,7 @@ const ModernAbout = () => {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
               <Link href="/resume" target="_blank">
-                <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                <Button className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
                   VIEW RESUME
                   <ArrowRight
                     className="ml-2 transition-transform group-hover:translate-x-1"
@@ -112,7 +112,7 @@ const ModernAbout = () => {
                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">FEATURED WORK</p>
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <Badge className="bg-black text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
+                    <Badge className="bg-[#333] text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
                       ALFAPHOX/REVIVE
                     </Badge>
                     <span className="font-mono md:text-sm lg:md:text-md text-white/90">2024</span>
@@ -133,7 +133,7 @@ const ModernAbout = () => {
                     "Creating intuitive, accessible interfaces",
                     "Fostering collaborative development environments",
                   ].map((focus, index) => (
-                    <div key={index} className="bg-black rounded-xl lg:rounded-2xl p-4 lg:p-6">
+                    <div key={index} className="bg-[#333] rounded-xl lg:rounded-2xl p-4 lg:p-6">
                       <p className="font-mono md:text-md text-white">{focus}</p>
                     </div>
                   ))}

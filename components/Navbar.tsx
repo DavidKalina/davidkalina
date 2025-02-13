@@ -31,7 +31,7 @@ const ModernNavbar = () => {
                 </Link>
               </Button>
               <Button
-                className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6"
+                className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6"
                 asChild
               >
                 <Link href="/resume" target="_blank">
@@ -97,7 +97,7 @@ const ModernNavbar = () => {
                 </Link>
               </Button>
               <Button
-                className="w-full bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm"
+                className="w-full bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono text-sm"
                 asChild
               >
                 <Link href="/resume" target="_blank">

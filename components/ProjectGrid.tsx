@@ -139,7 +139,7 @@ const ModernProjectGrid = () => {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4 lg:mb-6">
-                      <div className="inline-block bg-black rounded-lg lg:rounded-xl p-2">
+                      <div className="inline-block bg-[#333] rounded-lg lg:rounded-xl p-2">
                         <div className="lg:hidden">
                           {React.cloneElement(project.icon, { size: 20 })}
                         </div>
@@ -191,7 +191,7 @@ const ModernProjectGrid = () => {
                     <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
                       {project.href && (
                         <Link target="_blank" href={project.href}>
-                          <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
+                          <Button className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
                             VIEW PROJECT
                             <ArrowRight
                               className="ml-2 transition-transform group-hover:translate-x-1"

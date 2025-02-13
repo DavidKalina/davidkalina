@@ -46,7 +46,7 @@ const ModernFeaturedProject = () => {
                 />
                 <div className="relative z-10 w-full">
                   <div className="space-y-4 lg:space-y-6">
-                    <div className="inline-block bg-black rounded-xl lg:rounded-2xl p-2 lg:p-3">
+                    <div className="inline-block bg-[#333] rounded-xl lg:rounded-2xl p-2 lg:p-3">
                       <Network size={24} className="text-white lg:hidden" />
                       <Network size={32} className="text-white hidden lg:block" />
                     </div>
@@ -69,13 +69,13 @@ const ModernFeaturedProject = () => {
                 <div className="space-y-8 lg:space-y-12">
                   <div className="space-y-4 lg:space-y-6">
                     <div className="flex flex-wrap gap-2 lg:gap-3">
-                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-black">
+                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
                         MICROSERVICES
                       </Badge>
-                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-black">
+                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
                         DISTRIBUTED
                       </Badge>
-                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-black">
+                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
                         FULL-STACK
                       </Badge>
                     </div>
@@ -103,7 +103,7 @@ const ModernFeaturedProject = () => {
 
                   <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
                     <Link href="https://webmine.davidkalina.com" target="_blank">
-                      <Button className="bg-zinc-900 text-white hover:bg-black rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                      <Button className="bg-zinc-900 text-white hover:bg-[#333] rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto">
                         VIEW PROJECT
                         <ArrowRight
                           className="ml-2 transition-transform group-hover:translate-x-1"
