@@ -104,9 +104,8 @@ const ModernTechStack = () => {
             </div>
           </div>
           <p className="font-mono xl:text-lg text-zinc-600 leading-relaxed mb-16">
-            Specialized in modern web development with a focus on scalable applications. Experienced
-            in both frontend and backend technologies with a strong emphasis on code quality and
-            performance.
+            Expert in building scalable, high-performance applications using modern web
+            technologies.
           </p>
         </div>
 

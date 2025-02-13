@@ -2,12 +2,12 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2 } from "lucide-react";
+import { useContainerDimensions } from "@/hooks/useContainerDimensions";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { RefObject, useRef } from "react";
 import AnimatedForceGraph from "./ForceGraph";
 import WaveText from "./WaveText";
-import { RefObject, useRef } from "react";
-import { useContainerDimensions } from "@/hooks/useContainerDimensions";
 
 const ModernHero = () => {
   // Create a ref for the container that will wrap the force graph.
@@ -27,27 +27,18 @@ const ModernHero = () => {
             </div>
 
             {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
-                Bridging Innovation
-                <br />
-                with Scalable
-                <br />
-                <span className="inline-flex items-center gap-2 sm:gap-4">
-                  Web Solutions
-                  <Code2 size={32} className="text-zinc-400 sm:hidden" />
-                  <Code2 size={48} className="text-zinc-400 hidden sm:block" />
-                </span>
+            <div className="space-y-3">
+              <h1 className="font-mono font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-snug">
+                <span className="text-yellow-500">Human-Centered Innovation</span>
+                <span className="text-zinc-500"> with Scalable Tech</span>
               </h1>
             </div>
 
             {/* Description */}
             <p className="font-mono text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
-              Full-stack developer specializing in developing real-time systems, scalable web
-              applications, intuitive and creative UI/UX experiences, and utilizing the power of AI
-              while retaining the <WaveText text="spark of human divinity" />. Passionate about
-              merging user-centric design with cutting-edge technology to create impactful digital
-              experiences.
+              I build scalable, real-time systems and intuitive digital experiences—blending AI’s
+              power with human intuition to create technology that feels alive and retains the spark
+              of <WaveText text="human divinity" />.
             </p>
 
             {/* Tech Stack Pills */}
