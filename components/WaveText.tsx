@@ -22,7 +22,7 @@ const WaveText: FC<SequentialTextProps> = ({ text, className = "", addSheen = fa
             textShadow: "none",
           }}
           animate={{
-            scale: [1, 1.5, 1.2],
+            scale: [1, 1.5, 1.3],
             color: "#FFD700",
             filter: ["blur(0px)", "blur(4px)", "blur(0px)"],
             textShadow: [
