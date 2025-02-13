@@ -39,10 +39,10 @@ const ModernResume = () => {
           <div className="relative z-10">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6">
               <div>
-                <h1 className="text-3xl sm:text-4xl font-mono font-bold text-white mb-4">
+                <h1 className="text-3xl sm:text-4xl font-sketch font-bold text-white mb-4">
                   David Kalina
                 </h1>
-                <h2 className="text-lg sm:text-xl font-mono text-white/80 mb-6">
+                <h2 className="text-lg sm:text-xl font-sketch text-white/80 mb-6">
                   Full Stack Developer
                 </h2>
                 <div className="space-y-2">
@@ -50,23 +50,23 @@ const ModernResume = () => {
                     <Mail size={16} />
                     <a
                       href="mailto:davidkalina@proton.me"
-                      className="font-mono text-sm hover:text-white break-all"
+                      className="font-sketch text-sm hover:text-white break-all"
                     >
                       davidkalina@proton.me
                     </a>
                   </div>
                   <div className="flex items-center gap-2 text-white/60">
                     <Phone size={16} />
-                    <span className="font-mono text-sm">385-225-6102</span>
+                    <span className="font-sketch text-sm">385-225-6102</span>
                   </div>
                   <div className="flex items-center gap-2 text-white/60">
                     <MapPin size={16} />
-                    <span className="font-mono text-sm">Orem, UT</span>
+                    <span className="font-sketch text-sm">Orem, UT</span>
                   </div>
                 </div>
               </div>
               <Button
-                className="bg-white text-indigo-500 hover:bg-white/80 rounded-full px-4 py-4 sm:px-6 sm:py-6 font-mono text-sm w-full sm:w-auto"
+                className="bg-white text-indigo-500 hover:bg-white/80 rounded-full px-4 py-4 sm:px-6 sm:py-6 font-sketch text-sm w-full sm:w-auto"
                 onClick={() => {
                   // Create a link element
                   const link = document.createElement("a");
@@ -83,7 +83,7 @@ const ModernResume = () => {
             </div>
 
             {/* Professional Summary */}
-            <div className="mt-8 text-white/80 font-mono text-sm leading-relaxed">
+            <div className="mt-8 text-white/80 font-sketch text-sm leading-relaxed">
               <p>
                 Innovative and detail-oriented Full Stack Developer with over four years of
                 experience designing and deploying scalable web applications and AI-driven
@@ -101,14 +101,14 @@ const ModernResume = () => {
             <div className="bg-green-500 p-3 sm:p-4 rounded-2xl">
               <Star size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-mono font-bold">Key Strengths</h2>
+            <h2 className="text-xl sm:text-2xl font-sketch font-bold">Key Strengths</h2>
           </div>
           <Card className="border-2 border-zinc-100 rounded-2xl">
             <CardContent className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {keyStrengths.map((strength, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <Star size={16} className="text-green-500 mt-1 flex-shrink-0" />
-                  <span className="font-mono text-sm text-zinc-600">{strength}</span>
+                  <span className="font-sketch text-sm text-zinc-600">{strength}</span>
                 </div>
               ))}
             </CardContent>
@@ -121,18 +121,18 @@ const ModernResume = () => {
             <div className="bg-blue-500 p-3 sm:p-4 rounded-2xl">
               <Code size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-mono font-bold">Technical Skills</h2>
+            <h2 className="text-xl sm:text-2xl font-sketch font-bold">Technical Skills</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {Object.entries(skills).map(([category, items]) => (
               <Card key={category} className="border-2 border-zinc-100 rounded-2xl overflow-hidden">
                 <CardContent className="p-4 sm:p-6">
-                  <h3 className="font-mono text-sm text-zinc-400 mb-4 uppercase">{category}</h3>
+                  <h3 className="font-sketch text-sm text-zinc-400 mb-4 uppercase">{category}</h3>
                   <div className="flex flex-wrap gap-2">
                     {items.map((skill) => (
                       <Badge
                         key={skill}
-                        className="bg-zinc-100 text-zinc-900 rounded-full px-3 py-1 text-xs font-mono"
+                        className="bg-zinc-100 text-zinc-900 rounded-full px-3 py-1 text-xs font-sketch"
                       >
                         {skill}
                       </Badge>
@@ -150,7 +150,7 @@ const ModernResume = () => {
             <div className="bg-orange-500 p-3 sm:p-4 rounded-2xl">
               <Briefcase size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-mono font-bold">Experience</h2>
+            <h2 className="text-xl sm:text-2xl font-sketch font-bold">Experience</h2>
           </div>
 
           {/* Experience Cards */}
@@ -196,14 +196,14 @@ const ModernResume = () => {
               <CardContent className="p-6 sm:p-8">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-6">
                   <div>
-                    <h3 className="font-mono text-lg sm:text-xl font-bold mb-2">{job.title}</h3>
-                    <p className="font-mono text-zinc-600">{job.company}</p>
+                    <h3 className="font-sketch text-lg sm:text-xl font-bold mb-2">{job.title}</h3>
+                    <p className="font-sketch text-zinc-600">{job.company}</p>
                   </div>
-                  <Badge className="bg-orange-500 text-white rounded-full px-4 py-2 font-mono text-xs w-fit">
+                  <Badge className="bg-orange-500 text-white rounded-full px-4 py-2 font-sketch text-xs w-fit">
                     {job.date}
                   </Badge>
                 </div>
-                <ul className="space-y-3 font-mono text-sm text-zinc-600">
+                <ul className="space-y-3 font-sketch text-sm text-zinc-600">
                   {job.achievements.map((achievement, i) => (
                     <li key={i} className="flex gap-2">
                       <ExternalLink size={16} className="mt-1 flex-shrink-0" />
@@ -222,23 +222,23 @@ const ModernResume = () => {
             <div className="bg-purple-500 p-3 sm:p-4 rounded-2xl">
               <GraduationCap size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-mono font-bold">Education</h2>
+            <h2 className="text-xl sm:text-2xl font-sketch font-bold">Education</h2>
           </div>
 
           <Card className="border-2 border-zinc-100 rounded-2xl hover:border-purple-500 transition-colors duration-300">
             <CardContent className="p-6 sm:p-8">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-6">
                 <div>
-                  <h3 className="font-mono text-lg sm:text-xl font-bold mb-2">
+                  <h3 className="font-sketch text-lg sm:text-xl font-bold mb-2">
                     Software Engineering Certificate
                   </h3>
-                  <p className="font-mono text-zinc-600">General Assembly - Denver, CO</p>
+                  <p className="font-sketch text-zinc-600">General Assembly - Denver, CO</p>
                 </div>
-                <Badge className="bg-purple-500 text-white rounded-full px-4 py-2 font-mono text-xs w-fit">
+                <Badge className="bg-purple-500 text-white rounded-full px-4 py-2 font-sketch text-xs w-fit">
                   11/2019 - 02/2020
                 </Badge>
               </div>
-              <p className="font-mono text-sm text-zinc-600">
+              <p className="font-sketch text-sm text-zinc-600">
                 Completed an intensive 500-hour program in Full Stack Web Development, mastering
                 foundational and advanced software development concepts.
               </p>

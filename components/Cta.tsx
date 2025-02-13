@@ -1,11 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Clock, Mail, Send } from "lucide-react";
-import { useTransition, useState } from "react";
+import { useState, useTransition } from "react";
 import { sendContactEmail } from "../app/actions";
+import { ExcalidrawButton } from "./ExcalidrawButton";
+import { ExcalidrawCard } from "./ExcalidrawCard";
+import { ExcalidrawInput, ExcalidrawTextarea } from "./ExcalidrawFormField";
+import ExcalidrawSectionHeader from "./ExcalidrawSectionHeader";
+import { ExcalidrawFormAlert } from "./ExcalidrawFormAlert";
+import { ExcalidrawInfoItem } from "./ExcalidrawInfoItem";
+import { ExcalidrawStatus } from "./ExcalidrawStatus";
 
 const ModernCTA = () => {
   const [isPending, startTransition] = useTransition();
@@ -41,138 +45,78 @@ const ModernCTA = () => {
   };
 
   return (
-    <section className="bg-zinc-50/80">
+    <section className="bg-zinc-50/80" id="contact">
       <div className="max-w-7xl mx-auto px-8 py-32">
-        {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Left Column - Info */}
+          {/* Left Column */}
           <div className="space-y-12">
-            {/* Section Header */}
-            <div className="space-y-8">
-              <div className="flex items-center gap-6">
-                <div className="bg-zinc-900 p-4 rounded-2xl">
-                  <Mail size={24} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-mono text-zinc-500 mb-1">005 / CONTACT</p>
-                  <h2 className="text-3xl font-mono font-bold text-zinc-900">
-                    Let&apos;s Work Together
-                  </h2>
-                </div>
-              </div>
-              <p className="font-mono text-zinc-600 leading-relaxed">
-                Currently available for freelance projects and full-time opportunities. Let&apos;s
-                build something great together.
-              </p>
-            </div>
+            <ExcalidrawSectionHeader
+              icon={Mail}
+              title="Let's Work Together"
+              subtitle="005 / CONTACT"
+            />
 
-            {/* Quick Info */}
             <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <Clock size={20} className="text-zinc-500" />
-                <div>
-                  <p className="font-mono text-sm text-zinc-900 font-bold">Response Time</p>
-                  <p className="font-mono text-sm text-zinc-600">Usually within 24 hours</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <Mail size={20} className="text-zinc-500" />
-                <div>
-                  <p className="font-mono text-sm text-zinc-900 font-bold">Email</p>
-                  <p className="font-mono text-sm text-zinc-600">davidkalina@proton.me</p>
-                </div>
-              </div>
+              <ExcalidrawInfoItem
+                icon={Clock}
+                title="Response Time"
+                description="Usually within 24 hours"
+              />
+              <ExcalidrawInfoItem icon={Mail} title="Email" description="davidkalina@proton.me" />
             </div>
 
-            {/* Current Status */}
-            <div className="bg-white shadow-lg rounded-3xl p-8 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <p className="font-mono text-sm font-bold text-zinc-900">CURRENTLY AVAILABLE</p>
-              </div>
-              <p className="font-mono text-sm text-zinc-600">
-                Open to discussing new projects and opportunities. Ideal project duration: 3-6
-                months.
-              </p>
-            </div>
+            <ExcalidrawStatus
+              status="available"
+              title="CURRENTLY AVAILABLE"
+              description="Open to discussing new projects and opportunities. Ideal project duration: 3-6 months."
+            />
           </div>
 
           {/* Right Column - Form */}
-          <div className="relative">
-            <div className="absolute inset-0 rounded-3xl bg-white shadow-lg" />
-            <div className="relative p-8">
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="font-mono text-xs text-zinc-500">NAME</label>
-                      <Input
-                        required
-                        value={formState.name}
-                        onChange={(e) =>
-                          setFormState((prev) => ({ ...prev, name: e.target.value }))
-                        }
-                        className="h-14 px-6 font-mono text-sm bg-white border-2 border-zinc-200 rounded-2xl focus:border-zinc-900 focus:ring-0 transition-colors duration-300"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="font-mono text-xs text-zinc-500">EMAIL</label>
-                      <Input
-                        required
-                        type="email"
-                        value={formState.email}
-                        onChange={(e) =>
-                          setFormState((prev) => ({ ...prev, email: e.target.value }))
-                        }
-                        className="h-14 px-6 font-mono text-sm bg-white border-2 border-zinc-200 rounded-2xl focus:border-zinc-900 focus:ring-0 transition-colors duration-300"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="font-mono text-xs text-zinc-500">PROJECT DETAILS</label>
-                    <Textarea
-                      required
-                      value={formState.message}
-                      onChange={(e) =>
-                        setFormState((prev) => ({ ...prev, message: e.target.value }))
-                      }
-                      className="min-h-[200px] p-6 font-mono text-sm bg-white border-2 border-zinc-200 rounded-2xl focus:border-zinc-900 focus:ring-0 transition-colors duration-300"
-                      placeholder="Tell me about your project..."
-                    />
-                  </div>
+          <ExcalidrawCard className="p-8">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ExcalidrawInput
+                    label="NAME"
+                    required
+                    value={formState.name}
+                    onChange={(e) => setFormState((prev) => ({ ...prev, name: e.target.value }))}
+                    placeholder="John Doe"
+                  />
+                  <ExcalidrawInput
+                    label="EMAIL"
+                    type="email"
+                    required
+                    value={formState.email}
+                    onChange={(e) => setFormState((prev) => ({ ...prev, email: e.target.value }))}
+                    placeholder="john@example.com"
+                  />
                 </div>
+                <ExcalidrawTextarea
+                  label="PROJECT DETAILS"
+                  required
+                  value={formState.message}
+                  onChange={(e) => setFormState((prev) => ({ ...prev, message: e.target.value }))}
+                  placeholder="Tell me about your project..."
+                />
+              </div>
 
-                {status.message && (
-                  <div
-                    className={`p-4 rounded-2xl ${
-                      status.type === "success"
-                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                        : "bg-red-50 text-red-700 border border-red-200"
-                    } font-mono text-sm`}
-                  >
-                    {status.message}
-                  </div>
-                )}
+              {status.message && (
+                <ExcalidrawFormAlert type={status.type!} message={status.message} />
+              )}
 
-                <div className="flex items-center gap-4">
-                  <Button
-                    type="submit"
-                    disabled={isPending}
-                    className="bg-zinc-900 text-white hover:bg-black rounded-full font-mono text-sm px-8 py-6 group disabled:opacity-50"
-                  >
-                    {isPending ? "SENDING..." : "SEND MESSAGE"}
-                    <Send
-                      className="ml-2 transition-transform group-hover:translate-x-1"
-                      size={18}
-                    />
-                  </Button>
-                  <p className="font-mono text-xs text-zinc-500">Usually respond within 24 hours</p>
-                </div>
-              </form>
-            </div>
-          </div>
+              <div className="flex items-center gap-4">
+                <ExcalidrawButton type="submit" disabled={isPending}>
+                  {isPending ? "SENDING..." : "SEND MESSAGE"}
+                  <Send className="ml-2 transition-transform group-hover:translate-x-1" size={18} />
+                </ExcalidrawButton>
+                <p className="font-sketch text-xs text-slate-500">
+                  Usually respond within 24 hours
+                </p>
+              </div>
+            </form>
+          </ExcalidrawCard>
         </div>
       </div>
     </section>

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code2 } from "lucide-react";
-import AnimatedPieChart from "./AnimatedPieChart";
 import Link from "next/link";
+import { useState } from "react";
+import AnimatedPieChart from "./AnimatedPieChart";
+import { ExcalidrawBadge } from "./ExcalidrawBadge";
+import { ExcalidrawButton } from "./ExcalidrawButton";
 
 const ModernHero = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -17,14 +17,11 @@ const ModernHero = () => {
           {/* Content Section */}
           <div className="space-y-6 lg:space-y-8 pt-4 lg:pt-12">
             {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 bg-zinc-100 px-3 sm:px-4 py-2 rounded-full">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="font-mono text-[10px] sm:text-xs">AVAILABLE FOR PROJECTS</span>
-            </div>
+            <ExcalidrawBadge variant="green">AVAILABLE FOR PROJECTS</ExcalidrawBadge>
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+              <h1 className="font-sketch font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
                 Bridging Innovation
                 <br />
                 with Scalable
@@ -38,7 +35,7 @@ const ModernHero = () => {
             </div>
 
             {/* Description */}
-            <p className="font-mono text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
+            <p className="font-sketch text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
               Full-stack developer with real-time systems, scalable web applications, intuitive and
               creative UI/UX experiences, and utilizing the power of AI while retaining the spark of
               human divinity. Passionate about merging user-centric design with cutting-edge
@@ -48,33 +45,23 @@ const ModernHero = () => {
             {/* Tech Stack Pills */}
             <div className="flex flex-wrap gap-2">
               {["TYPESCRIPT", "REACT", "NODE.JS"].map((tech) => (
-                <Badge
-                  key={tech}
-                  className="bg-zinc-100 hover:text-white text-black px-3 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono"
-                >
-                  {tech}
-                </Badge>
+                <ExcalidrawBadge key={tech}>{tech}</ExcalidrawBadge>
               ))}
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Link href="#projects">
-                <Button className="bg-black text-white hover:bg-zinc-900 rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto">
+                <ExcalidrawButton>
                   VIEW PROJECTS
                   <ArrowRight
                     className="ml-2 transition-transform group-hover:translate-x-1"
                     size={18}
                   />
-                </Button>
+                </ExcalidrawButton>
               </Link>
               <Link href="#contact">
-                <Button
-                  variant="outline"
-                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
-                >
-                  CONTACT ME
-                </Button>
+                <ExcalidrawButton variant="blue">CONTACT ME</ExcalidrawButton>
               </Link>
             </div>
           </div>

@@ -1,19 +1,15 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import ModernFooter from "@/components/Footer";
-import ModernNavbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackground.";
+import ExcalidrawFooter from "@/components/ExcalidrawFooter";
+import ExcalidrawNavbar from "@/components/ExcalidrawNavbar";
 import { Analytics } from "@vercel/analytics/react";
+import type { Metadata } from "next";
+import { DM_Sans } from "next/font/google"; // Changed from Geist
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  weight: ["400", "500", "700"], // Include the weights you need
 });
 
 export const metadata: Metadata = {
@@ -32,15 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth`}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen flex flex-col`}
-      >
+    <html lang="en" className="scroll-smooth">
+      <body className={`${dmSans.variable} font-sans antialiased min-h-screen flex flex-col`}>
         <AnimatedBackground />
-        <ModernNavbar />
+        <ExcalidrawNavbar />
         <main className="flex-1">{children}</main>
         <Analytics />
-        <ModernFooter />
+        <ExcalidrawFooter />
       </body>
     </html>
   );
