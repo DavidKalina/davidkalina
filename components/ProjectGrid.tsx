@@ -145,7 +145,7 @@ const ModernProjectGrid = () => {
                         </div>
                         <div className="hidden lg:block">{project.icon}</div>
                       </div>
-                      <Badge className="bg-white/80/10 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                      <Badge className="bg-[#333] text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
                         {project.year}
                       </Badge>
                     </div>

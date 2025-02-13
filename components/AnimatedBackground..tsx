@@ -1,59 +1,88 @@
 "use client";
 
-import React, { useMemo } from "react";
-import { motion } from "framer-motion";
+import React, { useMemo, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 // Helper to get a random floating–point number between min and max.
 const getRandomFloat = (min: number, max: number) => Math.random() * (max - min) + min;
 
 // Generates a random movement path for a shape.
-// It randomly chooses one edge to start from and sets the end position on the opposite edge.
 const getRandomMovement = () => {
-  // (These offset numbers push the shape fully offscreen before/after.)
   const offset = 100;
-
-  // Check if window is defined (i.e. code is running in the browser)
   if (typeof window === "undefined") {
-    // Return default values when server-side rendering.
     return {
       start: { x: 0, y: 0 },
       end: { x: 0, y: 0 },
       duration: 30,
     };
   }
-
-  // (These offset numbers push the shape fully offscreen before/after.)
   const { innerWidth: width, innerHeight: height } = window;
   const edge = Math.floor(Math.random() * 4);
   let start, end;
   switch (edge) {
-    case 0: // Start at top, float downward.
+    case 0: // Top -> Bottom
       start = { x: getRandomFloat(0, width), y: -offset };
       end = { x: getRandomFloat(0, width), y: height + offset };
       break;
-    case 1: // Start at right, float leftward.
+    case 1: // Right -> Left
       start = { x: width + offset, y: getRandomFloat(0, height) };
       end = { x: -offset, y: getRandomFloat(0, height) };
       break;
-    case 2: // Start at bottom, float upward.
+    case 2: // Bottom -> Top
       start = { x: getRandomFloat(0, width), y: height + offset };
       end = { x: getRandomFloat(0, width), y: -offset };
       break;
-    case 3: // Start at left, float rightward.
-    default:
+    case 3:
+    default: // Left -> Right
       start = { x: -offset, y: getRandomFloat(0, height) };
       end = { x: width + offset, y: getRandomFloat(0, height) };
       break;
   }
-  // A random duration between 20 and 40 seconds.
   const duration = getRandomFloat(20, 40);
   return { start, end, duration };
 };
 
+// A wrapper component that applies an occasional scale change and holds that state for a bit.
+const RandomPulse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const pulse = async () => {
+      while (isMounted) {
+        // Wait for a random interval between 8 and 20 seconds.
+        const delay = getRandomFloat(8000, 20000);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        if (!isMounted) break;
+
+        // Choose a random target scale: either scaled down (0.9) or scaled up (1.1).
+        const targetScale = Math.random() < 0.5 ? 0.9 : 1.1;
+        // Animate to the target scale quickly.
+        await controls.start({ scale: targetScale, transition: { duration: 0.3 } });
+        if (!isMounted) break;
+
+        // Hold the new scale for 2 seconds.
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        if (!isMounted) break;
+
+        // Animate back to the original scale.
+        await controls.start({ scale: 1, transition: { duration: 0.3 } });
+      }
+    };
+
+    pulse();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [controls]);
+
+  return <motion.div animate={controls}>{children}</motion.div>;
+};
+
 const AnimatedBackground = () => {
-  // Base shapes definitions.
-  // (Feel free to tweak the classes and clip-paths as needed.)
   const baseShapes = [
     {
       shape: "circle",
@@ -89,7 +118,7 @@ const AnimatedBackground = () => {
     },
   ];
 
-  // Augment each shape with a random movement object.
+  // Augment each shape with a random movement.
   const shapes = useMemo(() => {
     return baseShapes.map((shape) => {
       const movement = getRandomMovement();
@@ -97,8 +126,7 @@ const AnimatedBackground = () => {
     });
   }, []);
 
-  // Define additional “floating” effects.
-  // (We removed horizontal translation here so that the outer motion controls the main movement.)
+  // Define continuous floating effects.
   const getAnimationProps = (animation: string) => {
     switch (animation) {
       case "animate-float-slow":
@@ -147,14 +175,13 @@ const AnimatedBackground = () => {
 
   return (
     <ParallaxProvider>
-      {/* The fixed container ensures the shapes are rendered behind other content */}
+      {/* Fixed container to render shapes behind content */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         {shapes.map((shape, index) => {
           const { start, end, duration } = shape.movement;
           const { animate, transition } = getAnimationProps(shape.animation);
           return (
-            // Outer motion.div animates from the random start to the random end,
-            // making the shape float across the entire viewport.
+            // Outer motion.div for continuous movement.
             <motion.div
               key={index}
               initial={start}
@@ -166,13 +193,15 @@ const AnimatedBackground = () => {
               }}
               className="absolute"
             >
-              {/* Inner motion.div applies extra floating effects (rotation and scaling) */}
-              <motion.div
-                className={`${shape.className} opacity-50`}
-                style={shape.style}
-                animate={animate}
-                transition={transition}
-              />
+              {/* Wrap the shape with RandomPulse to add the occasional held scale change */}
+              <RandomPulse>
+                <motion.div
+                  className={`${shape.className} opacity-50`}
+                  style={shape.style}
+                  animate={animate}
+                  transition={transition}
+                />
+              </RandomPulse>
             </motion.div>
           );
         })}
