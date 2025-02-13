@@ -166,6 +166,34 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
     }, 200);
 
     simulation.on("tick", () => {
+      // Check boundaries for each node
+      nodes.forEach((d) => {
+        if (d.x == null || d.y == null || d.vx == null || d.vy == null) return;
+
+        const r = getNodeRadius(d);
+        // Left boundary
+        if (d.x - r < -width / 2) {
+          d.x = -width / 2 + r;
+          d.vx *= -1;
+        }
+        // Right boundary
+        if (d.x + r > width / 2) {
+          d.x = width / 2 - r;
+          d.vx *= -1;
+        }
+        // Top boundary
+        if (d.y - r < -height / 2) {
+          d.y = -height / 2 + r;
+          d.vy *= -1;
+        }
+        // Bottom boundary
+        if (d.y + r > height / 2) {
+          d.y = height / 2 - r;
+          d.vy *= -1;
+        }
+      });
+
+      // Update links and node positions
       link
         .attr("x1", (d) => (d.source as NodeDatum).x!)
         .attr("y1", (d) => (d.source as NodeDatum).y!)
