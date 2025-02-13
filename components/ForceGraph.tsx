@@ -87,19 +87,6 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("viewBox", [-width / 2, -height / 2, width, height])
       .attr("style", "max-width: 100%; height: auto;");
 
-    // Only add zoom and drag behavior for non-mobile
-    if (!isMobile) {
-      const zoom = d3
-        .zoom<SVGSVGElement, undefined>()
-        .scaleExtent([0.5, 2])
-        .on("zoom", (event) => {
-          g.attr("transform", event.transform);
-        });
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      svg.call(zoom as any);
-    }
-
     const g = svg.append("g");
 
     const link = g
