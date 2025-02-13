@@ -73,7 +73,7 @@ const ModernAbout = () => {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
               <Link href="/resume" target="_blank">
-                <Button className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                <Button className="bg-[#333] text-white hover:bg-[#333] rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
                   VIEW RESUME
                   <ArrowRight
                     className="ml-2 transition-transform group-hover:translate-x-1"

@@ -16,7 +16,7 @@ const ModernFeaturedProject = () => {
         {/* Minimal Header */}
         <div className="flex items-center justify-between mb-8 lg:mb-12">
           <div className="flex items-center gap-4 lg:gap-6">
-            <div className="bg-zinc-900 p-3 lg:p-4 rounded-2xl">
+            <div className="bg-[#333] p-3 lg:p-4 rounded-2xl">
               <Star size={20} className="text-white lg:hidden" />
               <Star size={24} className="text-white hidden lg:block" />
             </div>
@@ -69,13 +69,13 @@ const ModernFeaturedProject = () => {
                 <div className="space-y-8 lg:space-y-12">
                   <div className="space-y-4 lg:space-y-6">
                     <div className="flex flex-wrap gap-2 lg:gap-3">
-                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
+                      <Badge className="bg-[#333] text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
                         MICROSERVICES
                       </Badge>
-                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
+                      <Badge className="bg-[#333] text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
                         DISTRIBUTED
                       </Badge>
-                      <Badge className="bg-zinc-900 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
+                      <Badge className="bg-[#333] text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333]">
                         FULL-STACK
                       </Badge>
                     </div>
@@ -103,7 +103,7 @@ const ModernFeaturedProject = () => {
 
                   <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
                     <Link href="https://webmine.davidkalina.com" target="_blank">
-                      <Button className="bg-zinc-900 text-white hover:bg-[#333] rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                      <Button className="bg-[#333] text-white hover:bg-[#333] rounded-full font-mono text-sm px-6 lg:px-8 py-6 group w-full sm:w-auto">
                         VIEW PROJECT
                         <ArrowRight
                           className="ml-2 transition-transform group-hover:translate-x-1"
