@@ -47,7 +47,6 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Check if we're on mobile based on screen width
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -61,11 +60,10 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
     const nodes: NodeDatum[] = defaultNodes.map((d) => ({ ...d }));
     const links: LinkDatum[] = defaultLinks.map((d) => ({ ...d }));
 
-    // Adjust forces based on screen size
-    const getNodeRadius = (d: NodeDatum) => (isMobile ? 25 : d.group === 1 ? 45 : 35);
-    const getFontSize = (d: NodeDatum) => (isMobile ? "18px" : d.group === 1 ? "32px" : "24px");
-    const linkDistance = isMobile ? 150 : 250;
-    const chargeStrength = isMobile ? -400 : -800;
+    const getNodeRadius = (d: NodeDatum) => (isMobile ? 20 : d.group === 1 ? 45 : 35);
+    const getFontSize = (d: NodeDatum) => (isMobile ? "16px" : d.group === 1 ? "32px" : "24px");
+    const linkDistance = isMobile ? 130 : 250;
+    const chargeStrength = isMobile ? -350 : -800;
 
     const simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
@@ -80,7 +78,6 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .force("center", d3.forceCenter(0, 0))
       .force("x", d3.forceX().strength(0.1))
       .force("y", d3.forceY().strength(0.1))
-      // Add collision force to prevent overlap
       .force("collision", d3.forceCollide().radius(isMobile ? 30 : 40));
 
     const svg = d3
@@ -90,18 +87,19 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("viewBox", [-width / 2, -height / 2, width, height])
       .attr("style", "max-width: 100%; height: auto;");
 
-    // Add zoom behavior
-    const zoom = d3
-      .zoom<SVGSVGElement, undefined>()
-      .scaleExtent([0.5, 2])
-      .on("zoom", (event) => {
-        g.attr("transform", event.transform);
-      });
+    // Only add zoom and drag behavior for non-mobile
+    if (!isMobile) {
+      const zoom = d3
+        .zoom<SVGSVGElement, undefined>()
+        .scaleExtent([0.5, 2])
+        .on("zoom", (event) => {
+          g.attr("transform", event.transform);
+        });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    svg.call(zoom as any);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      svg.call(zoom as any);
+    }
 
-    // Create a group for all elements that should be zoomed
     const g = svg.append("g");
 
     const link = g
@@ -111,7 +109,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke-width", (d) => Math.sqrt(d.value || 1) * (isMobile ? 2 : 3));
+      .attr("stroke-width", (d) => Math.sqrt(d.value || 1) * (isMobile ? 0.8 : 1.8));
 
     const node = g
       .append("g")
@@ -119,24 +117,31 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .selectAll<SVGGElement, NodeDatum>("g")
       .data(nodes)
       .join("g")
-      .style("cursor", "pointer");
+      .style("cursor", isMobile ? "default" : "pointer");
 
-    // Create node circles
     node.append("circle").attr("r", getNodeRadius).attr("fill", "#333").attr("stroke", "#555");
 
-    // Add labels that appear on tap/click for mobile
-    node
-      .append("text")
-      .text((d) => d.label)
-      .attr("class", "label")
-      .attr("text-anchor", "middle")
-      .attr("dy", 45)
-      .style("font-family", "monospace")
-      .style("font-size", "12px")
-      .style("fill", "#333")
-      .style("opacity", 0);
+    // Only add interactive labels for non-mobile
+    if (!isMobile) {
+      node
+        .append("text")
+        .text((d) => d.label)
+        .attr("class", "label")
+        .attr("text-anchor", "middle")
+        .attr("dy", 45)
+        .style("font-family", "monospace")
+        .style("font-size", "12px")
+        .style("fill", "#333")
+        .style("opacity", 0);
 
-    // Add emoji as text
+      // Handle node click for desktop only
+      node.on("click", function () {
+        const label = d3.select(this).select(".label");
+        const currentOpacity = label.style("opacity");
+        label.style("opacity", currentOpacity === "0" ? 1 : 0);
+      });
+    }
+
     node
       .append("text")
       .text((d) => d.emoji)
@@ -147,15 +152,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .style("pointer-events", "none")
       .attr("fill", "#ffffff");
 
-    // Handle node click/tap
-    node.on("click", function () {
-      // Toggle label visibility
-      const label = d3.select(this).select(".label");
-      const currentOpacity = label.style("opacity");
-      label.style("opacity", currentOpacity === "0" ? 1 : 0);
-    });
-
-    // Gentle drift with reduced movement for mobile
+    // Add gentle drift with reduced movement for mobile
     const driftInterval = setInterval(() => {
       nodes.forEach((node) => {
         if (!node.fx && !node.fy) {
@@ -178,31 +175,33 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
     });
 
-    // Modify drag behavior for better touch support
-    function dragstarted(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
-      if (!event.active) simulation.alphaTarget(0.3).restart();
-      d.fx = d.x;
-      d.fy = d.y;
-    }
+    // Only add drag behavior for non-mobile
+    if (!isMobile) {
+      function dragstarted(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
 
-    function dragged(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
-      d.fx = event.x;
-      d.fy = event.y;
-    }
+      function dragged(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
 
-    function dragended(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
-      if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
-    }
+      function dragended(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
 
-    node.call(
-      d3
-        .drag<SVGGElement, NodeDatum>()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended)
-    );
+      node.call(
+        d3
+          .drag<SVGGElement, NodeDatum>()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended)
+      );
+    }
 
     if (containerRef.current) {
       containerRef.current.innerHTML = "";
