@@ -4,12 +4,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import AnimatedPieChart from "./AnimatedPieChart";
+import AnimatedForceGraph from "./ForceGraph";
 import WaveText from "./WaveText";
+import { RefObject, useRef } from "react";
+import { useContainerDimensions } from "@/hooks/useContainerDimensions";
 
 const ModernHero = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  // Create a ref for the container that will wrap the force graph.
+  const graphContainerRef = useRef<HTMLDivElement>(null);
+  const { width, height } = useContainerDimensions(graphContainerRef as RefObject<HTMLElement>);
 
   return (
     <div className="bg-white/80">
@@ -42,7 +45,7 @@ const ModernHero = () => {
             <p className="font-mono text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
               Full-stack developer specializing in developing real-time systems, scalable web
               applications, intuitive and creative UI/UX experiences, and utilizing the power of AI
-              while retaining the spark of <WaveText text="human divinity" />. Passionate about
+              while retaining the <WaveText text="spark of human divinity" />. Passionate about
               merging user-centric design with cutting-edge technology to create impactful digital
               experiences.
             </p>
@@ -82,21 +85,9 @@ const ModernHero = () => {
           </div>
 
           {/* Visual Section */}
-          <div
-            className="relative rounded-3xl p-6 sm:p-8 lg:p-12 min-h-[400px] lg:min-h-[600px] flex flex-col items-center justify-center"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Gradient Overlay */}
-            <div
-              className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] transition-opacity duration-500 rounded-3xl ${
-                isHovered ? "opacity-100" : "opacity-0"
-              }`}
-            />
-            {/* Animated Pie Chart and Title */}
-            <div className="relative z-10">
-              <AnimatedPieChart />
-            </div>
+          <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
+            {/* Render the force graph only when valid dimensions are available */}
+            {width > 0 && height > 0 && <AnimatedForceGraph width={width} height={height} />}
           </div>
         </div>
       </div>
