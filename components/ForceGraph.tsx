@@ -87,6 +87,26 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("viewBox", [-width / 2, -height / 2, width, height])
       .attr("style", "max-width: 100%; height: auto;");
 
+    // Add glow filter
+    const defs = svg.append("defs");
+    const filter = defs
+      .append("filter")
+      .attr("id", "glow")
+      .attr("x", "-50%")
+      .attr("y", "-50%")
+      .attr("width", "200%")
+      .attr("height", "200%");
+
+    filter
+      .append("feGaussianBlur")
+      .attr("class", "blur")
+      .attr("stdDeviation", "3")
+      .attr("result", "coloredBlur");
+
+    const feMerge = filter.append("feMerge");
+    feMerge.append("feMergeNode").attr("in", "coloredBlur");
+    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
+
     const g = svg.append("g");
 
     const link = g
@@ -106,7 +126,19 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .join("g")
       .style("cursor", isMobile ? "default" : "pointer");
 
-    node.append("circle").attr("r", getNodeRadius).attr("fill", "#333").attr("stroke", "#555");
+    // Add nodes with hover effect
+    node
+      .append("circle")
+      .attr("r", getNodeRadius)
+      .attr("fill", "#333")
+      .attr("stroke", "#555")
+      .style("transition", "filter 0.3s ease")
+      .on("mouseover", function () {
+        d3.select(this).style("filter", "url(#glow)").attr("stroke", "#888");
+      })
+      .on("mouseout", function () {
+        d3.select(this).style("filter", "none").attr("stroke", "#555");
+      });
 
     // Only add interactive labels for non-mobile
     if (!isMobile) {

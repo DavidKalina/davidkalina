@@ -13,7 +13,7 @@ const ModernProjectGrid = () => {
       description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
       icon: <Layout size={24} className="text-white" />,
-      bgColor: "bg-emerald-500",
+      bgColor: "bg-emerald-500 dark:bg-emerald-400",
       metrics: {
         technology: "Cutting Edge",
         architecture: "Modular",
@@ -30,7 +30,7 @@ const ModernProjectGrid = () => {
         "Built with Firebase and TypeScript, significantly improving engagement and retention.",
       tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
       icon: <Bell size={24} className="text-white" />,
-      bgColor: "bg-orange-500",
+      bgColor: "bg-orange-500 dark:bg-orange-400",
       metrics: {
         notificationsSent: "1M+",
         retentionIncrease: "15%",
@@ -43,10 +43,10 @@ const ModernProjectGrid = () => {
       id: 2,
       title: "AI Content Optimization Tool",
       description:
-        "AI-powered content categorization tool using OpenAI’s GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
+        "AI-powered content categorization tool using OpenAI's GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
       tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
       icon: <Brain size={24} className="text-white" />,
-      bgColor: "bg-blue-500",
+      bgColor: "bg-blue-500 dark:bg-blue-400",
       metrics: {
         contentAnalyzed: "100K+",
         accuracy: "95%",
@@ -62,7 +62,7 @@ const ModernProjectGrid = () => {
         "A white-label review management tool that contributed to a product sale valued at over $400,000.",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
       icon: <Star size={24} className="text-white" />,
-      bgColor: "bg-red-500",
+      bgColor: "bg-red-500 dark:bg-red-400",
       metrics: {
         users: "5K+",
         revenue: "$400K+",
@@ -78,7 +78,7 @@ const ModernProjectGrid = () => {
         "A PWA designed to streamline operations, achieving several thousand monthly uses.",
       tags: ["REACT", "PWA", "SUPABASE"],
       icon: <Globe size={24} className="text-white" />,
-      bgColor: "bg-green-500",
+      bgColor: "bg-green-500 dark:bg-green-400",
       metrics: {
         monthlyUsers: "10K+",
         efficiencyBoost: "40%",
@@ -93,7 +93,7 @@ const ModernProjectGrid = () => {
         "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
       tags: ["PYTHON", "SENDGRID", "NODE.JS"],
       icon: <Mail size={24} className="text-white" />,
-      bgColor: "bg-indigo-500",
+      bgColor: "bg-indigo-500 dark:bg-indigo-400",
       metrics: {
         emailsProcessed: "500K+",
         speedImprovement: "10x",
@@ -104,23 +104,25 @@ const ModernProjectGrid = () => {
   ];
 
   return (
-    <section className="bg-white/80" id="projects">
+    <section className="bg-white/80 dark:bg-zinc-800/95" id="projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="max-w-2xl">
           <div className="flex items-center gap-4 lg:gap-6 mb-6 lg:mb-8">
-            <div className="bg-[#ffd43b] p-3 lg:p-4 rounded-xl lg:rounded-2xl">
+            <div className="bg-[#ffd43b] dark:bg-[#ffd43b]/80 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
               <Wrench size={20} className="text-white lg:hidden" />
               <Wrench size={24} className="text-white hidden lg:block" />
             </div>
             <div>
-              <p className="text-xs lg:text-sm font-mono text-zinc-500 mb-1">004 / WORK</p>
-              <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900">
+              <p className="text-xs lg:text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-1">
+                004 / WORK
+              </p>
+              <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
                 Recent Projects
               </h2>
             </div>
           </div>
-          <p className="font-mono text-sm lg:text-base text-zinc-600 leading-relaxed mb-8 lg:mb-16">
+          <p className="font-mono text-sm lg:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8 lg:mb-16">
             A selection of recent projects showcasing my expertise in full-stack development, from
             interactive user interfaces to robust backend systems.
           </p>
@@ -131,7 +133,7 @@ const ModernProjectGrid = () => {
           {projects.map((project) => (
             <Card
               key={project.id}
-              className="border-2 border-zinc-100 rounded-2xl lg:rounded-3xl overflow-hidden hover:border-black transition-colors duration-300 group"
+              className="border-2 border-zinc-100 dark:border-zinc-700/50 rounded-2xl lg:rounded-3xl overflow-hidden hover:border-black dark:hover:border-white transition-colors duration-300 group shadow-md"
             >
               <CardContent className="p-0">
                 {/* Project Header */}
@@ -139,13 +141,13 @@ const ModernProjectGrid = () => {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4 lg:mb-6">
-                      <div className="inline-block bg-[#333] rounded-lg lg:rounded-xl p-2">
+                      <div className="inline-block bg-[#333] dark:bg-zinc-700 rounded-lg lg:rounded-xl p-2">
                         <div className="lg:hidden">
                           {React.cloneElement(project.icon, { size: 20 })}
                         </div>
                         <div className="hidden lg:block">{project.icon}</div>
                       </div>
-                      <Badge className="bg-[#333] text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                      <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
                         {project.year}
                       </Badge>
                     </div>
@@ -159,14 +161,14 @@ const ModernProjectGrid = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="p-6 lg:p-8 bg-white/80">
+                <div className="p-6 lg:p-8 bg-white/80 dark:bg-zinc-800/80">
                   <div className="space-y-6 lg:space-y-8">
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <Badge
                           key={tag}
-                          className="bg-zinc-100 text-black hover:text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono"
+                          className="bg-zinc-100 dark:bg-zinc-700 text-black dark:text-white hover:text-white dark:hover:text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono"
                         >
                           {tag}
                         </Badge>
@@ -177,10 +179,10 @@ const ModernProjectGrid = () => {
                     <div className="grid grid-cols-3 gap-3 lg:gap-6">
                       {Object.entries(project.metrics).map(([key, value]) => (
                         <div key={key} className="space-y-1">
-                          <p className="font-mono text-lg lg:text-2xl font-bold text-zinc-900">
+                          <p className="font-mono text-lg lg:text-2xl font-bold text-zinc-900 dark:text-zinc-200">
                             {value}
                           </p>
-                          <p className="font-mono text-[10px] lg:text-xs text-zinc-400 uppercase">
+                          <p className="font-mono text-[10px] lg:text-xs text-zinc-400 dark:text-zinc-500 uppercase">
                             {key}
                           </p>
                         </div>
@@ -191,7 +193,13 @@ const ModernProjectGrid = () => {
                     <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
                       {project.href && (
                         <Link target="_blank" href={project.href}>
-                          <Button className="bg-[#333] text-white hover:bg-[#333] rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 group w-full sm:w-auto">
+                          <Button
+                            className="bg-[#333] dark:bg-white text-white dark:text-black 
+             hover:bg-zinc-900 dark:hover:bg-white rounded-full 
+             font-mono text-sm px-8 py-6 group disabled:opacity-50 
+             transition-all duration-300 
+             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                          >
                             VIEW PROJECT
                             <ArrowRight
                               className="ml-2 transition-transform group-hover:translate-x-1"
@@ -204,7 +212,7 @@ const ModernProjectGrid = () => {
                         <Link target="_blank" href={project.source}>
                           <Button
                             variant="outline"
-                            className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
+                            className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono text-xs lg:text-sm px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto"
                           >
                             <Github className="mr-2" size={14} />
                             SOURCE

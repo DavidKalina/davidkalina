@@ -15,7 +15,7 @@ const ModernHero = () => {
   const { width, height } = useContainerDimensions(graphContainerRef as RefObject<HTMLElement>);
 
   return (
-    <div className="bg-white/80">
+    <div className="bg-white/80 dark:bg-zinc-800/95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 lg:py-24">
           {/* Content Section */}
@@ -30,12 +30,12 @@ const ModernHero = () => {
             <div className="space-y-3">
               <h1 className="font-mono font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-snug">
                 <span className="text-yellow-500">Human-Centered Innovation</span>
-                <span className="text-zinc-500"> with Scalable Tech</span>
+                <span className="text-zinc-600 dark:text-zinc-200"> with Scalable Tech</span>
               </h1>
             </div>
 
             {/* Description */}
-            <p className="font-mono text-md sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
+            <p className="font-mono text-md sm:text-lg text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl">
               I build scalable, real-time systems and intuitive digital experiences—blending AI’s
               power with human intuition to create technology that feels alive and retains the spark
               of <WaveText text="human divinity" />.
@@ -56,7 +56,10 @@ const ModernHero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Link href="#projects">
-                <Button className="bg-[#333] text-white hover:bg-[#333] rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto">
+                <Button
+                  className="bg-[#FACC15] font-medium dark:bg-[#FACC15] text-white hover:bg-[#222] dark:hover:bg-[#FDE047] rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto 
+  shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] transition-all duration-300"
+                >
                   VIEW PROJECTS
                   <ArrowRight
                     className="ml-2 transition-transform group-hover:translate-x-1"
@@ -67,7 +70,7 @@ const ModernHero = () => {
               <Link href="#contact">
                 <Button
                   variant="outline"
-                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
+                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black dark:text-white rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
                 >
                   CONTACT ME
                 </Button>
