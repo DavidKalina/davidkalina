@@ -30,12 +30,12 @@ const ModernHero = () => {
             <div className="space-y-3">
               <h1 className="font-mono font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-snug">
                 <span className="text-yellow-500">Human-Centered Innovation</span>
-                <span className="text-zinc-500 dark:text-zinc-200"> with Scalable Tech</span>
+                <span className="text-zinc-600 dark:text-zinc-200"> with Scalable Tech</span>
               </h1>
             </div>
 
             {/* Description */}
-            <p className="font-mono text-md sm:text-lg text-zinc-600 dark:text-zinc-100 leading-relaxed max-w-xl">
+            <p className="font-mono text-md sm:text-lg text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl">
               I build scalable, real-time systems and intuitive digital experiences—blending AI’s
               power with human intuition to create technology that feels alive and retains the spark
               of <WaveText text="human divinity" />.
@@ -57,7 +57,7 @@ const ModernHero = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Link href="#projects">
                 <Button
-                  className="bg-[#333] font-medium dark:bg-[#FACC15] text-white hover:bg-[#222] dark:hover:bg-[#FDE047] rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto 
+                  className="bg-[#FACC15] font-medium dark:bg-[#FACC15] text-white hover:bg-[#222] dark:hover:bg-[#FDE047] rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto 
   shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] transition-all duration-300"
                 >
                   VIEW PROJECTS

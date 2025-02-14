@@ -14,7 +14,7 @@ const ModernAbout = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
-          <div className="bg-rose-500 dark:bg-rose-400 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
+          <div className="bg-rose-500 dark:bg-rose-600 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
             <User size={20} className="text-white lg:hidden" />
             <User size={24} className="text-white hidden lg:block" />
           </div>
@@ -37,12 +37,12 @@ const ModernAbout = () => {
                 Full-stack developer crafting thoughtful solutions that put people first
               </h3>
               <div className="space-y-4">
-                <p className="font-mono md:text-md lg:text-base text-zinc-600 dark:text-zinc-200 leading-relaxed">
+                <p className="font-mono md:text-md lg:text-base text-zinc-700 dark:text-zinc-200 leading-relaxed">
                   I believe in building technology that enhances rather than replaces human
                   capabilities. With over four years of experience, I focus on creating applications
                   that are both powerful and intuitive.
                 </p>
-                <p className="font-mono md:text-md lg:text-base text-zinc-600 dark:text-zinc-200 leading-relaxed">
+                <p className="font-mono md:text-md lg:text-base text-zinc-700 dark:text-zinc-200 leading-relaxed">
                   My approach combines technical expertise with a deep appreciation for human needs
                   and experiences. I enjoy mentoring others and building tools that make a real
                   difference in people&apos;s daily lives.
@@ -109,7 +109,7 @@ const ModernAbout = () => {
 
           {/* Right Column - Visual Section */}
           <div
-            className="relative bg-rose-500 dark:bg-rose-400 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12"
+            className="relative bg-rose-500 dark:bg-rose-600 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
