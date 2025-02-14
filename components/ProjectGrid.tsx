@@ -134,13 +134,13 @@ const ModernProjectGrid = () => {
             <Card
               key={project.id}
               className="border-2 border-zinc-100 dark:border-zinc-700/50 
-  rounded-2xl lg:rounded-3xl overflow-hidden 
-  hover:border-black dark:hover:border-white 
-  transition-all duration-300 group shadow-md
-  hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
-  hover:-translate-y-1 hover:scale-[1.01]"
+                rounded-2xl lg:rounded-3xl overflow-hidden bg-white dark:bg-zinc-800
+                hover:border-black dark:hover:border-white 
+                transition-all duration-300 group shadow-md
+                hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
+                hover:-translate-y-1 hover:scale-[1.01]"
             >
-              <CardContent className="p-0">
+              <CardContent className="p-0 h-full bg-white dark:bg-zinc-800">
                 {/* Project Header */}
                 <div className={`relative ${project.bgColor} p-6 lg:p-8`}>
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -166,7 +166,7 @@ const ModernProjectGrid = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="p-6 lg:p-8 bg-white/80 dark:bg-zinc-800/80">
+                <div className="p-6 lg:p-8 bg-white dark:bg-zinc-800 h-full">
                   <div className="space-y-6 lg:space-y-8">
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
@@ -200,10 +200,10 @@ const ModernProjectGrid = () => {
                         <Link target="_blank" href={project.href}>
                           <Button
                             className="bg-[#333] dark:bg-white text-white dark:text-black 
-             hover:bg-zinc-900 dark:hover:bg-white rounded-full 
-             font-mono text-sm px-8 py-6 group disabled:opacity-50 
-             transition-all duration-300 
-             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                              hover:bg-zinc-900 dark:hover:bg-white rounded-full 
+                              font-mono text-sm px-8 py-6 group disabled:opacity-50 
+                              transition-all duration-300 
+                              hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                           >
                             VIEW PROJECT
                             <ArrowRight
