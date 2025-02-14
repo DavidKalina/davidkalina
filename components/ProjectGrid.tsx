@@ -13,7 +13,7 @@ const ModernProjectGrid = () => {
       description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
       icon: <Layout size={24} className="text-white" />,
-      bgColor: "bg-emerald-500 dark:bg-emerald-400",
+      bgColor: "bg-emerald-500",
       metrics: {
         technology: "Cutting Edge",
         architecture: "Modular",
@@ -30,7 +30,7 @@ const ModernProjectGrid = () => {
         "Built with Firebase and TypeScript, significantly improving engagement and retention.",
       tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
       icon: <Bell size={24} className="text-white" />,
-      bgColor: "bg-orange-500 dark:bg-orange-400",
+      bgColor: "bg-orange-500",
       metrics: {
         notificationsSent: "1M+",
         retentionIncrease: "15%",
@@ -46,7 +46,7 @@ const ModernProjectGrid = () => {
         "AI-powered content categorization tool using OpenAI's GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
       tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
       icon: <Brain size={24} className="text-white" />,
-      bgColor: "bg-blue-500 dark:bg-blue-400",
+      bgColor: "bg-blue-500",
       metrics: {
         contentAnalyzed: "100K+",
         accuracy: "95%",
@@ -62,7 +62,7 @@ const ModernProjectGrid = () => {
         "A white-label review management tool that contributed to a product sale valued at over $400,000.",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
       icon: <Star size={24} className="text-white" />,
-      bgColor: "bg-red-500 dark:bg-red-400",
+      bgColor: "bg-red-500",
       metrics: {
         users: "5K+",
         revenue: "$400K+",
@@ -78,7 +78,7 @@ const ModernProjectGrid = () => {
         "A PWA designed to streamline operations, achieving several thousand monthly uses.",
       tags: ["REACT", "PWA", "SUPABASE"],
       icon: <Globe size={24} className="text-white" />,
-      bgColor: "bg-green-500 dark:bg-green-400",
+      bgColor: "bg-green-500",
       metrics: {
         monthlyUsers: "10K+",
         efficiencyBoost: "40%",
@@ -93,7 +93,7 @@ const ModernProjectGrid = () => {
         "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
       tags: ["PYTHON", "SENDGRID", "NODE.JS"],
       icon: <Mail size={24} className="text-white" />,
-      bgColor: "bg-indigo-500 dark:bg-indigo-400",
+      bgColor: "bg-indigo-500",
       metrics: {
         emailsProcessed: "500K+",
         speedImprovement: "10x",
