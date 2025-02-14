@@ -149,7 +149,7 @@ const ModernAbout = () => {
                   ].map((focus, index) => (
                     <div
                       key={index}
-                      className="bg-[#333] dark:bg-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6"
+                      className="bg-[#333] dark:bg-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125"
                     >
                       <p className="font-mono md:text-md text-white">{focus}</p>
                     </div>

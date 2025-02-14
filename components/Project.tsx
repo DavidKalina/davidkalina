@@ -33,7 +33,8 @@ const ModernFeaturedProject = () => {
 
         {/* Main Project Display */}
         <Card
-          className="bg-white/80 dark:bg-zinc-800/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl"
+          className="bg-white/80 dark:bg-zinc-800/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl overflow-hidden transition-all duration-300 
+  hover:shadow-xl hover:shadow-blue-500/10 hover:scale-[1.01] hover:-translate-y-1"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

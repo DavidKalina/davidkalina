@@ -133,7 +133,12 @@ const ModernProjectGrid = () => {
           {projects.map((project) => (
             <Card
               key={project.id}
-              className="border-2 border-zinc-100 dark:border-zinc-700/50 rounded-2xl lg:rounded-3xl overflow-hidden hover:border-black dark:hover:border-white transition-colors duration-300 group shadow-md"
+              className="border-2 border-zinc-100 dark:border-zinc-700/50 
+  rounded-2xl lg:rounded-3xl overflow-hidden 
+  hover:border-black dark:hover:border-white 
+  transition-all duration-300 group shadow-md
+  hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
+  hover:-translate-y-1 hover:scale-[1.01]"
             >
               <CardContent className="p-0">
                 {/* Project Header */}

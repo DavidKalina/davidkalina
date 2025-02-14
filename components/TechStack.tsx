@@ -118,7 +118,11 @@ const ModernTechStack = () => {
           {Object.entries(technologies).map(([key, category]) => (
             <Card
               key={key}
-              className="bg-white/80 dark:bg-zinc-800/80 shadow-lg rounded-3xl hover:shadow-xl transition-shadow duration-300 group overflow-hidden dark:shadow-zinc-900/30"
+              className="bg-white/80 dark:bg-zinc-800/80 shadow-lg rounded-3xl 
+  transition-all duration-300 group overflow-hidden 
+  dark:shadow-zinc-900/30
+  hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
+  hover:-translate-y-1 hover:scale-[1.02]"
             >
               <CardContent className="p-0">
                 {/* Card Header */}
