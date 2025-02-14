@@ -47,24 +47,24 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
+    // Clone data
     const nodes: NodeDatum[] = defaultNodes.map((d) => ({ ...d }));
     const links: LinkDatum[] = defaultLinks.map((d) => ({ ...d }));
 
+    // Node radius & styling
     const getNodeRadius = (d: NodeDatum) => (isMobile ? 20 : d.group === 1 ? 45 : 35);
     const getFontSize = (d: NodeDatum) => (isMobile ? "16px" : d.group === 1 ? "32px" : "24px");
     const linkDistance = isMobile ? 130 : 250;
     const chargeStrength = isMobile ? -350 : -800;
 
+    // Force simulation
     const simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
       .force(
@@ -80,6 +80,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .force("y", d3.forceY().strength(0.1))
       .force("collision", d3.forceCollide().radius(isMobile ? 30 : 40));
 
+    // Create SVG
     const svg = d3
       .create("svg")
       .attr("width", width)
@@ -87,7 +88,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("viewBox", [-width / 2, -height / 2, width, height])
       .attr("style", "max-width: 100%; height: auto;");
 
-    // Add glow filter
+    // Glow filter
     const defs = svg.append("defs");
     const filter = defs
       .append("filter")
@@ -96,19 +97,18 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("y", "-50%")
       .attr("width", "200%")
       .attr("height", "200%");
-
     filter
       .append("feGaussianBlur")
       .attr("class", "blur")
       .attr("stdDeviation", "3")
       .attr("result", "coloredBlur");
-
     const feMerge = filter.append("feMerge");
     feMerge.append("feMergeNode").attr("in", "coloredBlur");
     feMerge.append("feMergeNode").attr("in", "SourceGraphic");
 
     const g = svg.append("g");
 
+    // Links
     const link = g
       .append("g")
       .attr("stroke", "#666")
@@ -118,7 +118,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .join("line")
       .attr("stroke-width", (d) => Math.sqrt(d.value || 1) * (isMobile ? 0.8 : 1.8));
 
-    // Create node groups
+    // Nodes
     const node = g
       .append("g")
       .attr("stroke-width", 1.5)
@@ -126,20 +126,17 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .data(nodes)
       .join("g")
       .attr("class", "node")
+      .attr("data-id", (d) => d.id)
       .style("cursor", isMobile ? "default" : "pointer");
 
-    // Append a child group for scalable elements (circle and emoji)
+    // Scalable circle + emoji
     const scalable = node.append("g").attr("class", "scalable");
-
-    // Append the circle (no hover events here now)
     scalable
       .append("circle")
       .attr("r", getNodeRadius)
       .attr("fill", "#333")
       .attr("stroke", "#555")
       .style("transition", "filter 0.3s ease");
-
-    // Append the emoji text
     scalable
       .append("text")
       .text((d) => d.emoji)
@@ -150,7 +147,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .style("pointer-events", "none")
       .attr("fill", "#ffffff");
 
-    // Append interactive labels (outside the scalable group so they don't scale)
+    // Hover labels (for non-mobile)
     if (!isMobile) {
       node
         .append("text")
@@ -164,32 +161,27 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         .style("opacity", 0);
     }
 
-    // Add hover events on the node group (for non-mobile)
+    // Hover events (non-mobile)
     if (!isMobile) {
       node
         .on("mouseover", function () {
-          // Scale up the inner (scalable) group
           d3.select(this)
             .select(".scalable")
             .transition()
             .duration(400)
-            .ease(d3.easeCubicInOut) // added easing for gradual animation
+            .ease(d3.easeCubicInOut)
             .attr("transform", "scale(1.2)");
-          // Apply glow filter on the circle
           d3.select(this).select("circle").style("filter", "url(#glow)").attr("stroke", "#888");
         })
         .on("mouseout", function () {
-          // Revert scale back to normal
           d3.select(this)
             .select(".scalable")
             .transition()
             .duration(400)
-            .ease(d3.easeCubicInOut) // added easing for gradual animation
+            .ease(d3.easeCubicInOut)
             .attr("transform", "scale(1)");
-          // Remove glow filter on the circle
           d3.select(this).select("circle").style("filter", "none").attr("stroke", "#555");
         })
-        // Toggle label on click
         .on("click", function () {
           const label = d3.select(this).select(".label");
           const currentOpacity = label.style("opacity");
@@ -210,8 +202,199 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       simulation.alpha(0.05).restart();
     }, 200);
 
+    // Linger time
+    const lingerDuration = 3000; // 3 seconds
+
+    // Golden marker
+    const goldenMarker = g
+      .append("circle")
+      .attr("r", isMobile ? 3 : 4)
+      .attr("fill", "gold")
+      .style("pointer-events", "none")
+      .style("opacity", 0);
+
+    // Keep track of any active popup
+    let currentPopup: d3.Selection<SVGGElement, unknown, null, undefined> | null = null;
+
+    // Golden path sequence
+    const goldenPathSequence = ["1", "2", "5", "8", "11"];
+    let currentIndex = 0;
+
+    // Golden animation state
+    let activeGolden = {
+      sourceId: "",
+      targetId: "",
+      startTime: 0,
+      duration: 1000, // travel ms
+      inProgress: false,
+      lingerTriggered: false,
+    };
+
+    // Use d3.timer to move the golden marker
+    const goldenTimer = d3.timer(() => {
+      // If not in progress, start a new travel
+      if (!activeGolden.inProgress) {
+        // 1) Remove any existing popup (ensures hidden while traveling)
+        if (currentPopup) {
+          currentPopup.remove();
+          currentPopup = null;
+        }
+
+        // 2) Set up a new travel
+        const sourceId = goldenPathSequence[currentIndex];
+        const nextIndex = (currentIndex + 1) % goldenPathSequence.length;
+        const targetId = goldenPathSequence[nextIndex];
+
+        activeGolden = {
+          sourceId,
+          targetId,
+          startTime: Date.now(),
+          duration: 1000,
+          inProgress: true,
+          lingerTriggered: false,
+        };
+
+        goldenMarker.style("opacity", 1);
+        currentIndex = nextIndex;
+      } else {
+        // Travel in progress
+        const now = Date.now();
+        let t = (now - activeGolden.startTime) / activeGolden.duration;
+        if (t > 1) t = 1;
+
+        const sourceNode = nodes.find((n) => n.id === activeGolden.sourceId);
+        const targetNode = nodes.find((n) => n.id === activeGolden.targetId);
+        if (
+          sourceNode &&
+          targetNode &&
+          sourceNode.x != null &&
+          sourceNode.y != null &&
+          targetNode.x != null &&
+          targetNode.y != null
+        ) {
+          // Compute positions
+          const x1 = sourceNode.x,
+            y1 = sourceNode.y,
+            x2 = targetNode.x,
+            y2 = targetNode.y;
+          const dx = x2 - x1,
+            dy = y2 - y1;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const r1 = getNodeRadius(sourceNode);
+          const r2 = getNodeRadius(targetNode);
+
+          // Edge points
+          const sx = x1 + (dx / distance) * r1;
+          const sy = y1 + (dy / distance) * r1;
+          const ex = x2 - (dx / distance) * r2;
+          const ey = y2 - (dy / distance) * r2;
+
+          // Marker position
+          const markerX = sx + t * (ex - sx);
+          const markerY = sy + t * (ey - sy);
+          goldenMarker.attr("cx", markerX).attr("cy", markerY);
+
+          // If marker reached the target
+          if (t === 1 && !activeGolden.lingerTriggered) {
+            activeGolden.lingerTriggered = true;
+            goldenMarker.style("opacity", 0);
+
+            // Highlight the node’s circle
+            const targetNodeSelection = d3
+              .select(`[data-id="${activeGolden.targetId}"]`)
+              .select("circle");
+            targetNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
+
+            // Create the popup above the node
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (currentPopup as any) = g.append("g").attr("class", "node-popup").attr("opacity", 0);
+
+            // Dark rectangle with gold stroke
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (currentPopup as any)
+              .append("rect")
+              .attr("fill", "#222")
+              .attr("stroke", "#FFD700")
+              .attr("stroke-width", 1)
+              .attr("rx", 8)
+              .attr("ry", 8)
+              .attr("width", 320)
+              .attr("height", 160)
+              .attr("x", -160)
+              .attr("y", -40);
+
+            // Add emoji
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (currentPopup as any)
+              .append("text")
+              .text(targetNode.emoji)
+              .attr("fill", "#fff")
+              .attr("text-anchor", "middle")
+              .attr("x", -130)
+              .attr("y", -5)
+              .style("font-size", "24px")
+              .style("font-family", "Apple Color Emoji, sans-serif");
+
+            // Add label + multi-line description
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const textGroup = (currentPopup as any)
+              .append("text")
+              .attr("fill", "#fff")
+              .attr("x", -90)
+              .attr("y", -10)
+              .style("font-size", isMobile ? "12px" : "14px")
+              .style("font-family", "monospace");
+
+            // Bold label
+            textGroup.append("tspan").text(targetNode.label).style("font-weight", "bold");
+
+            // Simple multi-line wrapping
+            const maxWidth = 200;
+            const description = "This is a description that can wrap to multiple lines if needed.";
+            const words = description.split(" ");
+            let currentLine = "";
+            let textY = 15;
+
+            words.forEach((word, i) => {
+              const testLine = currentLine + (currentLine ? " " : "") + word;
+              const approxWidth = testLine.length * 7.5; // rough char width
+              if (approxWidth > maxWidth && i > 0) {
+                textGroup.append("tspan").attr("x", -90).attr("y", textY).text(currentLine);
+                currentLine = word;
+                textY += 20;
+              } else {
+                currentLine = testLine;
+              }
+            });
+            if (currentLine) {
+              textGroup.append("tspan").attr("x", -90).attr("y", textY).text(currentLine);
+            }
+
+            // Fade in
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (currentPopup as any).transition().duration(300).attr("opacity", 1);
+
+            // After lingerDuration, revert
+            d3.timeout(() => {
+              // Remove golden highlight
+              targetNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
+
+              // Fade out popup
+              currentPopup?.transition().duration(300).attr("opacity", 0).remove();
+              currentPopup = null;
+
+              // Reset
+              activeGolden.inProgress = false;
+              activeGolden.lingerTriggered = false;
+            }, lingerDuration);
+          }
+        }
+      }
+    });
+
+    // On each simulation tick
     simulation.on("tick", () => {
-      // Keep nodes within boundaries
+      // Constrain nodes
       nodes.forEach((d) => {
         if (d.x == null || d.y == null || d.vx == null || d.vy == null) return;
         const r = getNodeRadius(d);
@@ -240,29 +423,45 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         .attr("x2", (d) => (d.target as NodeDatum).x!)
         .attr("y2", (d) => (d.target as NodeDatum).y!);
 
-      // Update node positions (outer group)
+      // Update node positions
       node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
+
+      // Update popup position above the target node (if popup is visible)
+      if (currentPopup) {
+        const targetNode = nodes.find((n) => n.id === activeGolden.targetId);
+        if (targetNode && targetNode.x != null && targetNode.y != null) {
+          // Desired offset from the node’s center
+          const popupOffsetX = getNodeRadius(targetNode) + 20;
+          const popupOffsetY = -getNodeRadius(targetNode) - 20;
+          // Compensate for the popup’s centered contents:
+          const rectHalfWidth = 160; // 320 / 2
+          const rectHalfHeight = 40; // 80 / 2
+          currentPopup.attr(
+            "transform",
+            `translate(${targetNode.x + popupOffsetX + rectHalfWidth}, ${
+              targetNode.y + popupOffsetY + rectHalfHeight
+            })`
+          );
+        }
+      }
     });
 
-    // Drag behavior for non-mobile
+    // Drag for non-mobile
     if (!isMobile) {
       function dragstarted(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
       }
-
       function dragged(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
         d.fx = event.x;
         d.fy = event.y;
       }
-
       function dragended(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
         if (!event.active) simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
       }
-
       node.call(
         d3
           .drag<SVGGElement, NodeDatum>()
@@ -272,13 +471,16 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       );
     }
 
+    // Attach SVG
     if (containerRef.current) {
       containerRef.current.innerHTML = "";
       containerRef.current.appendChild(svg.node() as Node);
     }
 
+    // Cleanup
     return () => {
       clearInterval(driftInterval);
+      goldenTimer.stop();
       simulation.stop();
     };
   }, [width, height, isMobile]);
