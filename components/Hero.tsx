@@ -43,7 +43,7 @@ const ModernHero = () => {
 
             {/* Tech Stack Pills */}
             <div className="flex flex-wrap gap-2">
-              {["TYPESCRIPT", "REACT", "NODE.JS"].map((tech) => (
+              {["TYPESCRIPT", "REACT", "NODE.JS", "DOCKER", "EXPRESS", "PSQL"].map((tech) => (
                 <Badge
                   key={tech}
                   className="bg-zinc-100 hover:text-white text-black px-3 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono"

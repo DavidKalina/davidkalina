@@ -118,29 +118,39 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .join("line")
       .attr("stroke-width", (d) => Math.sqrt(d.value || 1) * (isMobile ? 0.8 : 1.8));
 
+    // Create node groups
     const node = g
       .append("g")
       .attr("stroke-width", 1.5)
       .selectAll<SVGGElement, NodeDatum>("g")
       .data(nodes)
       .join("g")
+      .attr("class", "node")
       .style("cursor", isMobile ? "default" : "pointer");
 
-    // Add nodes with hover effect
-    node
+    // Append a child group for scalable elements (circle and emoji)
+    const scalable = node.append("g").attr("class", "scalable");
+
+    // Append the circle (no hover events here now)
+    scalable
       .append("circle")
       .attr("r", getNodeRadius)
       .attr("fill", "#333")
       .attr("stroke", "#555")
-      .style("transition", "filter 0.3s ease")
-      .on("mouseover", function () {
-        d3.select(this).style("filter", "url(#glow)").attr("stroke", "#888");
-      })
-      .on("mouseout", function () {
-        d3.select(this).style("filter", "none").attr("stroke", "#555");
-      });
+      .style("transition", "filter 0.3s ease");
 
-    // Only add interactive labels for non-mobile
+    // Append the emoji text
+    scalable
+      .append("text")
+      .text((d) => d.emoji)
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .style("font-size", getFontSize)
+      .style("font-family", "Apple Color Emoji, sans-serif")
+      .style("pointer-events", "none")
+      .attr("fill", "#ffffff");
+
+    // Append interactive labels (outside the scalable group so they don't scale)
     if (!isMobile) {
       node
         .append("text")
@@ -152,26 +162,42 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         .style("font-size", "12px")
         .style("fill", "#333")
         .style("opacity", 0);
-
-      // Handle node click for desktop only
-      node.on("click", function () {
-        const label = d3.select(this).select(".label");
-        const currentOpacity = label.style("opacity");
-        label.style("opacity", currentOpacity === "0" ? 1 : 0);
-      });
     }
 
-    node
-      .append("text")
-      .text((d) => d.emoji)
-      .attr("text-anchor", "middle")
-      .attr("dominant-baseline", "middle")
-      .style("font-size", getFontSize)
-      .style("font-family", "Apple Color Emoji, sans-serif")
-      .style("pointer-events", "none")
-      .attr("fill", "#ffffff");
+    // Add hover events on the node group (for non-mobile)
+    if (!isMobile) {
+      node
+        .on("mouseover", function () {
+          // Scale up the inner (scalable) group
+          d3.select(this)
+            .select(".scalable")
+            .transition()
+            .duration(400)
+            .ease(d3.easeCubicInOut) // added easing for gradual animation
+            .attr("transform", "scale(1.2)");
+          // Apply glow filter on the circle
+          d3.select(this).select("circle").style("filter", "url(#glow)").attr("stroke", "#888");
+        })
+        .on("mouseout", function () {
+          // Revert scale back to normal
+          d3.select(this)
+            .select(".scalable")
+            .transition()
+            .duration(400)
+            .ease(d3.easeCubicInOut) // added easing for gradual animation
+            .attr("transform", "scale(1)");
+          // Remove glow filter on the circle
+          d3.select(this).select("circle").style("filter", "none").attr("stroke", "#555");
+        })
+        // Toggle label on click
+        .on("click", function () {
+          const label = d3.select(this).select(".label");
+          const currentOpacity = label.style("opacity");
+          label.style("opacity", currentOpacity === "0" ? 1 : 0);
+        });
+    }
 
-    // Add gentle drift with reduced movement for mobile
+    // Drift effect
     const driftInterval = setInterval(() => {
       nodes.forEach((node) => {
         if (!node.fx && !node.fy) {
@@ -185,44 +211,40 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
     }, 200);
 
     simulation.on("tick", () => {
-      // Check boundaries for each node
+      // Keep nodes within boundaries
       nodes.forEach((d) => {
         if (d.x == null || d.y == null || d.vx == null || d.vy == null) return;
-
         const r = getNodeRadius(d);
-        // Left boundary
         if (d.x - r < -width / 2) {
           d.x = -width / 2 + r;
           d.vx *= -1;
         }
-        // Right boundary
         if (d.x + r > width / 2) {
           d.x = width / 2 - r;
           d.vx *= -1;
         }
-        // Top boundary
         if (d.y - r < -height / 2) {
           d.y = -height / 2 + r;
           d.vy *= -1;
         }
-        // Bottom boundary
         if (d.y + r > height / 2) {
           d.y = height / 2 - r;
           d.vy *= -1;
         }
       });
 
-      // Update links and node positions
+      // Update link positions
       link
         .attr("x1", (d) => (d.source as NodeDatum).x!)
         .attr("y1", (d) => (d.source as NodeDatum).y!)
         .attr("x2", (d) => (d.target as NodeDatum).x!)
         .attr("y2", (d) => (d.target as NodeDatum).y!);
 
+      // Update node positions (outer group)
       node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
     });
 
-    // Only add drag behavior for non-mobile
+    // Drag behavior for non-mobile
     if (!isMobile) {
       function dragstarted(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
