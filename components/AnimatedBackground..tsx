@@ -75,45 +75,49 @@ const RandomPulse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AnimatedBackground = () => {
-  const baseShapes = [
-    {
-      shape: "circle",
-      className:
-        "w-16 h-16 md:w-32 md:h-32 bg-zinc-400 dark:bg-zinc-600 rounded-full shadow-[0px_0px_20px_rgba(255,255,255,0.1)] dark:shadow-[0px_0px_15px_rgba(255,215,0,0.2)]",
-      animation: "animate-float-slow",
-      style: {},
-    },
-    {
-      shape: "square",
-      className:
-        "w-20 h-20 md:w-40 md:h-40 bg-zinc-300 dark:bg-zinc-700 rotate-12 shadow-[0px_0px_15px_rgba(0,0,0,0.1)] dark:shadow-[0px_0px_15px_rgba(255,255,0,0.15)]",
-      animation: "animate-float-medium",
-      style: {},
-    },
-    {
-      shape: "rectangle",
-      className:
-        "w-32 h-12 md:w-64 md:h-24 bg-zinc-500 dark:bg-zinc-500 -rotate-6 shadow-[0px_0px_15px_rgba(255,255,255,0.05)] dark:shadow-[0px_0px_12px_rgba(0,255,255,0.2)]",
-      animation: "animate-float-fast",
-      style: {},
-    },
-    {
-      shape: "triangle",
-      className:
-        "w-16 h-16 md:w-32 md:h-32 bg-zinc-200 dark:bg-zinc-800 shadow-[0px_0px_10px_rgba(255,255,255,0.08)] dark:shadow-[0px_0px_10px_rgba(255,0,0,0.2)]",
-      style: { clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" },
-      animation: "animate-float-medium",
-    },
-    {
-      shape: "abstract",
-      className:
-        "w-24 h-24 md:w-48 md:h-48 bg-zinc-500 dark:bg-zinc-600 shadow-[0px_0px_12px_rgba(255,255,255,0.1)] dark:shadow-[0px_0px_15px_rgba(0,255,0,0.2)]",
-      style: {
-        clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+  const baseShapes = useMemo(
+    () => [
+      {
+        shape: "circle",
+        className:
+          "w-16 h-16 md:w-32 md:h-32 bg-zinc-400 dark:bg-zinc-600 rounded-full shadow-[0px_0px_20px_rgba(255,255,255,0.1)] dark:shadow-[0px_0px_15px_rgba(255,215,0,0.2)]",
+        animation: "animate-float-slow",
+        style: {},
       },
-      animation: "animate-float-slow",
-    },
-  ];
+      {
+        shape: "square",
+        className:
+          "w-20 h-20 md:w-40 md:h-40 bg-zinc-300 dark:bg-zinc-700 rotate-12 shadow-[0px_0px_15px_rgba(0,0,0,0.1)] dark:shadow-[0px_0px_15px_rgba(255,255,0,0.15)]",
+        animation: "animate-float-medium",
+        style: {},
+      },
+      {
+        shape: "rectangle",
+        className:
+          "w-32 h-12 md:w-64 md:h-24 bg-zinc-500 dark:bg-zinc-500 -rotate-6 shadow-[0px_0px_15px_rgba(255,255,255,0.05)] dark:shadow-[0px_0px_12px_rgba(0,255,255,0.2)]",
+        animation: "animate-float-fast",
+        style: {},
+      },
+      {
+        shape: "triangle",
+        className:
+          "w-16 h-16 md:w-32 md:h-32 bg-zinc-200 dark:bg-zinc-800 shadow-[0px_0px_10px_rgba(255,255,255,0.08)] dark:shadow-[0px_0px_10px_rgba(255,0,0,0.2)]",
+        style: { clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" },
+        animation: "animate-float-medium",
+      },
+      {
+        shape: "abstract",
+        className:
+          "w-24 h-24 md:w-48 md:h-48 bg-zinc-500 dark:bg-zinc-600 shadow-[0px_0px_12px_rgba(255,255,255,0.1)] dark:shadow-[0px_0px_15px_rgba(0,255,0,0.2)]",
+        style: {
+          clipPath:
+            "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+        },
+        animation: "animate-float-slow",
+      },
+    ],
+    []
+  );
 
   // Augment each shape with a random movement
   const shapes = useMemo(() => {
@@ -121,7 +125,7 @@ const AnimatedBackground = () => {
       const movement = getRandomMovement();
       return { ...shape, movement };
     });
-  }, []);
+  }, [baseShapes]);
 
   // Define continuous floating effects
   const getAnimationProps = (animation: string) => {
