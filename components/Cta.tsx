@@ -95,7 +95,7 @@ const ModernCTA = () => {
             </div>
 
             {/* Current Status */}
-            <div className="bg-white/80 dark:bg-zinc-700/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl p-8 hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-white/80 dark:bg-zinc-700/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                 <p className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-200">
@@ -110,7 +110,7 @@ const ModernCTA = () => {
           </div>
 
           {/* Right Column - Form */}
-          <div className="relative">
+          <div className="relative transform hover:scale-[1.02] transition-all duration-500">
             <div className="absolute inset-0 rounded-3xl bg-white/80 dark:bg-zinc-700/80 shadow-lg dark:shadow-zinc-900/30" />
             <div className="relative p-8">
               <form onSubmit={handleSubmit} className="space-y-8">
