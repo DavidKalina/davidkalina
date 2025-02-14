@@ -6,28 +6,30 @@ const ModernFooter = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white/80 border-t border-zinc-100">
+    <footer className="bg-white/80 dark:bg-zinc-800/95 border-t border-zinc-100 dark:border-zinc-700/50">
       <div className="max-w-7xl mx-auto px-8">
         {/* Main Footer Content */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="inline-block">
-              <h3 className="font-mono font-bold text-lg">davidkalina</h3>
+              <h3 className="font-mono font-bold text-lg text-black dark:text-white">
+                davidkalina
+              </h3>
             </Link>
-            <p className="font-mono text-sm text-zinc-600 leading-relaxed">
+            <p className="font-mono text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
               Building digital experiences with modern technologies and minimal design.
             </p>
           </div>
 
           {/* Navigation Links */}
           <div className="space-y-6">
-            <h4 className="font-mono text-xs text-zinc-400">NAVIGATION</h4>
+            <h4 className="font-mono text-xs text-zinc-400 dark:text-zinc-500">NAVIGATION</h4>
             <div className="space-y-4">
               <Link href="#projects">
                 <Button
                   variant="link"
-                  className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline"
+                  className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:no-underline"
                 >
                   Projects
                 </Button>
@@ -36,7 +38,7 @@ const ModernFooter = () => {
               <Link href="#about">
                 <Button
                   variant="link"
-                  className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline"
+                  className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:no-underline"
                 >
                   About
                 </Button>
@@ -45,7 +47,7 @@ const ModernFooter = () => {
               <Link href="#contact">
                 <Button
                   variant="link"
-                  className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline"
+                  className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:no-underline"
                 >
                   Contact
                 </Button>
@@ -55,11 +57,11 @@ const ModernFooter = () => {
 
           {/* Connect Section */}
           <div className="space-y-6">
-            <h4 className="font-mono text-xs text-zinc-400">CONNECT</h4>
+            <h4 className="font-mono text-xs text-zinc-400 dark:text-zinc-500">CONNECT</h4>
             <div className="space-y-4">
               <Button
                 variant="link"
-                className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline group inline-flex items-center"
+                className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:no-underline group inline-flex items-center"
                 asChild
               >
                 <Link href="mailto:davidkalina@proton.me">
@@ -73,7 +75,7 @@ const ModernFooter = () => {
               <br />
               <Button
                 variant="link"
-                className="p-0 h-auto font-mono text-sm text-zinc-600 hover:text-black hover:no-underline group inline-flex items-center"
+                className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:no-underline group inline-flex items-center"
                 asChild
               >
                 <Link href="https://www.linkedin.com/in/david-kalina-b68854342/" target="_blank">
@@ -87,29 +89,19 @@ const ModernFooter = () => {
               <br />
             </div>
           </div>
-
-          {/* Newsletter Section */}
-          {/* <div className="space-y-6">
-            <h4 className="font-mono text-xs text-zinc-400">NEWSLETTER</h4>
-            <p className="font-mono text-sm text-zinc-600">
-              Subscribe to get updates about new projects and articles.
-            </p>
-            <Button className="bg-[#333] text-white hover:bg-[#333] rounded-full font-mono text-sm px-6">
-              SUBSCRIBE
-              <Mail className="ml-2" size={16} />
-            </Button>
-          </div> */}
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-8 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="font-mono text-sm text-zinc-400">© {currentYear} All rights reserved.</p>
+        <div className="py-8 border-t border-zinc-100 dark:border-zinc-700/50 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-mono text-sm text-zinc-400 dark:text-zinc-500">
+            © {currentYear} All rights reserved.
+          </p>
 
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full h-10 w-10 text-zinc-400 hover:text-black"
+              className="rounded-full h-10 w-10 text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white"
               asChild
             >
               <Link href="https://github.com/DavidKalina" target="_blank">
@@ -119,7 +111,7 @@ const ModernFooter = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full h-10 w-10 text-zinc-400 hover:text-black"
+              className="rounded-full h-10 w-10 text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white"
               asChild
             >
               <Link href="https://www.linkedin.com/in/david-kalina-b68854342/" target="_blank">

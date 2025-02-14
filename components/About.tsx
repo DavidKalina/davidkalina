@@ -10,17 +10,21 @@ const ModernAbout = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="bg-white/80" id="about">
+    <section className="bg-white/80 dark:bg-zinc-800/95" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
-          <div className="bg-rose-500 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
+          <div className="bg-rose-500 dark:bg-rose-400 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
             <User size={20} className="text-white lg:hidden" />
             <User size={24} className="text-white hidden lg:block" />
           </div>
           <div>
-            <p className="md:text-sm lg:md:text-md font-mono text-zinc-500 mb-1">002 / ABOUT</p>
-            <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900">About Me</h2>
+            <p className="md:text-sm lg:md:text-md font-mono text-zinc-500 dark:text-zinc-400 mb-1">
+              002 / ABOUT
+            </p>
+            <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
+              About Me
+            </h2>
           </div>
         </div>
 
@@ -29,16 +33,16 @@ const ModernAbout = () => {
           {/* Left Column - Main Bio */}
           <div className="space-y-6 lg:space-y-8">
             <div className="space-y-4 lg:space-y-6">
-              <h3 className="font-mono text-lg lg:text-xl font-bold text-zinc-900">
+              <h3 className="font-mono text-lg lg:text-xl font-bold text-zinc-900 dark:text-zinc-100">
                 Full-stack developer crafting thoughtful solutions that put people first
               </h3>
               <div className="space-y-4">
-                <p className="font-mono md:text-md lg:text-base text-zinc-600 leading-relaxed">
+                <p className="font-mono md:text-md lg:text-base text-zinc-600 dark:text-zinc-200 leading-relaxed">
                   I believe in building technology that enhances rather than replaces human
                   capabilities. With over four years of experience, I focus on creating applications
                   that are both powerful and intuitive.
                 </p>
-                <p className="font-mono md:text-md lg:text-base text-zinc-600 leading-relaxed">
+                <p className="font-mono md:text-md lg:text-base text-zinc-600 dark:text-zinc-200 leading-relaxed">
                   My approach combines technical expertise with a deep appreciation for human needs
                   and experiences. I enjoy mentoring others and building tools that make a real
                   difference in people&apos;s daily lives.
@@ -49,20 +53,24 @@ const ModernAbout = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Terminal size={18} className="text-zinc-400 lg:hidden" />
-                <Terminal size={20} className="text-zinc-400 hidden lg:block" />
-                <p className="font-mono md:text-md font-bold text-zinc-900">Core Skills</p>
-                <p className="font-mono md:text-sm lg:md:text-md text-zinc-600">
+                <Terminal size={18} className="text-zinc-400 dark:text-zinc-300 lg:hidden" />
+                <Terminal size={20} className="text-zinc-400 dark:text-zinc-300 hidden lg:block" />
+                <p className="font-mono md:text-md font-bold text-zinc-900 dark:text-zinc-200">
+                  Core Skills
+                </p>
+                <p className="font-mono md:text-sm lg:md:text-md text-zinc-600 dark:text-zinc-300">
                   React, Next.js, TypeScript
                   <br />
                   Node.js, SQL, Supabase
                 </p>
               </div>
               <div className="space-y-2">
-                <Coffee size={18} className="text-zinc-400 lg:hidden" />
-                <Coffee size={20} className="text-zinc-400 hidden lg:block" />
-                <p className="font-mono md:text-md font-bold text-zinc-900">Interests</p>
-                <p className="font-mono md:text-sm lg:md:text-md text-zinc-600">
+                <Coffee size={18} className="text-zinc-400 dark:text-zinc-500 lg:hidden" />
+                <Coffee size={20} className="text-zinc-400 dark:text-zinc-500 hidden lg:block" />
+                <p className="font-mono md:text-md font-bold text-zinc-900 dark:text-zinc-200">
+                  Interests
+                </p>
+                <p className="font-mono md:text-sm lg:md:text-md text-zinc-600 dark:text-zinc-200">
                   Human-Centered Design
                   <br />
                   Tool Creation
@@ -73,7 +81,13 @@ const ModernAbout = () => {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
               <Link href="/resume" target="_blank">
-                <Button className="bg-[#333] text-white hover:bg-zinc-900 rounded-full font-mono md:text-md px-6 lg:px-8 py-6 group w-full sm:w-auto">
+                <Button
+                  className="bg-[#333] dark:bg-white text-white dark:text-black 
+             hover:bg-zinc-900 dark:hover:bg-white rounded-full 
+             font-mono text-sm px-8 py-6 group disabled:opacity-50 
+             transition-all duration-300 
+             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                >
                   VIEW RESUME
                   <ArrowRight
                     className="ml-2 transition-transform group-hover:translate-x-1"
@@ -84,7 +98,7 @@ const ModernAbout = () => {
               <Link href="https://github.com/DavidKalina" target="_blank">
                 <Button
                   variant="outline"
-                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black rounded-full font-mono md:text-md px-6 lg:px-8 py-6 w-full sm:w-auto"
+                  className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono md:text-md px-6 lg:px-8 py-6 w-full sm:w-auto"
                 >
                   <Github className="mr-2" size={18} />
                   GITHUB
@@ -95,7 +109,7 @@ const ModernAbout = () => {
 
           {/* Right Column - Visual Section */}
           <div
-            className="relative bg-rose-500 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12"
+            className="relative bg-rose-500 dark:bg-rose-400 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -112,7 +126,7 @@ const ModernAbout = () => {
                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">FEATURED WORK</p>
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <Badge className="bg-[#333] text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
+                    <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
                       ALFAPHOX/REVIVE
                     </Badge>
                     <span className="font-mono md:text-sm lg:md:text-md text-white/90">2024</span>
@@ -133,7 +147,10 @@ const ModernAbout = () => {
                     "Creating intuitive, accessible interfaces",
                     "Fostering collaborative development environments",
                   ].map((focus, index) => (
-                    <div key={index} className="bg-[#333] rounded-xl lg:rounded-2xl p-4 lg:p-6">
+                    <div
+                      key={index}
+                      className="bg-[#333] dark:bg-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6"
+                    >
                       <p className="font-mono md:text-md text-white">{focus}</p>
                     </div>
                   ))}
