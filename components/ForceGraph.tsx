@@ -305,74 +305,94 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
               .select("circle");
             targetNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
 
-            // Create the popup above the node
+            // Create the popup group
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (currentPopup as any) = g.append("g").attr("class", "node-popup").attr("opacity", 0);
 
-            // Dark rectangle with gold stroke
+            // Build the popup text content
+            // (1) create a subgroup to hold text/emoji
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const popupContent = (currentPopup as any).append("g").attr("class", "popup-content");
+
+            // (2) Insert the emoji
+            popupContent
+              .append("text")
+              .text(targetNode.emoji)
+              .attr("fill", "#fff")
+              .style("font-size", "24px")
+              .style("font-family", "Apple Color Emoji, sans-serif")
+              .attr("x", 0)
+              .attr("y", 0);
+
+            // (3) Insert the label (bold)
+            popupContent
+              .append("text")
+              .text(targetNode.label)
+              .attr("fill", "#fff")
+              .style("font-size", isMobile ? "14px" : "16px")
+              .style("font-weight", "bold")
+              .style("font-family", "monospace")
+              .attr("x", 35) // a bit to the right of the emoji
+              .attr("y", 0);
+
+            // (4) A multi-line description below
+            const description =
+              "This is a description that can wrap to multiple lines if needed. " +
+              "Adding more text here will automatically increase the height of the " +
+              "popup to fit the content properly.";
+
+            const maxWidth = 200;
+            const words = description.split(" ");
+            let currentLine = "";
+            const lines: string[] = [];
+            words.forEach((word, i) => {
+              const testLine = currentLine ? currentLine + " " + word : word;
+              const approxWidth = testLine.length * 7.5;
+              if (approxWidth > maxWidth && i > 0) {
+                lines.push(currentLine);
+                currentLine = word;
+              } else {
+                currentLine = testLine;
+              }
+            });
+            if (currentLine) lines.push(currentLine);
+
+            // Start y ~20 below the label
+            let currentY = 20;
+            lines.forEach((line) => {
+              popupContent
+                .append("text")
+                .attr("fill", "#fff")
+                .attr("x", 0)
+                .attr("y", currentY)
+                .style("font-size", isMobile ? "12px" : "14px")
+                .style("font-family", "monospace")
+                .text(line);
+
+              currentY += 16; // line spacing
+            });
+
+            // (5) Measure bounding box of the content
+            const bbox = (popupContent.node() as SVGGElement).getBBox();
+            const padding = 20;
+
+            // (6) Insert rect behind it using the measured dimensions
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (currentPopup as any)
-              .append("rect")
+              .insert("rect", ":first-child")
               .attr("fill", "#222")
               .attr("stroke", "#FFD700")
               .attr("stroke-width", 1)
               .attr("rx", 8)
               .attr("ry", 8)
-              .attr("width", 320)
-              .attr("height", 160)
-              .attr("x", -160)
-              .attr("y", -40);
+              .attr("x", bbox.x - padding)
+              .attr("y", bbox.y - padding)
+              .attr("width", bbox.width + 2 * padding)
+              .attr("height", bbox.height + 2 * padding);
 
-            // Add emoji
+            // Fade the popup in
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (currentPopup as any)
-              .append("text")
-              .text(targetNode.emoji)
-              .attr("fill", "#fff")
-              .attr("text-anchor", "middle")
-              .attr("x", -130)
-              .attr("y", -5)
-              .style("font-size", "24px")
-              .style("font-family", "Apple Color Emoji, sans-serif");
-
-            // Add label + multi-line description
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const textGroup = (currentPopup as any)
-              .append("text")
-              .attr("fill", "#fff")
-              .attr("x", -90)
-              .attr("y", -10)
-              .style("font-size", isMobile ? "12px" : "14px")
-              .style("font-family", "monospace");
-
-            // Bold label
-            textGroup.append("tspan").text(targetNode.label).style("font-weight", "bold");
-
-            // Simple multi-line wrapping
-            const maxWidth = 200;
-            const description = "This is a description that can wrap to multiple lines if needed.";
-            const words = description.split(" ");
-            let currentLine = "";
-            let textY = 15;
-
-            words.forEach((word, i) => {
-              const testLine = currentLine + (currentLine ? " " : "") + word;
-              const approxWidth = testLine.length * 7.5; // rough char width
-              if (approxWidth > maxWidth && i > 0) {
-                textGroup.append("tspan").attr("x", -90).attr("y", textY).text(currentLine);
-                currentLine = word;
-                textY += 20;
-              } else {
-                currentLine = testLine;
-              }
-            });
-            if (currentLine) {
-              textGroup.append("tspan").attr("x", -90).attr("y", textY).text(currentLine);
-            }
-
-            // Fade in
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (currentPopup as any).transition().duration(300).attr("opacity", 1);
+            (currentPopup as any).transition().duration(300).attr("opacity", 0.9);
 
             // After lingerDuration, revert
             d3.timeout(() => {
@@ -426,21 +446,15 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       // Update node positions
       node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
 
-      // Update popup position above the target node (if popup is visible)
+      // If a popup is showing, position it above the target node
       if (currentPopup) {
         const targetNode = nodes.find((n) => n.id === activeGolden.targetId);
         if (targetNode && targetNode.x != null && targetNode.y != null) {
-          // Desired offset from the node’s center
-          const popupOffsetX = getNodeRadius(targetNode) + 20;
-          const popupOffsetY = -getNodeRadius(targetNode) - 20;
-          // Compensate for the popup’s centered contents:
-          const rectHalfWidth = 160; // 320 / 2
-          const rectHalfHeight = 40; // 80 / 2
+          const nodeRadius = getNodeRadius(targetNode);
+          // Place popup above the node by (nodeRadius + 20)
           currentPopup.attr(
             "transform",
-            `translate(${targetNode.x + popupOffsetX + rectHalfWidth}, ${
-              targetNode.y + popupOffsetY + rectHalfHeight
-            })`
+            `translate(${targetNode.x}, ${targetNode.y - nodeRadius - 20})`
           );
         }
       }
