@@ -109,7 +109,7 @@ const ModernAbout = () => {
 
           {/* Right Column - Visual Section */}
           <div
-            className="relative bg-rose-500 dark:bg-rose-600 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12"
+            className="relative bg-rose-500 dark:bg-rose-600 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 transform hover:scale-[1.02] transition-all duration-500 ease-out"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
