@@ -32,8 +32,8 @@ const ModernProjectGrid = () => {
       icon: <Bell size={24} className="text-white" />,
       bgColor: "bg-orange-500",
       metrics: {
-        notificationsSent: "1M+",
-        retentionIncrease: "15%",
+        "Notifications Sent": "1M+",
+        "Retention Increase": "15%",
       },
       year: "2022",
       href: `https://flowty.io`,
@@ -48,7 +48,7 @@ const ModernProjectGrid = () => {
       icon: <Brain size={24} className="text-white" />,
       bgColor: "bg-blue-500",
       metrics: {
-        contentAnalyzed: "100K+",
+        "Content Analyzed": "100K+",
         accuracy: "95%",
         performance: "97",
       },
@@ -80,8 +80,8 @@ const ModernProjectGrid = () => {
       icon: <Globe size={24} className="text-white" />,
       bgColor: "bg-green-500",
       metrics: {
-        monthlyUsers: "10K+",
-        efficiencyBoost: "40%",
+        "Monthly Uses": "10K+",
+        "Efficiency Boost": "40%",
       },
       year: "2023",
       source: null,
