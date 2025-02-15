@@ -90,7 +90,7 @@ const ModernHero = () => {
                 <Button
                   variant="outline"
                   className="bg-zinc-200 text-black hover:bg-zinc-300 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700
-  rounded-full font-mono font-bold md:text-lg px-6 sm:px-8 py-6 w-full sm:w-auto transition-all"
+  rounded-full font-mono font-bold md:text-md xl:text-lg px-6 sm:px-8 py-6 w-full sm:w-auto transition-all"
                 >
                   CONTACT ME
                 </Button>
