@@ -162,7 +162,7 @@ const ModernTechStack = () => {
                               shadow-md transition-all duration-200
                               hover:bg-[#444] dark:hover:bg-zinc-600 
                               hover:border-zinc-400 dark:hover:border-zinc-300 
-                              hover:shadow-lg
+                              hover:shadow-lg w-min
                             "
                           >
                             {skill.icon}
