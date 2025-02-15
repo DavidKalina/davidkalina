@@ -84,7 +84,7 @@ const ModernAbout = () => {
                 <Button
                   className="bg-[#333] dark:bg-white text-white dark:text-black 
              hover:bg-zinc-900 dark:hover:bg-white rounded-full 
-             font-mono font-bold md:text-md xl:text-lg px-8 py-6 group disabled:opacity-50 
+             font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group disabled:opacity-50 
              transition-all duration-300 
              hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                 >
@@ -98,7 +98,7 @@ const ModernAbout = () => {
               <Link href="https://github.com/DavidKalina" target="_blank">
                 <Button
                   variant="outline"
-                  className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono font-bold md:text-md xl:text-lg px-6 lg:px-8 py-6 w-full sm:w-auto"
+                  className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-6 lg:px-8 py-6 w-full sm:w-auto"
                 >
                   <Github className="mr-2" size={18} />
                   GITHUB
