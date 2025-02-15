@@ -55,14 +55,14 @@ const ModernHero = () => {
 
             {/* Main Heading */}
             <div className="space-y-3">
-              <h1 className="font-mono font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-snug">
+              <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug">
                 <span className="text-yellow-500">Human-Centered Innovation</span>
                 <span className="text-zinc-600 dark:text-zinc-200"> with Scalable Tech</span>
               </h1>
             </div>
 
             {/* Description */}
-            <p className="font-mono text-md sm:text-lg text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl">
+            <p className="font-mono text-lg sm:text-md text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl">
               I build scalable, real-time systems and intuitive digital experiences—blending AI’s
               power with human intuition to create technology that feels alive and retains the spark
               of <WaveText text="human divinity" />.
