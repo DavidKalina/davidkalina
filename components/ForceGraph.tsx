@@ -248,7 +248,7 @@ const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphPr
 
                 setTimeout(() => {
                   onPopupRequest(initialNode, initialNode.x!, popupY);
-                }, 500);
+                }, 700);
               }
             }
 

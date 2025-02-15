@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,24 +19,24 @@ const ModernTechStack = () => {
     frontend: {
       icon: <Laptop size={24} />,
       title: "FRONTEND DEVELOPMENT",
-      description: "Crafting responsive and intuitive user interfaces with modern web technologies",
+      description: "Specializing in modern, user-centric web applications",
       skills: [
         {
           name: "TYPESCRIPT",
           level: "Advanced",
-          years: 4,
+          proficiency: "4+ years of production experience",
           icon: <SiTypescript size={16} className="text-blue-500 dark:text-blue-400" />,
         },
         {
           name: "REACT",
           level: "Advanced",
-          years: 4,
+          proficiency: "Enterprise-level applications",
           icon: <SiReact size={16} className="text-blue-400 dark:text-blue-300" />,
         },
         {
           name: "NEXT.JS",
           level: "Advanced",
-          years: 4,
+          proficiency: "Full-stack applications",
           icon: <SiNextdotjs size={16} className="text-black dark:text-white" />,
         },
       ],
@@ -46,24 +44,24 @@ const ModernTechStack = () => {
     backend: {
       icon: <Database size={24} />,
       title: "BACKEND DEVELOPMENT",
-      description: "Building robust and scalable server-side applications and APIs",
+      description: "Building scalable server-side solutions",
       skills: [
         {
           name: "NODE.JS",
-          level: "Advanced",
-          years: 3,
+          level: "Proficient",
+          proficiency: "Production microservices",
           icon: <SiNodedotjs size={16} className="text-emerald-500 dark:text-emerald-400" />,
         },
         {
           name: "EXPRESS",
-          level: "Advanced",
-          years: 3,
+          level: "Proficient",
+          proficiency: "REST API development",
           icon: <SiExpress size={16} className="text-zinc-500 dark:text-zinc-300" />,
         },
         {
           name: "DOCKER",
-          level: "Advanced",
-          years: 3,
+          level: "Intermediate",
+          proficiency: "Container orchestration",
           icon: <SiDocker size={16} className="text-blue-400 dark:text-blue-300" />,
         },
       ],
@@ -71,18 +69,18 @@ const ModernTechStack = () => {
     database: {
       icon: <Layers size={24} />,
       title: "DATABASE & INFRASTRUCTURE",
-      description: "Managing data and infrastructure with modern cloud solutions",
+      description: "Database design and infrastructure management",
       skills: [
         {
           name: "SUPABASE",
-          level: "Advanced",
-          years: 3,
+          level: "Proficient",
+          proficiency: "Full-stack integration",
           icon: <SiSupabase size={16} className="text-emerald-500 dark:text-emerald-400" />,
         },
         {
           name: "REDIS",
-          level: "Advanced",
-          years: 3,
+          level: "Intermediate",
+          proficiency: "Caching & queuing",
           icon: <SiRedis size={16} className="text-red-500 dark:text-red-400" />,
         },
       ],
@@ -92,7 +90,6 @@ const ModernTechStack = () => {
   return (
     <section className="bg-zinc-50/80 dark:bg-zinc-900/95">
       <div className="max-w-7xl mx-auto px-8 py-32">
-        {/* Section Header */}
         <div className="max-w-2xl">
           <div className="flex items-center gap-6 mb-8">
             <div className="bg-[#333] dark:bg-zinc-700 p-4 rounded-2xl">
@@ -103,29 +100,27 @@ const ModernTechStack = () => {
                 001 / EXPERTISE
               </p>
               <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
-                Technical Expertise
+                Technical Skills
               </h2>
             </div>
           </div>
           <p className="font-mono xl:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed mb-16">
-            Expert in building scalable, high-performance applications using modern web
-            technologies.
+            Focused on delivering high-performance web applications with modern technologies.
+            Committed to continuous learning and best practices.
           </p>
         </div>
 
-        {/* Tech Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Object.entries(technologies).map(([key, category]) => (
             <Card
               key={key}
               className="bg-white/80 dark:bg-zinc-800/80 shadow-lg rounded-3xl 
-  transition-all duration-300 group overflow-hidden 
-  dark:shadow-zinc-900/30
-  hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
-  hover:-translate-y-1 hover:scale-[1.02]"
+                transition-all duration-300 group overflow-hidden 
+                dark:shadow-zinc-900/30
+                hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
+                hover:-translate-y-1 hover:scale-[1.02]"
             >
               <CardContent className="p-0">
-                {/* Card Header */}
                 <div className="p-8 pb-6">
                   <div className="flex items-start gap-6 mb-6">
                     <div className="bg-[#333] dark:bg-zinc-700 p-4 rounded-xl group-hover:bg-[#333] dark:group-hover:bg-zinc-600 transition-colors duration-300">
@@ -142,7 +137,6 @@ const ModernTechStack = () => {
                   </div>
                 </div>
 
-                {/* Skills List */}
                 <div className="border-t border-zinc-200 dark:border-zinc-700/50">
                   {category.skills.map((skill, index) => (
                     <div
@@ -160,23 +154,22 @@ const ModernTechStack = () => {
                         <div className="space-y-2">
                           <Badge
                             className="
-      bg-[#333] dark:bg-zinc-700 
-      text-white px-4 py-2 
-      rounded-full text-xs font-mono 
-      flex items-center gap-2 
-      border border-zinc-600 dark:border-zinc-500
-      shadow-md transition-all duration-200
-      hover:bg-[#444] dark:hover:bg-zinc-600 
-      hover:border-zinc-400 dark:hover:border-zinc-300 
-      hover:shadow-lg
-    "
+                              bg-[#333] dark:bg-zinc-700 
+                              text-white px-4 py-2 
+                              rounded-full text-xs font-mono 
+                              flex items-center gap-2 
+                              border border-zinc-600 dark:border-zinc-500
+                              shadow-md transition-all duration-200
+                              hover:bg-[#444] dark:hover:bg-zinc-600 
+                              hover:border-zinc-400 dark:hover:border-zinc-300 
+                              hover:shadow-lg
+                            "
                           >
                             {skill.icon}
                             {skill.name}
                           </Badge>
-
                           <p className="font-mono text-xs text-zinc-500 dark:text-zinc-200 pl-1">
-                            {skill.years} YEARS EXPERIENCE
+                            {skill.proficiency}
                           </p>
                         </div>
                         <span className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
@@ -191,7 +184,6 @@ const ModernTechStack = () => {
           ))}
         </div>
 
-        {/* Experience Stats */}
         <div className="mt-24 pt-24 border-t border-zinc-200 dark:border-zinc-700/50">
           <ExperienceStats />
         </div>
