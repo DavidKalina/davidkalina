@@ -1,14 +1,14 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useContainerDimensions } from "@/hooks/useContainerDimensions";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { RefObject, useCallback, useRef, useState } from "react";
 import ForceGraph from "./ForceGraph";
+import TechBadges from "./TechStackBadges";
 import WaveText from "./WaveText";
-import { AnimatePresence, motion } from "framer-motion";
 
 interface NodeDatum {
   id: string;
@@ -69,23 +69,15 @@ const ModernHero = () => {
             </p>
 
             {/* Tech Stack Pills */}
-            <div className="flex flex-wrap gap-2">
-              {["TYPESCRIPT", "REACT", "NODE.JS", "DOCKER", "EXPRESS", "PSQL"].map((tech) => (
-                <Badge
-                  key={tech}
-                  className="bg-zinc-100 hover:text-white text-black px-3 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-mono"
-                >
-                  {tech}
-                </Badge>
-              ))}
-            </div>
+            <TechBadges />
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Link href="#projects">
                 <Button
-                  className="bg-[#FACC15] font-medium dark:bg-[#FACC15] text-white hover:bg-[#222] dark:hover:bg-[#FDE047] rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto 
-                  shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] transition-all duration-300"
+                  className="bg-[#EAB308] font-bold text-black hover:bg-[#D97706] dark:bg-[#FACC15] dark:text-black dark:hover:bg-[#FDE047]
+  rounded-full font-mono md:text-lg px-6 sm:px-8 py-6 group w-full sm:w-auto 
+  shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] transition-all duration-300"
                 >
                   VIEW PROJECTS
                   <ArrowRight
@@ -97,7 +89,8 @@ const ModernHero = () => {
               <Link href="#contact">
                 <Button
                   variant="outline"
-                  className="border-2 border-zinc-20 dark:border-zinc-700 hover:border-black hover:bg-white/80 text-black dark:text-white rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
+                  className="bg-zinc-200 text-black hover:bg-zinc-300 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700
+  rounded-full font-mono font-bold md:text-lg px-6 sm:px-8 py-6 w-full sm:w-auto transition-all"
                 >
                   CONTACT ME
                 </Button>

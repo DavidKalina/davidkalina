@@ -73,7 +73,7 @@ const SparkNotes = () => {
           <span className="sr-only">Quick overview</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700">
+      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 [&>button>svg]:text-zinc-900 [&>button>svg]:dark:text-zinc-100">
         <DialogHeader>
           <DialogTitle className="font-mono text-lg text-zinc-900 dark:text-zinc-100">
             SparkNotes ⚡️

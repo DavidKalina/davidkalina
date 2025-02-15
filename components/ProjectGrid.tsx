@@ -201,7 +201,7 @@ const ModernProjectGrid = () => {
                           <Button
                             className="bg-[#333] dark:bg-white text-white dark:text-black 
                               hover:bg-zinc-900 dark:hover:bg-white rounded-full 
-                              font-mono text-sm px-8 py-6 group disabled:opacity-50 
+                              font-mono font-bold md:text-lg px-8 py-6 group disabled:opacity-50 
                               transition-all duration-300 
                               hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                           >
