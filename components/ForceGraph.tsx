@@ -245,7 +245,10 @@ const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphPr
               // Trigger popup for initial node
               if (onPopupRequest) {
                 const popupY = initialNode.y - getNodeRadius(initialNode) - 20;
-                onPopupRequest(initialNode, initialNode.x, popupY);
+
+                setTimeout(() => {
+                  onPopupRequest(initialNode, initialNode.x!, popupY);
+                }, 500);
               }
             }
 
