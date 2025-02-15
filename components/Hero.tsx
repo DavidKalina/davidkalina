@@ -145,7 +145,7 @@ const ModernHero = () => {
                     damping: 30,
                     mass: 0.5,
                   }}
-                  className="absolute hidden md:block bg-zinc-900/90 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom min-w-[300px]"
+                  className="absolute hidden md:block bg-zinc-900/95 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom min-w-[300px]"
                   style={{
                     left: popupData.x + width / 2,
                     top: popupData.y + height / 2,
