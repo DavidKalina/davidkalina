@@ -153,10 +153,10 @@ const ModernHero = () => {
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">{popupData.node.emoji}</span>
-                    <span className="font-bold">{popupData.node.label}</span>
+                    <span className="text-2xl font-mono">{popupData.node.emoji}</span>
+                    <span className="font-bold font-mono">{popupData.node.label}</span>
                   </div>
-                  <p className="mt-2 text-sm">{popupData.node.description}</p>
+                  <p className="mt-2 text-sm font-mono">{popupData.node.description}</p>
                 </motion.div>
               )}
             </AnimatePresence>
