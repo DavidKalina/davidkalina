@@ -141,7 +141,7 @@ const defaultLinks: LinkDatum[] = [
   { source: "8", target: "9", value: 2 },
   { source: "9", target: "10", value: 1.5 },
   { source: "10", target: "11", value: 1.5 },
-  { source: "11", target: "1", value: 1 }, // Growth leads to more feedback
+  { source: "11", target: "12", value: 1 }, // Growth leads to more feedback
 ];
 
 interface ForceGraphProps {
