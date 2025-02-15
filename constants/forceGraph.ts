@@ -138,5 +138,4 @@ export const defaultLinks: LinkDatum[] = [
   { source: "9", target: "10", value: 1.5 },
   { source: "10", target: "11", value: 1.5 },
   { source: "11", target: "12", value: 1 }, // Growth leads to more feedback
-  { source: "12", target: "1", value: 1 }, // Growth leads to more feedback
 ];
