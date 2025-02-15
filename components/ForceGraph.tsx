@@ -152,13 +152,7 @@ interface ForceGraphProps {
   onPopupMove?: (x: number, y: number) => void;
 }
 
-const ForceGraph = ({
-  width,
-  height,
-  onPopupRequest,
-  activePopupNodeId,
-  onPopupMove,
-}: ForceGraphProps) => {
+const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -282,22 +276,17 @@ const ForceGraph = ({
     const drag = d3
       .drag<SVGGElement, NodeDatum>()
       .on("start", (event, d) => {
-        console.log("START", d.id);
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
       })
       .on("drag", (event, d) => {
-        console.log("DRAG", d.id);
         d.fx = event.x;
         d.fy = event.y;
-
-        console.log(d.id, activePopupNodeId);
 
         if (onPopupMove) onPopupMove(event.x, event.y);
       })
       .on("end", (event, d) => {
-        console.log("END", d.id);
         if (!event.active) simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
@@ -341,8 +330,49 @@ const ForceGraph = ({
       lingerTriggered: false,
     };
 
+    let initialNodeHandled = false;
+    let initialNodeStartTime = 0;
+
     const goldenTimer = d3.timer(() => {
       if (!activeGolden.inProgress) {
+        if (!initialNodeHandled) {
+          const initialNode = nodes.find((n) => n.id === goldenPathSequence[0]);
+
+          if (initialNode && initialNode.x != null && initialNode.y != null) {
+            if (initialNodeStartTime === 0) {
+              // First time seeing initial node - set up initial state
+              initialNodeStartTime = Date.now();
+
+              // Position the marker on the initial node
+              goldenMarker.attr("cx", initialNode.x).attr("cy", initialNode.y).style("opacity", 0);
+
+              // Highlight the initial node
+              const initialNodeSelection = d3
+                .select(`[data-id="${goldenPathSequence[0]}"]`)
+                .select("circle");
+              initialNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
+
+              // Trigger popup for initial node
+              if (onPopupRequest) {
+                const popupY = initialNode.y - getNodeRadius(initialNode) - 20;
+                onPopupRequest(initialNode, initialNode.x, popupY);
+              }
+            }
+
+            // Check if we've waited long enough on the initial node
+            if (Date.now() - initialNodeStartTime < lingerDuration) {
+              return; // Keep waiting
+            }
+
+            // Time to move on from initial node
+            initialNodeHandled = true;
+            const initialNodeSelection = d3
+              .select(`[data-id="${goldenPathSequence[0]}"]`)
+              .select("circle");
+            initialNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
+          }
+        }
+
         // Start a new golden marker travel.
         const sourceId = goldenPathSequence[currentIndex];
         const nextIndex = (currentIndex + 1) % goldenPathSequence.length;
