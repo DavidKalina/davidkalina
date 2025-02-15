@@ -42,7 +42,13 @@ const defaultLinks: LinkDatum[] = [
   { source: "8", target: "11", value: 1 },
 ];
 
-const ForceGraph = ({ width, height }: { width: number; height: number }) => {
+interface ForceGraphProps {
+  width: number;
+  height: number;
+  onPopupRequest?: (node: NodeDatum, x: number, y: number) => void;
+}
+
+const ForceGraph = ({ width, height, onPopupRequest }: ForceGraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -54,17 +60,17 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
   }, []);
 
   useEffect(() => {
-    // Clone data
+    // Clone the data so we don’t mutate the defaults.
     const nodes: NodeDatum[] = defaultNodes.map((d) => ({ ...d }));
     const links: LinkDatum[] = defaultLinks.map((d) => ({ ...d }));
 
-    // Node radius & styling
     const getNodeRadius = (d: NodeDatum) => (isMobile ? 20 : d.group === 1 ? 45 : 35);
     const getFontSize = (d: NodeDatum) => (isMobile ? "16px" : d.group === 1 ? "32px" : "24px");
     const linkDistance = isMobile ? 130 : 250;
     const chargeStrength = isMobile ? -350 : -800;
+    const lingerDuration = 3000; // milliseconds
 
-    // Force simulation
+    // Create the force simulation.
     const simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
       .force(
@@ -80,7 +86,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .force("y", d3.forceY().strength(0.1))
       .force("collision", d3.forceCollide().radius(isMobile ? 30 : 40));
 
-    // Create SVG
+    // Create the SVG container.
     const svg = d3
       .create("svg")
       .attr("width", width)
@@ -88,7 +94,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("viewBox", [-width / 2, -height / 2, width, height])
       .attr("style", "max-width: 100%; height: auto;");
 
-    // Glow filter
+    // Add a glow filter.
     const defs = svg.append("defs");
     const filter = defs
       .append("filter")
@@ -108,7 +114,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
 
     const g = svg.append("g");
 
-    // Links
+    // Draw links.
     const link = g
       .append("g")
       .attr("stroke", "#666")
@@ -118,7 +124,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .join("line")
       .attr("stroke-width", (d) => Math.sqrt(d.value || 1) * (isMobile ? 0.8 : 1.8));
 
-    // Nodes
+    // Draw nodes.
     const node = g
       .append("g")
       .attr("stroke-width", 1.5)
@@ -129,7 +135,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .attr("data-id", (d) => d.id)
       .style("cursor", isMobile ? "default" : "pointer");
 
-    // Scalable circle + emoji
+    // Add scalable circle and emoji.
     const scalable = node.append("g").attr("class", "scalable");
     scalable
       .append("circle")
@@ -147,7 +153,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .style("pointer-events", "none")
       .attr("fill", "#ffffff");
 
-    // Hover labels (for non-mobile)
+    // Optionally add hover labels (for non-mobile).
     if (!isMobile) {
       node
         .append("text")
@@ -161,7 +167,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         .style("opacity", 0);
     }
 
-    // Hover events (non-mobile)
+    // Add hover effects for non-mobile.
     if (!isMobile) {
       node
         .on("mouseover", function () {
@@ -189,7 +195,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         });
     }
 
-    // Drift effect
+    // Create a slight drift effect.
     const driftInterval = setInterval(() => {
       nodes.forEach((node) => {
         if (!node.fx && !node.fy) {
@@ -202,10 +208,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       simulation.alpha(0.05).restart();
     }, 200);
 
-    // Linger time
-    const lingerDuration = 3000; // 3 seconds
-
-    // Golden marker
+    // Set up the golden marker.
     const goldenMarker = g
       .append("circle")
       .attr("r", isMobile ? 3 : 4)
@@ -213,34 +216,21 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       .style("pointer-events", "none")
       .style("opacity", 0);
 
-    // Keep track of any active popup
-    let currentPopup: d3.Selection<SVGGElement, unknown, null, undefined> | null = null;
-
-    // Golden path sequence
+    // Golden marker animation along a predefined sequence.
     const goldenPathSequence = ["1", "2", "5", "8", "11"];
     let currentIndex = 0;
-
-    // Golden animation state
     let activeGolden = {
       sourceId: "",
       targetId: "",
       startTime: 0,
-      duration: 1000, // travel ms
+      duration: 1000, // travel time in ms
       inProgress: false,
       lingerTriggered: false,
     };
 
-    // Use d3.timer to move the golden marker
     const goldenTimer = d3.timer(() => {
-      // If not in progress, start a new travel
       if (!activeGolden.inProgress) {
-        // 1) Remove any existing popup (ensures hidden while traveling)
-        if (currentPopup) {
-          currentPopup.remove();
-          currentPopup = null;
-        }
-
-        // 2) Set up a new travel
+        // Start a new golden marker travel.
         const sourceId = goldenPathSequence[currentIndex];
         const nextIndex = (currentIndex + 1) % goldenPathSequence.length;
         const targetId = goldenPathSequence[nextIndex];
@@ -257,7 +247,7 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         goldenMarker.style("opacity", 1);
         currentIndex = nextIndex;
       } else {
-        // Travel in progress
+        // Animate marker travel.
         const now = Date.now();
         let t = (now - activeGolden.startTime) / activeGolden.duration;
         if (t > 1) t = 1;
@@ -272,7 +262,6 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
           targetNode.x != null &&
           targetNode.y != null
         ) {
-          // Compute positions
           const x1 = sourceNode.x,
             y1 = sourceNode.y,
             x2 = targetNode.x,
@@ -283,127 +272,37 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
           const r1 = getNodeRadius(sourceNode);
           const r2 = getNodeRadius(targetNode);
 
-          // Edge points
+          // Calculate edge points so the marker stays on the edge of the circles.
           const sx = x1 + (dx / distance) * r1;
           const sy = y1 + (dy / distance) * r1;
           const ex = x2 - (dx / distance) * r2;
           const ey = y2 - (dy / distance) * r2;
 
-          // Marker position
           const markerX = sx + t * (ex - sx);
           const markerY = sy + t * (ey - sy);
           goldenMarker.attr("cx", markerX).attr("cy", markerY);
 
-          // If marker reached the target
+          // When the marker reaches the target...
           if (t === 1 && !activeGolden.lingerTriggered) {
             activeGolden.lingerTriggered = true;
             goldenMarker.style("opacity", 0);
 
-            // Highlight the node’s circle
+            // Highlight the target node.
             const targetNodeSelection = d3
               .select(`[data-id="${activeGolden.targetId}"]`)
               .select("circle");
             targetNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
 
-            // Create the popup group
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (currentPopup as any) = g.append("g").attr("class", "node-popup").attr("opacity", 0);
+            // Instead of creating an SVG popup, call the callback.
+            if (onPopupRequest) {
+              const popupX = targetNode.x;
+              const popupY = targetNode.y - getNodeRadius(targetNode) - 20;
+              onPopupRequest(targetNode, popupX, popupY);
+            }
 
-            // Build the popup text content
-            // (1) create a subgroup to hold text/emoji
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const popupContent = (currentPopup as any).append("g").attr("class", "popup-content");
-
-            // (2) Insert the emoji
-            popupContent
-              .append("text")
-              .text(targetNode.emoji)
-              .attr("fill", "#fff")
-              .style("font-size", "24px")
-              .style("font-family", "Apple Color Emoji, sans-serif")
-              .attr("x", 0)
-              .attr("y", 0);
-
-            // (3) Insert the label (bold)
-            popupContent
-              .append("text")
-              .text(targetNode.label)
-              .attr("fill", "#fff")
-              .style("font-size", isMobile ? "14px" : "16px")
-              .style("font-weight", "bold")
-              .style("font-family", "monospace")
-              .attr("x", 35) // a bit to the right of the emoji
-              .attr("y", 0);
-
-            // (4) A multi-line description below
-            const description =
-              "This is a description that can wrap to multiple lines if needed. " +
-              "Adding more text here will automatically increase the height of the " +
-              "popup to fit the content properly.";
-
-            const maxWidth = 200;
-            const words = description.split(" ");
-            let currentLine = "";
-            const lines: string[] = [];
-            words.forEach((word, i) => {
-              const testLine = currentLine ? currentLine + " " + word : word;
-              const approxWidth = testLine.length * 7.5;
-              if (approxWidth > maxWidth && i > 0) {
-                lines.push(currentLine);
-                currentLine = word;
-              } else {
-                currentLine = testLine;
-              }
-            });
-            if (currentLine) lines.push(currentLine);
-
-            // Start y ~20 below the label
-            let currentY = 20;
-            lines.forEach((line) => {
-              popupContent
-                .append("text")
-                .attr("fill", "#fff")
-                .attr("x", 0)
-                .attr("y", currentY)
-                .style("font-size", isMobile ? "12px" : "14px")
-                .style("font-family", "monospace")
-                .text(line);
-
-              currentY += 16; // line spacing
-            });
-
-            // (5) Measure bounding box of the content
-            const bbox = (popupContent.node() as SVGGElement).getBBox();
-            const padding = 20;
-
-            // (6) Insert rect behind it using the measured dimensions
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (currentPopup as any)
-              .insert("rect", ":first-child")
-              .attr("fill", "#222")
-              .attr("stroke", "#FFD700")
-              .attr("stroke-width", 1)
-              .attr("rx", 8)
-              .attr("ry", 8)
-              .attr("x", bbox.x - padding)
-              .attr("y", bbox.y - padding)
-              .attr("width", bbox.width + 2 * padding)
-              .attr("height", bbox.height + 2 * padding);
-
-            // Fade the popup in
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (currentPopup as any).transition().duration(300).attr("opacity", 0.9);
-
-            // After lingerDuration, revert
+            // After a linger period, remove the highlight and reset.
             d3.timeout(() => {
-              // Remove golden highlight
               targetNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
-
-              // Fade out popup
-              currentPopup?.transition().duration(300).attr("opacity", 0).remove();
-              currentPopup = null;
-
-              // Reset
               activeGolden.inProgress = false;
               activeGolden.lingerTriggered = false;
             }, lingerDuration);
@@ -412,9 +311,9 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       }
     });
 
-    // On each simulation tick
+    // Update positions on each simulation tick.
     simulation.on("tick", () => {
-      // Constrain nodes
+      // Constrain nodes within the SVG.
       nodes.forEach((d) => {
         if (d.x == null || d.y == null || d.vx == null || d.vy == null) return;
         const r = getNodeRadius(d);
@@ -436,31 +335,18 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
         }
       });
 
-      // Update link positions
+      // Update link positions.
       link
         .attr("x1", (d) => (d.source as NodeDatum).x!)
         .attr("y1", (d) => (d.source as NodeDatum).y!)
         .attr("x2", (d) => (d.target as NodeDatum).x!)
         .attr("y2", (d) => (d.target as NodeDatum).y!);
 
-      // Update node positions
+      // Update node positions.
       node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
-
-      // If a popup is showing, position it above the target node
-      if (currentPopup) {
-        const targetNode = nodes.find((n) => n.id === activeGolden.targetId);
-        if (targetNode && targetNode.x != null && targetNode.y != null) {
-          const nodeRadius = getNodeRadius(targetNode);
-          // Place popup above the node by (nodeRadius + 20)
-          currentPopup.attr(
-            "transform",
-            `translate(${targetNode.x}, ${targetNode.y - nodeRadius - 20})`
-          );
-        }
-      }
     });
 
-    // Drag for non-mobile
+    // Add drag behavior for non-mobile devices.
     if (!isMobile) {
       function dragstarted(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -485,19 +371,19 @@ const ForceGraph = ({ width, height }: { width: number; height: number }) => {
       );
     }
 
-    // Attach SVG
+    // Append the SVG to the container.
     if (containerRef.current) {
       containerRef.current.innerHTML = "";
       containerRef.current.appendChild(svg.node() as Node);
     }
 
-    // Cleanup
+    // Cleanup when the component unmounts.
     return () => {
       clearInterval(driftInterval);
       goldenTimer.stop();
       simulation.stop();
     };
-  }, [width, height, isMobile]);
+  }, [width, height, isMobile, onPopupRequest]);
 
   return <div ref={containerRef} />;
 };
