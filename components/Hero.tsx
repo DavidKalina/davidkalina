@@ -5,14 +5,41 @@ import { Button } from "@/components/ui/button";
 import { useContainerDimensions } from "@/hooks/useContainerDimensions";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { RefObject, useRef } from "react";
-import AnimatedForceGraph from "./ForceGraph";
+import { RefObject, useCallback, useRef, useState } from "react";
+import ForceGraph from "./ForceGraph";
 import WaveText from "./WaveText";
+import { AnimatePresence, motion } from "framer-motion";
+
+interface NodeDatum {
+  id: string;
+  label: string;
+  emoji: string;
+  group?: number;
+  description: string;
+}
+
+interface PopupData {
+  node: NodeDatum;
+  x: number;
+  y: number;
+}
 
 const ModernHero = () => {
-  // Create a ref for the container that will wrap the force graph.
+  // Container ref for the graph area.
   const graphContainerRef = useRef<HTMLDivElement>(null);
   const { width, height } = useContainerDimensions(graphContainerRef as RefObject<HTMLElement>);
+
+  // Store the popup data (node info and coordinates).
+  const [popupData, setPopupData] = useState<PopupData | null>(null);
+
+  // Callback passed to ForceGraph.
+  const handlePopupRequest = useCallback((node: NodeDatum, x: number, y: number) => {
+    setPopupData({ node, x, y });
+    // Automatically dismiss the popup after 3 seconds.
+    setTimeout(() => {
+      setPopupData(null);
+    }, 3000);
+  }, []);
 
   return (
     <div className="bg-white/80 dark:bg-zinc-800/95 md:h-screen flex items-center">
@@ -58,7 +85,7 @@ const ModernHero = () => {
               <Link href="#projects">
                 <Button
                   className="bg-[#FACC15] font-medium dark:bg-[#FACC15] text-white hover:bg-[#222] dark:hover:bg-[#FDE047] rounded-full font-mono text-sm px-6 sm:px-8 py-6 group w-full sm:w-auto 
-  shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] transition-all duration-300"
+                  shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] transition-all duration-300"
                 >
                   VIEW PROJECTS
                   <ArrowRight
@@ -70,7 +97,7 @@ const ModernHero = () => {
               <Link href="#contact">
                 <Button
                   variant="outline"
-                  className="border-2 border-zinc-200 hover:border-black hover:bg-white/80 text-black dark:text-white rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
+                  className="border-2 border-zinc-20 dark:border-zinc-700 hover:border-black hover:bg-white/80 text-black dark:text-white rounded-full font-mono text-sm px-6 sm:px-8 py-6 w-full sm:w-auto"
                 >
                   CONTACT ME
                 </Button>
@@ -80,8 +107,59 @@ const ModernHero = () => {
 
           {/* Visual Section */}
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
-            {/* Render the force graph only when valid dimensions are available */}
-            {width > 0 && height > 0 && <AnimatedForceGraph width={width} height={height} />}
+            {width > 0 && height > 0 && (
+              <ForceGraph
+                width={width}
+                height={height}
+                onPopupRequest={handlePopupRequest}
+                activePopupNodeId={popupData?.node.id}
+                onPopupMove={(x, y) => {
+                  setPopupData((prev) => (prev ? { ...prev, x: x, y: y - 80 } : prev));
+                }}
+              />
+            )}
+
+            {/* Overlay Popup rendered on top of the graph */}
+            <AnimatePresence>
+              {popupData && (
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0.8,
+                    y: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    y: -120,
+                    x: "-50%",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    y: 20,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                    mass: 0.5,
+                  }}
+                  className="absolute bg-zinc-900/90 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom min-w-[300px]"
+                  style={{
+                    left: popupData.x + width / 2,
+                    top: popupData.y + height / 2,
+                    transformOrigin: "bottom center",
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{popupData.node.emoji}</span>
+                    <span className="font-bold">{popupData.node.label}</span>
+                  </div>
+                  <p className="mt-2 text-sm">{popupData.node.description}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
