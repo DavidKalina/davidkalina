@@ -8,6 +8,7 @@ import Link from "next/link";
 import { RefObject, useCallback, useRef, useState } from "react";
 import ForceGraph from "./ForceGraph";
 import WaveText from "./WaveText";
+import { motion } from "framer-motion";
 
 interface NodeDatum {
   id: string;
@@ -107,19 +108,31 @@ const ModernHero = () => {
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
             {/* Render ForceGraph when dimensions are valid */}
             {width > 0 && height > 0 && (
-              <ForceGraph width={width} height={height} onPopupRequest={handlePopupRequest} />
+              <ForceGraph
+                width={width}
+                height={height}
+                onPopupRequest={handlePopupRequest}
+                // Pass the active node’s id (if popupData is set) so ForceGraph knows which node to follow.
+                activePopupNodeId={popupData?.node.id}
+                // Update the popupData’s x and y on every tick.
+                onPopupMove={(x, y) => {
+                  console.log(x, y);
+
+                  setPopupData((prev) => (prev ? { ...prev, x: x, y: y - 100 } : prev));
+                }}
+              />
             )}
 
             {/* Overlay Popup rendered on top of the graph */}
             {popupData && (
-              <div
-                className="absolute bg-zinc-900 text-white p-4 rounded-md shadow-lg pointer-events-none"
-                style={{
-                  // Convert graph coordinates to container coordinates.
+              <motion.div
+                animate={{
                   left: popupData.x + width / 2,
                   top: popupData.y + height / 2,
-                  transform: "translate(-50%, -100%)", // center horizontally and move above the node
                 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="absolute bg-zinc-900 text-white p-4 rounded-md shadow-lg pointer-events-none"
+                style={{ transform: "translate(-50%, -100%)" }}
               >
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">{popupData.node.emoji}</span>
@@ -128,7 +141,7 @@ const ModernHero = () => {
                 <p className="mt-2 text-sm">
                   This is a brief description of {popupData.node.label}.
                 </p>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>

@@ -46,9 +46,17 @@ interface ForceGraphProps {
   width: number;
   height: number;
   onPopupRequest?: (node: NodeDatum, x: number, y: number) => void;
+  activePopupNodeId?: string;
+  onPopupMove?: (x: number, y: number) => void;
 }
 
-const ForceGraph = ({ width, height, onPopupRequest }: ForceGraphProps) => {
+const ForceGraph = ({
+  width,
+  height,
+  onPopupRequest,
+  activePopupNodeId,
+  onPopupMove,
+}: ForceGraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -168,32 +176,33 @@ const ForceGraph = ({ width, height, onPopupRequest }: ForceGraphProps) => {
     }
 
     // Add hover effects for non-mobile.
-    if (!isMobile) {
-      node
-        .on("mouseover", function () {
-          d3.select(this)
-            .select(".scalable")
-            .transition()
-            .duration(400)
-            .ease(d3.easeCubicInOut)
-            .attr("transform", "scale(1.2)");
-          d3.select(this).select("circle").style("filter", "url(#glow)").attr("stroke", "#888");
-        })
-        .on("mouseout", function () {
-          d3.select(this)
-            .select(".scalable")
-            .transition()
-            .duration(400)
-            .ease(d3.easeCubicInOut)
-            .attr("transform", "scale(1)");
-          d3.select(this).select("circle").style("filter", "none").attr("stroke", "#555");
-        })
-        .on("click", function () {
-          const label = d3.select(this).select(".label");
-          const currentOpacity = label.style("opacity");
-          label.style("opacity", currentOpacity === "0" ? 1 : 0);
-        });
-    }
+    // Define drag handlers
+    const drag = d3
+      .drag<SVGGElement, NodeDatum>()
+      .on("start", (event, d) => {
+        console.log("START", d.id);
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      })
+      .on("drag", (event, d) => {
+        console.log("DRAG", d.id);
+        d.fx = event.x;
+        d.fy = event.y;
+
+        console.log(d.id, activePopupNodeId);
+
+        if (onPopupMove) onPopupMove(event.x, event.y);
+      })
+      .on("end", (event, d) => {
+        console.log("END", d.id);
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      });
+
+    // Apply drag behavior to nodes
+    node.call(drag);
 
     // Create a slight drift effect.
     const driftInterval = setInterval(() => {
@@ -297,6 +306,7 @@ const ForceGraph = ({ width, height, onPopupRequest }: ForceGraphProps) => {
             if (onPopupRequest) {
               const popupX = targetNode.x;
               const popupY = targetNode.y - getNodeRadius(targetNode) - 20;
+
               onPopupRequest(targetNode, popupX, popupY);
             }
 
@@ -347,29 +357,6 @@ const ForceGraph = ({ width, height, onPopupRequest }: ForceGraphProps) => {
     });
 
     // Add drag behavior for non-mobile devices.
-    if (!isMobile) {
-      function dragstarted(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-      }
-      function dragged(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
-        d.fx = event.x;
-        d.fy = event.y;
-      }
-      function dragended(event: d3.D3DragEvent<SVGGElement, NodeDatum, unknown>, d: NodeDatum) {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
-      }
-      node.call(
-        d3
-          .drag<SVGGElement, NodeDatum>()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended)
-      );
-    }
 
     // Append the SVG to the container.
     if (containerRef.current) {
