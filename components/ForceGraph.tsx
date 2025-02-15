@@ -7,6 +7,7 @@ interface NodeDatum extends d3.SimulationNodeDatum {
   label: string;
   emoji: string;
   group?: number;
+  description: string;
 }
 
 interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {
@@ -14,32 +15,133 @@ interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {
 }
 
 const defaultNodes: NodeDatum[] = [
-  { id: "1", label: "Web Dev", emoji: "👨‍💻", group: 1 },
-  { id: "2", label: "React", emoji: "⚛️", group: 2 },
-  { id: "3", label: "TypeScript", emoji: "📘", group: 2 },
-  { id: "4", label: "UI/UX", emoji: "🎨", group: 2 },
-  { id: "5", label: "Data Viz", emoji: "📊", group: 3 },
-  { id: "6", label: "Performance", emoji: "⚡", group: 3 },
-  { id: "7", label: "AI/ML", emoji: "🤖", group: 3 },
-  { id: "8", label: "Coffee", emoji: "☕", group: 4 },
-  { id: "9", label: "Longboard", emoji: "🛹", group: 4 },
-  { id: "10", label: "Gaming", emoji: "🎮", group: 4 },
-  { id: "11", label: "Walking", emoji: "🚶", group: 4 },
+  // Initial Phase - Understanding and Planning
+  {
+    id: "1",
+    label: "1. Idea",
+    emoji: "💡",
+    group: 1,
+    description:
+      "Share your app idea with me. We'll discuss your vision, target audience, and core features that will make your app stand out in the market.",
+  },
+  {
+    id: "2",
+    label: "2. Discovery",
+    emoji: "🔍",
+    group: 1,
+    description:
+      "Deep dive into your requirements. We'll explore user stories, identify potential challenges, and outline the key functionalities needed for success.",
+  },
+  {
+    id: "3",
+    label: "3. Research",
+    emoji: "📚",
+    group: 1,
+    description:
+      "Market and technical research phase. We'll analyze competitors, explore technology options, and determine the best tech stack for your specific needs.",
+  },
+
+  // Planning Phase - Design and Architecture
+  {
+    id: "4",
+    label: "4. Planning",
+    emoji: "📋",
+    group: 2,
+    description:
+      "Create a detailed project roadmap. We'll break down the development into sprints, set milestones, and establish clear deliverables and timelines.",
+  },
+  {
+    id: "5",
+    label: "5. UI/UX",
+    emoji: "🎨",
+    group: 2,
+    description:
+      "Design the user interface and experience. We'll create wireframes, mockups, and interactive prototypes to visualize your app before development begins.",
+  },
+  {
+    id: "6",
+    label: "6. Architecture",
+    emoji: "🏗️",
+    group: 2,
+    description:
+      "Design the technical architecture. We'll plan the database structure, API endpoints, and ensure scalability, security, and performance are built-in from the start.",
+  },
+
+  // Development Phase - Building and Testing
+  {
+    id: "7",
+    label: "7. Development",
+    emoji: "👨‍💻",
+    group: 3,
+    description:
+      "Write clean, efficient code. We'll implement features according to the plan, following best practices and maintaining high code quality standards.",
+  },
+  {
+    id: "8",
+    label: "8. Testing",
+    emoji: "🧪",
+    group: 3,
+    description:
+      "Rigorous testing process. We'll conduct unit tests, integration tests, and user acceptance testing to ensure everything works flawlessly.",
+  },
+  {
+    id: "9",
+    label: "9. Feedback",
+    emoji: "💭",
+    group: 3,
+    description:
+      "Regular feedback loops. We'll review progress, gather your input, and make adjustments to ensure the app meets your vision and user needs.",
+  },
+
+  // Launch Phase - Deployment and Growth
+  {
+    id: "10",
+    label: "10. Launch",
+    emoji: "🚀",
+    group: 4,
+    description:
+      "Deploy your app to production. We'll handle the deployment process, ensuring a smooth launch with monitoring and backup systems in place.",
+  },
+  {
+    id: "11",
+    label: "11. Maintenance",
+    emoji: "🔧",
+    group: 4,
+    description:
+      "Ongoing support and updates. We'll monitor performance, fix any issues that arise, and implement security patches to keep your app running smoothly.",
+  },
+  {
+    id: "12",
+    label: "12. Growth",
+    emoji: "📈",
+    group: 4,
+    description:
+      "Scale and improve your app. We'll analyze user data, implement new features, and optimize performance to help your app grow and succeed.",
+  },
 ];
 
 const defaultLinks: LinkDatum[] = [
+  // Initial phase
   { source: "1", target: "2", value: 2 },
-  { source: "1", target: "3", value: 2 },
-  { source: "1", target: "4", value: 2 },
-  { source: "2", target: "5", value: 1.5 },
-  { source: "3", target: "6", value: 1.5 },
-  { source: "4", target: "7", value: 1.5 },
-  { source: "5", target: "8", value: 1 },
-  { source: "6", target: "9", value: 1 },
-  { source: "7", target: "10", value: 1 },
-  { source: "4", target: "10", value: 1 },
-  { source: "9", target: "11", value: 1 },
-  { source: "8", target: "11", value: 1 },
+  { source: "2", target: "3", value: 2 },
+
+  // Planning phase
+  { source: "3", target: "4", value: 2 },
+  { source: "4", target: "5", value: 1.5 },
+  { source: "4", target: "6", value: 1.5 },
+
+  // Development phase
+  { source: "5", target: "6", value: 1.5 },
+  { source: "6", target: "7", value: 1.5 },
+  { source: "7", target: "8", value: 1.5 },
+  { source: "8", target: "9", value: 1.5 },
+  { source: "9", target: "7", value: 1 }, // Feedback loop back to development
+
+  // Launch and beyond
+  { source: "8", target: "9", value: 2 },
+  { source: "9", target: "10", value: 1.5 },
+  { source: "10", target: "11", value: 1.5 },
+  { source: "11", target: "1", value: 1 }, // Growth leads to more feedback
 ];
 
 interface ForceGraphProps {
@@ -74,7 +176,7 @@ const ForceGraph = ({
 
     const getNodeRadius = (d: NodeDatum) => (isMobile ? 20 : d.group === 1 ? 45 : 35);
     const getFontSize = (d: NodeDatum) => (isMobile ? "16px" : d.group === 1 ? "32px" : "24px");
-    const linkDistance = isMobile ? 130 : 250;
+    const linkDistance = isMobile ? 130 : 350;
     const chargeStrength = isMobile ? -350 : -800;
     const lingerDuration = 3000; // milliseconds
 
@@ -226,7 +328,9 @@ const ForceGraph = ({
       .style("opacity", 0);
 
     // Golden marker animation along a predefined sequence.
-    const goldenPathSequence = ["1", "2", "5", "8", "11"];
+    const goldenPathSequence = defaultNodes
+      .sort((a, b) => Number(a.id) - Number(b.id))
+      .map((node) => node.id);
     let currentIndex = 0;
     let activeGolden = {
       sourceId: "",
@@ -248,7 +352,7 @@ const ForceGraph = ({
           sourceId,
           targetId,
           startTime: Date.now(),
-          duration: 1000,
+          duration: 2000,
           inProgress: true,
           lingerTriggered: false,
         };

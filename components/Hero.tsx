@@ -8,13 +8,14 @@ import Link from "next/link";
 import { RefObject, useCallback, useRef, useState } from "react";
 import ForceGraph from "./ForceGraph";
 import WaveText from "./WaveText";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface NodeDatum {
   id: string;
   label: string;
   emoji: string;
   group?: number;
+  description: string;
 }
 
 interface PopupData {
@@ -106,43 +107,59 @@ const ModernHero = () => {
 
           {/* Visual Section */}
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
-            {/* Render ForceGraph when dimensions are valid */}
             {width > 0 && height > 0 && (
               <ForceGraph
                 width={width}
                 height={height}
                 onPopupRequest={handlePopupRequest}
-                // Pass the active node’s id (if popupData is set) so ForceGraph knows which node to follow.
                 activePopupNodeId={popupData?.node.id}
-                // Update the popupData’s x and y on every tick.
                 onPopupMove={(x, y) => {
-                  console.log(x, y);
-
-                  setPopupData((prev) => (prev ? { ...prev, x: x, y: y - 100 } : prev));
+                  setPopupData((prev) => (prev ? { ...prev, x: x, y: y - 80 } : prev));
                 }}
               />
             )}
 
             {/* Overlay Popup rendered on top of the graph */}
-            {popupData && (
-              <motion.div
-                animate={{
-                  left: popupData.x + width / 2,
-                  top: popupData.y + height / 2,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute bg-zinc-900 text-white p-4 rounded-md shadow-lg pointer-events-none"
-                style={{ transform: "translate(-50%, -100%)" }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">{popupData.node.emoji}</span>
-                  <span className="font-bold">{popupData.node.label}</span>
-                </div>
-                <p className="mt-2 text-sm">
-                  This is a brief description of {popupData.node.label}.
-                </p>
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {popupData && (
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0.8,
+                    y: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    y: -120,
+                    x: "-50%",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    y: 20,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                    mass: 0.5,
+                  }}
+                  className="absolute bg-zinc-900/90 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom min-w-[300px]"
+                  style={{
+                    left: popupData.x + width / 2,
+                    top: popupData.y + height / 2,
+                    transformOrigin: "bottom center",
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{popupData.node.emoji}</span>
+                    <span className="font-bold">{popupData.node.label}</span>
+                  </div>
+                  <p className="mt-2 text-sm">{popupData.node.description}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
