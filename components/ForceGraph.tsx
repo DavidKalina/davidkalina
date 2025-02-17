@@ -239,137 +239,152 @@ const ForceGraph = ({
     let initialNodeHandled = false;
     let initialNodeStartTime = 0;
 
-    const goldenTimer = d3.timer(() => {
-      if (!activeGolden.inProgress) {
-        if (!initialNodeHandled) {
-          const initialNode = nodes.find((n) => n.id === goldenPathSequence[0]);
+    let goldenTimer: d3.Timer | null = null;
 
-          if (initialNode && initialNode.x != null && initialNode.y != null) {
-            if (initialNodeStartTime === 0) {
-              // First time seeing initial node - set up initial state
-              initialNodeStartTime = Date.now();
+    const startGoldenMarker = () => {
+      goldenTimer = d3.timer(() => {
+        if (!activeGolden.inProgress) {
+          if (!initialNodeHandled) {
+            const initialNode = nodes.find((n) => n.id === goldenPathSequence[0]);
 
-              // Position the marker on the initial node
-              goldenMarker.attr("cx", initialNode.x).attr("cy", initialNode.y).style("opacity", 0);
+            if (initialNode && initialNode.x != null && initialNode.y != null) {
+              if (initialNodeStartTime === 0) {
+                // First time seeing initial node - set up initial state
+                initialNodeStartTime = Date.now();
 
-              // Highlight the initial node
-              const initialNodeSelection = d3
-                .select(`[data-id="${goldenPathSequence[0]}"]`)
-                .select("circle");
-              initialNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
+                // Position the marker on the initial node
+                goldenMarker
+                  .attr("cx", initialNode.x)
+                  .attr("cy", initialNode.y)
+                  .style("opacity", 0);
 
-              // Trigger popup for initial node
-              if (onPopupRequest) {
-                setTimeout(() => {
+                // Highlight the initial node
+                const initialNodeSelection = d3
+                  .select(`[data-id="${goldenPathSequence[0]}"]`)
+                  .select("circle");
+                initialNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
+
+                // Trigger popup for initial node
+                if (onPopupRequest) {
                   onPopupRequest(
                     initialNode,
                     initialNode.x!,
                     (initialNode?.y ?? 0) - getNodeRadius(initialNode)
                   );
-                }, 200);
+                }
               }
-            }
 
-            // Check if we've waited long enough on the initial node
-            if (Date.now() - initialNodeStartTime < lingerDuration) {
-              return; // Keep waiting
-            }
+              // Check if we've waited long enough on the initial node
+              if (Date.now() - initialNodeStartTime < lingerDuration) {
+                return; // Keep waiting
+              }
 
-            // Time to move on from initial node
-            initialNodeHandled = true;
-            const initialNodeSelection = d3
-              .select(`[data-id="${goldenPathSequence[0]}"]`)
-              .select("circle");
-            initialNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
+              // Time to move on from initial node
+              initialNodeHandled = true;
+              const initialNodeSelection = d3
+                .select(`[data-id="${goldenPathSequence[0]}"]`)
+                .select("circle");
+              initialNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
+            }
+          }
+
+          // Start a new golden marker travel.
+          const sourceId = goldenPathSequence[currentIndex];
+          const nextIndex = (currentIndex + 1) % goldenPathSequence.length;
+          const targetId = goldenPathSequence[nextIndex];
+
+          activeGolden = {
+            sourceId,
+            targetId,
+            startTime: Date.now(),
+            duration: 2000,
+            inProgress: true,
+            lingerTriggered: false,
+          };
+
+          goldenMarker.style("opacity", 1);
+          currentIndex = nextIndex;
+        } else {
+          // Animate marker travel.
+          const now = Date.now();
+          let t = (now - activeGolden.startTime) / activeGolden.duration;
+          if (t > 1) t = 1;
+
+          const sourceNode = nodes.find((n) => n.id === activeGolden.sourceId);
+          const targetNode = nodes.find((n) => n.id === activeGolden.targetId);
+          if (
+            sourceNode &&
+            targetNode &&
+            sourceNode.x != null &&
+            sourceNode.y != null &&
+            targetNode.x != null &&
+            targetNode.y != null
+          ) {
+            const x1 = sourceNode.x,
+              y1 = sourceNode.y,
+              x2 = targetNode.x,
+              y2 = targetNode.y;
+            const dx = x2 - x1,
+              dy = y2 - y1;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const r1 = getNodeRadius(sourceNode);
+            const r2 = getNodeRadius(targetNode);
+
+            // Calculate edge points so the marker stays on the edge of the circles.
+            const sx = x1 + (dx / distance) * r1;
+            const sy = y1 + (dy / distance) * r1;
+            const ex = x2 - (dx / distance) * r2;
+            const ey = y2 - (dy / distance) * r2;
+
+            const markerX = sx + t * (ex - sx);
+            const markerY = sy + t * (ey - sy);
+            goldenMarker.attr("cx", markerX).attr("cy", markerY);
+
+            // When the marker reaches the target...
+            if (t === 1 && !activeGolden.lingerTriggered) {
+              activeGolden.lingerTriggered = true;
+              goldenMarker.style("opacity", 0);
+
+              // Highlight the target node.
+              const targetNodeSelection = d3
+                .select(`[data-id="${activeGolden.targetId}"]`)
+                .select("circle");
+              targetNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
+
+              // Instead of creating an SVG popup, call the callback.
+              if (onPopupRequest) {
+                const popupX = targetNode.x;
+                const popupY = targetNode.y - getNodeRadius(targetNode) - 20;
+
+                console.log(targetNode);
+
+                onPopupRequest(targetNode, popupX, popupY);
+              }
+
+              // After a linger period, remove the highlight and reset.
+              d3.timeout(() => {
+                targetNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
+                activeGolden.inProgress = false;
+                activeGolden.lingerTriggered = false;
+              }, lingerDuration);
+            }
           }
         }
+      });
 
-        // Start a new golden marker travel.
-        const sourceId = goldenPathSequence[currentIndex];
-        const nextIndex = (currentIndex + 1) % goldenPathSequence.length;
-        const targetId = goldenPathSequence[nextIndex];
+      return goldenTimer;
+    };
 
-        activeGolden = {
-          sourceId,
-          targetId,
-          startTime: Date.now(),
-          duration: 2000,
-          inProgress: true,
-          lingerTriggered: false,
-        };
-
-        goldenMarker.style("opacity", 1);
-        currentIndex = nextIndex;
-      } else {
-        // Animate marker travel.
-        const now = Date.now();
-        let t = (now - activeGolden.startTime) / activeGolden.duration;
-        if (t > 1) t = 1;
-
-        const sourceNode = nodes.find((n) => n.id === activeGolden.sourceId);
-        const targetNode = nodes.find((n) => n.id === activeGolden.targetId);
-        if (
-          sourceNode &&
-          targetNode &&
-          sourceNode.x != null &&
-          sourceNode.y != null &&
-          targetNode.x != null &&
-          targetNode.y != null
-        ) {
-          const x1 = sourceNode.x,
-            y1 = sourceNode.y,
-            x2 = targetNode.x,
-            y2 = targetNode.y;
-          const dx = x2 - x1,
-            dy = y2 - y1;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const r1 = getNodeRadius(sourceNode);
-          const r2 = getNodeRadius(targetNode);
-
-          // Calculate edge points so the marker stays on the edge of the circles.
-          const sx = x1 + (dx / distance) * r1;
-          const sy = y1 + (dy / distance) * r1;
-          const ex = x2 - (dx / distance) * r2;
-          const ey = y2 - (dy / distance) * r2;
-
-          const markerX = sx + t * (ex - sx);
-          const markerY = sy + t * (ey - sy);
-          goldenMarker.attr("cx", markerX).attr("cy", markerY);
-
-          // When the marker reaches the target...
-          if (t === 1 && !activeGolden.lingerTriggered) {
-            activeGolden.lingerTriggered = true;
-            goldenMarker.style("opacity", 0);
-
-            // Highlight the target node.
-            const targetNodeSelection = d3
-              .select(`[data-id="${activeGolden.targetId}"]`)
-              .select("circle");
-            targetNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
-
-            // Instead of creating an SVG popup, call the callback.
-            if (onPopupRequest) {
-              const popupX = targetNode.x;
-              const popupY = targetNode.y - getNodeRadius(targetNode) - 20;
-
-              console.log(targetNode);
-
-              onPopupRequest(targetNode, popupX, popupY);
-            }
-
-            // After a linger period, remove the highlight and reset.
-            d3.timeout(() => {
-              targetNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
-              activeGolden.inProgress = false;
-              activeGolden.lingerTriggered = false;
-            }, lingerDuration);
-          }
-        }
-      }
-    });
+    let hasExploded = false;
+    // Set a threshold for the explosion condition (adjust as needed).
 
     // Update positions on each simulation tick.
     simulation.on("tick", () => {
+      if (!hasExploded && simulation.alpha() < 0.05) {
+        hasExploded = true;
+        goldenTimer = startGoldenMarker();
+      }
+
       // Constrain nodes within the SVG.
       nodes.forEach((d) => {
         if (d.x == null || d.y == null || d.vx == null || d.vy == null) return;
@@ -414,7 +429,9 @@ const ForceGraph = ({
     // Cleanup when the component unmounts.
     return () => {
       clearInterval(driftInterval);
-      goldenTimer.stop();
+      if (goldenTimer) {
+        goldenTimer.stop();
+      }
       simulation.stop();
     };
   }, [width, height, isMobile, onPopupRequest]);
