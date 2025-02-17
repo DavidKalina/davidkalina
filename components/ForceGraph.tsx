@@ -13,9 +13,21 @@ interface ForceGraphProps {
   onPopupMove?: (x: number, y: number) => void;
 }
 
-const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphProps) => {
+const ForceGraph = ({
+  width,
+  height,
+  onPopupRequest,
+  onPopupMove,
+  activePopupNodeId,
+}: ForceGraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  const activePopupNodeIdRef = useRef(activePopupNodeId);
+
+  useEffect(() => {
+    activePopupNodeIdRef.current = activePopupNodeId;
+  }, [activePopupNodeId]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -163,6 +175,7 @@ const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphPr
 
     // Add hover effects for non-mobile.
     // Define drag handlers
+    // Define drag handlers
     const drag = d3
       .drag<SVGGElement, NodeDatum>()
       .on("start", (event, d) => {
@@ -174,7 +187,10 @@ const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphPr
         d.fx = event.x;
         d.fy = event.y;
 
-        if (onPopupMove) onPopupMove(event.x, event.y);
+        // Only update the popup position if this node is the active one.
+        if (activePopupNodeIdRef.current && d.id === activePopupNodeIdRef.current && onPopupMove) {
+          onPopupMove(event.x, event.y);
+        }
       })
       .on("end", (event, d) => {
         if (!event.active) simulation.alphaTarget(0);
@@ -335,6 +351,8 @@ const ForceGraph = ({ width, height, onPopupRequest, onPopupMove }: ForceGraphPr
             if (onPopupRequest) {
               const popupX = targetNode.x;
               const popupY = targetNode.y - getNodeRadius(targetNode) - 20;
+
+              console.log(targetNode);
 
               onPopupRequest(targetNode, popupX, popupY);
             }
