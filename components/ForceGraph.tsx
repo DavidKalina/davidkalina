@@ -380,7 +380,7 @@ const ForceGraph = ({
 
     // Update positions on each simulation tick.
     simulation.on("tick", () => {
-      if (!hasExploded && simulation.alpha() < 0.05) {
+      if (!hasExploded && simulation.alpha() < 0.03) {
         hasExploded = true;
         goldenTimer = startGoldenMarker();
       }
