@@ -37,6 +37,27 @@ const ForceGraph = ({
   }, []);
 
   useEffect(() => {
+    // Function to determine if the graph is sufficiently spread out
+    const isGraphSpreadOut = () => {
+      let minX = Infinity,
+        maxX = -Infinity,
+        minY = Infinity,
+        maxY = -Infinity;
+      nodes.forEach((node) => {
+        if (node.x != null && node.y != null) {
+          minX = Math.min(minX, node.x);
+          maxX = Math.max(maxX, node.x);
+          minY = Math.min(minY, node.y);
+          maxY = Math.max(maxY, node.y);
+        }
+      });
+      const spreadX = maxX - minX;
+      const spreadY = maxY - minY;
+
+      // Adjust these thresholds as needed.
+      return spreadX > width * 0.6 && spreadY > height * 0.6;
+    };
+
     const calculateForceParameters = () => {
       const minDimension = Math.min(width, height);
       const nodeCount = nodes.length;
@@ -380,7 +401,17 @@ const ForceGraph = ({
 
     // Update positions on each simulation tick.
     simulation.on("tick", () => {
-      if (!hasExploded && simulation.alpha() < 0.03) {
+      node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
+
+      if (activePopupNodeIdRef.current && onPopupMove) {
+        const activeNode = nodes.find((n) => n.id === activePopupNodeIdRef.current);
+
+        if (activeNode && activeNode.x != null && activeNode.y != null) {
+          onPopupMove(activeNode.x, activeNode.y);
+        }
+      }
+
+      if (!hasExploded && simulation.alpha() < 0.03 && isGraphSpreadOut()) {
         hasExploded = true;
         goldenTimer = startGoldenMarker();
       }
