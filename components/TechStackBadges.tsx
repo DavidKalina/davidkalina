@@ -5,6 +5,7 @@ import {
   SiNodedotjs,
   SiPostgresql,
   SiReact,
+  SiRedis,
   SiTypescript,
 } from "react-icons/si";
 
@@ -38,6 +39,11 @@ const techStack = [
     name: "PSQL",
     icon: SiPostgresql,
     iconColor: "text-blue-300",
+  },
+  {
+    name: "REDIS",
+    icon: SiRedis,
+    iconColor: "text-red-300",
   },
 ];
 
