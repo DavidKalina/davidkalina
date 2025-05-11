@@ -1,4 +1,5 @@
 import ModernAbout from "@/components/About";
+import ModernBlog from "@/components/Blog";
 import ModernCTA from "@/components/Cta";
 import ModernHero from "@/components/Hero";
 import ModernFeaturedProject from "@/components/Project";
@@ -23,6 +24,8 @@ export default function Home() {
       <ModernFeaturedProject />
 
       <ModernProjectGrid />
+
+      <ModernBlog />
 
       <ModernCTA />
     </>
