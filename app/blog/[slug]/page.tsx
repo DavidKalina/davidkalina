@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, MessageSquare } from "lucide-react";
 import Link from "next/link";
-import { blogPosts, type BlogPost } from "@/lib/blog-data";
+import { getBlogPosts, type BlogPost } from "@/lib/blog-data";
 
 // Generate metadata for each blog post
 export async function generateMetadata({
@@ -12,7 +12,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post: BlogPost | undefined = blogPosts.find((post) => post.slug === params.slug);
+  const posts = await getBlogPosts();
+  const post = posts.find((post) => post.slug === params.slug);
 
   if (!post) {
     return {
@@ -29,13 +30,14 @@ export async function generateMetadata({
 
 // Generate static paths for all blog posts
 export async function generateStaticParams() {
-  return blogPosts.map((post: BlogPost) => ({
+  return (await getBlogPosts()).map((post: BlogPost) => ({
     slug: post.slug,
   }));
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post: BlogPost | undefined = blogPosts.find((post) => post.slug === params.slug);
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const posts = await getBlogPosts();
+  const post = posts.find((post) => post.slug === params.slug);
 
   if (!post) {
     notFound();
