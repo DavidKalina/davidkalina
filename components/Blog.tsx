@@ -26,7 +26,7 @@ const ModernBlog = ({ posts }: BlogProps) => {
           </div>
           <div>
             <p className="md:text-sm lg:md:text-md font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-              006 / BLOG
+              005 / BLOG
             </p>
             <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
               Latest Articles
@@ -122,21 +122,23 @@ const ModernBlog = ({ posts }: BlogProps) => {
         </div>
 
         {/* View All Button */}
-        <div className="flex justify-center mt-12">
-          <Link href="/blog">
-            <Button
-              className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600
-                text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-            >
-              VIEW ALL ARTICLES
-              <ArrowRight
-                className="ml-2 transition-transform group-hover:translate-x-1"
-                size={18}
-              />
-            </Button>
-          </Link>
-        </div>
+        {posts?.length > 0 && (
+          <div className="flex justify-center mt-12">
+            <Link href="/blog">
+              <Button
+                className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600
+                  text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
+                  transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+              >
+                VIEW ALL ARTICLES
+                <ArrowRight
+                  className="ml-2 transition-transform group-hover:translate-x-1"
+                  size={18}
+                />
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

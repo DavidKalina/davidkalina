@@ -58,7 +58,7 @@ const ModernCTA = () => {
                 </div>
                 <div>
                   <p className="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-                    005 / CONTACT
+                    006 / CONTACT
                   </p>
                   <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
                     Let&apos;s Work Together
