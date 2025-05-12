@@ -41,7 +41,10 @@ const ModernCTA = () => {
   };
 
   return (
-    <section className="bg-zinc-50/80 dark:bg-zinc-900/95" id="contact">
+    <section
+      className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95"
+      id="contact"
+    >
       <div className="max-w-7xl mx-auto px-8 py-32">
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -50,7 +53,7 @@ const ModernCTA = () => {
             {/* Section Header */}
             <div className="space-y-8">
               <div className="flex items-center gap-6">
-                <div className="bg-[#333] dark:bg-zinc-700 p-4 rounded-2xl">
+                <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-4 rounded-2xl">
                   <Mail size={24} className="text-white" />
                 </div>
                 <div>
@@ -95,24 +98,28 @@ const ModernCTA = () => {
             </div>
 
             {/* Current Status */}
-            <div className="bg-white/80 dark:bg-zinc-700/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-                <p className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-200">
-                  CURRENTLY AVAILABLE
+            <div className="relative bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-700/80 dark:to-zinc-800/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                  <p className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-200">
+                    CURRENTLY AVAILABLE
+                  </p>
+                </div>
+                <p className="font-mono text-sm text-zinc-600 dark:text-zinc-300">
+                  Open to discussing new projects and opportunities. Ideal project duration: 3-6
+                  months.
                 </p>
               </div>
-              <p className="font-mono text-sm text-zinc-600 dark:text-zinc-300">
-                Open to discussing new projects and opportunities. Ideal project duration: 3-6
-                months.
-              </p>
             </div>
           </div>
 
           {/* Right Column - Form */}
           <div className="relative transform hover:scale-[1.02] transition-all duration-500">
-            <div className="absolute inset-0 rounded-3xl bg-white/80 dark:bg-zinc-700/80 shadow-lg dark:shadow-zinc-900/30" />
-            <div className="relative p-8">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-700/80 dark:to-zinc-800/80 shadow-lg dark:shadow-zinc-900/30" />
+            <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-8 z-10">
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -178,11 +185,10 @@ const ModernCTA = () => {
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="bg-[#333] dark:bg-white text-white dark:text-black 
-             hover:bg-zinc-900 dark:hover:bg-white rounded-full 
-             font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group disabled:opacity-50 
-             transition-all duration-300 
-             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                    className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
+                      text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
+                      disabled:opacity-50 transition-all duration-300 
+                      hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                   >
                     {isPending ? "SENDING..." : "SEND MESSAGE"}
                     <Send
