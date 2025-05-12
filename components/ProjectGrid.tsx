@@ -207,11 +207,15 @@ const ModernProjectGrid = () => {
                       {project.href && (
                         <Link target="_blank" href={project.href}>
                           <Button
-                            className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
+                            className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
                               text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                              disabled:opacity-50 transition-all duration-300 
-                              hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                              hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                              border-2 border-zinc-800 dark:border-zinc-600
+                              transition-all duration-300 
+                              hover:border-white dark:hover:border-zinc-400
+                              hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                              dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
+                              hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
+                              hover:-translate-y-0.5 disabled:opacity-50"
                           >
                             VIEW PROJECT
                             <ArrowRight
@@ -225,11 +229,14 @@ const ModernProjectGrid = () => {
                         <Link target="_blank" href={project.source}>
                           <Button
                             variant="outline"
-                            className="bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-800 dark:to-zinc-700
+                            className="bg-gradient-to-r from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900
                               text-black dark:text-white rounded-full font-mono text-xs lg:text-sm 
-                              px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto transition-all duration-300
-                              hover:from-zinc-200 hover:to-zinc-100 dark:hover:from-zinc-700 dark:hover:to-zinc-600
-                              border-0 shadow-sm hover:shadow-md"
+                              px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto
+                              border-2 border-zinc-200 dark:border-zinc-700
+                              transition-all duration-300 
+                              hover:border-black dark:hover:border-white
+                              hover:from-zinc-50 hover:to-white dark:hover:from-zinc-700 dark:hover:to-zinc-800
+                              hover:shadow-md hover:-translate-y-0.5"
                           >
                             <Github className="mr-2" size={14} />
                             SOURCE
@@ -242,6 +249,29 @@ const ModernProjectGrid = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="flex justify-center mt-12">
+          <Link href="/blog">
+            <Button
+              className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
+                text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
+                border-2 border-zinc-800 dark:border-zinc-600
+                transition-all duration-300 
+                hover:border-white dark:hover:border-zinc-400
+                hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
+                hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
+                hover:-translate-y-0.5"
+            >
+              VIEW ALL ARTICLES
+              <ArrowRight
+                className="ml-2 transition-transform group-hover:translate-x-1"
+                size={18}
+              />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
