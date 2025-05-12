@@ -35,7 +35,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+} & { searchParams: { [key: string]: string | string[] | undefined } }) {
   const posts = await getBlogPosts();
   const post = posts.find((post) => post.slug === params.slug);
 
