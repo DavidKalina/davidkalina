@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { getBlogPosts, type BlogPost } from "@/lib/blog-data";
+import Script from "next/script";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -16,6 +17,116 @@ type MetadataProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
+// Sample blog post for testing
+const samplePost: BlogPost = {
+  id: "welcome",
+  slug: "welcome",
+  title: "Welcome to My Blog",
+  excerpt: "A showcase of my blog's features including code snippets, images, and more.",
+  category: "Getting Started",
+  date: new Date().toISOString(),
+  readTime: "5 min read",
+  comments: 0,
+  tags: ["blog", "features", "markdown"],
+  content: `
+    <h1>Welcome to My Blog</h1>
+    
+    <p>Welcome to my corner of the internet! This post demonstrates the various features available in my blog posts, from code snippets to images and everything in between.</p>
+
+    <h2>Code Snippets</h2>
+    
+    <p>Let's start with some code examples. Here's a simple React component:</p>
+
+    <pre><code class="language-typescript">interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+export function Button({ 
+  children, 
+  onClick, 
+  variant = 'primary' 
+}: ButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={\`btn btn-\${variant}\`}
+    >
+      {children}
+    </button>
+  );
+}</code></pre>
+
+    <p>And here's a highlighted code block showing a Next.js API route:</p>
+
+    <pre><code class="language-typescript highlight: [1, 3-5]">// This line is highlighted
+export async function GET(request: Request) {
+  // These lines are highlighted
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get('q');
+  const results = await searchDatabase(query);
+  // These lines are highlighted
+  return Response.json({ results });
+}</code></pre>
+
+    <h2>Images</h2>
+
+    <p>Here's an example of an image with a caption:</p>
+
+    <figure>
+      <img 
+        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=800&fit=crop" 
+        alt="Code on a laptop screen" 
+      />
+      <figcaption>A beautiful workspace setup for coding</figcaption>
+    </figure>
+
+    <h2>Lists and Formatting</h2>
+
+    <p>Here are some key features of this blog:</p>
+
+    <ul>
+      <li>✨ Beautiful typography and spacing</li>
+      <li>🎨 Syntax highlighting for code blocks</li>
+      <li>📸 Responsive images with captions</li>
+      <li>🌓 Dark mode support</li>
+      <li>📱 Mobile-friendly design</li>
+    </ul>
+
+    <h2>Code Copy Button</h2>
+
+    <p>Try copying this code block using the button in the top-right corner:</p>
+
+    <pre><code class="language-javascript">// A simple counter component
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}</code></pre>
+
+    <h2>Links and References</h2>
+
+    <p>You can find more information about the technologies used in this blog:</p>
+
+    <ul>
+      <li><a href="https://nextjs.org">Next.js</a> - The React framework used</li>
+      <li><a href="https://tailwindcss.com">Tailwind CSS</a> - For styling</li>
+      <li><a href="https://mdxjs.com">MDX</a> - For enhanced markdown</li>
+    </ul>
+
+    <p>That's it for now! Feel free to explore the other posts and features of the blog.</p>
+  `,
+  markdownContent: "", // This would be the original markdown content
+};
+
 // Generate metadata for each blog post
 export async function generateMetadata(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -24,6 +135,15 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
+
+  // For testing, return the sample post metadata
+  if (slug === "welcome") {
+    return {
+      title: `${samplePost.title} | David Kalina's Blog`,
+      description: samplePost.excerpt,
+    };
+  }
+
   const posts = await getBlogPosts();
   const post = posts.find((post) => post.slug === slug);
 
@@ -49,6 +169,136 @@ export async function generateStaticParams() {
 
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params;
+
+  // For testing, return the sample post
+  if (slug === "welcome") {
+    return (
+      <article className="min-h-screen bg-white/80 dark:bg-zinc-800/95 pt-32 pb-16">
+        <Script id="code-block-setup">
+          {`
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('pre code').forEach((block) => {
+                const pre = block.parentElement;
+                if (pre) {
+                  const button = document.createElement('div');
+                  button.innerHTML = \`
+                    <button class="copy-button" aria-label="Copy code" title="Copy code">
+                      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                      </svg>
+                    </button>
+                  \`;
+                  pre.appendChild(button);
+
+                  button.addEventListener('click', async () => {
+                    const code = block.textContent || '';
+                    await navigator.clipboard.writeText(code);
+                    
+                    const icon = button.querySelector('svg');
+                    if (icon) {
+                      icon.innerHTML = \`
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      \`;
+                      setTimeout(() => {
+                        icon.innerHTML = \`
+                          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        \`;
+                      }, 2000);
+                    }
+                  });
+                }
+              });
+            });
+          `}
+        </Script>
+
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Back Button */}
+          <div className="mb-8">
+            <Link href="/#blog">
+              <Button
+                variant="ghost"
+                className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                  hover:text-[#333] dark:hover:text-white group/button"
+              >
+                <ArrowLeft
+                  size={16}
+                  className="mr-2 transition-transform group-hover/button:-translate-x-1"
+                />
+                BACK TO ARTICLES
+              </Button>
+            </Link>
+          </div>
+
+          {/* Article Header */}
+          <header className="mb-8 space-y-6">
+            <div className="flex items-center gap-4">
+              <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono">
+                {samplePost.category}
+              </Badge>
+              <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                <Clock size={14} />
+                <span className="font-mono text-xs">{samplePost.readTime}</span>
+              </div>
+            </div>
+
+            <h1 className="font-mono text-3xl lg:text-4xl font-bold text-zinc-900 dark:text-zinc-200">
+              {samplePost.title}
+            </h1>
+
+            <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
+              <div className="flex items-center gap-2">
+                <MessageSquare size={14} />
+                <span className="font-mono text-xs">{samplePost.comments} comments</span>
+              </div>
+              <span className="font-mono text-xs">
+                {new Date(samplePost.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
+            </div>
+          </header>
+
+          {/* Article Content */}
+          <div
+            className="prose prose-zinc dark:prose-invert max-w-none
+              prose-headings:font-mono prose-p:font-mono prose-li:font-mono
+              prose-headings:text-zinc-900 dark:prose-headings:text-zinc-200
+              prose-p:text-zinc-600 dark:prose-p:text-zinc-300
+              prose-a:text-blue-600 dark:prose-a:text-blue-400
+              prose-code:text-zinc-900 dark:prose-code:text-zinc-200
+              prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800
+              prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+              prose-pre:bg-zinc-100 dark:prose-pre:bg-zinc-800
+              prose-pre:border prose-pre:border-zinc-200 dark:prose-pre:border-zinc-700
+              prose-img:rounded-xl prose-img:border prose-img:border-zinc-200 dark:prose-img:border-zinc-700"
+            dangerouslySetInnerHTML={{ __html: samplePost.content }}
+          />
+
+          {/* Tags */}
+          <div className="mt-12 pt-8 border-t border-zinc-100 dark:border-zinc-700/50">
+            <div className="flex flex-wrap gap-2">
+              {samplePost.tags.map((tag: string) => (
+                <Badge
+                  key={tag}
+                  className="bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-200 
+                    hover:bg-zinc-200 dark:hover:bg-zinc-600 px-3 py-1 rounded-full 
+                    text-[10px] lg:text-xs font-mono transition-colors duration-300"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   const posts = await getBlogPosts();
   const post = posts.find((post) => post.slug === slug);
 
@@ -58,6 +308,46 @@ export default async function BlogPost({ params }: PageProps) {
 
   return (
     <article className="min-h-screen bg-white/80 dark:bg-zinc-800/95 pt-32 pb-16">
+      <Script id="code-block-setup">
+        {`
+          document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach((block) => {
+              const pre = block.parentElement;
+              if (pre) {
+                const button = document.createElement('div');
+                button.innerHTML = \`
+                  <button class="copy-button" aria-label="Copy code" title="Copy code">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                  </button>
+                \`;
+                pre.appendChild(button);
+
+                button.addEventListener('click', async () => {
+                  const code = block.textContent || '';
+                  await navigator.clipboard.writeText(code);
+                  
+                  const icon = button.querySelector('svg');
+                  if (icon) {
+                    icon.innerHTML = \`
+                      <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    \`;
+                    setTimeout(() => {
+                      icon.innerHTML = \`
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                      \`;
+                    }, 2000);
+                  }
+                });
+              }
+            });
+          });
+        `}
+      </Script>
+
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-8">
