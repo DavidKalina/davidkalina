@@ -1,9 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import {
+  SiAnthropic,
   SiDocker,
   SiExpress,
+  SiGit,
+  SiNextdotjs,
   SiNodedotjs,
+  SiOpenai,
   SiPostgresql,
+  SiPython,
   SiReact,
   SiRedis,
   SiTypescript,
@@ -44,6 +49,31 @@ const techStack = [
     name: "REDIS",
     icon: SiRedis,
     iconColor: "text-red-300",
+  },
+  {
+    name: "NEXT.JS",
+    icon: SiNextdotjs,
+    iconColor: "text-zinc-300",
+  },
+  {
+    name: "PYTHON",
+    icon: SiPython,
+    iconColor: "text-blue-300",
+  },
+  {
+    name: "OPENAI",
+    icon: SiOpenai,
+    iconColor: "text-blue-300",
+  },
+  {
+    name: "GIT",
+    icon: SiGit,
+    iconColor: "text-red-300",
+  },
+  {
+    name: "Anthropic",
+    icon: SiAnthropic,
+    iconColor: "text-blue-300",
   },
 ];
 
