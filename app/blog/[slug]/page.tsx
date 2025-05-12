@@ -95,30 +95,20 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         </header>
 
         {/* Article Content */}
-        <div className="prose prose-zinc dark:prose-invert max-w-none">
-          {/* This is where the actual blog post content would go */}
-          <p className="font-mono text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8">
-            {post.excerpt}
-          </p>
-
-          {/* Example content - replace with actual blog post content */}
-          <div className="space-y-6 font-mono text-zinc-600 dark:text-zinc-300">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-200 mt-12 mb-6">
-              Getting Started
-            </h2>
-            <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </p>
-            {/* Add more content sections as needed */}
-          </div>
-        </div>
+        <div
+          className="prose prose-zinc dark:prose-invert max-w-none
+            prose-headings:font-mono prose-p:font-mono prose-li:font-mono
+            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-200
+            prose-p:text-zinc-600 dark:prose-p:text-zinc-300
+            prose-a:text-blue-600 dark:prose-a:text-blue-400
+            prose-code:text-zinc-900 dark:prose-code:text-zinc-200
+            prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800
+            prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+            prose-pre:bg-zinc-100 dark:prose-pre:bg-zinc-800
+            prose-pre:border prose-pre:border-zinc-200 dark:prose-pre:border-zinc-700
+            prose-img:rounded-xl prose-img:border prose-img:border-zinc-200 dark:prose-img:border-zinc-700"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
         {/* Tags */}
         <div className="mt-12 pt-8 border-t border-zinc-100 dark:border-zinc-700/50">
