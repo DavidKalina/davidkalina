@@ -250,29 +250,6 @@ const ModernProjectGrid = () => {
             </Card>
           ))}
         </div>
-
-        {/* View All Button */}
-        <div className="flex justify-center mt-12">
-          <Link href="/blog">
-            <Button
-              className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
-                text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                border-2 border-zinc-800 dark:border-zinc-600
-                transition-all duration-300 
-                hover:border-white dark:hover:border-zinc-400
-                hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
-                dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
-                hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
-                hover:-translate-y-0.5"
-            >
-              VIEW ALL ARTICLES
-              <ArrowRight
-                className="ml-2 transition-transform group-hover:translate-x-1"
-                size={18}
-              />
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );

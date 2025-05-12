@@ -1,6 +1,7 @@
 import { parseMarkdown } from "./markdown";
 import type { Database } from "@/types/supabase";
 import { supabase } from "./supabase";
+import { calculateReadTime } from "./utils";
 
 type Article = Database["public"]["Tables"]["articles"]["Row"];
 type ArticleTag = Database["public"]["Tables"]["article_tags"]["Row"] & {
@@ -148,13 +149,23 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
   if (error) {
     console.error("Error fetching blog posts:", error);
-    return [samplePost]; // Return sample post even if there's an error
+    // Calculate read time for sample post
+    const samplePostWithReadTime = {
+      ...samplePost,
+      readTime: calculateReadTime(samplePost.content),
+    };
+    return [samplePostWithReadTime];
   }
 
   const posts = await Promise.all(
     (articles as (Article & { article_tags: ArticleTag[] })[]).map(async (article) => {
       // If we have cached HTML content, use it
       if (article.html_content) {
+        const readTime = calculateReadTime(article.html_content);
+        // Update read time in database if it's different
+        if (readTime !== article.read_time) {
+          await supabase.from("articles").update({ read_time: readTime }).eq("id", article.id);
+        }
         return {
           id: article.id,
           slug: article.slug,
@@ -162,7 +173,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
           excerpt: article.excerpt,
           category: article.category,
           date: article.date,
-          readTime: article.read_time,
+          readTime,
           comments: article.comments_count,
           tags: article.article_tags.map((at) => at.tags.name),
           content: article.html_content,
@@ -172,9 +183,16 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
       // Otherwise, parse the markdown
       const parsed = await parseMarkdown(article.markdown_content);
+      const readTime = calculateReadTime(parsed.content);
 
-      // Optionally update the article with the parsed HTML
-      await supabase.from("articles").update({ html_content: parsed.content }).eq("id", article.id);
+      // Update the article with the parsed HTML and read time
+      await supabase
+        .from("articles")
+        .update({
+          html_content: parsed.content,
+          read_time: readTime,
+        })
+        .eq("id", article.id);
 
       return {
         id: article.id,
@@ -183,7 +201,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         excerpt: article.excerpt,
         category: article.category,
         date: article.date,
-        readTime: article.read_time,
+        readTime,
         comments: article.comments_count,
         tags: article.article_tags.map((at) => at.tags.name),
         content: parsed.content,
@@ -192,8 +210,14 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     })
   );
 
+  // Calculate read time for sample post
+  const samplePostWithReadTime = {
+    ...samplePost,
+    readTime: calculateReadTime(samplePost.content),
+  };
+
   // Always include the sample post at the beginning
-  return [samplePost, ...posts];
+  return [samplePostWithReadTime, ...posts];
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -214,6 +238,13 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
   if (error || !article) {
     console.error("Error fetching blog post:", error);
+    if (slug === "welcome") {
+      // Calculate read time for sample post
+      return {
+        ...samplePost,
+        readTime: calculateReadTime(samplePost.content),
+      };
+    }
     return null;
   }
 
@@ -221,6 +252,11 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
   // If we have cached HTML content, use it
   if (typedArticle.html_content) {
+    const readTime = calculateReadTime(typedArticle.html_content);
+    // Update read time in database if it's different
+    if (readTime !== typedArticle.read_time) {
+      await supabase.from("articles").update({ read_time: readTime }).eq("id", typedArticle.id);
+    }
     return {
       id: typedArticle.id,
       slug: typedArticle.slug,
@@ -228,7 +264,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       excerpt: typedArticle.excerpt,
       category: typedArticle.category,
       date: typedArticle.date,
-      readTime: typedArticle.read_time,
+      readTime,
       comments: typedArticle.comments_count,
       tags: typedArticle.article_tags.map((at) => at.tags.name),
       content: typedArticle.html_content,
@@ -238,11 +274,15 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
   // Otherwise, parse the markdown
   const parsed = await parseMarkdown(typedArticle.markdown_content);
+  const readTime = calculateReadTime(parsed.content);
 
-  // Update the article with the parsed HTML
+  // Update the article with the parsed HTML and read time
   await supabase
     .from("articles")
-    .update({ html_content: parsed.content })
+    .update({
+      html_content: parsed.content,
+      read_time: readTime,
+    })
     .eq("id", typedArticle.id);
 
   return {
@@ -252,7 +292,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     excerpt: typedArticle.excerpt,
     category: typedArticle.category,
     date: typedArticle.date,
-    readTime: typedArticle.read_time,
+    readTime,
     comments: typedArticle.comments_count,
     tags: typedArticle.article_tags.map((at) => at.tags.name),
     content: parsed.content,

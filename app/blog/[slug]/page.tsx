@@ -28,9 +28,7 @@ const samplePost: BlogPost = {
   readTime: "5 min read",
   comments: 0,
   tags: ["blog", "features", "markdown"],
-  content: `
-    <h1>Welcome to My Blog</h1>
-    
+  content: `    
     <p>Welcome to my corner of the internet! This post demonstrates the various features available in my blog posts, from code snippets to images and everything in between.</p>
 
     <h2>Code Snippets</h2>
@@ -249,10 +247,6 @@ export default async function BlogPost({ params }: PageProps) {
             </h1>
 
             <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
-              <div className="flex items-center gap-2">
-                <MessageSquare size={14} />
-                <span className="font-mono text-xs">{samplePost.comments} comments</span>
-              </div>
               <span className="font-mono text-xs">
                 {new Date(samplePost.date).toLocaleDateString("en-US", {
                   month: "long",
