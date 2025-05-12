@@ -11,12 +11,12 @@ const ModernFeaturedProject = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="bg-zinc-50/80 dark:bg-zinc-900/95">
+    <section className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Minimal Header */}
         <div className="flex items-center justify-between mb-8 lg:mb-12">
           <div className="flex items-center gap-4 lg:gap-6">
-            <div className="bg-[#333] dark:bg-zinc-700 p-3 lg:p-4 rounded-2xl">
+            <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-3 lg:p-4 rounded-2xl">
               <Star size={20} className="text-white lg:hidden" />
               <Star size={24} className="text-white hidden lg:block" />
             </div>
@@ -33,23 +33,25 @@ const ModernFeaturedProject = () => {
 
         {/* Main Project Display */}
         <Card
-          className="bg-white/80 dark:bg-zinc-800/80 shadow-lg dark:shadow-zinc-900/30 rounded-3xl overflow-hidden transition-all duration-300 
-  hover:shadow-xl hover:shadow-blue-500/10 hover:scale-[1.01] hover:-translate-y-1"
+          className="relative bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80 
+            shadow-lg dark:shadow-zinc-900/30 rounded-3xl overflow-hidden transition-all duration-300 
+            hover:shadow-xl hover:shadow-blue-500/10 hover:scale-[1.01] hover:-translate-y-1"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <CardContent className="p-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <CardContent className="p-0 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Project Visual */}
-              <div className="relative bg-blue-600 dark:bg-blue-500 p-6 sm:p-8 lg:p-16 min-h-[320px] lg:min-h-[480px] flex items-center">
+              <div className="relative bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 p-6 sm:p-8 lg:p-16 min-h-[320px] lg:min-h-[480px] flex items-center">
                 <div
-                  className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.08),rgba(255,255,255,0))] transition-opacity duration-500 ${
+                  className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))] transition-opacity duration-500 ${
                     isHovered ? "opacity-100" : "opacity-0"
                   }`}
                 />
                 <div className="relative z-10 w-full">
                   <div className="space-y-4 lg:space-y-6">
-                    <div className="inline-block bg-[#333] dark:bg-zinc-700 rounded-xl lg:rounded-2xl p-2 lg:p-3">
+                    <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-xl lg:rounded-2xl p-2 lg:p-3">
                       <Network size={24} className="text-white lg:hidden" />
                       <Network size={32} className="text-white hidden lg:block" />
                     </div>
@@ -68,17 +70,32 @@ const ModernFeaturedProject = () => {
               </div>
 
               {/* Project Details */}
-              <div className="p-6 sm:p-8 lg:p-16 bg-white/80 dark:bg-zinc-800/80">
+              <div className="p-6 sm:p-8 lg:p-16 bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80">
                 <div className="space-y-8 lg:space-y-12">
                   <div className="space-y-4 lg:space-y-6">
                     <div className="flex flex-wrap gap-2 lg:gap-3">
-                      <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333] dark:hover:bg-zinc-600">
+                      <Badge
+                        className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
+                        text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
+                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                        transition-all duration-300"
+                      >
                         LLM-POWERED
                       </Badge>
-                      <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333] dark:hover:bg-zinc-600">
+                      <Badge
+                        className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
+                        text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
+                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                        transition-all duration-300"
+                      >
                         GOOGLE PLACES API
                       </Badge>
-                      <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono hover:bg-[#333] dark:hover:bg-zinc-600">
+                      <Badge
+                        className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
+                        text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
+                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                        transition-all duration-300"
+                      >
                         REAL-TIME
                       </Badge>
                     </div>
@@ -111,7 +128,11 @@ const ModernFeaturedProject = () => {
                     <Link href="https://github.com/DavidKalina/realtime-markers-demo">
                       <Button
                         variant="outline"
-                        className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-zinc-900 dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-6 lg:px-8 py-6 group w-full sm:w-auto"
+                        className="bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-800 dark:to-zinc-700
+                          text-black dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg 
+                          px-6 lg:px-8 py-6 w-full sm:w-auto transition-all duration-300
+                          hover:from-zinc-200 hover:to-zinc-100 dark:hover:from-zinc-700 dark:hover:to-zinc-600
+                          border-0 shadow-sm hover:shadow-md"
                       >
                         <Github className="mr-2" size={18} />
                         SOURCE

@@ -1,4 +1,6 @@
 import ModernAbout from "@/components/About";
+import { getBlogPosts } from "@/lib/blog-data";
+import ModernBlog from "@/components/Blog";
 import ModernCTA from "@/components/Cta";
 import ModernHero from "@/components/Hero";
 import ModernFeaturedProject from "@/components/Project";
@@ -11,7 +13,9 @@ export const metadata: Metadata = {
   description: "Welcome to my portfolio showcasing my work and expertise",
 };
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getBlogPosts();
+
   return (
     <>
       <ModernHero />
@@ -23,6 +27,8 @@ export default function Home() {
       <ModernFeaturedProject />
 
       <ModernProjectGrid />
+
+      <ModernBlog posts={posts} />
 
       <ModernCTA />
     </>

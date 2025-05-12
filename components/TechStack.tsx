@@ -88,11 +88,11 @@ const ModernTechStack = () => {
   };
 
   return (
-    <section className="bg-zinc-50/80 dark:bg-zinc-900/95">
+    <section className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95">
       <div className="max-w-7xl mx-auto px-8 py-32">
         <div className="max-w-2xl">
           <div className="flex items-center gap-6 mb-8">
-            <div className="bg-[#333] dark:bg-zinc-700 p-4 rounded-2xl">
+            <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-4 rounded-2xl">
               <Code2 size={24} className="text-white" />
             </div>
             <div>
@@ -114,16 +114,18 @@ const ModernTechStack = () => {
           {Object.entries(technologies).map(([key, category]) => (
             <Card
               key={key}
-              className="bg-white/80 dark:bg-zinc-800/80 shadow-lg rounded-3xl 
+              className="relative bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-700/80 dark:to-zinc-800/80 
+                shadow-lg rounded-3xl 
                 transition-all duration-300 group overflow-hidden 
                 dark:shadow-zinc-900/30
                 hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
                 hover:-translate-y-1 hover:scale-[1.02]"
             >
-              <CardContent className="p-0">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <CardContent className="p-0 relative z-10">
                 <div className="p-8 pb-6">
                   <div className="flex items-start gap-6 mb-6">
-                    <div className="bg-[#333] dark:bg-zinc-700 p-4 rounded-xl group-hover:bg-[#333] dark:group-hover:bg-zinc-600 transition-colors duration-300">
+                    <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-4 rounded-xl group-hover:from-[#444] group-hover:to-zinc-600 dark:group-hover:from-zinc-600 dark:group-hover:to-zinc-500 transition-colors duration-300">
                       <div className="text-white">{category.icon}</div>
                     </div>
                     <div className="flex-1 pt-2">
@@ -154,13 +156,13 @@ const ModernTechStack = () => {
                         <div className="space-y-2">
                           <Badge
                             className="
-                              bg-[#333] dark:bg-zinc-700 
+                              bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
                               text-white px-4 py-2 
                               rounded-full text-xs font-mono 
                               flex items-center gap-2 
                               border border-zinc-600 dark:border-zinc-500
                               shadow-md transition-all duration-200
-                              hover:bg-[#444] dark:hover:bg-zinc-600 
+                              hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
                               hover:border-zinc-400 dark:hover:border-zinc-300 
                               hover:shadow-lg w-min
                             "
