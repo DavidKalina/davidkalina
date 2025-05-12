@@ -11,12 +11,12 @@ const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white dark:bg-zinc-800 border-b border-zinc-100 dark:border-zinc-700/50 fixed w-full z-[999]">
+    <nav className="bg-gradient-to-b from-white/95 to-white/90 dark:from-zinc-800/95 dark:to-zinc-800/90 border-b border-zinc-100 dark:border-zinc-700/50 fixed w-full z-[999] backdrop-blur-sm">
       <div className="px-8 mx-auto max-w-7xl">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3">
-            <span className="font-mono font-bold text-lg text-black dark:text-white">
+            <span className="font-mono font-bold text-lg bg-gradient-to-r from-zinc-900 to-zinc-700 dark:from-zinc-100 dark:to-zinc-300 bg-clip-text text-transparent">
               davidkalina
             </span>
           </Link>
@@ -28,7 +28,13 @@ const ModernNavbar = () => {
             <div className="flex items-center gap-3 pl-6 border-l border-zinc-100 dark:border-zinc-700/50">
               <Button
                 variant="outline"
-                className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono text-sm px-6"
+                className="bg-gradient-to-r from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900
+                  text-black dark:text-white rounded-full font-mono text-sm px-6
+                  border-2 border-zinc-200 dark:border-zinc-700
+                  transition-all duration-300 
+                  hover:border-black dark:hover:border-white
+                  hover:from-zinc-50 hover:to-white dark:hover:from-zinc-700 dark:hover:to-zinc-800
+                  hover:shadow-md hover:-translate-y-0.5"
                 asChild
               >
                 <Link href="https://github.com/DavidKalina" target="_blank">
@@ -38,16 +44,23 @@ const ModernNavbar = () => {
               </Button>
 
               <Button
-                className="bg-[#333] dark:bg-white text-white dark:text-black 
-             hover:bg-zinc-900 dark:hover:bg-white rounded-full 
-             font-mono text-sm px-8 group disabled:opacity-50 
-             transition-all duration-300 
-             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
+                  text-white rounded-full font-mono text-sm px-8 group 
+                  border-2 border-zinc-800 dark:border-zinc-600
+                  transition-all duration-300 
+                  hover:border-white dark:hover:border-zinc-400
+                  hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                  dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
+                  hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
+                  hover:-translate-y-0.5"
                 asChild
               >
                 <Link href="/resume" target="_blank">
                   RESUME
-                  <ExternalLink className="ml-2" size={16} />
+                  <ExternalLink
+                    className="ml-2 transition-transform group-hover:translate-x-1"
+                    size={16}
+                  />
                 </Link>
               </Button>
             </div>
@@ -56,7 +69,7 @@ const ModernNavbar = () => {
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
-            className="md:hidden p-2"
+            className="md:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 transition-colors duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -70,12 +83,14 @@ const ModernNavbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-zinc-100 dark:border-zinc-700/50 bg-white dark:bg-zinc-800">
+        <div className="md:hidden border-t border-zinc-100 dark:border-zinc-700/50 bg-gradient-to-b from-white/95 to-white/90 dark:from-zinc-800/95 dark:to-zinc-800/90 backdrop-blur-sm">
           <div className="px-8 py-6 space-y-6">
             <Link href="/projects" className="block">
               <Button
                 variant="ghost"
-                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white"
+                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                  transition-colors duration-300"
               >
                 PROJECTS
               </Button>
@@ -83,7 +98,9 @@ const ModernNavbar = () => {
             <Link href="/about" className="block">
               <Button
                 variant="ghost"
-                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white"
+                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                  transition-colors duration-300"
               >
                 ABOUT
               </Button>
@@ -91,7 +108,9 @@ const ModernNavbar = () => {
             <Link href="/contact" className="block">
               <Button
                 variant="ghost"
-                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white"
+                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                  transition-colors duration-300"
               >
                 CONTACT
               </Button>
@@ -100,7 +119,13 @@ const ModernNavbar = () => {
               <ThemeToggle />
               <Button
                 variant="outline"
-                className="w-full border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono text-sm"
+                className="w-full bg-gradient-to-r from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900
+                  text-black dark:text-white rounded-full font-mono text-sm
+                  border-2 border-zinc-200 dark:border-zinc-700
+                  transition-all duration-300 
+                  hover:border-black dark:hover:border-white
+                  hover:from-zinc-50 hover:to-white dark:hover:from-zinc-700 dark:hover:to-zinc-800
+                  hover:shadow-md hover:-translate-y-0.5"
                 asChild
               >
                 <Link href="https://github.com" target="_blank">
@@ -109,12 +134,23 @@ const ModernNavbar = () => {
                 </Link>
               </Button>
               <Button
-                className="w-full bg-[#333] dark:bg-white text-white dark:text-black hover:bg-[#333] dark:hover:bg-white rounded-full font-mono text-sm"
+                className="w-full bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
+                  text-white rounded-full font-mono text-sm
+                  border-2 border-zinc-800 dark:border-zinc-600
+                  transition-all duration-300 
+                  hover:border-white dark:hover:border-zinc-400
+                  hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                  dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
+                  hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
+                  hover:-translate-y-0.5"
                 asChild
               >
                 <Link href="/resume" target="_blank">
                   RESUME
-                  <ExternalLink className="ml-2" size={16} />
+                  <ExternalLink
+                    className="ml-2 transition-transform group-hover:translate-x-1"
+                    size={16}
+                  />
                 </Link>
               </Button>
             </div>
