@@ -10,11 +10,14 @@ const ModernAbout = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="bg-white/80 dark:bg-zinc-800/95" id="about">
+    <section
+      className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95"
+      id="about"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
-          <div className="bg-rose-500 dark:bg-rose-600 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
+          <div className="bg-gradient-to-br from-rose-500 to-rose-600 dark:from-rose-600 dark:to-rose-700 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
             <User size={20} className="text-white lg:hidden" />
             <User size={24} className="text-white hidden lg:block" />
           </div>
@@ -82,11 +85,11 @@ const ModernAbout = () => {
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
               <Link href="/resume" target="_blank">
                 <Button
-                  className="bg-[#333] dark:bg-white text-white dark:text-black 
-             hover:bg-zinc-900 dark:hover:bg-white rounded-full 
-             font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group disabled:opacity-50 
-             transition-all duration-300 
-             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                  className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
+                    text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
+                    disabled:opacity-50 transition-all duration-300 
+                    hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                    hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                 >
                   VIEW RESUME
                   <ArrowRight
@@ -98,7 +101,11 @@ const ModernAbout = () => {
               <Link href="https://github.com/DavidKalina" target="_blank">
                 <Button
                   variant="outline"
-                  className="border-2 border-zinc-200 dark:border-zinc-700 hover:border-black dark:hover:border-white hover:bg-white/80 dark:hover:bg-zinc-800/80 text-black dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-6 lg:px-8 py-6 w-full sm:w-auto"
+                  className="bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-800 dark:to-zinc-700
+                    text-black dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg 
+                    px-6 lg:px-8 py-6 w-full sm:w-auto transition-all duration-300
+                    hover:from-zinc-200 hover:to-zinc-100 dark:hover:from-zinc-700 dark:hover:to-zinc-600
+                    border-0 shadow-sm hover:shadow-md"
                 >
                   <Github className="mr-2" size={18} />
                   GITHUB
@@ -109,7 +116,7 @@ const ModernAbout = () => {
 
           {/* Right Column - Visual Section */}
           <div
-            className="relative bg-rose-500 dark:bg-rose-600 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 transform hover:scale-[1.02] transition-all duration-500 ease-out"
+            className="relative bg-gradient-to-br from-rose-500 to-rose-600 dark:from-rose-600 dark:to-rose-700 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 transform hover:scale-[1.02] transition-all duration-500 ease-out"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -126,7 +133,7 @@ const ModernAbout = () => {
                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">FEATURED WORK</p>
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                    <Badge className="bg-[#333] dark:bg-zinc-700 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
+                    <Badge className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:md:text-sm font-mono w-fit">
                       ALFAPHOX/REVIVE
                     </Badge>
                     <span className="font-mono md:text-sm lg:md:text-md text-white/90">2024</span>
@@ -149,7 +156,7 @@ const ModernAbout = () => {
                   ].map((focus, index) => (
                     <div
                       key={index}
-                      className="bg-[#333] dark:bg-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125"
+                      className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125"
                     >
                       <p className="font-mono md:text-md text-white">{focus}</p>
                     </div>

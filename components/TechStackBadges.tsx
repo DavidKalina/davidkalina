@@ -84,13 +84,13 @@ const TechBadges = () => {
         <Badge
           key={name}
           className="
-            bg-[#333] dark:bg-zinc-700 
+            bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
             text-white px-3 sm:px-4 py-2
             rounded-full text-[10px] sm:text-xs font-mono 
             flex items-center gap-2 
             border border-zinc-600 dark:border-zinc-500
             shadow-md transition-all duration-200
-            hover:bg-[#444] dark:hover:bg-zinc-600 
+            hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
             hover:border-zinc-400 dark:hover:border-zinc-300 
             hover:shadow-lg w-min
           "
