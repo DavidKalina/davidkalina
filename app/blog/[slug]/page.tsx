@@ -4,30 +4,28 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock } from "lucide-react";
 import Link from "next/link";
-import { getBlogPosts, type BlogPost } from "@/lib/blog-data";
+import { getBlogPost } from "@/lib/blog-data";
 import Script from "next/script";
 
 type PageProps = {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 type MetadataProps = {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 // Generate metadata for each blog post
 export async function generateMetadata(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  { params, searchParams }: MetadataProps,
+  { params }: MetadataProps,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
 
-  const posts = await getBlogPosts();
-  const post = posts.find((post) => post.slug === slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     return {
@@ -42,18 +40,10 @@ export async function generateMetadata(
   };
 }
 
-// Generate static paths for all blog posts
-export async function generateStaticParams() {
-  return (await getBlogPosts()).map((post: BlogPost) => ({
-    slug: post.slug,
-  }));
-}
-
 export default async function BlogPost({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
 
-  const posts = await getBlogPosts();
-  const post = posts.find((post) => post.slug === slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();

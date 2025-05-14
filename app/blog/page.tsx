@@ -4,6 +4,10 @@ import { getBlogPosts } from "@/lib/blog-data";
 import { ArrowRight, BookOpen, Clock, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
+// Configure the page to be dynamic
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
   title: "Blog | David Kalina",
   description: "Read my latest articles about software development, technology, and more.",
