@@ -2,9 +2,10 @@ import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Clock, MessageSquare } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
 import Link from "next/link";
 import { getBlogPosts, type BlogPost } from "@/lib/blog-data";
+import Script from "next/script";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -24,6 +25,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
+
   const posts = await getBlogPosts();
   const post = posts.find((post) => post.slug === slug);
 
@@ -49,6 +51,7 @@ export async function generateStaticParams() {
 
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params;
+
   const posts = await getBlogPosts();
   const post = posts.find((post) => post.slug === slug);
 
@@ -58,6 +61,46 @@ export default async function BlogPost({ params }: PageProps) {
 
   return (
     <article className="min-h-screen bg-white/80 dark:bg-zinc-800/95 pt-32 pb-16">
+      <Script id="code-block-setup">
+        {`
+          document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach((block) => {
+              const pre = block.parentElement;
+              if (pre) {
+                const button = document.createElement('div');
+                button.innerHTML = \`
+                  <button class="copy-button" aria-label="Copy code" title="Copy code">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                  </button>
+                \`;
+                pre.appendChild(button);
+
+                button.addEventListener('click', async () => {
+                  const code = block.textContent || '';
+                  await navigator.clipboard.writeText(code);
+                  
+                  const icon = button.querySelector('svg');
+                  if (icon) {
+                    icon.innerHTML = \`
+                      <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    \`;
+                    setTimeout(() => {
+                      icon.innerHTML = \`
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                      \`;
+                    }, 2000);
+                  }
+                });
+              }
+            });
+          });
+        `}
+      </Script>
+
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-8">
@@ -93,10 +136,6 @@ export default async function BlogPost({ params }: PageProps) {
           </h1>
 
           <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
-            <div className="flex items-center gap-2">
-              <MessageSquare size={14} />
-              <span className="font-mono text-xs">{post.comments} comments</span>
-            </div>
             <span className="font-mono text-xs">
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "long",
@@ -120,7 +159,7 @@ export default async function BlogPost({ params }: PageProps) {
             prose-pre:bg-zinc-100 dark:prose-pre:bg-zinc-800
             prose-pre:border prose-pre:border-zinc-200 dark:prose-pre:border-zinc-700
             prose-img:rounded-xl prose-img:border prose-img:border-zinc-200 dark:prose-img:border-zinc-700"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post.content.replace(/<h1[^>]*>.*?<\/h1>/i, "") }}
         />
 
         {/* Tags */}

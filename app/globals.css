@@ -58,3 +58,69 @@
     --chart-5: 0 70% 40%;
   }
 }
+
+@layer components {
+  /* Code block styles */
+  .prose pre {
+    @apply relative;
+  }
+
+  .prose pre code {
+    @apply block p-4 overflow-x-auto text-sm;
+  }
+
+  .prose pre code .highlighted {
+    @apply bg-zinc-800/50 dark:bg-zinc-700/50;
+  }
+
+  /* Line numbers */
+  .prose pre code .line {
+    @apply border-l-2 border-transparent px-4;
+  }
+
+  .prose pre code .line.highlighted {
+    @apply border-l-2 border-blue-500 bg-blue-500/10;
+  }
+
+  /* Copy button */
+  .prose pre .copy-button {
+    @apply absolute top-2 right-2 p-2 rounded-md bg-zinc-800/50 dark:bg-zinc-700/50 
+      text-zinc-400 hover:text-zinc-200 transition-colors duration-200;
+  }
+
+  /* Image styles */
+  .prose img {
+    @apply my-8 rounded-xl border border-zinc-200 dark:border-zinc-700 
+      shadow-lg transition-all duration-300 hover:shadow-xl;
+  }
+
+  .prose img:hover {
+    @apply scale-[1.02] transform;
+  }
+
+  /* Image captions */
+  .prose figure {
+    @apply my-8;
+  }
+
+  .prose figure figcaption {
+    @apply mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400;
+  }
+
+  /* Anchor links for headings */
+  .prose .anchor {
+    @apply absolute -ml-6 flex items-center opacity-0 border-0;
+  }
+
+  .prose .anchor svg {
+    @apply h-5 w-5 text-zinc-400 dark:text-zinc-600;
+  }
+
+  .prose *:hover > .anchor {
+    @apply opacity-100;
+  }
+
+  .prose .anchor:focus {
+    @apply opacity-100;
+  }
+}
