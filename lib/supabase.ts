@@ -1,4 +1,4 @@
-import { Database } from "@/types/supabase";
+import { Database } from "@/database.types";
 import { createClient } from "@supabase/supabase-js";
 
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
