@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Clock, MessageSquare, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 
 interface ArticleCardFooterProps {
   readTime: string;
-  comments: number;
 }
 
-export const ArticleCardFooter = ({ readTime, comments }: ArticleCardFooterProps) => {
+export const ArticleCardFooter = ({ readTime }: ArticleCardFooterProps) => {
   return (
     <div className="p-6 lg:p-8 bg-white dark:bg-zinc-800">
       <div className="space-y-6">
@@ -15,10 +14,6 @@ export const ArticleCardFooter = ({ readTime, comments }: ArticleCardFooterProps
           <div className="flex items-center gap-2">
             <Clock size={14} />
             <span className="font-mono text-xs">{readTime}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <MessageSquare size={14} />
-            <span className="font-mono text-xs">{comments} comments</span>
           </div>
         </div>
 
