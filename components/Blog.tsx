@@ -3,9 +3,10 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Clock, MessageSquare } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { type BlogPost } from "@/lib/blog-data";
+import { ArticleCardFooter } from "@/components/ArticleCardFooter";
 
 interface BlogProps {
   posts: BlogPost[];
@@ -74,34 +75,7 @@ const ModernBlog = ({ posts }: BlogProps) => {
                   </div>
 
                   {/* Content Footer */}
-                  <div className="p-6 lg:p-8 bg-white dark:bg-zinc-800">
-                    <div className="space-y-6">
-                      {/* Meta Information */}
-                      <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
-                        <div className="flex items-center gap-2">
-                          <Clock size={14} />
-                          <span className="font-mono text-xs">{post.readTime}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <MessageSquare size={14} />
-                          <span className="font-mono text-xs">{post.comments} comments</span>
-                        </div>
-                      </div>
-
-                      {/* Read More Button */}
-                      <Button
-                        variant="ghost"
-                        className="p-0 h-auto font-mono text-sm text-zinc-600 dark:text-zinc-300 
-                          group-hover:text-[#333] dark:group-hover:text-white w-full justify-between"
-                      >
-                        <span>READ ARTICLE</span>
-                        <ArrowRight
-                          size={16}
-                          className="transition-transform group-hover:translate-x-1"
-                        />
-                      </Button>
-                    </div>
-                  </div>
+                  <ArticleCardFooter readTime={post.readTime} comments={post.comments} />
                 </div>
               </Link>
             ))

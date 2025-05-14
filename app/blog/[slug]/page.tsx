@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock } from "lucide-react";
@@ -7,23 +7,15 @@ import Link from "next/link";
 import { getBlogPost } from "@/lib/blog-data";
 import Script from "next/script";
 
-type PageProps = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-type MetadataProps = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+type PageParams = { slug: string };
 
 // Generate metadata for each blog post
-export async function generateMetadata(
-  { params }: MetadataProps,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { slug } = params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<PageParams>;
+}): Promise<Metadata> {
+  const { slug } = await params;
 
   const post = await getBlogPost(slug);
 
@@ -40,8 +32,8 @@ export async function generateMetadata(
   };
 }
 
-export default async function BlogPost({ params }: PageProps) {
-  const { slug } = params;
+export default async function BlogPost({ params }: { params: Promise<PageParams> }) {
+  const { slug } = await params;
 
   const post = await getBlogPost(slug);
 
