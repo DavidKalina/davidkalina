@@ -78,7 +78,7 @@ export default async function BlogPage() {
               >
                 <div className="relative h-full">
                   {/* Gradient Header */}
-                  <div className="relative bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-6 lg:p-8">
+                  <div className="relative bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 h-[200px] p-6 lg:p-8">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10">
                       {/* Category Badge */}

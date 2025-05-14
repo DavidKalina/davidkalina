@@ -8,6 +8,10 @@ import ModernProjectGrid from "@/components/ProjectGrid";
 import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
 
+// Configure the page to be dynamic
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "David Kalina | Full Stack Developer",
   description: "Welcome to my portfolio showcasing my work and expertise",
@@ -15,8 +19,6 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const posts = await getBlogPosts();
-
-  console.log(posts);
 
   return (
     <>

@@ -50,9 +50,9 @@ const ModernBlog = ({ posts }: BlogProps) => {
               >
                 <div className="relative h-full">
                   {/* Gradient Header */}
-                  <div className="relative bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-6 lg:p-8">
+                  <div className="relative bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-6 lg:p-8 min-h-[200px] flex flex-col justify-between">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex flex-col flex-1">
                       {/* Category Badge */}
                       <Badge
                         className="bg-white/10 text-white px-3 lg:px-4 py-2 
@@ -70,7 +70,9 @@ const ModernBlog = ({ posts }: BlogProps) => {
                       </h3>
 
                       {/* Excerpt */}
-                      <p className="font-mono text-sm text-white/60 line-clamp-3">{post.excerpt}</p>
+                      <p className="font-mono text-sm text-white/60 line-clamp-3">
+                        {post.excerpt || <span className="opacity-0">No excerpt provided</span>}
+                      </p>
                     </div>
                   </div>
 
