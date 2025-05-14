@@ -23,6 +23,13 @@ const ModernNavbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="/blog"
+              className="font-mono text-sm text-zinc-600 dark:text-zinc-300 
+              hover:text-black dark:hover:text-white transition-colors duration-300"
+            >
+              BLOG
+            </Link>
             <SparkNotes />
             <ThemeToggle />
             <div className="flex items-center gap-3 pl-6 border-l border-zinc-100 dark:border-zinc-700/50">
@@ -85,6 +92,16 @@ const ModernNavbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-zinc-100 dark:border-zinc-700/50 bg-gradient-to-b from-white/95 to-white/90 dark:from-zinc-800/95 dark:to-zinc-800/90 backdrop-blur-sm">
           <div className="px-8 py-6 space-y-6">
+            <Link href="/blog" className="block">
+              <Button
+                variant="ghost"
+                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                  transition-colors duration-300"
+              >
+                BLOG
+              </Button>
+            </Link>
             <Link href="/projects" className="block">
               <Button
                 variant="ghost"
