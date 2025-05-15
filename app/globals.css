@@ -62,15 +62,15 @@
 @layer components {
   /* Code block styles */
   .prose pre {
-    @apply relative;
+    @apply relative bg-zinc-50 dark:bg-zinc-800;
   }
 
   .prose pre code {
-    @apply block p-4 overflow-x-auto text-sm;
+    @apply block p-4 overflow-x-auto text-sm text-black dark:text-zinc-200;
   }
 
   .prose pre code .highlighted {
-    @apply bg-zinc-800/50 dark:bg-zinc-700/50;
+    @apply bg-zinc-200/50 dark:bg-zinc-700/50;
   }
 
   /* Line numbers */

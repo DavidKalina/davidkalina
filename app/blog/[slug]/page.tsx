@@ -138,7 +138,7 @@ export default async function BlogPost({ params }: { params: Promise<PageParams>
             prose-code:text-black dark:prose-code:text-zinc-200
             prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800
             prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-            prose-pre:bg-zinc-100 dark:prose-pre:bg-zinc-800
+            prose-pre:bg-zinc-50 dark:prose-pre:bg-zinc-800
             prose-pre:border prose-pre:border-zinc-200 dark:prose-pre:border-zinc-700
             prose-img:rounded-xl prose-img:border prose-img:border-zinc-200 dark:prose-img:border-zinc-700"
           dangerouslySetInnerHTML={{ __html: post.content.replace(/<h1[^>]*>.*?<\/h1>/i, "") }}
