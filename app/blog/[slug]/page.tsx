@@ -135,7 +135,7 @@ export default async function BlogPost({ params }: { params: Promise<PageParams>
             prose-headings:text-zinc-900 dark:prose-headings:text-zinc-200
             prose-p:text-zinc-600 dark:prose-p:text-zinc-300
             prose-a:text-blue-600 dark:prose-a:text-blue-400
-            prose-code:text-zinc-900 dark:prose-code:text-zinc-200
+            prose-code:text-black dark:prose-code:text-zinc-200
             prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800
             prose-code:px-1 prose-code:py-0.5 prose-code:rounded
             prose-pre:bg-zinc-100 dark:prose-pre:bg-zinc-800
