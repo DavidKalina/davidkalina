@@ -9,7 +9,6 @@ import Script from "next/script";
 
 type PageParams = { slug: string };
 
-// Generate metadata for each blog post
 export async function generateMetadata({
   params,
 }: {
