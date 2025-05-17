@@ -4,10 +4,23 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock } from "lucide-react";
 import Link from "next/link";
-import { getBlogPost } from "@/lib/blog-data";
+import { getBlogPost, getBlogPosts } from "@/lib/blog-data";
 import Script from "next/script";
 
+// Configure static generation with ISR
+export const dynamic = "force-static";
+export const revalidate = 3600; // Revalidate every hour
+export const dynamicParams = true; // Allow dynamic params for on-demand generation
+
 type PageParams = { slug: string };
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
@@ -15,7 +28,6 @@ export async function generateMetadata({
   params: Promise<PageParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-
   const post = await getBlogPost(slug);
 
   if (!post) {
@@ -33,7 +45,6 @@ export async function generateMetadata({
 
 export default async function BlogPost({ params }: { params: Promise<PageParams> }) {
   const { slug } = await params;
-
   const post = await getBlogPost(slug);
 
   if (!post) {

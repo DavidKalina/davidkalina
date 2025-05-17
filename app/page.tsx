@@ -8,9 +8,9 @@ import ModernProjectGrid from "@/components/ProjectGrid";
 import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
 
-// Configure the page to be dynamic
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Configure static generation
+export const dynamic = "force-static";
+export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
   title: "David Kalina | Full Stack Developer",

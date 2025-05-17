@@ -3,14 +3,22 @@ import { getBlogPosts } from "@/lib/blog-data";
 import { BookOpen, Clock } from "lucide-react";
 import { ArticleCard } from "../components/ArticleCard";
 
-// Configure the page to be dynamic
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Configure static generation
+export const dynamic = "force-static";
+export const revalidate = 3600; // Revalidate every hour
 
 export const metadata = {
   title: "Blog | David Kalina",
   description: "Read my latest articles about software development, technology, and more.",
 };
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();

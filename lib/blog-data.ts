@@ -50,10 +50,6 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       // If we have cached HTML content, use it
       if (typedArticle.html_content) {
         const readTime = calculateReadTime(typedArticle.html_content);
-        // Update read time in database if it's different
-        if (readTime !== typedArticle.read_time) {
-          await supabase.from("articles").update({ read_time: readTime }).eq("id", typedArticle.id);
-        }
         return {
           id: typedArticle.id,
           slug: typedArticle.slug,
@@ -98,8 +94,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     })
   );
 
-  // Always include the sample post at the beginning
-  return [...posts];
+  return posts;
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
