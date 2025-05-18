@@ -80,13 +80,12 @@ const techStack = [
 
 const TechBadges = () => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-3 max-w-2xl">
+    <div className="flex flex-wrap gap-2 sm:gap-3 max-w-2xl justify-start">
       {techStack.map(({ name, icon: Icon, iconColor }) => (
         <motion.div
           key={name}
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          className="flex justify-center"
         >
           <Badge
             className="
@@ -98,11 +97,11 @@ const TechBadges = () => {
               shadow-md transition-all duration-200
               hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
               hover:border-zinc-400 dark:hover:border-zinc-300 
-              hover:shadow-lg whitespace-nowrap w-full
+              hover:shadow-lg whitespace-nowrap
             "
           >
             <Icon size={14} className={`${iconColor} flex-shrink-0`} />
-            <span className="truncate">{name}</span>
+            <span>{name}</span>
           </Badge>
         </motion.div>
       ))}
