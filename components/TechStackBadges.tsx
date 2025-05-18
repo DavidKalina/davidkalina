@@ -80,28 +80,28 @@ const techStack = [
 
 const TechBadges = () => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 max-w-4xl">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-3 max-w-2xl">
       {techStack.map(({ name, icon: Icon, iconColor }) => (
         <motion.div
           key={name}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
           className="flex justify-center"
         >
           <Badge
             className="
               bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
-              text-white px-2 sm:px-3 py-1.5 sm:py-2
-              rounded-full text-[10px] sm:text-xs font-mono 
+              text-white px-2.5 sm:px-3 py-1.5 sm:py-2
+              rounded-full text-[11px] sm:text-xs font-mono 
               flex items-center gap-1.5 sm:gap-2
               border border-zinc-600 dark:border-zinc-500
               shadow-md transition-all duration-200
               hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
               hover:border-zinc-400 dark:hover:border-zinc-300 
-              hover:shadow-lg whitespace-nowrap
+              hover:shadow-lg whitespace-nowrap w-full
             "
           >
-            <Icon size={12} className={`${iconColor} flex-shrink-0`} />
+            <Icon size={14} className={`${iconColor} flex-shrink-0`} />
             <span className="truncate">{name}</span>
           </Badge>
         </motion.div>

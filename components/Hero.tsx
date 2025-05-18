@@ -47,7 +47,7 @@ const ModernHero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 lg:py-24">
           {/* Content Section */}
-          <div className="space-y-6 lg:space-y-8 pt-10 lg:pt-12">
+          <div className="space-y-5 lg:space-y-6 pt-10 lg:pt-12">
             {/* Status Badge */}
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-700 px-3 sm:px-4 py-2 rounded-full shadow-sm">
               <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 animate-pulse" />
@@ -57,7 +57,7 @@ const ModernHero = () => {
             </div>
 
             {/* Main Heading */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug">
                 <span className="bg-gradient-to-r from-yellow-500 to-amber-500 bg-clip-text text-transparent">
                   {HERO_CONSTANTS.heading.highlight}
@@ -69,16 +69,18 @@ const ModernHero = () => {
             </div>
 
             {/* Description */}
-            <p className="font-mono text-lg sm:text-md text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl">
+            <p className="font-mono text-lg sm:text-md text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl mb-2">
               {HERO_CONSTANTS.description.text}{" "}
               <WaveText text={HERO_CONSTANTS.description.waveText} />.
             </p>
 
             {/* Tech Stack Pills */}
-            <TechBadges />
+            <div className="mt-4">
+              <TechBadges />
+            </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="#projects">
                 <Button
                   className="bg-gradient-to-r from-[#EAB308] to-[#D97706] dark:from-[#FACC15] dark:to-[#F59E0B]
@@ -170,23 +172,11 @@ const ModernHero = () => {
                     transformOrigin: "bottom center",
                   }}
                 >
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="flex items-center gap-2"
-                  >
+                  <div className="flex items-center gap-2">
                     <span className="text-2xl font-mono">{popupData.node.emoji}</span>
                     <span className="font-bold font-mono">{popupData.node.label}</span>
-                  </motion.div>
-                  <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="mt-2 text-sm font-mono"
-                  >
-                    {popupData.node.description}
-                  </motion.p>
+                  </div>
+                  <p className="mt-2 text-sm font-mono">{popupData.node.description}</p>
                 </motion.div>
               )}
             </AnimatePresence>
