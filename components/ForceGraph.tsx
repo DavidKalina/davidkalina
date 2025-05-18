@@ -25,6 +25,22 @@ const ForceGraph = ({
 
   const activePopupNodeIdRef = useRef(activePopupNodeId);
 
+  // Add function to calculate initial positions in a circular layout
+  const calculateInitialPositions = (nodes: NodeDatum[], width: number, height: number) => {
+    const radius = Math.min(width, height) * 0.4; // Use 40% of the smaller dimension
+    const centerX = 0;
+    const centerY = 0;
+
+    nodes.forEach((node, i) => {
+      const angle = (i / nodes.length) * 2 * Math.PI;
+      node.x = centerX + radius * Math.cos(angle);
+      node.y = centerY + radius * Math.sin(angle);
+      // Add some random variation to prevent perfect circle
+      node.x += (Math.random() - 0.5) * radius * 0.2;
+      node.y += (Math.random() - 0.5) * radius * 0.2;
+    });
+  };
+
   useEffect(() => {
     activePopupNodeIdRef.current = activePopupNodeId;
   }, [activePopupNodeId]);
@@ -79,9 +95,12 @@ const ForceGraph = ({
       };
     };
 
-    // Clone the data so we don’t mutate the defaults.
+    // Clone the data so we don't mutate the defaults.
     const nodes: NodeDatum[] = defaultNodes.map((d) => ({ ...d }));
     const links: LinkDatum[] = defaultLinks.map((d) => ({ ...d }));
+
+    // Calculate initial positions before simulation
+    calculateInitialPositions(nodes, width, height);
 
     const getNodeRadius = (d: NodeDatum) => (isMobile ? 20 : d.group === 1 ? 45 : 35);
     const getFontSize = (d: NodeDatum) => (isMobile ? "16px" : d.group === 1 ? "32px" : "24px");
@@ -89,7 +108,7 @@ const ForceGraph = ({
     const forceParams = calculateForceParameters();
     const lingerDuration = 3000; // milliseconds
 
-    // Create the force simulation.
+    // Create the force simulation with modified parameters
     const simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
       .force(
@@ -98,20 +117,25 @@ const ForceGraph = ({
           .forceLink<NodeDatum, LinkDatum>(links)
           .id((d) => d.id)
           .distance(forceParams.linkDistance)
-          .strength(0.7)
+          .strength(0.5) // Reduced strength to maintain spread
       )
       .force(
         "charge",
         d3
           .forceManyBody()
-          .strength(forceParams.chargeStrength)
-          .distanceMax(width * 0.7)
+          .strength(forceParams.chargeStrength * 0.8) // Slightly reduced repulsion
+          .distanceMax(width * 0.8) // Increased max distance
       )
-      .force("center", d3.forceCenter(0, 0))
-      .force("x", d3.forceX().strength(0.08))
-      .force("y", d3.forceY().strength(0.08))
-      .force("collision", d3.forceCollide().radius(forceParams.collisionRadius).strength(0.8))
-      .force("radial", d3.forceRadial(width / 4, 0, 0).strength(0.05));
+      .force("center", d3.forceCenter(0, 0).strength(0.02)) // Reduced center force
+      .force("x", d3.forceX().strength(0.05)) // Reduced x force
+      .force("y", d3.forceY().strength(0.05)) // Reduced y force
+      .force("collision", d3.forceCollide().radius(forceParams.collisionRadius).strength(0.9))
+      .force("radial", d3.forceRadial(width / 3, 0, 0).strength(0.03)); // Reduced radial force
+
+    // Run a quick pre-simulation to stabilize initial positions
+    simulation.alpha(0.3).restart();
+    for (let i = 0; i < 100; ++i) simulation.tick();
+    simulation.alpha(0);
 
     // Create the SVG container.
     const svg = d3

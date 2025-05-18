@@ -13,80 +13,27 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import ExperienceStats from "./ExperienceStats";
+import { TECH_STACK_CONSTANTS } from "@/constants/techStack";
+
+// Helper function to map icon names to components
+const getIconComponent = (iconName: string, size: number = 24) => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    Laptop: <Laptop size={size} />,
+    Database: <Database size={size} />,
+    Layers: <Layers size={size} />,
+    SiTypescript: <SiTypescript size={size} className="text-blue-500 dark:text-blue-400" />,
+    SiReact: <SiReact size={size} className="text-blue-400 dark:text-blue-300" />,
+    SiNextdotjs: <SiNextdotjs size={size} className="text-black dark:text-white" />,
+    SiNodedotjs: <SiNodedotjs size={size} className="text-emerald-500 dark:text-emerald-400" />,
+    SiExpress: <SiExpress size={size} className="text-zinc-500 dark:text-zinc-300" />,
+    SiDocker: <SiDocker size={size} className="text-blue-400 dark:text-blue-300" />,
+    SiSupabase: <SiSupabase size={size} className="text-emerald-500 dark:text-emerald-400" />,
+    SiRedis: <SiRedis size={size} className="text-red-500 dark:text-red-400" />,
+  };
+  return iconMap[iconName] || null;
+};
 
 const ModernTechStack = () => {
-  const technologies = {
-    frontend: {
-      icon: <Laptop size={24} />,
-      title: "FRONTEND DEVELOPMENT",
-      description: "Specializing in modern, user-centric web applications",
-      skills: [
-        {
-          name: "TYPESCRIPT",
-          level: "Advanced",
-          proficiency: "4+ years of production experience",
-          icon: <SiTypescript size={16} className="text-blue-500 dark:text-blue-400" />,
-        },
-        {
-          name: "REACT",
-          level: "Advanced",
-          proficiency: "Enterprise-level applications",
-          icon: <SiReact size={16} className="text-blue-400 dark:text-blue-300" />,
-        },
-        {
-          name: "NEXT.JS",
-          level: "Advanced",
-          proficiency: "Full-stack applications",
-          icon: <SiNextdotjs size={16} className="text-black dark:text-white" />,
-        },
-      ],
-    },
-    backend: {
-      icon: <Database size={24} />,
-      title: "BACKEND DEVELOPMENT",
-      description: "Building scalable server-side solutions",
-      skills: [
-        {
-          name: "NODE.JS",
-          level: "Proficient",
-          proficiency: "Production microservices",
-          icon: <SiNodedotjs size={16} className="text-emerald-500 dark:text-emerald-400" />,
-        },
-        {
-          name: "EXPRESS",
-          level: "Proficient",
-          proficiency: "REST API development",
-          icon: <SiExpress size={16} className="text-zinc-500 dark:text-zinc-300" />,
-        },
-        {
-          name: "DOCKER",
-          level: "Intermediate",
-          proficiency: "Container orchestration",
-          icon: <SiDocker size={16} className="text-blue-400 dark:text-blue-300" />,
-        },
-      ],
-    },
-    database: {
-      icon: <Layers size={24} />,
-      title: "DATABASE & INFRASTRUCTURE",
-      description: "Database design and infrastructure management",
-      skills: [
-        {
-          name: "SUPABASE",
-          level: "Proficient",
-          proficiency: "Full-stack integration",
-          icon: <SiSupabase size={16} className="text-emerald-500 dark:text-emerald-400" />,
-        },
-        {
-          name: "REDIS",
-          level: "Intermediate",
-          proficiency: "Caching & queuing",
-          icon: <SiRedis size={16} className="text-red-500 dark:text-red-400" />,
-        },
-      ],
-    },
-  };
-
   return (
     <section className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95">
       <div className="max-w-7xl mx-auto px-8 py-32">
@@ -97,21 +44,20 @@ const ModernTechStack = () => {
             </div>
             <div>
               <p className="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-                001 / EXPERTISE
+                {TECH_STACK_CONSTANTS.section.number} / EXPERTISE
               </p>
               <h2 className="text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
-                Technical Skills
+                {TECH_STACK_CONSTANTS.section.title}
               </h2>
             </div>
           </div>
           <p className="font-mono xl:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed mb-16">
-            Focused on delivering high-performance web applications with modern technologies.
-            Committed to continuous learning and best practices.
+            {TECH_STACK_CONSTANTS.section.description}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Object.entries(technologies).map(([key, category]) => (
+          {Object.entries(TECH_STACK_CONSTANTS.categories).map(([key, category]) => (
             <Card
               key={key}
               className="relative bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-700/80 dark:to-zinc-800/80 
@@ -126,7 +72,7 @@ const ModernTechStack = () => {
                 <div className="p-8 pb-6">
                   <div className="flex items-start gap-6 mb-6">
                     <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-4 rounded-xl group-hover:from-[#444] group-hover:to-zinc-600 dark:group-hover:from-zinc-600 dark:group-hover:to-zinc-500 transition-colors duration-300">
-                      <div className="text-white">{category.icon}</div>
+                      <div className="text-white">{getIconComponent(category.icon)}</div>
                     </div>
                     <div className="flex-1 pt-2">
                       <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-200 mb-1">
@@ -167,7 +113,7 @@ const ModernTechStack = () => {
                               hover:shadow-lg w-min
                             "
                           >
-                            {skill.icon}
+                            {getIconComponent(skill.icon, 16)}
                             {skill.name}
                           </Badge>
                           <p className="font-mono text-xs text-zinc-500 dark:text-zinc-200 pl-1">

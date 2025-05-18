@@ -1,113 +1,11 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Bell, Brain, Github, Globe, Layout, Mail, Star, Wrench } from "lucide-react";
-import Link from "next/link";
+import { Wrench } from "lucide-react";
 import React from "react";
+import { PROJECT_GRID_CONSTANTS } from "@/constants/projectGrid";
+import ProjectCard from "./ProjectCard";
 
 const ModernProjectGrid = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "WebMine",
-      description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
-      icon: <Layout size={24} className="text-white" />,
-      bgColor: "bg-emerald-500",
-      metrics: {
-        technology: "Cutting Edge",
-        architecture: "Modular",
-        ui: "Modern",
-      },
-      year: "2023",
-      href: `https://webmine.davidkalina.com`,
-      source: null,
-    },
-    {
-      id: 6,
-      title: "Flowty.io Real-Time Notification Center",
-      description:
-        "Built with Firebase and TypeScript, significantly improving engagement and retention.",
-      tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
-      icon: <Bell size={24} className="text-white" />,
-      bgColor: "bg-orange-500",
-      metrics: {
-        "Notifications Sent": "1M+",
-        "Retention Increase": "15%",
-      },
-      year: "2022",
-      href: `https://flowty.io`,
-      source: null,
-    },
-    {
-      id: 2,
-      title: "AI Content Optimization Tool",
-      description:
-        "AI-powered content categorization tool using OpenAI's GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
-      tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
-      icon: <Brain size={24} className="text-white" />,
-      bgColor: "bg-blue-500",
-      metrics: {
-        "Content Analyzed": "100K+",
-        accuracy: "95%",
-        performance: "97",
-      },
-      year: "2024",
-      source: null,
-    },
-    {
-      id: 3,
-      title: "Alfaphox/Revive Ratings",
-      description:
-        "A white-label review management tool that contributed to a product sale valued at over $400,000.",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
-      icon: <Star size={24} className="text-white" />,
-      bgColor: "bg-red-500",
-      metrics: {
-        users: "5K+",
-        revenue: "$400K+",
-        retention: "80%",
-      },
-      year: "2023",
-      source: null,
-    },
-    {
-      id: 4,
-      title: "Progressive Web App for Maxwell Pipeline Services",
-      description:
-        "A PWA designed to streamline operations, achieving several thousand monthly uses.",
-      tags: ["REACT", "PWA", "SUPABASE"],
-      icon: <Globe size={24} className="text-white" />,
-      bgColor: "bg-green-500",
-      metrics: {
-        "Monthly Uses": "10K+",
-        "Efficiency Boost": "40%",
-      },
-      year: "2023",
-      source: null,
-    },
-    {
-      id: 5,
-      title: "Automated Email Distribution System",
-      description:
-        "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
-      tags: ["PYTHON", "SENDGRID", "NODE.JS"],
-      icon: <Mail size={24} className="text-white" />,
-      bgColor: "bg-indigo-500",
-      metrics: {
-        emailsProcessed: "500K+",
-        speedImprovement: "10x",
-      },
-      year: "2021",
-      source: null,
-    },
-  ];
-
   return (
-    <section
-      className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95"
-      id="projects"
-    >
+    <section className="bg-white dark:bg-zinc-900" id="projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="max-w-2xl">
@@ -118,136 +16,22 @@ const ModernProjectGrid = () => {
             </div>
             <div>
               <p className="text-xs lg:text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-                004 / WORK
+                {PROJECT_GRID_CONSTANTS.section.number} / WORK
               </p>
               <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
-                Recent Projects
+                {PROJECT_GRID_CONSTANTS.section.title}
               </h2>
             </div>
           </div>
           <p className="font-mono text-sm lg:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8 lg:mb-16">
-            A selection of recent projects showcasing my expertise in full-stack development, from
-            interactive user interfaces to robust backend systems.
+            {PROJECT_GRID_CONSTANTS.section.description}
           </p>
         </div>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {projects.map((project) => (
-            <Card
-              key={project.id}
-              className="relative border-2 border-zinc-100 dark:border-zinc-700/50 
-                rounded-2xl lg:rounded-3xl overflow-hidden bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80
-                hover:border-black dark:hover:border-white 
-                transition-all duration-300 group shadow-md
-                hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
-                hover:-translate-y-1 hover:scale-[1.01]"
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <CardContent className="p-0 h-full relative z-10">
-                {/* Project Header */}
-                <div className={`relative ${project.bgColor} p-6 lg:p-8`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.08),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4 lg:mb-6">
-                      <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-lg lg:rounded-xl p-2">
-                        <div className="lg:hidden">
-                          {React.cloneElement(project.icon, { size: 20 })}
-                        </div>
-                        <div className="hidden lg:block">{project.icon}</div>
-                      </div>
-                      <Badge className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
-                        {project.year}
-                      </Badge>
-                    </div>
-                    <h3 className="font-mono text-lg lg:text-xl font-bold text-white mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="font-mono text-xs lg:text-sm text-white/60 leading-relaxed">
-                      {project.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Project Details */}
-                <div className="p-6 lg:p-8 bg-white dark:bg-zinc-800 h-full">
-                  <div className="space-y-6 lg:space-y-8">
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          className="bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-700 dark:to-zinc-600 
-                            text-black dark:text-white hover:text-white dark:hover:text-white 
-                            px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono
-                            hover:from-[#333] hover:to-zinc-700 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                            transition-all duration-300"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    {/* Metrics */}
-                    <div className="grid grid-cols-3 gap-3 lg:gap-6">
-                      {Object.entries(project.metrics).map(([key, value]) => (
-                        <div key={key} className="space-y-1">
-                          <p className="font-mono text-lg lg:text-2xl font-bold text-zinc-900 dark:text-zinc-200">
-                            {value}
-                          </p>
-                          <p className="font-mono text-[10px] lg:text-xs text-zinc-400 dark:text-zinc-500 uppercase">
-                            {key}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
-                      {project.href && (
-                        <Link target="_blank" href={project.href}>
-                          <Button
-                            className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
-                              text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                              border-2 border-zinc-800 dark:border-zinc-600
-                              transition-all duration-300 
-                              hover:border-white dark:hover:border-zinc-400
-                              hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
-                              dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
-                              hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
-                              hover:-translate-y-0.5 disabled:opacity-50"
-                          >
-                            VIEW PROJECT
-                            <ArrowRight
-                              className="ml-2 transition-transform group-hover:translate-x-1"
-                              size={14}
-                            />
-                          </Button>
-                        </Link>
-                      )}
-                      {project.source && (
-                        <Link target="_blank" href={project.source}>
-                          <Button
-                            variant="outline"
-                            className="bg-gradient-to-r from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900
-                              text-black dark:text-white rounded-full font-mono text-xs lg:text-sm 
-                              px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto
-                              border-2 border-zinc-200 dark:border-zinc-700
-                              transition-all duration-300 
-                              hover:border-black dark:hover:border-white
-                              hover:from-zinc-50 hover:to-white dark:hover:from-zinc-700 dark:hover:to-zinc-800
-                              hover:shadow-md hover:-translate-y-0.5"
-                          >
-                            <Github className="mr-2" size={14} />
-                            SOURCE
-                          </Button>
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          {PROJECT_GRID_CONSTANTS.projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
