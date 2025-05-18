@@ -9,6 +9,7 @@ import { RefObject, useCallback, useRef, useState } from "react";
 import ForceGraph from "./ForceGraph";
 import TechBadges from "./TechStackBadges";
 import WaveText from "./WaveText";
+import { HERO_CONSTANTS } from "@/constants/hero";
 
 interface NodeDatum {
   id: string;
@@ -51,7 +52,7 @@ const ModernHero = () => {
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-700 px-3 sm:px-4 py-2 rounded-full shadow-sm">
               <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 animate-pulse" />
               <span className="font-mono text-[10px] sm:text-xs text-zinc-900 dark:text-zinc-100 font-medium">
-                AVAILABLE FOR PROJECTS
+                {HERO_CONSTANTS.status.text}
               </span>
             </div>
 
@@ -59,17 +60,18 @@ const ModernHero = () => {
             <div className="space-y-3">
               <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug">
                 <span className="bg-gradient-to-r from-yellow-500 to-amber-500 bg-clip-text text-transparent">
-                  Human-Centered Innovation
+                  {HERO_CONSTANTS.heading.highlight}
                 </span>
-                <span className="text-zinc-600 dark:text-zinc-200"> with Scalable Tech</span>
+                <span className="text-zinc-600 dark:text-zinc-200">
+                  {HERO_CONSTANTS.heading.rest}
+                </span>
               </h1>
             </div>
 
             {/* Description */}
             <p className="font-mono text-lg sm:text-md text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl">
-              I build scalable, real-time systems and intuitive digital experiences—blending
-              AI&apos;s power with human intuition to create technology that feels alive and retains
-              the spark of <WaveText text="human divinity" />.
+              {HERO_CONSTANTS.description.text}{" "}
+              <WaveText text={HERO_CONSTANTS.description.waveText} />.
             </p>
 
             {/* Tech Stack Pills */}
@@ -100,7 +102,7 @@ const ModernHero = () => {
                     rounded-full font-mono font-bold md:text-md 2xl:text-lg px-6 sm:px-8 py-6 w-full sm:w-auto 
                     transition-all duration-300 border-0 shadow-sm hover:shadow-md"
                 >
-                  CONTACT ME
+                  {HERO_CONSTANTS.cta.contact}
                 </Button>
               </Link>
             </div>
