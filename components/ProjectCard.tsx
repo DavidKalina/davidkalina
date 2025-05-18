@@ -33,29 +33,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
         hover:-translate-y-1 hover:scale-[1.01]"
     >
-      {/* Gradient overlay */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500"
-        style={{
-          background:
-            project.bgColor === "bg-gradient-to-br from-[#10B981] to-[#059669]"
-              ? "linear-gradient(to bottom right, #10B981, #059669)"
-              : project.bgColor === "bg-gradient-to-br from-[#F59E0B] to-[#D97706]"
-              ? "linear-gradient(to bottom right, #F59E0B, #D97706)"
-              : project.bgColor === "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]"
-              ? "linear-gradient(to bottom right, #8B5CF6, #7C3AED)"
-              : project.bgColor === "bg-gradient-to-br from-[#EC4899] to-[#DB2777]"
-              ? "linear-gradient(to bottom right, #EC4899, #DB2777)"
-              : project.bgColor === "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]"
-              ? "linear-gradient(to bottom right, #14B8A6, #0D9488)"
-              : "linear-gradient(to bottom right, #0EA5E9, #0284C7)",
-        }}
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <CardContent className="p-0 h-full relative z-10">
         {/* Project Header */}
-        <div className={`relative ${project.bgColor} p-6 lg:p-8 h-[180px] lg:h-[220px]`}>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div
+          className="p-6 lg:p-8 h-[180px] lg:h-[220px] relative"
+          style={{
+            background:
+              project.bgColor === "bg-gradient-to-br from-[#10B981] to-[#059669]"
+                ? "linear-gradient(to bottom right, #10B981, #059669)"
+                : project.bgColor === "bg-gradient-to-br from-[#F59E0B] to-[#D97706]"
+                ? "linear-gradient(to bottom right, #F59E0B, #D97706)"
+                : project.bgColor === "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]"
+                ? "linear-gradient(to bottom right, #8B5CF6, #7C3AED)"
+                : project.bgColor === "bg-gradient-to-br from-[#EC4899] to-[#DB2777]"
+                ? "linear-gradient(to bottom right, #EC4899, #DB2777)"
+                : project.bgColor === "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]"
+                ? "linear-gradient(to bottom right, #14B8A6, #0D9488)"
+                : "linear-gradient(to bottom right, #0EA5E9, #0284C7)",
+          }}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))]" />
           <div className="relative z-10 h-full flex flex-col">
             <div className="flex items-center justify-between mb-4 lg:mb-6">
               <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-lg lg:rounded-xl p-2">
