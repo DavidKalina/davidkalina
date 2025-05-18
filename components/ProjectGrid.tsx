@@ -4,105 +4,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Bell, Brain, Github, Globe, Layout, Mail, Star, Wrench } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { PROJECT_GRID_CONSTANTS, Project } from "@/constants/projectGrid";
+
+// Helper function to map icon names to components
+const getIconComponent = (iconName: string, size: number = 24): React.ReactElement => {
+  const iconMap: { [key: string]: React.ReactElement } = {
+    Layout: <Layout size={size} className="text-white" />,
+    Bell: <Bell size={size} className="text-white" />,
+    Brain: <Brain size={size} className="text-white" />,
+    Star: <Star size={size} className="text-white" />,
+    Globe: <Globe size={size} className="text-white" />,
+    Mail: <Mail size={size} className="text-white" />,
+  };
+  return iconMap[iconName] || <Layout size={size} className="text-white" />;
+};
 
 const ModernProjectGrid = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "WebMine",
-      description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
-      icon: <Layout size={24} className="text-white" />,
-      bgColor: "bg-emerald-500",
-      metrics: {
-        technology: "Cutting Edge",
-        architecture: "Modular",
-        ui: "Modern",
-      },
-      year: "2023",
-      href: `https://webmine.davidkalina.com`,
-      source: null,
-    },
-    {
-      id: 6,
-      title: "Flowty.io Real-Time Notification Center",
-      description:
-        "Built with Firebase and TypeScript, significantly improving engagement and retention.",
-      tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
-      icon: <Bell size={24} className="text-white" />,
-      bgColor: "bg-orange-500",
-      metrics: {
-        "Notifications Sent": "1M+",
-        "Retention Increase": "15%",
-      },
-      year: "2022",
-      href: `https://flowty.io`,
-      source: null,
-    },
-    {
-      id: 2,
-      title: "AI Content Optimization Tool",
-      description:
-        "AI-powered content categorization tool using OpenAI's GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
-      tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
-      icon: <Brain size={24} className="text-white" />,
-      bgColor: "bg-blue-500",
-      metrics: {
-        "Content Analyzed": "100K+",
-        accuracy: "95%",
-        performance: "97",
-      },
-      year: "2024",
-      source: null,
-    },
-    {
-      id: 3,
-      title: "Alfaphox/Revive Ratings",
-      description:
-        "A white-label review management tool that contributed to a product sale valued at over $400,000.",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
-      icon: <Star size={24} className="text-white" />,
-      bgColor: "bg-red-500",
-      metrics: {
-        users: "5K+",
-        revenue: "$400K+",
-        retention: "80%",
-      },
-      year: "2023",
-      source: null,
-    },
-    {
-      id: 4,
-      title: "Progressive Web App for Maxwell Pipeline Services",
-      description:
-        "A PWA designed to streamline operations, achieving several thousand monthly uses.",
-      tags: ["REACT", "PWA", "SUPABASE"],
-      icon: <Globe size={24} className="text-white" />,
-      bgColor: "bg-green-500",
-      metrics: {
-        "Monthly Uses": "10K+",
-        "Efficiency Boost": "40%",
-      },
-      year: "2023",
-      source: null,
-    },
-    {
-      id: 5,
-      title: "Automated Email Distribution System",
-      description:
-        "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
-      tags: ["PYTHON", "SENDGRID", "NODE.JS"],
-      icon: <Mail size={24} className="text-white" />,
-      bgColor: "bg-indigo-500",
-      metrics: {
-        emailsProcessed: "500K+",
-        speedImprovement: "10x",
-      },
-      year: "2021",
-      source: null,
-    },
-  ];
-
   return (
     <section
       className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95"
@@ -118,22 +35,21 @@ const ModernProjectGrid = () => {
             </div>
             <div>
               <p className="text-xs lg:text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-                004 / WORK
+                {PROJECT_GRID_CONSTANTS.section.number} / WORK
               </p>
               <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
-                Recent Projects
+                {PROJECT_GRID_CONSTANTS.section.title}
               </h2>
             </div>
           </div>
           <p className="font-mono text-sm lg:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8 lg:mb-16">
-            A selection of recent projects showcasing my expertise in full-stack development, from
-            interactive user interfaces to robust backend systems.
+            {PROJECT_GRID_CONSTANTS.section.description}
           </p>
         </div>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {projects.map((project) => (
+          {PROJECT_GRID_CONSTANTS.projects.map((project: Project) => (
             <Card
               key={project.id}
               className="relative border-2 border-zinc-100 dark:border-zinc-700/50 
@@ -151,10 +67,8 @@ const ModernProjectGrid = () => {
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4 lg:mb-6">
                       <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-lg lg:rounded-xl p-2">
-                        <div className="lg:hidden">
-                          {React.cloneElement(project.icon, { size: 20 })}
-                        </div>
-                        <div className="hidden lg:block">{project.icon}</div>
+                        <div className="lg:hidden">{getIconComponent(project.icon, 20)}</div>
+                        <div className="hidden lg:block">{getIconComponent(project.icon)}</div>
                       </div>
                       <Badge className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
                         {project.year}
