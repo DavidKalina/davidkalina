@@ -25,7 +25,7 @@ export const PROJECT_GRID_CONSTANTS = {
       description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
       icon: "Layout",
-      bgColor: "bg-emerald-500",
+      bgColor: "bg-gradient-to-br from-[#10B981] to-[#059669]",
       metrics: {
         technology: "Cutting Edge",
         architecture: "Modular",
@@ -42,7 +42,7 @@ export const PROJECT_GRID_CONSTANTS = {
         "Built with Firebase and TypeScript, significantly improving engagement and retention.",
       tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
       icon: "Bell",
-      bgColor: "bg-orange-500",
+      bgColor: "bg-gradient-to-br from-[#F59E0B] to-[#D97706]",
       metrics: {
         "Notifications Sent": "1M+",
         "Retention Increase": "15%",
@@ -58,7 +58,7 @@ export const PROJECT_GRID_CONSTANTS = {
         "AI-powered content categorization tool using OpenAI's GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
       tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
       icon: "Brain",
-      bgColor: "bg-blue-500",
+      bgColor: "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]",
       metrics: {
         "Content Analyzed": "100K+",
         accuracy: "95%",
@@ -74,7 +74,7 @@ export const PROJECT_GRID_CONSTANTS = {
         "A white-label review management tool that contributed to a product sale valued at over $400,000.",
       tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
       icon: "Star",
-      bgColor: "bg-red-500",
+      bgColor: "bg-gradient-to-br from-[#EC4899] to-[#DB2777]",
       metrics: {
         users: "5K+",
         revenue: "$400K+",
@@ -90,7 +90,7 @@ export const PROJECT_GRID_CONSTANTS = {
         "A PWA designed to streamline operations, achieving several thousand monthly uses.",
       tags: ["REACT", "PWA", "SUPABASE"],
       icon: "Globe",
-      bgColor: "bg-green-500",
+      bgColor: "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]",
       metrics: {
         "Monthly Uses": "10K+",
         "Efficiency Boost": "40%",
@@ -105,7 +105,7 @@ export const PROJECT_GRID_CONSTANTS = {
         "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
       tags: ["PYTHON", "SENDGRID", "NODE.JS"],
       icon: "Mail",
-      bgColor: "bg-indigo-500",
+      bgColor: "bg-gradient-to-br from-[#0EA5E9] to-[#0284C7]",
       metrics: {
         emailsProcessed: "500K+",
         speedImprovement: "10x",
