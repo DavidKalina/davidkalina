@@ -148,7 +148,7 @@ const ModernHero = () => {
                   animate={{
                     opacity: 1,
                     scale: 1,
-                    y: -100,
+                    y: -80,
                     x: "-50%",
                     filter: "blur(0px)",
                   }}
