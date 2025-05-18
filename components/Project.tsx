@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Github, Network, Star } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { PROJECT_CONSTANTS } from "@/constants/project";
 
 const ModernFeaturedProject = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,10 +23,10 @@ const ModernFeaturedProject = () => {
             </div>
             <div>
               <p className="text-xs lg:text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-                003 / FEATURED
+                {PROJECT_CONSTANTS.section.number} / FEATURED
               </p>
               <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
-                MapMoji | Event Discovery
+                {PROJECT_CONSTANTS.section.title}
               </h2>
             </div>
           </div>
@@ -57,12 +58,12 @@ const ModernFeaturedProject = () => {
                     </div>
                     <div>
                       <p className="text-white/80 font-mono text-xs lg:text-sm tracking-wider mb-2 lg:mb-3">
-                        REACT NATIVE · TYPESCRIPT · DOCKER · REDIS · BUN · PSQL · AI · WEBSOCKETS
+                        {PROJECT_CONSTANTS.project.techStack}
                       </p>
                       <h3 className="text-2xl lg:text-4xl text-white font-mono font-bold leading-tight">
-                        Next Gen
+                        {PROJECT_CONSTANTS.project.heading.line1}
                         <br />
-                        mobile app
+                        {PROJECT_CONSTANTS.project.heading.line2}
                       </h3>
                     </div>
                   </div>
@@ -74,46 +75,26 @@ const ModernFeaturedProject = () => {
                 <div className="space-y-8 lg:space-y-12">
                   <div className="space-y-4 lg:space-y-6">
                     <div className="flex flex-wrap gap-2 lg:gap-3">
-                      <Badge
-                        className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
-                        text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
-                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                        transition-all duration-300"
-                      >
-                        LLM-POWERED
-                      </Badge>
-                      <Badge
-                        className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
-                        text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
-                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                        transition-all duration-300"
-                      >
-                        GOOGLE PLACES API
-                      </Badge>
-                      <Badge
-                        className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
-                        text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
-                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                        transition-all duration-300"
-                      >
-                        REAL-TIME
-                      </Badge>
+                      {PROJECT_CONSTANTS.project.badges.map((badge, index) => (
+                        <Badge
+                          key={index}
+                          className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
+                            text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
+                            hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                            transition-all duration-300"
+                        >
+                          {badge.text}
+                        </Badge>
+                      ))}
                     </div>
                     <p className="font-mono text-sm lg:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                      A next-gen mobile app that revolutionizes the way people discover and attend
-                      events. Simply snap a photo of an event flyer, and the app will utilize AI to
-                      determine the details and the Google Places API will find the best location
-                      for the event. All of this is done in real-time.
+                      {PROJECT_CONSTANTS.project.description}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-4 lg:gap-6">
-                    {[
-                      { value: "Modern", label: "UI/UX" },
-                      { value: "Real-Time", label: "Search" },
-                      { value: "Map", label: "Integration" },
-                    ].map((stat) => (
-                      <div key={stat.label} className="space-y-1 lg:space-y-2">
+                    {PROJECT_CONSTANTS.project.stats.map((stat, index) => (
+                      <div key={index} className="space-y-1 lg:space-y-2">
                         <p className="font-mono text-xl lg:text-2xl font-bold text-zinc-900 dark:text-zinc-200">
                           {stat.value}
                         </p>
@@ -125,7 +106,7 @@ const ModernFeaturedProject = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
-                    <Link href="https://github.com/DavidKalina/realtime-markers-demo">
+                    <Link href={PROJECT_CONSTANTS.project.links.source.url}>
                       <Button
                         variant="outline"
                         className="bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-800 dark:to-zinc-700
@@ -135,7 +116,7 @@ const ModernFeaturedProject = () => {
                           border-0 shadow-sm hover:shadow-md"
                       >
                         <Github className="mr-2" size={18} />
-                        SOURCE
+                        {PROJECT_CONSTANTS.project.links.source.text}
                       </Button>
                     </Link>
                   </div>
