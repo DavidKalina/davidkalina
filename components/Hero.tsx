@@ -111,15 +111,26 @@ const ModernHero = () => {
           {/* Visual Section */}
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
             {width > 0 && height > 0 && (
-              <ForceGraph
-                width={width}
-                height={height}
-                onPopupRequest={handlePopupRequest}
-                activePopupNodeId={popupData?.node.id}
-                onPopupMove={(x, y) => {
-                  setPopupData((prev) => (prev ? { ...prev, x: x, y: y - 80 } : prev));
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 1.2,
+                  ease: [0.22, 1, 0.36, 1], // Custom easing for smooth animation
+                  delay: 0.3, // Slight delay to let other elements settle
                 }}
-              />
+                className="w-full h-full"
+              >
+                <ForceGraph
+                  width={width}
+                  height={height}
+                  onPopupRequest={handlePopupRequest}
+                  activePopupNodeId={popupData?.node.id}
+                  onPopupMove={(x, y) => {
+                    setPopupData((prev) => (prev ? { ...prev, x: x, y: y - 80 } : prev));
+                  }}
+                />
+              </motion.div>
             )}
 
             {/* Overlay Popup rendered on top of the graph */}
@@ -130,36 +141,52 @@ const ModernHero = () => {
                     opacity: 0,
                     scale: 0.8,
                     y: 20,
+                    filter: "blur(4px)",
                   }}
                   animate={{
                     opacity: 1,
                     scale: 1,
                     y: -120,
                     x: "-50%",
+                    filter: "blur(0px)",
                   }}
                   exit={{
                     opacity: 0,
                     scale: 0.8,
                     y: 20,
+                    filter: "blur(4px)",
                   }}
                   transition={{
                     type: "spring",
-                    stiffness: 500,
-                    damping: 30,
-                    mass: 0.5,
+                    stiffness: 400,
+                    damping: 25,
+                    mass: 0.8,
+                    delay: 0.1, // Slight delay after graph appears
                   }}
-                  className="absolute hidden md:block bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom md:min-w-[300px]"
+                  className="absolute hidden md:block bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom md:min-w-[300px] backdrop-blur-sm"
                   style={{
                     left: popupData.x + width / 2,
                     top: popupData.y + height / 2,
                     transformOrigin: "bottom center",
                   }}
                 >
-                  <div className="flex items-center gap-2">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="flex items-center gap-2"
+                  >
                     <span className="text-2xl font-mono">{popupData.node.emoji}</span>
                     <span className="font-bold font-mono">{popupData.node.label}</span>
-                  </div>
-                  <p className="mt-2 text-sm font-mono">{popupData.node.description}</p>
+                  </motion.div>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-2 text-sm font-mono"
+                  >
+                    {popupData.node.description}
+                  </motion.p>
                 </motion.div>
               )}
             </AnimatePresence>
