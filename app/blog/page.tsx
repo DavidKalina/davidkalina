@@ -26,25 +26,24 @@ export default async function BlogPage() {
   return (
     <main className="min-h-screen pt-20 bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95">
       {/* Hero Section */}
-      <div className="relative border-b border-zinc-100 dark:border-zinc-700/50">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1),rgba(255,255,255,0))] dark:bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.05),rgba(255,255,255,0))]" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <div className="border-b border-zinc-100 dark:border-zinc-700/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-mono text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">
+            <h1 className="font-mono text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
               Blog
             </h1>
-            <p className="font-mono text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-8">
+            <p className="font-mono text-lg text-zinc-600 dark:text-zinc-400 mb-6">
               Exploring software development, technology, and the intersection of code and
               creativity.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-4 py-1.5 rounded-full font-mono text-sm">
+            <div className="flex flex-wrap justify-center gap-2">
+              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-1 rounded-full font-mono text-sm">
                 Software Development
               </Badge>
-              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-4 py-1.5 rounded-full font-mono text-sm">
+              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-1 rounded-full font-mono text-sm">
                 Technology
               </Badge>
-              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-4 py-1.5 rounded-full font-mono text-sm">
+              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-1 rounded-full font-mono text-sm">
                 Web Development
               </Badge>
             </div>

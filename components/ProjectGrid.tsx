@@ -5,7 +5,10 @@ import ProjectCard from "./ProjectCard";
 
 const ModernProjectGrid = () => {
   return (
-    <section className="bg-white dark:bg-zinc-900" id="projects">
+    <section
+      className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95"
+      id="projects"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         {/* Section Header */}
         <div className="max-w-2xl">

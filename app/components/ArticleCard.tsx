@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { ArticleCardFooter } from "@/components/ArticleCardFooter";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface ArticleCardProps {
   slug: string;
@@ -10,7 +11,20 @@ interface ArticleCardProps {
   readTime: string;
 }
 
+// Map categories to gradient colors
+const categoryGradients = {
+  Technology: "from-[#3B82F6] to-[#2563EB]",
+  Development: "from-[#10B981] to-[#059669]",
+  Design: "from-[#8B5CF6] to-[#7C3AED]",
+  Business: "from-[#F59E0B] to-[#D97706]",
+  default: "from-[#64748B] to-[#475569]",
+} as const;
+
 export function ArticleCard({ slug, title, excerpt, category, readTime }: ArticleCardProps) {
+  // Get gradient based on category or use default
+  const gradientClass =
+    categoryGradients[category as keyof typeof categoryGradients] || categoryGradients.default;
+
   return (
     <Link
       href={`/blog/${slug}`}
@@ -21,14 +35,16 @@ export function ArticleCard({ slug, title, excerpt, category, readTime }: Articl
         hover:-translate-y-1 hover:scale-[1.01] overflow-hidden"
     >
       <div className="relative h-full">
-        {/* Gradient Header */}
-        <div className="relative bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 h-[200px] p-6 lg:p-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Dynamic Gradient Header */}
+        <div className={cn("relative bg-gradient-to-br h-[200px] p-6 lg:p-8", gradientClass)}>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="relative z-10">
             {/* Category Badge */}
             <Badge
-              className="bg-white/10 text-white px-3 lg:px-4 py-2 
-              rounded-full text-[10px] lg:text-xs font-mono mb-4"
+              className="bg-white/20 backdrop-blur-sm text-white px-3 lg:px-4 py-2 
+              rounded-full text-[10px] lg:text-xs font-mono mb-4
+              border border-white/10 hover:bg-white/30 transition-colors duration-300"
             >
               {category}
             </Badge>
@@ -36,13 +52,14 @@ export function ArticleCard({ slug, title, excerpt, category, readTime }: Articl
             {/* Title */}
             <h3
               className="font-mono text-xl font-bold text-white mb-3
-              group-hover:text-white/90 transition-colors duration-300"
+              group-hover:text-white/90 transition-colors duration-300
+              drop-shadow-sm"
             >
               {title}
             </h3>
 
             {/* Excerpt */}
-            <p className="font-mono text-sm text-white/60 line-clamp-3">{excerpt}</p>
+            <p className="font-mono text-sm text-white/80 line-clamp-3 drop-shadow-sm">{excerpt}</p>
           </div>
         </div>
 

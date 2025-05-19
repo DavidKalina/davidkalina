@@ -53,7 +53,7 @@ const ModernCTA = () => {
             {/* Section Header */}
             <div className="space-y-8">
               <div className="flex items-center gap-6">
-                <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-4 rounded-2xl">
+                <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 dark:from-emerald-500 dark:to-emerald-600 p-4 rounded-2xl">
                   <Mail size={24} className="text-white" />
                 </div>
                 <div>
@@ -185,10 +185,10 @@ const ModernCTA = () => {
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
+                    className="bg-gradient-to-r from-emerald-600 to-emerald-700 dark:from-emerald-500 dark:to-emerald-600
                       text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
                       disabled:opacity-50 transition-all duration-300 
-                      hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+                      hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] dark:hover:shadow-[0_0_15px_rgba(16,185,129,0.8)]"
                   >
                     {isPending ? "SENDING..." : "SEND MESSAGE"}
                     <Send
