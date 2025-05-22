@@ -7,7 +7,7 @@ export const HERO_CONSTANTS = {
     rest: " with Scalable Tech",
   },
   description: {
-    text: "I build scalable, real-time systems and intuitive digital experiences—blending AI's power with human intuition to create technology that feels alive and retains the spark of human divinity.",
+    text: "I build scalable, real-time systems and intuitive digital experiences—blending AI's power with human intuition to create technology that feels alive and retains the spark of",
     waveText: "human divinity",
   },
   cta: {
