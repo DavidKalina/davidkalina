@@ -125,7 +125,7 @@ const ModernTechStack = () => {
           {TECH_STACK_CONSTANTS.section.description}
         </p>
 
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-8">
           {Object.entries(TECH_STACK_CONSTANTS.categories).map(([key, category], index) => (
             <MotionDiv
               key={key}
