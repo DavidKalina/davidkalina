@@ -12,6 +12,8 @@ import {
   SiRedis,
   SiSupabase,
   SiTypescript,
+  SiTailwindcss,
+  SiBun,
 } from "react-icons/si";
 import ExperienceStats from "./ExperienceStats";
 import { TECH_STACK_CONSTANTS } from "@/constants/techStack";
@@ -33,6 +35,8 @@ const getIconComponent = (iconName: string, size: number = 24) => {
     SiDocker: <SiDocker size={size} className="text-blue-400 dark:text-blue-300" />,
     SiSupabase: <SiSupabase size={size} className="text-emerald-500 dark:text-emerald-400" />,
     SiRedis: <SiRedis size={size} className="text-red-500 dark:text-red-400" />,
+    SiTailwindcss: <SiTailwindcss size={size} className="text-cyan-500 dark:text-cyan-400" />,
+    SiBun: <SiBun size={size} className="text-orange-500 dark:text-orange-400" />,
   };
   return iconMap[iconName] || null;
 };
@@ -193,7 +197,7 @@ const ModernTechStack = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex flex-wrap gap-4">
                       {category.skills.map((skill, skillIndex) => (
                         <MotionDiv
                           key={skill.name}
@@ -204,6 +208,7 @@ const ModernTechStack = () => {
                             ease: [0.22, 1, 0.36, 1],
                             delay: index * 0.1 + skillIndex * 0.05,
                           }}
+                          className="flex-[1_1_300px] min-w-[280px]"
                         >
                           <div
                             className="group/skill relative bg-white/80 dark:bg-zinc-800/80 rounded-2xl p-4 
