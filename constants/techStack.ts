@@ -1,9 +1,9 @@
 export const TECH_STACK_CONSTANTS = {
   section: {
     number: "001",
-    title: "Technical Skills",
+    title: "Tech Stack",
     description:
-      "Focused on delivering high-performance web applications with modern technologies. Committed to continuous learning and best practices.",
+      "I mostly use Typescript for frontend and backend development, and here's a comprehensive list of the technologies I love to work with and have worked with professionally.",
   },
   categories: {
     frontend: {
