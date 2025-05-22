@@ -5,7 +5,6 @@ import { ExternalLink, Github, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
-import SparkNotes from "./SparkNotes";
 
 const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,7 +29,6 @@ const ModernNavbar = () => {
             >
               BLOG
             </Link>
-            <SparkNotes />
             <ThemeToggle />
             <div className="flex items-center gap-3 pl-6 border-l border-zinc-100 dark:border-zinc-700/50">
               <Button
