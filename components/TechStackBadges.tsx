@@ -4,6 +4,7 @@ import {
   SiDocker,
   SiExpress,
   SiGit,
+  SiHtml5,
   SiNextdotjs,
   SiNodedotjs,
   SiOpenai,
@@ -11,6 +12,7 @@ import {
   SiPython,
   SiReact,
   SiRedis,
+  SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
 import { motion } from "framer-motion";
@@ -74,6 +76,16 @@ const techStack = [
   {
     name: "Anthropic",
     icon: SiAnthropic,
+    iconColor: "text-blue-300",
+  },
+  {
+    name: "HTML",
+    icon: SiHtml5,
+    iconColor: "text-red-300",
+  },
+  {
+    name: "Tailwind",
+    icon: SiTailwindcss,
     iconColor: "text-blue-300",
   },
 ];
