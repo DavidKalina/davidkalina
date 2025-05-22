@@ -70,6 +70,30 @@ const getCategoryHoverGradient = (category: string) => {
   );
 };
 
+type Skill = {
+  name: string;
+  level: string;
+  proficiency: string;
+  icon: string;
+  iconColor: string;
+  details: string;
+};
+
+const CompactSkillCard = ({ skill }: { skill: Skill }) => (
+  <div
+    className="flex items-center justify-between gap-2 bg-white/80 dark:bg-zinc-800/80 rounded-xl p-2.5
+    border border-zinc-200 dark:border-zinc-700/50
+    hover:bg-white dark:hover:bg-zinc-800
+    hover:border-zinc-300 dark:hover:border-zinc-600
+    transition-all duration-300 backdrop-blur-sm group"
+  >
+    <div className="flex-shrink-0">{getIconComponent(skill.icon, 20)}</div>
+    <span className="font-mono text-[10px] text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
+      {skill.level}
+    </span>
+  </div>
+);
+
 const ModernTechStack = () => {
   return (
     <section
@@ -120,7 +144,41 @@ const ModernTechStack = () => {
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <CardContent className="p-0 relative z-10">
-                  <div className="p-8">
+                  {/* Mobile Compact View */}
+                  <div className="lg:hidden p-6">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-3 rounded-xl">
+                        <div className="text-white">{getIconComponent(category.icon, 20)}</div>
+                      </div>
+                      <div>
+                        <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-200">
+                          {category.title}
+                        </h3>
+                        <p className="font-mono text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                          {category.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      {category.skills.map((skill, skillIndex) => (
+                        <MotionDiv
+                          key={skill.name}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: index * 0.1 + skillIndex * 0.05,
+                          }}
+                        >
+                          <CompactSkillCard skill={skill} />
+                        </MotionDiv>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Desktop Full View */}
+                  <div className="hidden lg:block p-8">
                     <div className="flex items-start gap-6 mb-8">
                       <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-4 rounded-xl group-hover:from-[#444] group-hover:to-zinc-600 dark:group-hover:from-zinc-600 dark:group-hover:to-zinc-500 transition-colors duration-300">
                         <div className="text-white">{getIconComponent(category.icon)}</div>
