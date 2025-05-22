@@ -21,18 +21,27 @@ export const PROJECT_GRID_CONSTANTS = {
   projects: [
     {
       id: 1,
-      title: "WebMine",
-      description: "Real-time analytics dashboard for tracking sales, inventory, and customer data",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "STRIPE"],
-      icon: "Layout",
+      title: "MapMoji",
+      description:
+        "Mobile app that bridges the gap between physical and digital worlds by empowering users to take photos of event flyers and turn them into digital map markers that everyone can see in real-time.",
+      tags: [
+        "React Native",
+        "Expo",
+        "Redis",
+        "Google Places API",
+        "Typescript",
+        "PSQL",
+        "OpenAI",
+        "WebSockets",
+      ],
+      icon: "Map",
       bgColor: "bg-gradient-to-br from-[#10B981] to-[#059669]",
       metrics: {
         technology: "Cutting Edge",
         architecture: "Modular",
         ui: "Modern",
       },
-      year: "2023",
-      href: "https://webmine.davidkalina.com",
+      year: "2025",
       source: null,
     },
     {
@@ -47,7 +56,7 @@ export const PROJECT_GRID_CONSTANTS = {
         "Notifications Sent": "1M+",
         "Retention Increase": "15%",
       },
-      year: "2022",
+      year: "2024",
       href: "https://flowty.io",
       source: null,
     },
