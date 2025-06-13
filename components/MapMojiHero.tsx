@@ -55,11 +55,10 @@ const radiusMiles = 5;
 const MapMojiHero = () => {
     const mapRef = useRef<MapRef>(null);
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-    const [locationError, setLocationError] = useState<string | null>(null);
-    const [isLocationLoading, setIsLocationLoading] = useState(true);
 
-    const [isLoaded, setIsLoaded] = useState(false);
     const [isMapReady, setIsMapReady] = useState(false);
+    const [isMapFullyLoaded, setIsMapFullyLoaded] = useState(false);
+    const [isLoadingFadingOut, setIsLoadingFadingOut] = useState(false);
     const [allMarkers, setAllMarkers] = useState<Marker[]>([]);
     const [visibleMarkers, setVisibleMarkers] = useState<Set<string>>(new Set());
 
@@ -170,11 +169,9 @@ const MapMojiHero = () => {
     useEffect(() => {
         const getUserLocation = () => {
             if (!navigator.geolocation) {
-                setLocationError('Geolocation is not supported by this browser.');
-                setIsLocationLoading(false);
+                console.log('Geolocation is not supported by this browser.');
                 return;
             }
-
 
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -185,11 +182,9 @@ const MapMojiHero = () => {
                         longitude,
                         latitude
                     }));
-                    setIsLocationLoading(false);
                 },
                 () => {
-                    setLocationError('Unable to get your location. Please enable location services.');
-                    setIsLocationLoading(false);
+                    console.log('Unable to get your location. Please enable location services.');
                 },
                 {
                     enableHighAccuracy: true,
@@ -203,16 +198,15 @@ const MapMojiHero = () => {
     }, []);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoaded(true);
-        }, 100);
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
         if (isMapReady && userLocation) {
             const timer = setTimeout(() => {
                 startAnimation();
+                // Start fade-out animation
+                setIsLoadingFadingOut(true);
+                // Set map as fully loaded after fade-out completes
+                setTimeout(() => {
+                    setIsMapFullyLoaded(true);
+                }, 1000); // Match the CSS transition duration
             }, 1000);
             return () => clearTimeout(timer);
         }
@@ -301,43 +295,45 @@ const MapMojiHero = () => {
                 })}
             </Map>
 
+            {/* Animated gradient loading state */}
+            {!isMapFullyLoaded && (
+                <div className={`absolute inset-0 z-50 transition-all duration-1000 ease-in-out ${isLoadingFadingOut ? 'opacity-0' : 'opacity-100'}`}>
+                    {/* Animated gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-700 via-blue-800 via-gray-600 to-blue-900 animate-gradient-x"></div>
+
+                    {/* Animated gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-shimmer"></div>
+
+                    {/* Loading content */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                            <div className="mb-6">
+                                <div className="text-6xl md:text-8xl font-bold text-white font-space-mono mb-4 animate-pulse">
+                                    MapMoji
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Dim overlay for better text readability */}
             <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px] z-10"></div>
 
             {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-indigo-900/20 animate-pulse-slow z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900/20 via-blue-900/20 to-gray-800/20 animate-pulse-slow z-10"></div>
 
             {/* Hero content */}
             <div className="absolute inset-0 flex items-center justify-center p-4 z-30">
-                <div className={`text-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <h1 className={`text-6xl md:text-8xl font-bold text-white font-space-mono mb-4 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                        MapMoji 🗺️
+                <div className="text-center">
+                    <h1 className="text-6xl md:text-8xl font-bold text-white font-space-mono mb-4">
+                        MapMoji
                     </h1>
-                    <p className={`text-xl md:text-2xl text-gray-300 font-space-mono mb-8 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <p className="text-xl md:text-2xl text-gray-300 font-space-mono mb-8">
                         A Third Space in Your Pocket
                     </p>
 
-                    {/* Location Status */}
-                    <div className={`transition-all duration-1000 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                        {isLocationLoading ? (
-                            <div className="flex items-center justify-center space-x-2">
-                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
-                                <p className="text-blue-300 font-space-mono text-sm">Getting your location...</p>
-                            </div>
-                        ) : locationError ? (
-                            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3 max-w-md mx-auto">
-                                <p className="text-red-300 font-space-mono text-sm">{locationError}</p>
-                            </div>
-                        ) : userLocation ? (
-                            <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-3 max-w-md mx-auto">
-                                <p className="text-green-300 font-space-mono text-sm">
-                                    📍 Location captured! Animating around your area
-                                </p>
-                            </div>
-                        ) : null}
-                    </div>
-
-                    <div className={`mt-8 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <div className="mt-8">
                         <p className="text-blue-300 font-space-mono text-lg">
                             📷 Scan • 🏷️ Save • 📤 Share
                         </p>
