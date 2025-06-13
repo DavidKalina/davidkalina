@@ -169,7 +169,15 @@ const MapMojiHero = () => {
     useEffect(() => {
         const getUserLocation = () => {
             if (!navigator.geolocation) {
-                console.log('Geolocation is not supported by this browser.');
+                console.log('Geolocation is not supported by this browser. Using default location.');
+                // Fallback to New York City coordinates
+                const fallbackLocation: [number, number] = [-74.006, 40.7128];
+                setUserLocation(fallbackLocation);
+                setViewState(prev => ({
+                    ...prev,
+                    longitude: fallbackLocation[0],
+                    latitude: fallbackLocation[1]
+                }));
                 return;
             }
 
@@ -184,7 +192,15 @@ const MapMojiHero = () => {
                     }));
                 },
                 () => {
-                    console.log('Unable to get your location. Please enable location services.');
+                    console.log('Unable to get your location. Using default location.');
+                    // Fallback to New York City coordinates
+                    const fallbackLocation: [number, number] = [-74.006, 40.7128];
+                    setUserLocation(fallbackLocation);
+                    setViewState(prev => ({
+                        ...prev,
+                        longitude: fallbackLocation[0],
+                        latitude: fallbackLocation[1]
+                    }));
                 },
                 {
                     enableHighAccuracy: true,
