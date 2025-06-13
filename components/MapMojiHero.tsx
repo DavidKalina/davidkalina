@@ -27,7 +27,7 @@ const useCameraAnimation = (mapRef: React.RefObject<MapRef | null>, userLocation
 
         const rotateCamera = (timestamp: number) => {
             if (!isAnimatingRef.current) return;
-            map.rotateTo((timestamp / 100) % 360, { duration: 0 });
+            map.rotateTo((timestamp / 600) % 360, { duration: 0 });
             animationRef.current = requestAnimationFrame(rotateCamera);
         };
 
@@ -49,12 +49,14 @@ const useCameraAnimation = (mapRef: React.RefObject<MapRef | null>, userLocation
     return { startAnimation, stopAnimation };
 };
 
+const radiusMiles = 5;
+
 const MapMojiHero = () => {
     const mapRef = useRef<MapRef>(null);
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
     const [locationError, setLocationError] = useState<string | null>(null);
     const [isLocationLoading, setIsLocationLoading] = useState(true);
-    const [radiusMiles, setRadiusMiles] = useState(5);
+
     const [isLoaded, setIsLoaded] = useState(false);
     const [isMapReady, setIsMapReady] = useState(false);
 
@@ -88,7 +90,7 @@ const MapMojiHero = () => {
                     }));
                     setIsLocationLoading(false);
                 },
-                (error) => {
+                () => {
                     setLocationError('Unable to get your location. Please enable location services.');
                     setIsLocationLoading(false);
                 },
