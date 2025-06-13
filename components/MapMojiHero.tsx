@@ -141,10 +141,16 @@ const MapMojiHero = () => {
 
                 // Stagger the appearance of markers
                 markers.forEach((marker, index) => {
+                    // Base delay: 1 second initial + 2 seconds between each marker
+                    const baseDelay = index * 2000 + 1000;
+                    // Add random delay between 0-3 seconds
+                    const randomDelay = Math.random() * 3000;
+                    const totalDelay = baseDelay + randomDelay;
+
                     setTimeout(() => {
                         setVisibleMarkers(prev => new Set([...prev, marker.id]));
                         console.log(`Added marker ${index}:`, marker);
-                    }, index * 2000 + 1000); // 1 second delay, then 2 seconds between each
+                    }, totalDelay);
                 });
             };
 
