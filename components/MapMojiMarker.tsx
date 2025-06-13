@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { MarkerSVG, ShadowSVG, TimePopup, MARKER_WIDTH, MARKER_HEIGHT, SHADOW_OFFSET } from './MapMojiMarkerSVGs';
 
 // Define the Marker interface
@@ -30,6 +30,8 @@ const COLORS = {
 
 export const MapMojiMarker: React.FC<MapMojiMarkerProps> = React.memo(
     ({ event, onPress, style, className = '' }) => {
+        const [showRipple, setShowRipple] = useState(false);
+
         // Memoize SVG components
         const ShadowSvg = useMemo(() => <ShadowSVG />, []);
         const MarkerSvg = useMemo(
@@ -46,6 +48,15 @@ export const MapMojiMarker: React.FC<MapMojiMarkerProps> = React.memo(
             [event.data.isPrivate],
         );
 
+        // Trigger ripple effect after drop-in animation completes
+        useEffect(() => {
+            const timer = setTimeout(() => {
+                setShowRipple(true);
+            }, 400); // Match the drop-in animation duration
+
+            return () => clearTimeout(timer);
+        }, []);
+
         return (
             <div
                 className={`relative flex items-center justify-center ${className}`}
@@ -56,6 +67,13 @@ export const MapMojiMarker: React.FC<MapMojiMarkerProps> = React.memo(
                     ...style
                 }}
             >
+                {/* Ripple Effect */}
+                {showRipple && (
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-0">
+                        <div className="w-16 h-16 bg-blue-400/80 rounded-full animate-ripple"></div>
+                    </div>
+                )}
+
                 {/* Popup */}
                 <div className="absolute w-full z-10">
                     <TimePopup

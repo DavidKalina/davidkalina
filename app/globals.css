@@ -208,6 +208,27 @@
     }
   }
 
+  /* Ripple effect animation */
+  .animate-ripple {
+    animation: ripple 0.6s ease-out forwards;
+    will-change: transform, opacity;
+  }
+
+  @keyframes ripple {
+    0% {
+      opacity: 0.6;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 0.3;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+
   /* Slow spin animation for hourglass */
   .animate-spin-slow {
     animation: spin-slow 3s linear infinite;
