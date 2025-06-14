@@ -1,7 +1,16 @@
 'use client';
 
-import React from 'react';
-import { QRCodeSVG } from 'qrcode.react';
+import React, { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamic import for QR code to reduce initial bundle size
+const QRCodeSVG = dynamic(() => import('qrcode.react').then(mod => ({ default: mod.QRCodeSVG })), {
+    loading: () => (
+        <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] bg-gray-200 rounded-lg animate-pulse flex items-center justify-center">
+            <div className="text-gray-500 font-space-mono">Loading QR Code...</div>
+        </div>
+    ),
+});
 
 const MapMojiContact = () => {
     return (
@@ -20,17 +29,23 @@ const MapMojiContact = () => {
                     <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-2xl p-6 md:p-12">
                         <div className="flex justify-center">
                             <div className="bg-white p-3 md:p-6 lg:p-8 rounded-lg relative overflow-hidden">
-                                <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] flex items-center justify-center">
-                                    <QRCodeSVG
-                                        value="https://testflight.apple.com/join/TZaPHE4j"
-                                        size={320}
-                                        level="M"
-                                        marginSize={1}
-                                        bgColor="#ffffff"
-                                        fgColor="#000000"
-                                        className="w-full h-full max-w-full max-h-full"
-                                    />
-                                </div>
+                                <Suspense fallback={
+                                    <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] bg-gray-200 rounded-lg animate-pulse flex items-center justify-center">
+                                        <div className="text-gray-500 font-space-mono">Loading QR Code...</div>
+                                    </div>
+                                }>
+                                    <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] flex items-center justify-center">
+                                        <QRCodeSVG
+                                            value="https://testflight.apple.com/join/TZaPHE4j"
+                                            size={320}
+                                            level="M"
+                                            marginSize={1}
+                                            bgColor="#ffffff"
+                                            fgColor="#000000"
+                                            className="w-full h-full max-w-full max-h-full"
+                                        />
+                                    </div>
+                                </Suspense>
                                 {/* Sheen effect overlay */}
                                 <div className="absolute inset-0 pointer-events-none">
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-sheen"></div>

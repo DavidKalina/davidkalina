@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { aboutContent } from '../data/aboutContent';
 
