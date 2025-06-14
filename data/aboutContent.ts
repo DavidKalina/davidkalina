@@ -52,7 +52,7 @@ export const aboutContent: AboutContent = {
         title: "There's more to your location than meets the eye",
         description: [
             "A lot of events don't appear on major event-discovery platforms. What if there were an app that enabled you to discovery events hidden in every nook and cranny of the world?",
-            "MapMoji is a revolutionary mapping platform that utilizes the power of AI to discover events hidden in every nook and cranny of the world and share them with others in real-time.",
+            "MapMoji is a next generation mapping platform that utilizes the power of AI and Websockets to illuminate third spaces wherever they may be.",
             "Simply snap a photo of an event, let the AI analyze it, and have it appear on the map for others to see."
         ]
     },

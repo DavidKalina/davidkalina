@@ -12,7 +12,7 @@ const MapMojiContact = () => {
                         Scan to Connect 📱
                     </h2>
                     <p className="text-xl text-gray-300 font-space-mono max-w-3xl mx-auto">
-                        Ready to explore the world with MapMoji? Scan the QR code to get started!
+                        Ready to explore the world with MapMoji? Scan the QR code to join our TestFlight beta!
                     </p>
                 </div>
 
@@ -21,7 +21,7 @@ const MapMojiContact = () => {
                         <div className="flex justify-center">
                             <div className="bg-white p-6 rounded-lg relative overflow-hidden">
                                 <QRCodeSVG
-                                    value="https://mapmoji.com"
+                                    value="https://testflight.apple.com/join/TZaPHE4j"
                                     size={320}
                                     level="M"
                                     marginSize={1}
@@ -36,8 +36,11 @@ const MapMojiContact = () => {
                         </div>
 
                         <div className="mt-8 text-center">
-                            <p className="text-gray-300 font-space-mono text-lg">
-                                Scan to download MapMoji or get in touch
+                            <p className="text-gray-300 font-space-mono text-lg mb-2">
+                                Scan to download MapMoji TestFlight build
+                            </p>
+                            <p className="text-blue-300 font-space-mono text-sm">
+                                Limited to 500 beta testers - Help shape the future of MapMoji!
                             </p>
                         </div>
                     </div>
