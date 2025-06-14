@@ -55,6 +55,19 @@ const ProjectSplitCard = ({
                 <div className="text-center">
                     <p className="font-mono text-sm text-blue-100 font-bold">TestFlight Beta</p>
                     <p className="font-mono text-xs text-blue-200">Scan to join</p>
+
+                    {/* Mobile TestFlight Button */}
+                    <div className="md:hidden mt-4">
+                        <a
+                            href={qrUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center px-4 py-2 bg-white/20 hover:bg-white/30 text-white font-mono font-semibold rounded-lg transition-colors duration-200 border border-white/30"
+                        >
+                            <span className="mr-2">📱</span>
+                            Join TestFlight
+                        </a>
+                    </div>
                 </div>
             </div>
 

@@ -60,6 +60,19 @@ const MapMojiContact = () => {
                             <p className="text-blue-300 font-space-mono text-sm">
                                 Limited to 500 beta testers - Help shape the future of MapMoji!
                             </p>
+
+                            {/* Mobile TestFlight Button */}
+                            <div className="md:hidden mt-6">
+                                <a
+                                    href="https://testflight.apple.com/join/TZaPHE4j"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-space-mono font-semibold rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                                >
+                                    <span className="mr-2">📱</span>
+                                    Join TestFlight
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
