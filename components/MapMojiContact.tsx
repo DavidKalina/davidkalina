@@ -19,11 +19,11 @@ const MapMojiContact = () => {
                 <div className="max-w-2xl mx-auto px-4">
                     <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-2xl p-6 md:p-12">
                         <div className="flex justify-center">
-                            <div className="bg-white p-3 md:p-6 rounded-lg relative overflow-hidden">
-                                <div className="w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+                            <div className="bg-white p-3 md:p-6 lg:p-8 rounded-lg relative overflow-hidden">
+                                <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] flex items-center justify-center">
                                     <QRCodeSVG
                                         value="https://testflight.apple.com/join/TZaPHE4j"
-                                        size={256}
+                                        size={320}
                                         level="M"
                                         marginSize={1}
                                         bgColor="#ffffff"
