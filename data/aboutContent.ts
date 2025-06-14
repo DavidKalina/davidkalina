@@ -1,4 +1,49 @@
-export const aboutContent = {
+import * as LucideIcons from 'lucide-react';
+
+// Type for available Lucide icons
+type LucideIconName = keyof typeof LucideIcons;
+
+// Type for key point with type-safe icon
+interface KeyPoint {
+    icon: LucideIconName;
+    title: string;
+    description: string;
+}
+
+// Type for metric with type-safe color
+interface Metric {
+    value: string;
+    label: string;
+    color: 'blue' | 'purple' | 'green' | 'orange' | 'red' | 'yellow' | 'gray' | 'pink' | 'indigo' | 'cyan' | 'emerald' | 'sky';
+}
+
+// Type for the entire about content
+interface AboutContent {
+    header: {
+        sectionNumber: string;
+        title: string;
+    };
+    mainContent: {
+        title: string;
+        description: string[];
+    };
+    keyPoints: KeyPoint[];
+    technology: {
+        title: string;
+        description: string;
+    };
+    mission: {
+        title: string;
+        subtitle: string;
+        description: string;
+    };
+    stats: {
+        title: string;
+        metrics: Metric[];
+    };
+}
+
+export const aboutContent: AboutContent = {
     header: {
         sectionNumber: "02 / ABOUT",
         title: "About MapMoji 🌍"
@@ -13,12 +58,12 @@ export const aboutContent = {
     },
     keyPoints: [
         {
-            icon: "Zap",
+            icon: "Camera",
             title: "Contribute",
             description: "Snap a photo of an event, let the AI analyze it, and have it appear on the map for others to see."
         },
         {
-            icon: "Camera",
+            icon: "Globe",
             title: "Discover",
             description: "See events happening around you in real-time."
         },
@@ -26,9 +71,11 @@ export const aboutContent = {
             icon: "Search",
             title: "Search",
             description: "Search for events by name, location, or category."
+        }, {
+            icon: "Users",
+            title: "Show up",
+            description: "Show up to events and meet new people."
         }
-
-
     ],
     technology: {
         title: "Modern Technology",
@@ -36,8 +83,8 @@ export const aboutContent = {
     },
     mission: {
         title: "Our Mission",
-        subtitle: "Geographic Exploration Made Fun",
-        description: "To make geographic exploration accessible, engaging, and fun for everyone through innovative technology and beautiful design."
+        subtitle: "Another tool to get out into the world",
+        description: "We want to leverage the power of modern technology to help people get out there and do people things"
     },
     stats: {
         title: "Key Metrics",
