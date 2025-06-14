@@ -2,180 +2,20 @@
 
 import React from 'react';
 import { aboutContent } from '../data/aboutContent';
+import { mapMojiFeaturesContent } from '../data/mapMojiFeaturesContent';
 
 const MapMojiFeatures = () => {
-    // Map icon names to emojis
-    const emojiMap: { [key: string]: string } = {
-        // Basic actions
-        Zap: '⚡',
-        Camera: '📷',
-        Search: '🔍',
-        Shield: '🛡️',
-        Globe: '🌍',
-        MapPin: '📍',
-        Users: '👥',
-        Heart: '❤️',
-        Star: '⭐',
-        Target: '🎯',
-        Compass: '🧭',
-        Eye: '👁️',
-        Share: '📤',
-        Navigation: '🧭',
-        Smartphone: '📱',
-        Wifi: '📶',
-        Lock: '🔒',
-        Unlock: '🔓',
-        Clock: '⏰',
-        CheckCircle: '✅',
-        AlertCircle: '⚠️',
-        Info: 'ℹ️',
-        Settings: '⚙️',
-
-        // Transportation
-        Home: '🏠',
-        Building: '🏢',
-        Car: '🚗',
-        Plane: '✈️',
-        Train: '🚂',
-        Bus: '🚌',
-        Bike: '🚲',
-
-        // Objects
-        Trophy: '🏆',
-        Gift: '🎁',
-        Music: '🎵',
-        Video: '🎬',
-        Image: '🖼️',
-        File: '📄',
-        Folder: '📁',
-        Database: '🗄️',
-        Server: '🖥️',
-        Cloud: '☁️',
-        Download: '⬇️',
-        Upload: '⬆️',
-        Send: '📤',
-        Mail: '📧',
-        Phone: '📞',
-        Bell: '🔔',
-        Calendar: '📅',
-
-        // Nature
-        Sun: '☀️',
-        Moon: '🌙',
-        Umbrella: '☂️',
-        Snowflake: '❄️',
-        Flame: '🔥',
-        Leaf: '🍃',
-        Trees: '🌳',
-        Flower: '🌸',
-        Bug: '🐛',
-        Fish: '🐟',
-        Bird: '🐦',
-        Dog: '🐕',
-        Cat: '🐱',
-
-        // Media
-        Gamepad: '🎮',
-        Headphones: '🎧',
-        Speaker: '🔊',
-        Mic: '🎤',
-        Volume: '🔊',
-        VolumeX: '🔇',
-        Play: '▶️',
-        Pause: '⏸️',
-        SkipBack: '⏮️',
-        SkipForward: '⏭️',
-        Rewind: '⏪',
-        FastForward: '⏩',
-        Shuffle: '🔀',
-        Repeat: '🔁',
-
-        // Layout
-        List: '📋',
-        Grid: '⊞',
-        Columns: '⊟',
-        Rows: '⊞',
-        Layout: '📐',
-        Sidebar: '📊',
-        Menu: '☰',
-        X: '❌',
-        Plus: '➕',
-        Minus: '➖',
-        Edit: '✏️',
-        Trash: '🗑️',
-        Copy: '📋',
-        Save: '💾',
-        RefreshCw: '🔄',
-        RotateCcw: '🔄',
-        RotateCw: '🔄',
-        ZoomIn: '🔍',
-        ZoomOut: '🔍',
-        Maximize: '⛶',
-        Minimize: '⛶',
-        ExternalLink: '🔗',
-        Link: '🔗',
-        Unlink: '🔗',
-        Anchor: '⚓',
-        Tag: '🏷️',
-        Hash: '#',
-        AtSign: '@',
-
-        // Finance
-        DollarSign: '💵',
-        Percent: '%',
-        Euro: '💶',
-        PoundSterling: '💷',
-        Bitcoin: '₿',
-        CreditCard: '💳',
-        Wallet: '👛',
-        ShoppingCart: '🛒',
-        ShoppingBag: '🛍️',
-        Package: '📦',
-        Truck: '🚚',
-        Store: '🏪',
-
-        // Buildings
-        Building2: '🏢',
-        Factory: '🏭',
-        Warehouse: '🏭',
-        School: '🏫',
-        University: '🎓',
-        Hospital: '🏥',
-        Church: '⛪',
-
-        // Geography
-        Mountain: '⛰️',
-        Square: '⬜',
-        Circle: '⭕',
-
-        // Shapes
-        Triangle: '🔺',
-        Diamond: '💎',
-        Hexagon: '⬡',
-        Octagon: '⯃',
-
-        // Default fallback
-        default: '✨'
-    };
-
-    const gradientColors = [
-        "from-blue-500 to-cyan-500",
-        "from-purple-500 to-pink-500",
-        "from-green-500 to-emerald-500",
-        "from-orange-500 to-red-500",
-        "from-indigo-500 to-purple-500",
-        "from-yellow-500 to-orange-500"
-    ];
+    const { emojiMap, gradientColors, header } = mapMojiFeaturesContent;
 
     return (
         <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white font-space-mono mb-4">
-                        Powerful Features 🚀
+                        {header.title}
                     </h2>
                     <p className="text-xl text-gray-300 font-space-mono max-w-3xl mx-auto">
-                        Discover the advanced capabilities that make MapMoji the ultimate event discovery platform
+                        {header.subtitle}
                     </p>
                 </div>
 
