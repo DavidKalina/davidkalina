@@ -1,10 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Camera, MapPin, Share2, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Camera, MapPin, Share2, Users, Loader2, CheckCircle, Zap } from 'lucide-react';
+import CameraCaptureFrame from './CameraCaptureFrame';
 
 const MapMojiHowItWorks = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const [currentFrame, setCurrentFrame] = useState(0);
+
+    // Auto-advance frames every 3 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentFrame((prev) => (prev + 1) % 4);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const steps = [
         {
@@ -30,6 +41,160 @@ const MapMojiHowItWorks = () => {
             title: "Build Community",
             description: "Create and join communities around shared interests and locations.",
             color: "from-orange-500 to-red-500"
+        }
+    ];
+
+    const frames = [
+        {
+            title: "Frame 1: Capturing Image",
+            content: <CameraCaptureFrame />
+        },
+        {
+            title: "Frame 2: Processing Image",
+            content: (
+                <div className="space-y-6">
+                    <div className="text-center">
+                        <div className="relative inline-block">
+                            <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center">
+                                <Loader2 size={32} className="text-white animate-spin" />
+                            </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-white font-mono mt-4">
+                            ⚙️ Processing Data
+                        </h3>
+                    </div>
+                    <div className="space-y-3">
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center justify-between">
+                                <p className="font-mono text-sm text-white/90">OCR Processing</p>
+                                <div className="w-16 bg-white/20 rounded-full h-2">
+                                    <div className="bg-green-400 h-2 rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center justify-between">
+                                <p className="font-mono text-sm text-white/90">Event Classification</p>
+                                <div className="w-16 bg-white/20 rounded-full h-2">
+                                    <div className="bg-blue-400 h-2 rounded-full animate-pulse" style={{ width: '45%' }}></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center justify-between">
+                                <p className="font-mono text-sm text-white/90">Metadata Extraction</p>
+                                <div className="w-16 bg-white/20 rounded-full h-2">
+                                    <div className="bg-purple-400 h-2 rounded-full animate-pulse" style={{ width: '90%' }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        },
+        {
+            title: "Frame 3: Job Queue / Worker",
+            content: (
+                <div className="space-y-6">
+                    <div className="text-center">
+                        <div className="relative inline-block">
+                            <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center">
+                                <Zap size={32} className="text-white animate-pulse" />
+                            </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-white font-mono mt-4">
+                            🔄 Worker Queue
+                        </h3>
+                    </div>
+                    <div className="space-y-3">
+                        <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-lg p-3 border border-green-400/30">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <p className="font-mono text-sm text-white/90">Worker #3</p>
+                                </div>
+                                <p className="font-mono text-xs text-green-400">Processing</p>
+                            </div>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                    <p className="font-mono text-sm text-white/90">Worker #7</p>
+                                </div>
+                                <p className="font-mono text-xs text-yellow-400">Queued</p>
+                            </div>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                                    <p className="font-mono text-sm text-white/90">Worker #12</p>
+                                </div>
+                                <p className="font-mono text-xs text-blue-400">Idle</p>
+                            </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-400/30">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                    <CheckCircle size={16} className="text-purple-400" />
+                                    <p className="font-mono text-sm text-white/90">Event Created</p>
+                                </div>
+                                <p className="font-mono text-xs text-purple-400">Complete</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        },
+        {
+            title: "Frame 4: Event on Map",
+            content: (
+                <div className="space-y-6">
+                    <div className="text-center">
+                        <div className="relative inline-block">
+                            <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center">
+                                <MapPin size={32} className="text-white" />
+                            </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-white font-mono mt-4">
+                            🗺️ Event Live on Map
+                        </h3>
+                    </div>
+                    <div className="space-y-3">
+                        <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-lg p-3 border border-orange-400/30">
+                            <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-2xl">🎪</span>
+                                <div>
+                                    <p className="font-mono text-sm font-bold text-white">Street Festival</p>
+                                    <p className="font-mono text-xs text-white/70">2 blocks away</p>
+                                </div>
+                            </div>
+                            <p className="font-mono text-xs text-white/80">Live music, food trucks, art displays</p>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-xl">🎨</span>
+                                <div>
+                                    <p className="font-mono text-sm font-bold text-white">Art Gallery Opening</p>
+                                    <p className="font-mono text-xs text-white/70">0.5 miles away</p>
+                                </div>
+                            </div>
+                            <p className="font-mono text-xs text-white/80">Contemporary art exhibition</p>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                            <div className="flex items-center space-x-2 mb-2">
+                                <span className="text-xl">🍕</span>
+                                <div>
+                                    <p className="font-mono text-sm font-bold text-white">Food Truck Rally</p>
+                                    <p className="font-mono text-xs text-white/70">1.2 miles away</p>
+                                </div>
+                            </div>
+                            <p className="font-mono text-xs text-white/80">International cuisine festival</p>
+                        </div>
+                    </div>
+                </div>
+            )
         }
     ];
 
@@ -91,7 +256,7 @@ const MapMojiHowItWorks = () => {
                         </div>
                     </div>
 
-                    {/* Right Column - Visual Section */}
+                    {/* Right Column - Animated Process */}
                     <div
                         className="relative bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-12 transform hover:scale-[1.02] transition-all duration-500 ease-out"
                         onMouseEnter={() => setIsHovered(true)}
@@ -103,44 +268,24 @@ const MapMojiHowItWorks = () => {
                                 }`}
                         />
 
-                        {/* Content */}
-                        <div className="relative z-10 space-y-8 lg:space-y-12">
-                            {/* Demo Process */}
-                            <div className="space-y-4">
-                                <p className="font-mono md:text-sm lg:md:text-md text-white/90">
-                                    Demo Process
-                                </p>
-                                <div className="space-y-4">
-                                    <div className="text-center">
-                                        <div className="text-6xl mb-4">📱</div>
-                                        <h3 className="text-2xl font-bold text-white font-mono">
-                                            Your Phone, Your World
-                                        </h3>
-                                    </div>
-                                    <p className="font-mono md:text-md lg:text-base text-white/80">
-                                        Everything you need is right in your pocket. No complicated setup, no registration required - just point, scan, and explore.
-                                    </p>
-                                </div>
-                            </div>
+                        {/* Frame Indicator */}
+                        <div className="absolute top-4 right-4 flex space-x-1">
+                            {[0, 1, 2, 3].map((index) => (
+                                <div
+                                    key={index}
+                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${currentFrame === index
+                                        ? 'bg-white scale-125'
+                                        : 'bg-white/30'
+                                        }`}
+                                />
+                            ))}
+                        </div>
 
-                            {/* Features Highlight */}
-                            <div className="space-y-4">
-                                <p className="font-mono md:text-sm lg:md:text-md text-white/90">
-                                    Key Features
-                                </p>
-                                <div className="grid grid-cols-1 gap-3 lg:gap-4">
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <p className="font-mono md:text-md text-white">🎯 Real-time location tracking</p>
-                                    </div>
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <p className="font-mono md:text-md text-white">🔒 Privacy-first design</p>
-                                    </div>
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <p className="font-mono md:text-md text-white">⚡ Instant event discovery</p>
-                                    </div>
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <p className="font-mono md:text-md text-white">🌍 Global community access</p>
-                                    </div>
+                        {/* Animated Content */}
+                        <div className="relative z-10">
+                            <div className="min-h-[400px] flex items-center justify-center">
+                                <div className="w-full animate-fadeIn">
+                                    {frames[currentFrame].content}
                                 </div>
                             </div>
                         </div>
@@ -152,6 +297,16 @@ const MapMojiHowItWorks = () => {
                     </div>
                 </div>
             </div>
+
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.5s ease-out;
+                }
+            `}</style>
         </section>
     );
 };

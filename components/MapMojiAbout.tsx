@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Globe, Shield, Zap } from 'lucide-react';
+import { aboutContent } from '../data/aboutContent';
 
 const MapMojiAbout = () => {
     const [isHovered, setIsHovered] = useState(false);
@@ -17,10 +18,10 @@ const MapMojiAbout = () => {
                     </div>
                     <div>
                         <p className="md:text-sm lg:md:text-md font-mono text-gray-400 mb-1">
-                            02 / ABOUT
+                            {aboutContent.header.sectionNumber}
                         </p>
                         <h2 className="text-2xl lg:text-3xl font-mono font-bold text-white">
-                            About MapMoji 🌍
+                            {aboutContent.header.title}
                         </h2>
                     </div>
                 </div>
@@ -31,40 +32,36 @@ const MapMojiAbout = () => {
                     <div className="space-y-6 lg:space-y-8">
                         <div className="space-y-4 lg:space-y-6">
                             <h3 className="font-mono text-lg lg:text-xl font-bold text-white">
-                                Revolutionary Mapping Platform
+                                {aboutContent.mainContent.title}
                             </h3>
                             <div className="space-y-4">
-                                <p className="font-mono md:text-md lg:text-base text-gray-300 leading-relaxed">
-                                    MapMoji is a revolutionary mapping platform that combines the power of interactive maps with the fun and expressiveness of emojis. We believe that exploring the world should be both informative and delightful.
-                                </p>
-                                <p className="font-mono md:text-md lg:text-base text-gray-300 leading-relaxed">
-                                    Built with cutting-edge technology and designed with user experience in mind, MapMoji transforms how you interact with geographic data and location-based services.
-                                </p>
+                                {aboutContent.mainContent.description.map((paragraph, index) => (
+                                    <p key={index} className="font-mono md:text-md lg:text-base text-gray-300 leading-relaxed">
+                                        {paragraph}
+                                    </p>
+                                ))}
                             </div>
                         </div>
 
                         {/* Key Points */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <Zap size={18} className="text-blue-400 lg:hidden" />
-                                <Zap size={20} className="text-blue-400 hidden lg:block" />
-                                <p className="font-mono md:text-md font-bold text-white">
-                                    Interactive Experience
-                                </p>
-                                <p className="font-mono md:text-sm lg:md:text-md text-gray-300">
-                                    Engage with maps like never before with our innovative camera animations and location-based features.
-                                </p>
-                            </div>
-                            <div className="space-y-2">
-                                <Shield size={18} className="text-purple-400 lg:hidden" />
-                                <Shield size={20} className="text-purple-400 hidden lg:block" />
-                                <p className="font-mono md:text-md font-bold text-white">
-                                    Privacy First
-                                </p>
-                                <p className="font-mono md:text-sm lg:md:text-md text-gray-300">
-                                    Your location data stays on your device. We believe in transparency and user privacy above all else.
-                                </p>
-                            </div>
+                            {aboutContent.keyPoints.map((point, index) => {
+                                const IconComponent = point.icon === 'Zap' ? Zap : Shield;
+                                const iconColor = point.icon === 'Zap' ? 'text-blue-400' : 'text-purple-400';
+
+                                return (
+                                    <div key={index} className="space-y-2">
+                                        <IconComponent size={18} className={`${iconColor} lg:hidden`} />
+                                        <IconComponent size={20} className={`${iconColor} hidden lg:block`} />
+                                        <p className="font-mono md:text-md font-bold text-white">
+                                            {point.title}
+                                        </p>
+                                        <p className="font-mono md:text-sm lg:md:text-md text-gray-300">
+                                            {point.description}
+                                        </p>
+                                    </div>
+                                );
+                            })}
                         </div>
 
                         {/* Technology Stack */}
@@ -75,10 +72,10 @@ const MapMojiAbout = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-white font-mono mb-2">
-                                        Modern Technology
+                                        {aboutContent.technology.title}
                                     </h3>
                                     <p className="text-gray-300 font-mono">
-                                        Built with React, Next.js, and Mapbox for optimal performance and beautiful visualizations.
+                                        {aboutContent.technology.description}
                                     </p>
                                 </div>
                             </div>
@@ -102,17 +99,17 @@ const MapMojiAbout = () => {
                             {/* Mission Statement */}
                             <div className="space-y-4">
                                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">
-                                    Our Mission
+                                    {aboutContent.mission.title}
                                 </p>
                                 <div className="space-y-4">
                                     <div className="text-center">
                                         <div className="text-6xl mb-4">🗺️</div>
                                         <h3 className="text-2xl font-bold text-white font-mono">
-                                            Geographic Exploration Made Fun
+                                            {aboutContent.mission.subtitle}
                                         </h3>
                                     </div>
                                     <p className="font-mono md:text-md lg:text-base text-white/80">
-                                        To make geographic exploration accessible, engaging, and fun for everyone through innovative technology and beautiful design.
+                                        {aboutContent.mission.description}
                                     </p>
                                 </div>
                             </div>
@@ -120,33 +117,30 @@ const MapMojiAbout = () => {
                             {/* Stats */}
                             <div className="space-y-4">
                                 <p className="font-mono md:text-sm lg:md:text-md text-white/90">
-                                    Key Metrics
+                                    {aboutContent.stats.title}
                                 </p>
                                 <div className="grid grid-cols-2 gap-3 lg:gap-4">
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <div className="text-center">
-                                            <div className="text-3xl font-bold text-blue-400 font-mono">100%</div>
-                                            <div className="text-sm text-white/80 font-mono">Privacy Focused</div>
-                                        </div>
-                                    </div>
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <div className="text-center">
-                                            <div className="text-3xl font-bold text-purple-400 font-mono">24/7</div>
-                                            <div className="text-sm text-white/80 font-mono">Available</div>
-                                        </div>
-                                    </div>
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <div className="text-center">
-                                            <div className="text-3xl font-bold text-green-400 font-mono">0</div>
-                                            <div className="text-sm text-white/80 font-mono">Registration Required</div>
-                                        </div>
-                                    </div>
-                                    <div className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
-                                        <div className="text-center">
-                                            <div className="text-3xl font-bold text-orange-400 font-mono">∞</div>
-                                            <div className="text-sm text-white/80 font-mono">Possibilities</div>
-                                        </div>
-                                    </div>
+                                    {aboutContent.stats.metrics.map((metric, index) => {
+                                        const colorClasses = {
+                                            blue: 'text-blue-400',
+                                            purple: 'text-purple-400',
+                                            green: 'text-green-400',
+                                            orange: 'text-orange-400'
+                                        };
+
+                                        return (
+                                            <div key={index} className="bg-gradient-to-r from-[#333] to-zinc-700 rounded-xl lg:rounded-2xl p-4 lg:p-6 transition-all duration-300 hover:scale-[1.02] hover:brightness-125">
+                                                <div className="text-center">
+                                                    <div className={`text-3xl font-bold ${colorClasses[metric.color as keyof typeof colorClasses]} font-mono`}>
+                                                        {metric.value}
+                                                    </div>
+                                                    <div className="text-sm text-white/80 font-mono">
+                                                        {metric.label}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
