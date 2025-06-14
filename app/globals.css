@@ -202,17 +202,12 @@
     80% {
       opacity: 1;
       transform: translateY(-5px) scale(1.02) rotate(-1deg);
-      filter: blur(0px);
-    }
-    90% {
-      opacity: 1;
-      transform: translateY(-2px) scale(1.01) rotate(0deg);
-      filter: blur(0px);
+      filter: blur(0.5px);
     }
     100% {
       opacity: 1;
       transform: translateY(0) scale(1) rotate(0deg);
-      filter: blur(0px);
+      filter: blur(0);
     }
   }
 
@@ -272,6 +267,23 @@
     }
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  /* Sheen effect animation */
+  .animate-sheen {
+    animation: sheen 3s ease-in-out infinite;
+  }
+
+  @keyframes sheen {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+    }
+    50% {
+      transform: translateX(100%) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(100%) skewX(-12deg);
     }
   }
 }

@@ -1,18 +1,15 @@
 'use client';
 
-import React from 'react';
-import MapMojiHero from '@/components/MapMojiHero';
 import MapMojiAbout from '@/components/MapMojiAbout';
-import MapMojiHowItWorks from '@/components/MapMojiHowItWorks';
-import MapMojiFeatures from '@/components/MapMojiFeatures';
 import MapMojiContact from '@/components/MapMojiContact';
+import MapMojiFeatures from '@/components/MapMojiFeatures';
+import MapMojiHero from '@/components/MapMojiHero';
 
 const MapMojiLandingPage = () => {
     return (
         <>
             <MapMojiHero />
             <MapMojiAbout />
-            <MapMojiHowItWorks />
             <MapMojiFeatures />
             <MapMojiContact />
         </>

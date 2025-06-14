@@ -58,23 +58,34 @@ export const aboutContent: AboutContent = {
     },
     keyPoints: [
         {
-            icon: "Camera",
-            title: "Contribute",
-            description: "Snap a photo of an event, let the AI analyze it, and have it appear on the map for others to see."
+            icon: "Zap",
+            title: "AI Classification",
+            description: "Advanced AI automatically analyzes and categorizes events from photos, making discovery effortless and accurate."
         },
         {
-            icon: "Globe",
-            title: "Discover",
-            description: "See events happening around you in real-time."
+            icon: "Clock",
+            title: "Real-Time Events",
+            description: "See events happening around you in real-time with live updates and instant notifications."
         },
         {
             icon: "Search",
-            title: "Search",
-            description: "Search for events by name, location, or category."
-        }, {
+            title: "Robust Search",
+            description: "Powerful search capabilities with filters for location, category, time, and personal preferences."
+        },
+        {
             icon: "Users",
+            title: "Friend's Events",
+            description: "Discover what events your friends have saved and join them for shared experiences."
+        },
+        {
+            icon: "CheckCircle",
+            title: "RSVP to Events",
+            description: "Easily RSVP to events, manage your schedule, and coordinate with friends seamlessly."
+        },
+        {
+            icon: "Target",
             title: "Show up",
-            description: "Show up to events and meet new people."
+            description: "Get directions, arrive on time, and make the most of every event with integrated navigation and reminders."
         }
     ],
     technology: {
