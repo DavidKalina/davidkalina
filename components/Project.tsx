@@ -33,98 +33,112 @@ const ModernFeaturedProject = () => {
         </div>
 
         {/* Main Project Display */}
-        <Card
-          className="relative bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80 
-            shadow-lg dark:shadow-zinc-900/30 rounded-3xl overflow-hidden transition-all duration-300 
-            hover:shadow-xl hover:shadow-blue-500/10 hover:scale-[1.01] hover:-translate-y-1"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <CardContent className="p-0 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Project Visual */}
-              <div className="relative bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 p-6 sm:p-8 lg:p-16 min-h-[320px] lg:min-h-[480px] flex items-center">
-                <div
-                  className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))] transition-opacity duration-500 ${
-                    isHovered ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-                <div className="relative z-10 w-full">
-                  <div className="space-y-4 lg:space-y-6">
-                    <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-xl lg:rounded-2xl p-2 lg:p-3">
-                      <Network size={24} className="text-white lg:hidden" />
-                      <Network size={32} className="text-white hidden lg:block" />
-                    </div>
-                    <div>
-                      <p className="text-white/80 font-mono text-xs lg:text-sm tracking-wider mb-2 lg:mb-3">
-                        {PROJECT_CONSTANTS.project.techStack}
-                      </p>
-                      <h3 className="text-2xl lg:text-4xl text-white font-mono font-bold leading-tight">
-                        {PROJECT_CONSTANTS.project.heading.line1}
-                        <br />
-                        {PROJECT_CONSTANTS.project.heading.line2}
-                      </h3>
+        <Link href="/mapmoji">
+          <Card
+            className="relative bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80 
+              shadow-lg dark:shadow-zinc-900/30 rounded-3xl overflow-hidden transition-all duration-300 
+              hover:shadow-xl hover:shadow-blue-500/10 hover:scale-[1.01] hover:-translate-y-1 cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.04),rgba(255,255,255,0))] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <CardContent className="p-0 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                {/* Project Visual */}
+                <div className="relative bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 p-6 sm:p-8 lg:p-16 min-h-[320px] lg:min-h-[480px] flex items-center">
+                  <div
+                    className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))] transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"
+                      }`}
+                  />
+                  <div className="relative z-10 w-full">
+                    <div className="space-y-4 lg:space-y-6">
+                      <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-xl lg:rounded-2xl p-2 lg:p-3">
+                        <Network size={24} className="text-white lg:hidden" />
+                        <Network size={32} className="text-white hidden lg:block" />
+                      </div>
+                      <div>
+                        <p className="text-white/80 font-mono text-xs lg:text-sm tracking-wider mb-2 lg:mb-3">
+                          {PROJECT_CONSTANTS.project.techStack}
+                        </p>
+                        <h3 className="text-2xl lg:text-4xl text-white font-mono font-bold leading-tight">
+                          {PROJECT_CONSTANTS.project.heading.line1}
+                          <br />
+                          {PROJECT_CONSTANTS.project.heading.line2}
+                        </h3>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Project Details */}
-              <div className="p-6 sm:p-8 lg:p-16 bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80">
-                <div className="space-y-8 lg:space-y-12">
-                  <div className="space-y-4 lg:space-y-6">
-                    <div className="flex flex-wrap gap-2 lg:gap-3">
-                      {PROJECT_CONSTANTS.project.badges.map((badge, index) => (
-                        <Badge
-                          key={index}
-                          className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
-                            text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
-                            hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                            transition-all duration-300"
-                        >
-                          {badge.text}
-                        </Badge>
+                {/* Project Details */}
+                <div className="p-6 sm:p-8 lg:p-16 bg-gradient-to-br from-white/80 to-zinc-50/80 dark:from-zinc-800/80 dark:to-zinc-700/80">
+                  <div className="space-y-8 lg:space-y-12">
+                    <div className="space-y-4 lg:space-y-6">
+                      <div className="flex flex-wrap gap-2 lg:gap-3">
+                        {PROJECT_CONSTANTS.project.badges.map((badge, index) => (
+                          <Badge
+                            key={index}
+                            className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 
+                              text-white px-3 lg:px-4 py-2 rounded-full text-[10px] lg:text-xs font-mono 
+                              hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                              transition-all duration-300"
+                          >
+                            {badge.text}
+                          </Badge>
+                        ))}
+                      </div>
+                      <p className="font-mono text-sm lg:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                        {PROJECT_CONSTANTS.project.description}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4 lg:gap-6">
+                      {PROJECT_CONSTANTS.project.stats.map((stat, index) => (
+                        <div key={index} className="space-y-1 lg:space-y-2">
+                          <p className="font-mono text-xl lg:text-2xl font-bold text-zinc-900 dark:text-zinc-200">
+                            {stat.value}
+                          </p>
+                          <p className="font-mono text-[10px] lg:text-xs text-zinc-500 dark:text-zinc-400">
+                            {stat.label}
+                          </p>
+                        </div>
                       ))}
                     </div>
-                    <p className="font-mono text-sm lg:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                      {PROJECT_CONSTANTS.project.description}
-                    </p>
-                  </div>
 
-                  <div className="grid grid-cols-3 gap-4 lg:gap-6">
-                    {PROJECT_CONSTANTS.project.stats.map((stat, index) => (
-                      <div key={index} className="space-y-1 lg:space-y-2">
-                        <p className="font-mono text-xl lg:text-2xl font-bold text-zinc-900 dark:text-zinc-200">
-                          {stat.value}
-                        </p>
-                        <p className="font-mono text-[10px] lg:text-xs text-zinc-500 dark:text-zinc-400">
-                          {stat.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
-                    <Link href={PROJECT_CONSTANTS.project.links.source.url}>
-                      <Button
-                        variant="outline"
-                        className="bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-800 dark:to-zinc-700
-                          text-black dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg 
-                          px-6 lg:px-8 py-6 w-full sm:w-auto transition-all duration-300
-                          hover:from-zinc-200 hover:to-zinc-100 dark:hover:from-zinc-700 dark:hover:to-zinc-600
-                          border-0 shadow-sm hover:shadow-md"
-                      >
-                        <Github className="mr-2" size={18} />
-                        {PROJECT_CONSTANTS.project.links.source.text}
-                      </Button>
-                    </Link>
+                    <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
+                      <Link href={PROJECT_CONSTANTS.project.links.source.url}>
+                        <Button
+                          variant="outline"
+                          className="bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-800 dark:to-zinc-700
+                            text-black dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg 
+                            px-6 lg:px-8 py-6 w-full sm:w-auto transition-all duration-300
+                            hover:from-zinc-200 hover:to-zinc-100 dark:hover:from-zinc-700 dark:hover:to-zinc-600
+                            border-0 shadow-sm hover:shadow-md"
+                        >
+                          <Github className="mr-2" size={18} />
+                          {PROJECT_CONSTANTS.project.links.source.text}
+                        </Button>
+                      </Link>
+                      <Link href="/mapmoji">
+                        <Button
+                          variant="outline"
+                          className="bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700
+                            text-blue-900 dark:text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg 
+                            px-6 lg:px-8 py-6 w-full sm:w-auto transition-all duration-300
+                            hover:from-blue-200 hover:to-blue-300 dark:hover:from-blue-700 dark:hover:to-blue-600
+                            border-0 shadow-sm hover:shadow-md"
+                        >
+                          <Network className="mr-2" size={18} />
+                          Try MapMoji
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </section>
   );
