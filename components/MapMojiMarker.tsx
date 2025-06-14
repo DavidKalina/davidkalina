@@ -31,6 +31,7 @@ const COLORS = {
 export const MapMojiMarker: React.FC<MapMojiMarkerProps> = React.memo(
     ({ event, onPress, style, className = '' }) => {
         const [showRipple, setShowRipple] = useState(false);
+        const [showPopup, setShowPopup] = useState(false);
 
         // Memoize SVG components
         const ShadowSvg = useMemo(() => <ShadowSVG />, []);
@@ -48,11 +49,24 @@ export const MapMojiMarker: React.FC<MapMojiMarkerProps> = React.memo(
             [event.data.isPrivate],
         );
 
-        // Trigger ripple effect after drop-in animation completes
+        // Trigger popup entrance after marker appears
         useEffect(() => {
+            const popupDelay = 100 + Math.random() * 200; // Reduced delay between 100-300ms
+            const timer = setTimeout(() => {
+                setShowPopup(true);
+            }, popupDelay);
+
+            return () => clearTimeout(timer);
+        }, []);
+
+        // Trigger ripple effect after drop-in animation completes with random delay
+        useEffect(() => {
+            // Add random delay (200-400ms) to prevent all ripples from appearing at the same time
+            const rippleDelay = 200 + Math.random() * 200; // Reduced from 300-600ms
+
             const timer = setTimeout(() => {
                 setShowRipple(true);
-            }, 400); // Match the drop-in animation duration
+            }, rippleDelay);
 
             return () => clearTimeout(timer);
         }, []);
@@ -75,13 +89,15 @@ export const MapMojiMarker: React.FC<MapMojiMarkerProps> = React.memo(
                 )}
 
                 {/* Popup */}
-                <div className="absolute w-full z-10">
-                    <TimePopup
-                        time={event.data.eventDate || ""}
-                        endDate={event.data.endDate || ""}
-                        title={event.data.title || ""}
-                    />
-                </div>
+                {showPopup && (
+                    <div className="absolute w-full z-10 popup-entrance">
+                        <TimePopup
+                            time={event.data.eventDate || ""}
+                            endDate={event.data.endDate || ""}
+                            title={event.data.title || ""}
+                        />
+                    </div>
+                )}
 
                 {/* Marker Shadow */}
                 <div

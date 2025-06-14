@@ -130,25 +130,42 @@ export const TimePopup: React.FC<TimePopupProps> = React.memo(
 
         const intervalRef = useRef<NodeJS.Timeout>(null);
 
-        // Toggle between time and title every 4 seconds
+        // Toggle between time and title with random delays to prevent synchronization
         useEffect(() => {
             const cycleContent = () => {
                 if (isAnimating) return;
 
                 setIsAnimating(true);
-                setShowTitle((prev) => !prev);
+
+                // Reduced delay for snappier transitions
+                setTimeout(() => {
+                    setShowTitle((prev) => !prev);
+                }, 150); // Reduced from 250ms for faster transitions
 
                 // Reset animation state after the transition is complete
                 setTimeout(() => {
                     setIsAnimating(false);
-                }, 700);
+                }, 300); // Reduced from 500ms for snappier feel
             };
 
-            intervalRef.current = setInterval(cycleContent, 4000);
+            // Add random initial delay (0-2 seconds) to prevent all popups from starting at the same time
+            const initialDelay = Math.random() * 2000; // Reduced from 3000ms
+
+            // Slightly vary the cycle timing (3-4 seconds) for each popup instance
+            const cycleInterval = 3000 + Math.random() * 1000; // Reduced from 3500ms base
+
+            const startInterval = () => {
+                intervalRef.current = setInterval(cycleContent, cycleInterval);
+            };
+
+            // Start with initial delay, then begin regular cycling
+            const initialTimer = setTimeout(startInterval, initialDelay);
+
             return () => {
                 if (intervalRef.current) {
                     clearInterval(intervalRef.current);
                 }
+                clearTimeout(initialTimer);
             };
         }, [isAnimating]);
 
@@ -267,8 +284,12 @@ export const TimePopup: React.FC<TimePopupProps> = React.memo(
         return (
             <div className="absolute -top-[70px] left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                 {!showTitle && (
-                    <div className={`bg-white px-3 py-2 rounded-lg flex items-center justify-center border border-white/15 shadow-lg transition-all duration-700 min-w-[180px] ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-                        }`}>
+                    <div
+                        className={`bg-white px-3 py-2 rounded-lg flex items-center justify-center border border-white/15 shadow-lg min-w-[180px] popup-transition hover:shadow-xl hover:scale-105 hover:border-white/25 ${isAnimating
+                                ? 'opacity-0 scale-95 translate-y-1'
+                                : 'opacity-100 scale-100 translate-y-0'
+                            }`}
+                    >
                         <TimeContent
                             timeLeft={timeLeft}
                             isExpired={isExpired}
@@ -277,8 +298,12 @@ export const TimePopup: React.FC<TimePopupProps> = React.memo(
                 )}
 
                 {showTitle && (
-                    <div className={`bg-white px-3 py-2 rounded-lg flex items-center justify-center border border-white/15 shadow-lg transition-all duration-700 min-w-[180px] ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-                        }`}>
+                    <div
+                        className={`bg-white px-3 py-2 rounded-lg flex items-center justify-center border border-white/15 shadow-lg min-w-[180px] popup-transition hover:shadow-xl hover:scale-105 hover:border-white/25 ${isAnimating
+                                ? 'opacity-0 scale-95 translate-y-1'
+                                : 'opacity-100 scale-100 translate-y-0'
+                            }`}
+                    >
                         <TitleContent title={title} />
                     </div>
                 )}
