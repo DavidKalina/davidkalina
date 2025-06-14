@@ -343,9 +343,9 @@ const MapMojiAbout = () => {
                             <h3 className="font-mono text-lg lg:text-xl font-bold text-white">
                                 {aboutContent.mainContent.title}
                             </h3>
-                            <div className="space-y-4">
+                            <div className="space-y-6">
                                 {aboutContent.mainContent.description.map((paragraph, index) => (
-                                    <p key={index} className="font-mono md:text-md lg:text-base text-gray-300 leading-relaxed">
+                                    <p key={index} className="font-mono text-base lg:text-lg text-gray-200 leading-7 lg:leading-8 tracking-wide">
                                         {paragraph}
                                     </p>
                                 ))}
@@ -365,7 +365,7 @@ const MapMojiAbout = () => {
                                         <p className="font-mono md:text-md font-bold text-white">
                                             {point.title}
                                         </p>
-                                        <p className="font-mono md:text-sm lg:md:text-md text-gray-300">
+                                        <p className="font-mono text-sm lg:text-base text-gray-200 leading-6">
                                             {point.description}
                                         </p>
                                     </div>

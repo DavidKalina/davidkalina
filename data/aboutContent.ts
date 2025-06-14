@@ -91,22 +91,22 @@ export const aboutContent: AboutContent = {
         metrics: [
             {
                 value: "100%",
-                label: "Privacy Focused",
+                label: "Real-time Events",
                 color: "blue"
             },
             {
                 value: "24/7",
-                label: "Available",
+                label: "Discovery",
                 color: "purple"
             },
             {
                 value: "0",
-                label: "Registration Required",
+                label: "Barriers to Entry",
                 color: "green"
             },
             {
                 value: "∞",
-                label: "Possibilities",
+                label: "Connections Made",
                 color: "orange"
             }
         ]
