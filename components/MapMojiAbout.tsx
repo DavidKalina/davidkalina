@@ -18,7 +18,7 @@ const MapMojiAbout = () => {
                 </div>
 
                 {/* Main Content */}
-                <div className="max-w-4xl mx-auto mb-16">
+                <div className="max-w-4xl mx-auto">
                     <div className="bg-black/40 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
                         <h3 className="font-space-mono text-2xl font-bold text-white mb-6">
                             {aboutContent.mainContent.title}
@@ -29,22 +29,22 @@ const MapMojiAbout = () => {
                                     {paragraph}
                                 </p>
                             ))}
-                        </div>
-                    </div>
-                </div>
 
-                {/* Mission Section */}
-                <div className="text-center">
-                    <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-white/20 rounded-2xl p-8 max-w-4xl mx-auto">
-                        <h3 className="text-2xl font-bold text-white font-space-mono mb-4">
-                            {aboutContent.mission.title} 🚀
-                        </h3>
-                        <p className="text-gray-300 font-space-mono text-lg mb-4">
-                            {aboutContent.mission.subtitle}
-                        </p>
-                        <p className="text-gray-300 font-space-mono text-base">
-                            {aboutContent.mission.description}
-                        </p>
+                            {/* Mission Statement - Styled Differently */}
+                            <div className="mt-12 pt-8 border-t border-white/20">
+                                <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-xl p-6">
+                                    <h4 className="font-space-mono text-xl font-bold text-blue-300 mb-3 flex items-center">
+                                        🚀 {aboutContent.mission.title}
+                                    </h4>
+                                    <p className="font-space-mono text-lg font-semibold text-blue-200 mb-3">
+                                        {aboutContent.mission.subtitle}
+                                    </p>
+                                    <p className="font-space-mono text-base text-blue-100 leading-relaxed">
+                                        {aboutContent.mission.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
