@@ -286,8 +286,8 @@ export const TimePopup: React.FC<TimePopupProps> = React.memo(
                 {!showTitle && (
                     <div
                         className={`bg-white px-3 py-2 rounded-lg flex items-center justify-center border border-white/15 shadow-lg min-w-[180px] popup-transition hover:shadow-xl hover:scale-105 hover:border-white/25 ${isAnimating
-                                ? 'opacity-0 scale-95 translate-y-1'
-                                : 'opacity-100 scale-100 translate-y-0'
+                            ? 'opacity-0 scale-95 translate-y-1'
+                            : 'opacity-100 scale-100 translate-y-0'
                             }`}
                     >
                         <TimeContent
@@ -300,8 +300,8 @@ export const TimePopup: React.FC<TimePopupProps> = React.memo(
                 {showTitle && (
                     <div
                         className={`bg-white px-3 py-2 rounded-lg flex items-center justify-center border border-white/15 shadow-lg min-w-[180px] popup-transition hover:shadow-xl hover:scale-105 hover:border-white/25 ${isAnimating
-                                ? 'opacity-0 scale-95 translate-y-1'
-                                : 'opacity-100 scale-100 translate-y-0'
+                            ? 'opacity-0 scale-95 translate-y-1'
+                            : 'opacity-100 scale-100 translate-y-0'
                             }`}
                     >
                         <TitleContent title={title} />
