@@ -5,11 +5,76 @@ import { useContainerDimensions } from "@/hooks/useContainerDimensions";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { RefObject, useCallback, useRef, useState } from "react";
-import ForceGraph from "./ForceGraph";
+import { RefObject, useCallback, useRef, useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import TechBadges from "./TechStackBadges";
 import WaveText from "./WaveText";
 import { HERO_CONSTANTS } from "@/constants/hero";
+
+// Lazy load ForceGraph with a loading skeleton
+const ForceGraph = dynamic(() => import("./ForceGraph"), {
+  loading: () => (
+    <div className="w-full h-full min-h-[400px] lg:min-h-[600px] flex items-center justify-center">
+      <div className="relative">
+        {/* Animated loading skeleton that mimics the graph structure */}
+        <div className="space-y-4">
+          <div className="flex justify-center space-x-8">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="w-12 h-12 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
+              />
+            ))}
+          </div>
+          <div className="flex justify-center space-x-12">
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                className="w-8 h-8 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
+                style={{ animationDelay: `${i * 0.2}s` }}
+              />
+            ))}
+          </div>
+          <div className="flex justify-center space-x-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="w-6 h-6 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              />
+            ))}
+          </div>
+        </div>
+        {/* Subtle connecting lines animation */}
+        <div className="absolute inset-0 pointer-events-none">
+          <svg className="w-full h-full" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="transparent" />
+                <stop offset="50%" stopColor="currentColor" className="text-zinc-300 dark:text-zinc-600" />
+                <stop offset="100%" stopColor="transparent" />
+              </linearGradient>
+            </defs>
+            {[1, 2, 3].map((i) => (
+              <line
+                key={i}
+                x1={20 + i * 20}
+                y1={30}
+                x2={60 + i * 10}
+                y2={70}
+                stroke="url(#lineGradient)"
+                strokeWidth="0.5"
+                className="animate-pulse"
+                style={{ animationDelay: `${i * 0.3}s` }}
+              />
+            ))}
+          </svg>
+        </div>
+      </div>
+    </div>
+  ),
+  ssr: false, // Disable SSR for D3.js component
+});
 
 interface NodeDatum {
   id: string;
@@ -33,6 +98,9 @@ const ModernHero = () => {
   // Store the popup data (node info and coordinates).
   const [popupData, setPopupData] = useState<PopupData | null>(null);
 
+  // Intersection observer to only load ForceGraph when visible
+  const [shouldLoadGraph, setShouldLoadGraph] = useState(false);
+
   // Callback passed to ForceGraph.
   const handlePopupRequest = useCallback((node: NodeDatum, x: number, y: number) => {
     setPopupData({ node, x, y });
@@ -40,6 +108,29 @@ const ModernHero = () => {
     setTimeout(() => {
       setPopupData(null);
     }, 3000);
+  }, []);
+
+  // Intersection observer to detect when graph container is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Add a small delay to ensure smooth loading
+          setTimeout(() => setShouldLoadGraph(true), 100);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the container is visible
+        rootMargin: "50px", // Start loading 50px before it comes into view
+      }
+    );
+
+    if (graphContainerRef.current) {
+      observer.observe(graphContainerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -112,7 +203,7 @@ const ModernHero = () => {
 
           {/* Visual Section */}
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
-            {width > 0 && height > 0 && (
+            {shouldLoadGraph && width > 0 && height > 0 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
