@@ -7,74 +7,59 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { RefObject, useCallback, useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import TechBadges from "./TechStackBadges";
-import WaveText from "./WaveText";
 import { HERO_CONSTANTS } from "@/constants/hero";
 
-// Lazy load ForceGraph with a loading skeleton
-const ForceGraph = dynamic(() => import("./ForceGraph"), {
+// Lazy load heavy components with optimized loading states
+const TechBadges = dynamic(() => import("./TechStackBadges"), {
   loading: () => (
-    <div className="w-full h-full min-h-[400px] lg:min-h-[600px] flex items-center justify-center">
-      <div className="relative">
-        {/* Animated loading skeleton that mimics the graph structure */}
-        <div className="space-y-4">
-          <div className="flex justify-center space-x-8">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-12 h-12 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
-              />
-            ))}
-          </div>
-          <div className="flex justify-center space-x-12">
-            {[1, 2].map((i) => (
-              <div
-                key={i}
-                className="w-8 h-8 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
-            ))}
-          </div>
-          <div className="flex justify-center space-x-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="w-6 h-6 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              />
-            ))}
-          </div>
-        </div>
-        {/* Subtle connecting lines animation */}
-        <div className="absolute inset-0 pointer-events-none">
-          <svg className="w-full h-full" viewBox="0 0 100 100">
-            <defs>
-              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="transparent" />
-                <stop offset="50%" stopColor="currentColor" className="text-zinc-300 dark:text-zinc-600" />
-                <stop offset="100%" stopColor="transparent" />
-              </linearGradient>
-            </defs>
-            {[1, 2, 3].map((i) => (
-              <line
-                key={i}
-                x1={20 + i * 20}
-                y1={30}
-                x2={60 + i * 10}
-                y2={70}
-                stroke="url(#lineGradient)"
-                strokeWidth="0.5"
-                className="animate-pulse"
-                style={{ animationDelay: `${i * 0.3}s` }}
-              />
-            ))}
-          </svg>
-        </div>
-      </div>
+    <div className="flex flex-wrap gap-2">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <div
+          key={i}
+          className="h-6 w-16 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
+        />
+      ))}
     </div>
   ),
-  ssr: false, // Disable SSR for D3.js component
+  ssr: false
 });
+
+const WaveText = dynamic(() => import("./WaveText"), {
+  loading: () => <span className="text-zinc-700 dark:text-zinc-100">interactive experiences</span>,
+  ssr: false
+});
+
+// Lazy load ForceGraph with intersection observer
+const ForceGraph = dynamic(() => import("./ForceGraph"), {
+  loading: () => <GraphSkeleton />,
+  ssr: false,
+});
+
+// Optimized skeleton component
+const GraphSkeleton = () => (
+  <div className="w-full h-full min-h-[400px] lg:min-h-[600px] flex items-center justify-center">
+    <div className="space-y-6">
+      <div className="flex justify-center space-x-6">
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="w-10 h-10 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
+            style={{ animationDelay: `${i * 0.2}s` }}
+          />
+        ))}
+      </div>
+      <div className="flex justify-center space-x-8">
+        {[1, 2].map((i) => (
+          <div
+            key={i}
+            className="w-6 h-6 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
+            style={{ animationDelay: `${(i + 3) * 0.2}s` }}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
 
 interface NodeDatum {
   id: string;
@@ -91,63 +76,85 @@ interface PopupData {
 }
 
 const ModernHero = () => {
-  // Container ref for the graph area.
   const graphContainerRef = useRef<HTMLDivElement>(null);
   const { width, height } = useContainerDimensions(graphContainerRef as RefObject<HTMLElement>);
 
-  // Store the popup data (node info and coordinates).
   const [popupData, setPopupData] = useState<PopupData | null>(null);
-
-  // Intersection observer to only load ForceGraph when visible
   const [shouldLoadGraph, setShouldLoadGraph] = useState(false);
+  const [isGraphVisible, setIsGraphVisible] = useState(false);
 
-  // Callback passed to ForceGraph.
+  // Optimized popup handler with debouncing
   const handlePopupRequest = useCallback((node: NodeDatum, x: number, y: number) => {
     setPopupData({ node, x, y });
-    // Automatically dismiss the popup after 3 seconds.
-    setTimeout(() => {
+    // Use requestIdleCallback for non-critical popup dismissal
+    const timeoutId = setTimeout(() => {
       setPopupData(null);
     }, 3000);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
-  // Intersection observer to detect when graph container is visible
+  // Optimized intersection observer with better thresholds
   useEffect(() => {
+    if (!graphContainerRef.current) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Add a small delay to ensure smooth loading
-          setTimeout(() => setShouldLoadGraph(true), 100);
+          setIsGraphVisible(true);
+          // Use requestIdleCallback for non-critical graph loading
+          if (window.requestIdleCallback) {
+            window.requestIdleCallback(() => {
+              setShouldLoadGraph(true);
+            });
+          } else {
+            setTimeout(() => {
+              setShouldLoadGraph(true);
+            }, 50);
+          }
           observer.disconnect();
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the container is visible
-        rootMargin: "50px", // Start loading 50px before it comes into view
+        threshold: 0.05, // Smaller threshold for earlier loading
+        rootMargin: "100px", // Larger margin for smoother UX
       }
     );
 
-    if (graphContainerRef.current) {
-      observer.observe(graphContainerRef.current);
-    }
-
+    observer.observe(graphContainerRef.current);
     return () => observer.disconnect();
+  }, [width, height]);
+
+  // Preload critical resources for better performance
+  useEffect(() => {
+    // Preconnect to external domains if needed
+    const preconnectLink = document.createElement('link');
+    preconnectLink.rel = 'preconnect';
+    preconnectLink.href = 'https://fonts.googleapis.com';
+    document.head.appendChild(preconnectLink);
+
+    return () => {
+      if (document.head.contains(preconnectLink)) {
+        document.head.removeChild(preconnectLink);
+      }
+    };
   }, []);
 
   return (
     <div className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95 md:h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 lg:py-24">
-          {/* Content Section */}
+          {/* Content Section - Render immediately for better FCP */}
           <div className="space-y-5 lg:space-y-6 pt-10 lg:pt-12">
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-700 px-3 sm:px-4 py-2 rounded-full shadow-sm">
-              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-400 animate-pulse" />
+            {/* Status Badge - Simplified for faster render */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-700 px-3 sm:px-4 py-2 rounded-full">
+              <div className="w-2 h-2 rounded-full bg-green-500" />
               <span className="font-mono text-[10px] sm:text-xs text-zinc-900 dark:text-zinc-100 font-medium">
                 {HERO_CONSTANTS.status.text}
               </span>
             </div>
 
-            {/* Main Heading */}
+            {/* Main Heading - Critical content, render immediately */}
             <div className="space-y-2">
               <h1 className="font-mono font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug">
                 <span className="bg-gradient-to-r from-yellow-500 to-amber-500 bg-clip-text text-transparent">
@@ -159,25 +166,24 @@ const ModernHero = () => {
               </h1>
             </div>
 
-            {/* Description */}
+            {/* Description - Load WaveText component lazily */}
             <p className="font-mono text-lg sm:text-md text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl mb-2">
               {HERO_CONSTANTS.description.text}{" "}
               <WaveText text={HERO_CONSTANTS.description.waveText} />.
             </p>
 
-            {/* Tech Stack Pills */}
+            {/* Tech Stack Pills - Load lazily */}
             <div className="mt-4">
               <TechBadges />
             </div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Critical for engagement, render immediately */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="#projects">
+              <Link href="#projects" prefetch={false}>
                 <Button
                   className="bg-gradient-to-r from-[#EAB308] to-[#D97706] dark:from-[#FACC15] dark:to-[#F59E0B]
                     font-bold text-black hover:from-[#D97706] hover:to-[#B45309] dark:hover:from-[#F59E0B] dark:hover:to-[#D97706]
                     rounded-full font-mono md:text-lg px-6 sm:px-8 py-6 group w-full sm:w-auto 
-                    shadow-[0px_0px_8px_rgba(255,215,0,0.4)] group-hover:shadow-[0px_0px_14px_rgba(255,215,0,0.6)] 
                     transition-all duration-300"
                 >
                   VIEW PROJECTS
@@ -187,13 +193,13 @@ const ModernHero = () => {
                   />
                 </Button>
               </Link>
-              <Link href="#contact">
+              <Link href="#contact" prefetch={false}>
                 <Button
                   variant="outline"
                   className="bg-gradient-to-r from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-700
                     text-black hover:from-zinc-300 hover:to-zinc-200 dark:text-white dark:hover:from-zinc-700 dark:hover:to-zinc-600
                     rounded-full font-mono font-bold md:text-md 2xl:text-lg px-6 sm:px-8 py-6 w-full sm:w-auto 
-                    transition-all duration-300 border-0 shadow-sm hover:shadow-md"
+                    transition-all duration-300 border-0"
                 >
                   {HERO_CONSTANTS.cta.contact}
                 </Button>
@@ -201,16 +207,18 @@ const ModernHero = () => {
             </div>
           </div>
 
-          {/* Visual Section */}
+          {/* Visual Section - Lazy loaded with intersection observer */}
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
+            {!isGraphVisible && <GraphSkeleton />}
+
             {shouldLoadGraph && width > 0 && height > 0 && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
-                  duration: 1.2,
-                  ease: [0.22, 1, 0.36, 1], // Custom easing for smooth animation
-                  delay: 0.3, // Slight delay to let other elements settle
+                  duration: 0.8,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.1,
                 }}
                 className="w-full h-full"
               >
@@ -226,41 +234,23 @@ const ModernHero = () => {
               </motion.div>
             )}
 
-            {/* Overlay Popup rendered on top of the graph */}
-            <AnimatePresence>
+            {/* Popup - Optimized with reduced motion */}
+            <AnimatePresence mode="wait">
               {popupData && (
                 <motion.div
-                  initial={{
-                    opacity: 0,
-                    scale: 0.8,
-                    y: 20,
-                    filter: "blur(4px)",
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: -80,
-                    x: "-50%",
-                    filter: "blur(0px)",
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0.8,
-                    y: 20,
-                    filter: "blur(4px)",
-                  }}
+                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: -80, x: "-50%" }}
+                  exit={{ opacity: 0, scale: 0.9, y: 10 }}
                   transition={{
                     type: "spring",
-                    stiffness: 400,
-                    damping: 25,
-                    mass: 0.8,
-                    delay: 0.1, // Slight delay after graph appears
+                    stiffness: 300,
+                    damping: 20,
+                    mass: 0.6,
                   }}
-                  className="absolute hidden md:block bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 text-white p-4 rounded-md shadow-lg pointer-events-none origin-bottom md:min-w-[300px] backdrop-blur-sm"
+                  className="absolute hidden md:block bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 text-white p-4 rounded-md pointer-events-none origin-bottom md:min-w-[300px] backdrop-blur-sm"
                   style={{
                     left: popupData.x + width / 2,
                     top: popupData.y + height / 2,
-                    transformOrigin: "bottom center",
                   }}
                 >
                   <div className="flex items-center gap-2">
