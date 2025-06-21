@@ -31,31 +31,37 @@ const WaveText = dynamic(() => import("./WaveText"), {
 
 // Lazy load ForceGraph with intersection observer
 const ForceGraph = dynamic(() => import("./ForceGraph"), {
-  loading: () => <GraphSkeleton />,
   ssr: false,
 });
 
 // Optimized skeleton component
 const GraphSkeleton = () => (
   <div className="w-full h-full min-h-[400px] lg:min-h-[600px] flex items-center justify-center">
-    <div className="space-y-6">
-      <div className="flex justify-center space-x-6">
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="w-10 h-10 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
-            style={{ animationDelay: `${i * 0.2}s` }}
-          />
-        ))}
+    <div className="flex flex-col items-center space-y-6">
+      {/* Loading Wheel */}
+      <div className="relative">
+        {/* Outer ring */}
+        <div className="w-16 h-16 border-4 border-zinc-200 dark:border-zinc-700 rounded-full"></div>
+        {/* Spinning inner ring */}
+        <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-yellow-500 dark:border-t-yellow-400 rounded-full animate-spin"></div>
+        {/* Center dot */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-yellow-500 dark:bg-yellow-400 rounded-full"></div>
       </div>
-      <div className="flex justify-center space-x-8">
-        {[1, 2].map((i) => (
-          <div
-            key={i}
-            className="w-6 h-6 bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 rounded-full animate-pulse"
-            style={{ animationDelay: `${(i + 3) * 0.2}s` }}
-          />
-        ))}
+
+      {/* Loading text */}
+      <div className="text-center space-y-2">
+        <p className="font-mono text-sm text-zinc-600 dark:text-zinc-300 font-medium">
+          Loading interactive graph
+        </p>
+        <div className="flex justify-center space-x-1">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="w-1.5 h-1.5 bg-yellow-500 dark:bg-yellow-400 rounded-full animate-pulse"
+              style={{ animationDelay: `${i * 0.2}s` }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   </div>
@@ -80,8 +86,7 @@ const ModernHero = () => {
   const { width, height } = useContainerDimensions(graphContainerRef as RefObject<HTMLElement>);
 
   const [popupData, setPopupData] = useState<PopupData | null>(null);
-  const [shouldLoadGraph, setShouldLoadGraph] = useState(false);
-  const [isGraphVisible, setIsGraphVisible] = useState(false);
+  const [isGraphLoaded, setIsGraphLoaded] = useState(false);
 
   // Optimized popup handler with debouncing
   const handlePopupRequest = useCallback((node: NodeDatum, x: number, y: number) => {
@@ -94,36 +99,29 @@ const ModernHero = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Optimized intersection observer with better thresholds
+  // Simplified intersection observer - single state management
   useEffect(() => {
     if (!graphContainerRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsGraphVisible(true);
-          // Use requestIdleCallback for non-critical graph loading
-          if (window.requestIdleCallback) {
-            window.requestIdleCallback(() => {
-              setShouldLoadGraph(true);
-            });
-          } else {
-            setTimeout(() => {
-              setShouldLoadGraph(true);
-            }, 50);
-          }
+          // Small delay to ensure smooth transition
+          setTimeout(() => {
+            setIsGraphLoaded(true);
+          }, 100);
           observer.disconnect();
         }
       },
       {
-        threshold: 0.05, // Smaller threshold for earlier loading
-        rootMargin: "100px", // Larger margin for smoother UX
+        threshold: 0.1,
+        rootMargin: "50px",
       }
     );
 
     observer.observe(graphContainerRef.current);
     return () => observer.disconnect();
-  }, [width, height]);
+  }, []);
 
   // Preload critical resources for better performance
   useEffect(() => {
@@ -209,9 +207,9 @@ const ModernHero = () => {
 
           {/* Visual Section - Lazy loaded with intersection observer */}
           <div ref={graphContainerRef} className="relative min-h-[400px] lg:min-h-[600px]">
-            {!isGraphVisible && <GraphSkeleton />}
+            {!isGraphLoaded && <GraphSkeleton />}
 
-            {shouldLoadGraph && width > 0 && height > 0 && (
+            {isGraphLoaded && width > 0 && height > 0 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
