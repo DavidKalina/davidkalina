@@ -8,7 +8,6 @@ import ModernProjectGrid from "@/components/ProjectGrid";
 import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
 
-// Configure static generation
 export const dynamic = "force-static";
 export const revalidate = 3600; // Revalidate every hour
 
