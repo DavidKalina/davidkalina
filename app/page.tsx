@@ -9,7 +9,7 @@ import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600; 
 
 export const metadata: Metadata = {
   title: "David Kalina | Full Stack Developer",
