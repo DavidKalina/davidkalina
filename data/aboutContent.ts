@@ -49,43 +49,43 @@ export const aboutContent: AboutContent = {
         title: "About MapMoji 🌍"
     },
     mainContent: {
-        title: "There's more to your location than meets the eye",
+        title: "Empowering communities through intelligent civic engagement",
         description: [
-            "A lot of events don't appear on major event-discovery platforms. What if there were an app that enabled you to discovery events hidden in every nook and cranny of the world?",
-            "MapMoji is a next generation mapping platform that utilizes the power of AI and Websockets to illuminate third spaces wherever they may be.",
-            "Simply snap a photo of an event, let the AI analyze it, and have it appear on the map for others to see."
+            "Traditional civic engagement platforms often miss the grassroots events that truly connect communities. What if there were a platform that could capture and amplify every local gathering, from neighborhood meetings to city-wide initiatives?",
+            "MapMoji is a next-generation civic engagement platform that leverages AI and real-time technology to illuminate community events and foster meaningful civic participation.",
+            "From scanning local events to creating official civic gatherings, MapMoji bridges the gap between digital discovery and real-world community engagement."
         ]
     },
     keyPoints: [
         {
-            icon: "Zap",
-            title: "AI Classification",
-            description: "Advanced AI automatically analyzes and categorizes events from photos, making discovery effortless and accurate."
+            icon: "Camera",
+            title: "Event Scanning",
+            description: "Crowd source events with the snap of a photo. The AI will automatically parse the information, generate categories, and the event will be shared with the rest of the community in real-time."
         },
         {
-            icon: "Clock",
-            title: "Real-Time Events",
-            description: "See events happening around you in real-time with live updates and instant notifications."
+            icon: "BarChart3",
+            title: "Analytics Dashboard",
+            description: "Comprehensive analytics showing event trends, engagement metrics, and community participation insights. Track event engagement, feedback, and more."
         },
         {
             icon: "Search",
-            title: "Robust Search",
-            description: "Powerful search capabilities with filters for location, category, time, and personal preferences."
+            title: "Query Insights",
+            description: "Gain insights into what type of events your community is searching for to help improve resident satisfaction."
+        },
+        {
+            icon: "Calendar",
+            title: "Official Events",
+            description: "Create and manage official civic events, community gatherings, and public activities with ease."
+        },
+        {
+            icon: "Zap",
+            title: "Instant Broadcasting",
+            description: "Beam official events directly into the app for immediate community visibility and engagement."
         },
         {
             icon: "Users",
-            title: "Friend's Events",
-            description: "Discover what events your friends have saved and join them for shared experiences."
-        },
-        {
-            icon: "CheckCircle",
-            title: "RSVP to Events",
-            description: "Easily RSVP to events, manage your schedule, and coordinate with friends seamlessly."
-        },
-        {
-            icon: "Target",
-            title: "Show up",
-            description: "Get directions, arrive on time, and make the most of every event with integrated navigation and reminders."
+            title: "Civic Engagement",
+            description: "Foster community connections through shared events, local initiatives, and civic participation tracking."
         }
     ],
     technology: {
@@ -94,30 +94,30 @@ export const aboutContent: AboutContent = {
     },
     mission: {
         title: "Our Mission",
-        subtitle: "Another tool to get out into the world",
-        description: "We want to leverage the power of modern technology to help people get out there and do people things"
+        subtitle: "Building stronger communities through civic participation",
+        description: "We believe that vibrant communities are built through active civic engagement. MapMoji empowers citizens to discover, participate in, and create meaningful civic events that strengthen local connections and drive positive change."
     },
     stats: {
-        title: "Key Metrics",
+        title: "Community Impact",
         metrics: [
             {
                 value: "100%",
-                label: "Real-time Events",
+                label: "Civic Events",
                 color: "blue"
             },
             {
                 value: "24/7",
-                label: "Discovery",
+                label: "Community Access",
                 color: "purple"
             },
             {
                 value: "0",
-                label: "Barriers to Entry",
+                label: "Barriers to Participation",
                 color: "green"
             },
             {
                 value: "∞",
-                label: "Connections Made",
+                label: "Community Connections",
                 color: "orange"
             }
         ]

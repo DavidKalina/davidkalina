@@ -15,8 +15,8 @@ interface MapMojiFeaturesContent {
 
 export const mapMojiFeaturesContent: MapMojiFeaturesContent = {
     header: {
-        title: "Powerful Features 🚀",
-        subtitle: "Discover the advanced capabilities that make MapMoji the ultimate event discovery platform"
+        title: "Civic Engagement Features 🏛️",
+        subtitle: "Empowering communities through intelligent event discovery, analytics, and civic participation tools"
     },
     emojiMap: {
         // Basic actions
@@ -43,6 +43,7 @@ export const mapMojiFeaturesContent: MapMojiFeaturesContent = {
         AlertCircle: '⚠️',
         Info: 'ℹ️',
         Settings: '⚙️',
+        BarChart3: '📊',
 
         // Transportation
         Home: '🏠',

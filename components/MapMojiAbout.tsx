@@ -8,10 +8,10 @@ const MapMojiAbout = () => {
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white font-space-mono mb-4">
-                        About MapMoji 🌍
+                        About MapMoji 🏛️
                     </h2>
                     <p className="text-xl text-gray-300 font-space-mono max-w-3xl mx-auto">
-                        Discover the story behind the ultimate mapping experience
+                        Discover how we&apos;re revolutionizing civic engagement through intelligent community mapping
                     </p>
                 </div>
 

@@ -107,7 +107,7 @@ class MapErrorBoundary extends React.Component<
                                 MapMoji
                             </h1>
                             <p className="text-gray-300 font-space-mono text-sm mb-4">
-                                A Third Space in Your Pocket
+                                Civic Engagement Software
                             </p>
                             <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
                                 <p className="text-red-200 font-space-mono text-sm">
@@ -312,7 +312,7 @@ const MapMojiHero = () => {
                             MapMoji
                         </h1>
                         <p className="text-gray-300 font-space-mono text-sm mb-4">
-                            A Third Space in Your Pocket
+                            Civic Engagement Software
                         </p>
                         <div className="bg-yellow-500/20 border border-yellow-500/30 rounded-lg p-4">
                             <p className="text-yellow-200 font-space-mono text-sm">
@@ -440,7 +440,7 @@ const MapMojiHero = () => {
                             MapMoji
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-300 font-space-mono mb-8">
-                            A Third Space in Your Pocket
+                            Civic Engagement Software
                         </p>
 
                         <div className="mt-8">
