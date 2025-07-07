@@ -183,17 +183,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
               {project.href && (
-                <Link target="_blank" href={project.href}>
+                <Link target="_blank" href={project.href} className={!project.source ? "w-full" : ""}>
                   <Button
-                    className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
+                    className={`bg-gradient-to-r from-black via-zinc-900 to-black dark:from-zinc-900 dark:via-black dark:to-zinc-900
                       text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                      border-2 border-zinc-800 dark:border-zinc-600
+                      border-2 border-black dark:border-zinc-800
                       transition-all duration-300 
-                      hover:border-white dark:hover:border-zinc-400
-                      hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
-                      dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
-                      hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
-                      hover:-translate-y-0.5 disabled:opacity-50"
+                      hover:border-white dark:hover:border-zinc-300
+                      hover:from-zinc-800 hover:via-zinc-900 hover:to-zinc-800 
+                      dark:hover:from-zinc-800 dark:hover:via-zinc-900 dark:hover:to-zinc-800
+                      hover:shadow-[0_0_25px_rgba(255,255,255,0.8)] dark:hover:shadow-[0_0_25px_rgba(255,255,255,1)]
+                      hover:-translate-y-1 disabled:opacity-50 ${!project.source ? "w-full" : ""}`}
                   >
                     VIEW PROJECT
                     <ArrowRight
@@ -204,17 +204,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 </Link>
               )}
               {project.source && (
-                <Link target="_blank" href={project.source}>
+                <Link target="_blank" href={project.source} className={!project.href ? "w-full" : ""}>
                   <Button
                     variant="outline"
-                    className="bg-gradient-to-r from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900
-                      text-black dark:text-white rounded-full font-mono text-xs lg:text-sm 
-                      px-4 lg:px-6 py-5 lg:py-6 w-full sm:w-auto
-                      border-2 border-zinc-200 dark:border-zinc-700
+                    className={`bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-900 dark:to-zinc-800
+                      text-zinc-900 dark:text-zinc-100 rounded-full font-mono text-xs lg:text-sm 
+                      px-4 lg:px-6 py-5 lg:py-6
+                      border-2 border-zinc-300 dark:border-zinc-600
                       transition-all duration-300 
-                      hover:border-black dark:hover:border-white
-                      hover:from-zinc-50 hover:to-white dark:hover:from-zinc-700 dark:hover:to-zinc-800
-                      hover:shadow-md hover:-translate-y-0.5"
+                      hover:border-zinc-900 dark:hover:border-zinc-300
+                      hover:from-white hover:to-zinc-50 dark:hover:from-zinc-800 dark:hover:to-zinc-900
+                      hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] ${!project.href ? "w-full" : "w-full sm:w-auto"}`}
                   >
                     <Github className="mr-2" size={14} />
                     SOURCE
