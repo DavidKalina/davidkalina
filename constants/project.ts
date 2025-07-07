@@ -21,7 +21,7 @@ export const PROJECT_CONSTANTS = {
       },
     ],
     description:
-      "A comprehensive next-gen package that bolsters civic engagement.",
+      "A comprehensive next-gen package that bolsters civic engagement. Crowd source events in your town using the snap of a photo. See how your residents are engaging with their community.",
     stats: [
       {
         value: "Modern",
