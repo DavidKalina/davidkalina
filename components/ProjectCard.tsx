@@ -138,7 +138,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <h3 className="font-mono text-lg lg:text-xl font-bold text-white mb-2 line-clamp-2">
               {project.title}
             </h3>
-            <p className="font-mono text-xs lg:text-sm text-white/60 leading-relaxed line-clamp-3 flex-grow">
+            <p className="font-mono text-xs lg:text-sm text-white/90 leading-relaxed line-clamp-3 flex-grow">
               {project.description}
             </p>
           </div>
@@ -159,19 +159,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                   >
                     <Badge
                       className="
-                        bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
-                        text-white px-2.5 sm:px-3 py-1.5 sm:py-2
-                        rounded-full text-[11px] sm:text-xs font-mono 
+                        bg-gradient-to-r from-zinc-800 to-zinc-900 dark:from-zinc-800 dark:to-zinc-900
+                        text-zinc-100 px-2.5 sm:px-3 py-1.5 sm:py-2
+                        rounded-full text-[11px] sm:text-xs font-mono font-medium
                         flex items-center gap-1.5 sm:gap-2
-                        border border-zinc-600 dark:border-zinc-500
+                        border border-zinc-700 dark:border-zinc-600
                         shadow-md transition-all duration-200
-                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                        hover:border-zinc-400 dark:hover:border-zinc-300 
+                        hover:from-zinc-700 hover:to-zinc-800 dark:hover:from-zinc-700 dark:hover:to-zinc-800
+                        hover:border-zinc-500 dark:hover:border-zinc-400 
                         hover:shadow-lg whitespace-nowrap
                       "
                     >
                       <Icon size={14} className={`${color} flex-shrink-0`} />
-                      <span>{tag}</span>
+                      <span className="text-zinc-50 font-semibold">{tag}</span>
                     </Badge>
                   </motion.div>
                 );
