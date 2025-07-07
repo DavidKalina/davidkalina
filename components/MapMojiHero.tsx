@@ -442,12 +442,6 @@ const MapMojiHero = () => {
                         <p className="text-xl md:text-2xl text-gray-300 font-space-mono mb-8">
                             Civic Engagement Software
                         </p>
-
-                        <div className="mt-8">
-                            <p className="text-blue-300 font-space-mono text-lg">
-                                📷 Scan • 🏷️ Save • 📤 Share
-                            </p>
-                        </div>
                     </div>
                 </div>
             </section>

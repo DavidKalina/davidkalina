@@ -3,7 +3,7 @@ import { aboutContent } from '../data/aboutContent';
 
 const MapMojiAbout = () => {
     return (
-        <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+        <section className="py-20 bg-gradient-to-br from-gray-700 via-blue-800 via-gray-600 to-blue-900">
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="text-center mb-16">

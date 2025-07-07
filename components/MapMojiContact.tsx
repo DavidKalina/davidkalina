@@ -14,7 +14,7 @@ const QRCodeSVG = dynamic(() => import('qrcode.react').then(mod => ({ default: m
 
 const MapMojiContact = () => {
     return (
-        <section className="py-12 md:py-20 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
+        <section className="py-12 md:py-20 bg-gradient-to-br from-gray-700 via-blue-800 via-gray-600 to-blue-900">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white font-space-mono mb-4">
