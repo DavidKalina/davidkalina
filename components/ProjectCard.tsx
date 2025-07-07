@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,6 +7,30 @@ import { ArrowRight, Github, Layout, Bell, Brain, Star, Globe, Mail } from "luci
 import Link from "next/link";
 import React from "react";
 import { Project } from "@/constants/projectGrid";
+import { motion } from "framer-motion";
+import {
+  SiAnthropic,
+  SiDocker,
+  SiExpress,
+  SiGit,
+  SiHtml5,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiOpenai,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiRedis,
+  SiTailwindcss,
+  SiTypescript,
+  SiFirebase,
+  SiSupabase,
+  SiD3Dotjs,
+  SiExpo,
+  SiGoogle,
+  SiSendgrid,
+  SiPwa,
+} from "react-icons/si";
 
 // Helper function to map icon names to components
 const getIconComponent = (iconName: string, size: number = 24): React.ReactElement => {
@@ -17,6 +43,52 @@ const getIconComponent = (iconName: string, size: number = 24): React.ReactEleme
     Mail: <Mail size={size} className="text-white" />,
   };
   return iconMap[iconName] || <Layout size={size} className="text-white" />;
+};
+
+// Helper function to map tag names to icons and colors
+const getTagIcon = (tag: string): { icon: React.ComponentType<{ size?: number; className?: string }>; color: string } => {
+  const tagMap: { [key: string]: { icon: React.ComponentType<{ size?: number; className?: string }>; color: string } } = {
+    // React ecosystem
+    "REACT": { icon: SiReact, color: "text-blue-300" },
+    "REACT NATIVE": { icon: SiReact, color: "text-blue-300" },
+    "NEXT.JS": { icon: SiNextdotjs, color: "text-zinc-300" },
+    "TYPESCRIPT": { icon: SiTypescript, color: "text-blue-400" },
+
+    // Backend & Database
+    "NODE.JS": { icon: SiNodedotjs, color: "text-emerald-400" },
+    "EXPRESS": { icon: SiExpress, color: "text-zinc-300" },
+    "PSQL": { icon: SiPostgresql, color: "text-blue-300" },
+    "SUPABASE": { icon: SiSupabase, color: "text-emerald-400" },
+    "FIREBASE": { icon: SiFirebase, color: "text-yellow-400" },
+    "REDIS": { icon: SiRedis, color: "text-red-300" },
+
+    // AI & APIs
+    "OPENAI": { icon: SiOpenai, color: "text-blue-300" },
+    "ANTHROPIC": { icon: SiAnthropic, color: "text-blue-300" },
+
+    // Development tools
+    "DOCKER": { icon: SiDocker, color: "text-blue-300" },
+    "GIT": { icon: SiGit, color: "text-red-300" },
+    "EXPO": { icon: SiExpo, color: "text-zinc-300" },
+
+    // APIs & Services
+    "GOOGLE PLACES API": { icon: SiGoogle, color: "text-blue-400" },
+    "SENDGRID": { icon: SiSendgrid, color: "text-blue-400" },
+    "WEBSOCKETS": { icon: SiExpress, color: "text-zinc-300" },
+
+    // Frontend & Styling
+    "HTML": { icon: SiHtml5, color: "text-red-300" },
+    "TAILWIND": { icon: SiTailwindcss, color: "text-blue-300" },
+    "PWA": { icon: SiPwa, color: "text-blue-400" },
+
+    // Data visualization
+    "D3.JS": { icon: SiD3Dotjs, color: "text-orange-400" },
+
+    // Programming languages
+    "PYTHON": { icon: SiPython, color: "text-blue-300" },
+  };
+
+  return tagMap[tag.toUpperCase()] || { icon: SiExpress, color: "text-zinc-300" };
 };
 
 interface ProjectCardProps {
@@ -42,14 +114,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               project.bgColor === "bg-gradient-to-br from-[#10B981] to-[#059669]"
                 ? "linear-gradient(to bottom right, #10B981, #059669)"
                 : project.bgColor === "bg-gradient-to-br from-[#F59E0B] to-[#D97706]"
-                ? "linear-gradient(to bottom right, #F59E0B, #D97706)"
-                : project.bgColor === "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]"
-                ? "linear-gradient(to bottom right, #8B5CF6, #7C3AED)"
-                : project.bgColor === "bg-gradient-to-br from-[#EC4899] to-[#DB2777]"
-                ? "linear-gradient(to bottom right, #EC4899, #DB2777)"
-                : project.bgColor === "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]"
-                ? "linear-gradient(to bottom right, #14B8A6, #0D9488)"
-                : "linear-gradient(to bottom right, #0EA5E9, #0284C7)",
+                  ? "linear-gradient(to bottom right, #F59E0B, #D97706)"
+                  : project.bgColor === "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]"
+                    ? "linear-gradient(to bottom right, #8B5CF6, #7C3AED)"
+                    : project.bgColor === "bg-gradient-to-br from-[#EC4899] to-[#DB2777]"
+                      ? "linear-gradient(to bottom right, #EC4899, #DB2777)"
+                      : project.bgColor === "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]"
+                        ? "linear-gradient(to bottom right, #14B8A6, #0D9488)"
+                        : "linear-gradient(to bottom right, #0EA5E9, #0284C7)",
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))]" />
@@ -77,33 +149,36 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="space-y-6 lg:space-y-8">
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  className="bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-700 dark:to-zinc-600 
-                    text-black dark:text-white hover:text-white dark:hover:text-white 
-                    px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono
-                    hover:from-[#333] hover:to-zinc-700 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-                    transition-all duration-300"
-                >
-                  {tag}
-                </Badge>
-              ))}
+              {project.tags.map((tag) => {
+                const { icon: Icon, color } = getTagIcon(tag);
+                return (
+                  <motion.div
+                    key={tag}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <Badge
+                      className="
+                        bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
+                        text-white px-2.5 sm:px-3 py-1.5 sm:py-2
+                        rounded-full text-[11px] sm:text-xs font-mono 
+                        flex items-center gap-1.5 sm:gap-2
+                        border border-zinc-600 dark:border-zinc-500
+                        shadow-md transition-all duration-200
+                        hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
+                        hover:border-zinc-400 dark:hover:border-zinc-300 
+                        hover:shadow-lg whitespace-nowrap
+                      "
+                    >
+                      <Icon size={14} className={`${color} flex-shrink-0`} />
+                      <span>{tag}</span>
+                    </Badge>
+                  </motion.div>
+                );
+              })}
             </div>
 
-            {/* Metrics */}
-            <div className="grid grid-cols-3 gap-3 lg:gap-6">
-              {Object.entries(project.metrics).map(([key, value]) => (
-                <div key={key} className="space-y-1">
-                  <p className="font-mono text-lg lg:text-2xl font-bold text-zinc-900 dark:text-zinc-200">
-                    {value}
-                  </p>
-                  <p className="font-mono text-[10px] lg:text-xs text-zinc-400 dark:text-zinc-500 uppercase">
-                    {key}
-                  </p>
-                </div>
-              ))}
-            </div>
+
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
