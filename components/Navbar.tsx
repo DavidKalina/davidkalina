@@ -12,6 +12,7 @@ const ModernNavbar = () => {
   const pathname = usePathname();
   const isMapMojiActive = pathname === "/mapmoji";
   const isBlogActive = pathname === "/blog";
+  const isHomePage = pathname === "/";
 
   return (
     <nav className="bg-gradient-to-b from-white/95 to-white/90 dark:from-zinc-800/95 dark:to-zinc-800/90 border-b border-zinc-100 dark:border-zinc-700/50 fixed w-full z-[999] backdrop-blur-sm">
@@ -103,7 +104,7 @@ const ModernNavbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-zinc-100 dark:border-zinc-700/50 bg-gradient-to-b from-white/95 to-white/90 dark:from-zinc-800/95 dark:to-zinc-800/90 backdrop-blur-sm">
           <div className="px-8 py-6 space-y-6">
-            <Link href="/blog" className="block">
+            <Link href="/blog" className="block" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className={`w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
@@ -113,7 +114,7 @@ const ModernNavbar = () => {
                 BLOG
               </Button>
             </Link>
-            <Link href="/mapmoji" className="block">
+            <Link href="/mapmoji" className="block" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="ghost"
                 className={`w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
@@ -123,36 +124,73 @@ const ModernNavbar = () => {
                 MAPMOJI
               </Button>
             </Link>
-            <Link href="/projects" className="block">
-              <Button
-                variant="ghost"
-                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
-                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
-                  transition-colors duration-300"
-              >
-                PROJECTS
-              </Button>
-            </Link>
-            <Link href="/about" className="block">
-              <Button
-                variant="ghost"
-                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
-                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
-                  transition-colors duration-300"
-              >
-                ABOUT
-              </Button>
-            </Link>
-            <Link href="/contact" className="block">
-              <Button
-                variant="ghost"
-                className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
-                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
-                  transition-colors duration-300"
-              >
-                CONTACT
-              </Button>
-            </Link>
+            {isHomePage ? (
+              <>
+                <Link href="/#about" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                      hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                      transition-colors duration-300"
+                  >
+                    ABOUT
+                  </Button>
+                </Link>
+                <Link href="/#projects" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                      hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                      transition-colors duration-300"
+                  >
+                    PROJECTS
+                  </Button>
+                </Link>
+                <Link href="/#contact" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                      hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                      transition-colors duration-300"
+                  >
+                    CONTACT
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/#about" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                      hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                      transition-colors duration-300"
+                  >
+                    ABOUT
+                  </Button>
+                </Link>
+                <Link href="/#projects" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                      hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                      transition-colors duration-300"
+                  >
+                    PROJECTS
+                  </Button>
+                </Link>
+                <Link href="/#contact" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
+                      hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
+                      transition-colors duration-300"
+                  >
+                    CONTACT
+                  </Button>
+                </Link>
+              </>
+            )}
             <div className="pt-6 border-t border-zinc-100 dark:border-zinc-700/50 space-y-3">
               <ThemeToggle />
               <Button
@@ -166,7 +204,7 @@ const ModernNavbar = () => {
                   hover:shadow-md hover:-translate-y-0.5"
                 asChild
               >
-                <Link href="https://github.com" target="_blank">
+                <Link href="https://github.com" target="_blank" onClick={() => setIsMobileMenuOpen(false)}>
                   <Github className="mr-2" size={16} />
                   GITHUB
                 </Link>
@@ -183,7 +221,7 @@ const ModernNavbar = () => {
                   hover:-translate-y-0.5"
                 asChild
               >
-                <Link href="/resume" target="_blank">
+                <Link href="/resume" target="_blank" onClick={() => setIsMobileMenuOpen(false)}>
                   RESUME
                   <ExternalLink
                     className="ml-2 transition-transform group-hover:translate-x-1"
