@@ -1,9 +1,14 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ModernFooter = () => {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   return (
     <footer className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95 border-t border-zinc-100 dark:border-zinc-700/50">
@@ -29,9 +34,9 @@ const ModernFooter = () => {
             </h4>
             <div className="flex flex-col gap-3">
               {[
-                { href: "#projects", label: "Projects" },
-                { href: "#about", label: "About" },
-                { href: "#contact", label: "Contact" },
+                { href: isHomePage ? "#projects" : "/#projects", label: "Projects" },
+                { href: isHomePage ? "#about" : "/#about", label: "About" },
+                { href: isHomePage ? "#contact" : "/#contact", label: "Contact" },
               ].map((link) => (
                 <Link key={link.href} href={link.href} className="w-fit">
                   <Button
