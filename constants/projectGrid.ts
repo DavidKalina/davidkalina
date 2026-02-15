@@ -20,31 +20,6 @@ export const PROJECT_GRID_CONSTANTS = {
   },
   projects: [
     {
-      id: 1,
-      title: "MapMoji",
-      description:
-        "Mobile app that bridges the gap between physical and digital worlds by empowering users to take photos of event flyers and turn them into digital map markers that everyone can see in real-time.",
-      tags: [
-        "React Native",
-        "Expo",
-        "Redis",
-        "Google Places API",
-        "Typescript",
-        "PSQL",
-        "OpenAI",
-        "WebSockets",
-      ],
-      icon: "Map",
-      bgColor: "bg-gradient-to-br from-[#10B981] to-[#059669]",
-      metrics: {
-        technology: "Cutting Edge",
-        architecture: "Modular",
-        ui: "Modern",
-      },
-      year: "2025",
-      source: null,
-    },
-    {
       id: 6,
       title: "Flowty.io Real-Time Notification Center",
       description:

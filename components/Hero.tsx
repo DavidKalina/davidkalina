@@ -5,7 +5,7 @@ import { useContainerDimensions } from "@/hooks/useContainerDimensions";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { RefObject, useCallback, useRef, useState, useEffect } from "react";
+import { RefObject, useCallback, useRef, useState, useEffect, ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { HERO_CONSTANTS } from "@/constants/hero";
 
@@ -66,6 +66,30 @@ const GraphSkeleton = () => (
     </div>
   </div>
 );
+
+const WAVE_TAG = "{{wave}}";
+const WAVE_CLOSE = "{{/wave}}";
+
+function DescriptionWithWave({ text }: { text: string }) {
+  const parts: ReactNode[] = [];
+  let remaining = text;
+
+  while (remaining.includes(WAVE_TAG)) {
+    const openIdx = remaining.indexOf(WAVE_TAG);
+    const closeIdx = remaining.indexOf(WAVE_CLOSE, openIdx);
+
+    if (closeIdx === -1) break;
+
+    parts.push(remaining.slice(0, openIdx));
+    parts.push(
+      <WaveText key={parts.length} text={remaining.slice(openIdx + WAVE_TAG.length, closeIdx)} />
+    );
+    remaining = remaining.slice(closeIdx + WAVE_CLOSE.length);
+  }
+  parts.push(remaining);
+
+  return <>{parts}</>;
+}
 
 interface NodeDatum {
   id: string;
@@ -164,10 +188,9 @@ const ModernHero = () => {
               </h1>
             </div>
 
-            {/* Description - Load WaveText component lazily */}
+            {/* Description - Parse {{wave}}...{{/wave}} tags for wave effect */}
             <p className="font-mono text-lg sm:text-md text-zinc-700 dark:text-zinc-100 leading-relaxed max-w-xl mb-2">
-              {HERO_CONSTANTS.description.text}{" "}
-              <WaveText text={HERO_CONSTANTS.description.waveText} />.
+              <DescriptionWithWave text={HERO_CONSTANTS.description} />
             </p>
 
             {/* Tech Stack Pills - Load lazily */}

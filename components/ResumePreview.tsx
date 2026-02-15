@@ -69,21 +69,6 @@ const ModernResume = () => {
     },
   ];
 
-  const projects = [
-    {
-      name: "MapMoji",
-      description:
-        "A mobile-first event discovery platform that allows users to scan real-world flyers and instantly turn them into live map pins. Built with React Native and Expo, it leverages AI to extract event data from images using OpenAI-powered LLMs, and geolocates events with Google Maps and Mapbox APIs.",
-      features: [
-        "Designed a scalable, containerized backend with PostgreSQL, Redis, and a multi-service architecture using Docker Compose.",
-        "Implemented real-time WebSocket updates for map interactions and event publishing.",
-        "Used text embeddings to enable intelligent search and filtering across thousands of events.",
-        "Created a gamified leveling system to encourage user engagement, built with modular microservices.",
-        "Developed custom image parsing logic and integrated cloud storage with DigitalOcean Spaces for fast, reliable event flyer handling.",
-      ],
-    },
-  ];
-
   return (
     <div className="bg-white/80 dark:bg-zinc-800/95 min-h-screen pt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
@@ -263,32 +248,7 @@ const ModernResume = () => {
               Projects
             </h2>
           </div>
-          {projects.map((project, index) => (
-            <Card
-              key={index}
-              className="border-2 border-zinc-100 dark:border-zinc-700/50 rounded-2xl hover:border-teal-500 dark:hover:border-teal-400 transition-colors duration-300 bg-white/80 dark:bg-zinc-800/80"
-            >
-              <CardContent className="p-6 sm:p-8">
-                <h3 className="font-mono text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-200 mb-2">
-                  {project.name}
-                </h3>
-                <p className="font-mono text-sm text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-                <ul className="space-y-3 font-mono text-sm text-zinc-600 dark:text-zinc-300">
-                  {project.features.map((feature, i) => (
-                    <li key={i} className="flex gap-2">
-                      <Star
-                        size={16}
-                        className="mt-1 flex-shrink-0 text-teal-500 dark:text-teal-400"
-                      />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
+         
         </div>
 
         {/* Education */}

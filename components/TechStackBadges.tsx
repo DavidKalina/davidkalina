@@ -14,6 +14,7 @@ import {
   SiRedis,
   SiTailwindcss,
   SiTypescript,
+  SiAmazonwebservices
 } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -22,6 +23,11 @@ const techStack = [
     name: "TYPESCRIPT",
     icon: SiTypescript,
     iconColor: "text-blue-400",
+  },
+  {
+    name: "AWS",
+    icon: SiAmazonwebservices,
+    iconColor: "text-orange-400"
   },
   {
     name: "REACT",

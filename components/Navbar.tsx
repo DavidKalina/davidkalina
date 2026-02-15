@@ -10,7 +10,6 @@ import { ThemeToggle } from "./ThemeToggle";
 const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isMapMojiActive = pathname === "/mapmoji";
   const isBlogActive = pathname === "/blog";
   const isHomePage = pathname === "/";
 
@@ -34,14 +33,6 @@ const ModernNavbar = () => {
               border-b-2 ${isBlogActive ? 'border-blue-500 hover:border-blue-600' : 'border-transparent'}`}
             >
               BLOG
-            </Link>
-            <Link
-              href="/mapmoji"
-              className={`font-mono text-sm text-zinc-600 dark:text-zinc-300 
-              hover:text-black dark:hover:text-white transition-colors duration-300
-              border-b-2 ${isMapMojiActive ? 'border-blue-500 hover:border-blue-600' : 'border-transparent'}`}
-            >
-              MAPMOJI
             </Link>
             <ThemeToggle />
             <div className="flex items-center gap-3 pl-6 border-l border-zinc-100 dark:border-zinc-700/50">
@@ -112,16 +103,6 @@ const ModernNavbar = () => {
                   transition-colors duration-300 border-b-2 ${isBlogActive ? 'border-blue-500 hover:border-blue-600' : 'border-transparent'}`}
               >
                 BLOG
-              </Button>
-            </Link>
-            <Link href="/mapmoji" className="block" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button
-                variant="ghost"
-                className={`w-full justify-start font-mono text-sm text-zinc-600 dark:text-zinc-300 
-                  hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 
-                  transition-colors duration-300 border-b-2 ${isMapMojiActive ? 'border-blue-500 hover:border-blue-600' : 'border-transparent'}`}
-              >
-                MAPMOJI
               </Button>
             </Link>
             {isHomePage ? (

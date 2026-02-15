@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import Link from "next/link";
+import { Github } from "lucide-react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Suspense } from "react";
-import { Github, Network } from "lucide-react";
 
 interface ProjectSplitCardProps {
     title: string;
@@ -12,7 +12,6 @@ interface ProjectSplitCardProps {
     badges: { text: string }[];
     stats: { value: string; label: string }[];
     sourceUrl: string;
-    mapmojiUrl: string;
     qrUrl: string;
 }
 
@@ -30,7 +29,6 @@ const ProjectSplitCard = ({
     badges,
     stats,
     sourceUrl,
-    mapmojiUrl,
     qrUrl,
 }: ProjectSplitCardProps) => {
     return (
@@ -103,15 +101,6 @@ const ProjectSplitCard = ({
                         >
                             <Github className="mr-2" size={18} />
                             Source
-                        </Button>
-                    </Link>
-                    <Link href={mapmojiUrl}>
-                        <Button
-                            variant="outline"
-                            className="bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-full font-mono font-bold px-6 py-6 w-full sm:w-auto border-0 shadow-sm hover:shadow-lg"
-                        >
-                            <Network className="mr-2" size={18} />
-                            Try MapMoji
                         </Button>
                     </Link>
                 </div>

@@ -3,7 +3,6 @@ import { getBlogPosts } from "@/lib/blog-data";
 import ModernBlog from "@/components/Blog";
 import ModernCTA from "@/components/Cta";
 import ModernHero from "@/components/Hero";
-import ModernFeaturedProject from "@/components/Project";
 import ModernProjectGrid from "@/components/ProjectGrid";
 import ModernTechStack from "@/components/TechStack";
 import type { Metadata } from "next";
@@ -26,8 +25,6 @@ export default async function Home() {
       <ModernTechStack />
 
       <ModernAbout />
-
-      <ModernFeaturedProject />
 
       <ModernProjectGrid />
 
