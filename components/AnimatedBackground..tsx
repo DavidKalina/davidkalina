@@ -2,7 +2,6 @@
 
 import React, { useMemo, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { ParallaxProvider } from "react-scroll-parallax";
 
 const getRandomFloat = (min: number, max: number) => Math.random() * (max - min) + min;
 
@@ -175,37 +174,34 @@ const AnimatedBackground = () => {
   };
 
   return (
-    <ParallaxProvider>
-      {/* Fixed container to render shapes behind content */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        {shapes.map((shape, index) => {
-          const { start, end, duration } = shape.movement;
-          const { animate, transition } = getAnimationProps(shape.animation);
-          return (
-            <motion.div
-              key={index}
-              initial={start}
-              animate={end}
-              transition={{
-                duration,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="absolute"
-            >
-              <RandomPulse>
-                <motion.div
-                  className={`${shape.className} opacity-50`}
-                  style={shape.style}
-                  animate={animate}
-                  transition={transition}
-                />
-              </RandomPulse>
-            </motion.div>
-          );
-        })}
-      </div>
-    </ParallaxProvider>
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      {shapes.map((shape, index) => {
+        const { start, end, duration } = shape.movement;
+        const { animate, transition } = getAnimationProps(shape.animation);
+        return (
+          <motion.div
+            key={index}
+            initial={start}
+            animate={end}
+            transition={{
+              duration,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute"
+          >
+            <RandomPulse>
+              <motion.div
+                className={`${shape.className} opacity-50`}
+                style={shape.style}
+                animate={animate}
+                transition={transition}
+              />
+            </RandomPulse>
+          </motion.div>
+        );
+      })}
+    </div>
   );
 };
 

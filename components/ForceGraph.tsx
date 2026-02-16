@@ -1,6 +1,9 @@
 "use client";
 import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
-import * as d3 from "d3";
+import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide, type Simulation } from "d3-force";
+import { create, select } from "d3-selection";
+import { drag } from "d3-drag";
+import { timeout, type Timer } from "d3-timer";
 import { NodeDatum, defaultNodes, LinkDatum, defaultLinks } from "@/constants/forceGraph";
 
 // Calculate optimal link distance based on viewport size and number of nodes
@@ -22,8 +25,8 @@ const ForceGraph = ({
 }: ForceGraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const simulationRef = useRef<d3.Simulation<NodeDatum, LinkDatum> | null>(null);
-  const goldenTimerRef = useRef<d3.Timer | { stop: () => void } | null>(null);
+  const simulationRef = useRef<Simulation<NodeDatum, LinkDatum> | null>(null);
+  const goldenTimerRef = useRef<Timer | { stop: () => void } | null>(null);
   const activePopupNodeIdRef = useRef(activePopupNodeId);
 
   // Memoize expensive calculations
@@ -131,25 +134,22 @@ const ForceGraph = ({
     calculateInitialPositions(nodes, width, height);
 
     // Create the force simulation with optimized parameters
-    const simulation = d3
-      .forceSimulation<NodeDatum, LinkDatum>(nodes)
+    const simulation = forceSimulation<NodeDatum, LinkDatum>(nodes)
       .force(
         "link",
-        d3
-          .forceLink<NodeDatum, LinkDatum>(links)
+        forceLink<NodeDatum, LinkDatum>(links)
           .id((d) => d.id)
           .distance(forceParams.linkDistance)
           .strength(0.3)
       )
       .force(
         "charge",
-        d3
-          .forceManyBody()
+        forceManyBody()
           .strength(forceParams.chargeStrength * 0.6)
           .distanceMax(width * 0.6)
       )
-      .force("center", d3.forceCenter(0, 0).strength(0.01))
-      .force("collision", d3.forceCollide().radius(forceParams.collisionRadius).strength(0.7))
+      .force("center", forceCenter(0, 0).strength(0.01))
+      .force("collision", forceCollide().radius(forceParams.collisionRadius).strength(0.7))
       .alphaDecay(0.01)
       .velocityDecay(0.6);
 
@@ -161,8 +161,7 @@ const ForceGraph = ({
     // Don't set alpha to 0 - let it decay naturally for smooth movement
 
     // Create SVG with optimized structure
-    const svg = d3
-      .create("svg")
+    const svg = create("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [-width / 2, -height / 2, width, height])
@@ -241,8 +240,7 @@ const ForceGraph = ({
     }
 
     // Optimized drag handlers with useCallback
-    const drag = d3
-      .drag<SVGGElement, NodeDatum>()
+    const dragBehavior = drag<SVGGElement, NodeDatum>()
       .on("start", (event, d) => {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
@@ -262,7 +260,7 @@ const ForceGraph = ({
         d.fy = null;
       });
 
-    node.call(drag);
+    node.call(dragBehavior);
 
     // Remove drift effect for smoother movement
     // The natural forces should provide enough movement without additional jitter
@@ -308,8 +306,7 @@ const ForceGraph = ({
                   .attr("cy", initialNode.y)
                   .style("opacity", 0);
 
-                const initialNodeSelection = d3
-                  .select(`[data-id="${goldenPathSequence[0]}"]`)
+                const initialNodeSelection = select(`[data-id="${goldenPathSequence[0]}"]`)
                   .select("circle");
                 initialNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
 
@@ -326,8 +323,7 @@ const ForceGraph = ({
               }
 
               initialNodeHandled = true;
-              const initialNodeSelection = d3
-                .select(`[data-id="${goldenPathSequence[0]}"]`)
+              const initialNodeSelection = select(`[data-id="${goldenPathSequence[0]}"]`)
                 .select("circle");
               initialNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
             }
@@ -386,14 +382,13 @@ const ForceGraph = ({
               activeGolden.lingerTriggered = true;
               goldenMarker.style("opacity", 0);
 
-              const targetNodeSelection = d3
-                .select(`[data-id="${activeGolden.targetId}"]`)
+              const targetNodeSelection = select(`[data-id="${activeGolden.targetId}"]`)
                 .select("circle");
               targetNodeSelection.attr("stroke", "gold").attr("stroke-width", isMobile ? 2 : 4);
 
               handlePopupRequest(targetNode, targetNode.x, targetNode.y - getNodeRadius(targetNode) - 20);
 
-              d3.timeout(() => {
+              timeout(() => {
                 targetNodeSelection.attr("stroke", "#555").attr("stroke-width", isMobile ? 1 : 1.5);
                 activeGolden.inProgress = false;
                 activeGolden.lingerTriggered = false;

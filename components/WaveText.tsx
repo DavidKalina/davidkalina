@@ -18,13 +18,13 @@ const WaveText: FC<SequentialTextProps> = ({ text, className = "", addSheen = fa
           initial={{
             scale: 1,
             color: "inherit",
-            filter: "blur(0px)",
+            opacity: 0.7,
             textShadow: "none",
           }}
           animate={{
             scale: [1, 1.5, 1.3],
             color: "#FFD700",
-            filter: ["blur(0px)", "blur(4px)", "blur(0px)"],
+            opacity: [0.7, 1, 1],
             textShadow: [
               "none",
               "0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6)",

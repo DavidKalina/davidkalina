@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { User, ArrowRight, Github, Terminal, Coffee } from "lucide-react";
+import { User, Github, Terminal, Coffee, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { ABOUT_CONSTANTS } from "@/constants/about";
 
@@ -78,20 +78,20 @@ const ModernAbout = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-6">
-              <Link href="/resume" target="_blank">
+              <Link href="/#contact">
                 <Button
                   className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
-                    text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
+                    text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group
                     border-2 border-zinc-800 dark:border-zinc-600
-                    transition-all duration-300 
+                    transition-all duration-300
                     hover:border-white dark:hover:border-zinc-400
-                    hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                    hover:from-[#444] hover:via-zinc-700 hover:to-[#444]
                     dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
                     hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
                     hover:-translate-y-0.5 disabled:opacity-50"
                 >
-                  {ABOUT_CONSTANTS.cta.resume}
-                  <ArrowRight
+                  {ABOUT_CONSTANTS.cta.contact}
+                  <MessageSquare
                     className="ml-2 transition-transform group-hover:translate-x-1"
                     size={18}
                   />

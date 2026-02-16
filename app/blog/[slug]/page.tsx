@@ -53,7 +53,23 @@ export default async function BlogPost({ params }: { params: Promise<PageParams>
 
   return (
     <article className="min-h-screen bg-white/80 dark:bg-zinc-800/95 pt-32 pb-16">
-      <Script id="code-block-setup">
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
+        strategy="lazyOnload"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"
+        strategy="lazyOnload"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"
+        strategy="lazyOnload"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-tsx.min.js"
+        strategy="lazyOnload"
+      />
+      <Script id="code-block-setup" strategy="lazyOnload">
         {`
           document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('pre code').forEach((block) => {

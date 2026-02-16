@@ -14,7 +14,7 @@ export const TECH_STACK_CONSTANTS = {
         {
           name: "TYPESCRIPT",
           level: "Advanced",
-          proficiency: "4+ years of production experience",
+          proficiency: "5+ years of production experience",
           icon: "SiTypescript",
           iconColor: "text-blue-500 dark:text-blue-400",
           details: "Type-safe development, advanced patterns, and complex state management",
@@ -25,6 +25,14 @@ export const TECH_STACK_CONSTANTS = {
           proficiency: "Enterprise-level applications",
           icon: "SiReact",
           iconColor: "text-blue-400 dark:text-blue-300",
+          details: "Custom hooks, performance optimization, and complex component architecture",
+        },
+        {
+          name: "VUE",
+          level: "Advanced",
+          proficiency: "Enterprise-level applications",
+          icon: "SiVue",
+          iconColor: "text-emerald-400 dark:text-emerald-300",
           details: "Custom hooks, performance optimization, and complex component architecture",
         },
         {

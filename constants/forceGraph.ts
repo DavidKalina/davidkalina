@@ -1,4 +1,6 @@
-export interface NodeDatum extends d3.SimulationNodeDatum {
+import type { SimulationNodeDatum, SimulationLinkDatum } from "d3-force";
+
+export interface NodeDatum extends SimulationNodeDatum {
   id: string;
   label: string;
   emoji: string;
@@ -6,7 +8,7 @@ export interface NodeDatum extends d3.SimulationNodeDatum {
   description: string;
 }
 
-export interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {
+export interface LinkDatum extends SimulationLinkDatum<NodeDatum> {
   value?: number;
 }
 

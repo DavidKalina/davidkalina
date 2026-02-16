@@ -21,7 +21,7 @@ export const ABOUT_CONSTANTS = {
     },
   },
   cta: {
-    resume: "VIEW RESUME",
+    contact: "GET IN TOUCH",
     github: "GITHUB",
   },
   featuredWork: {

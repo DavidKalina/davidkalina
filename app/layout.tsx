@@ -8,7 +8,6 @@ import AnimatedBackground from "@/components/AnimatedBackground.";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,12 +42,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth`}>
-      <head>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-tsx.min.js" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} font-sans antialiased min-h-screen flex flex-col`}
       >

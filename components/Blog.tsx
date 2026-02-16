@@ -1,5 +1,3 @@
-"use client";
-
 import { ArticleCard } from "@/app/components/ArticleCard";
 import { Button } from "@/components/ui/button";
 import { type BlogPost } from "@/lib/blog-data";

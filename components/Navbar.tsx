@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Menu, X } from "lucide-react";
+import { Github, Menu, X, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -55,19 +55,19 @@ const ModernNavbar = () => {
 
               <Button
                 className="bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
-                  text-white rounded-full font-mono text-sm px-8 group 
+                  text-white rounded-full font-mono text-sm px-8 group
                   border-2 border-zinc-800 dark:border-zinc-600
-                  transition-all duration-300 
+                  transition-all duration-300
                   hover:border-white dark:hover:border-zinc-400
-                  hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                  hover:from-[#444] hover:via-zinc-700 hover:to-[#444]
                   dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
                   hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
                   hover:-translate-y-0.5"
                 asChild
               >
-                <Link href="/resume" target="_blank">
-                  RESUME
-                  <ExternalLink
+                <Link href="/#contact">
+                  CONTACT
+                  <MessageSquare
                     className="ml-2 transition-transform group-hover:translate-x-1"
                     size={16}
                   />
@@ -194,17 +194,17 @@ const ModernNavbar = () => {
                 className="w-full bg-gradient-to-r from-[#333] via-zinc-800 to-[#333] dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-700
                   text-white rounded-full font-mono text-sm
                   border-2 border-zinc-800 dark:border-zinc-600
-                  transition-all duration-300 
+                  transition-all duration-300
                   hover:border-white dark:hover:border-zinc-400
-                  hover:from-[#444] hover:via-zinc-700 hover:to-[#444] 
+                  hover:from-[#444] hover:via-zinc-700 hover:to-[#444]
                   dark:hover:from-zinc-600 dark:hover:via-zinc-700 dark:hover:to-zinc-600
                   hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.9)]
                   hover:-translate-y-0.5"
                 asChild
               >
-                <Link href="/resume" target="_blank" onClick={() => setIsMobileMenuOpen(false)}>
-                  RESUME
-                  <ExternalLink
+                <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  CONTACT
+                  <MessageSquare
                     className="ml-2 transition-transform group-hover:translate-x-1"
                     size={16}
                   />

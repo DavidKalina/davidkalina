@@ -147,21 +147,6 @@ const ModernHero = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Preload critical resources for better performance
-  useEffect(() => {
-    // Preconnect to external domains if needed
-    const preconnectLink = document.createElement('link');
-    preconnectLink.rel = 'preconnect';
-    preconnectLink.href = 'https://fonts.googleapis.com';
-    document.head.appendChild(preconnectLink);
-
-    return () => {
-      if (document.head.contains(preconnectLink)) {
-        document.head.removeChild(preconnectLink);
-      }
-    };
-  }, []);
-
   return (
     <div className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95 md:h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
