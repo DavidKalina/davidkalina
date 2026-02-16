@@ -1,19 +1,18 @@
 "use client";
 
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 const getRandomFloat = (min: number, max: number) => Math.random() * (max - min) + min;
 
+const STATIC_MOVEMENT = {
+  start: { x: 0, y: 0 },
+  end: { x: 0, y: 0 },
+  duration: 30,
+} as const;
+
 const getRandomMovement = () => {
   const offset = 100;
-  if (typeof window === "undefined") {
-    return {
-      start: { x: 0, y: 0 },
-      end: { x: 0, y: 0 },
-      duration: 30,
-    };
-  }
   const { innerWidth: width, innerHeight: height } = window;
   const edge = Math.floor(Math.random() * 4);
   let start, end;
@@ -74,6 +73,9 @@ const RandomPulse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AnimatedBackground = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const baseShapes = useMemo(
     () => [
       {
@@ -118,13 +120,13 @@ const AnimatedBackground = () => {
     []
   );
 
-  // Augment each shape with a random movement
+  // Augment each shape with movement. Use static movement until mounted to avoid hydration mismatch.
   const shapes = useMemo(() => {
     return baseShapes.map((shape) => {
-      const movement = getRandomMovement();
+      const movement = mounted ? getRandomMovement() : STATIC_MOVEMENT;
       return { ...shape, movement };
     });
-  }, [baseShapes]);
+  }, [baseShapes, mounted]);
 
   // Define continuous floating effects
   const getAnimationProps = (animation: string) => {
