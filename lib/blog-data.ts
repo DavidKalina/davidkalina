@@ -1,16 +1,7 @@
+import fs from "fs";
+import path from "path";
 import { parseMarkdown } from "./markdown";
-import type { Database } from "@/types/supabase";
-import { supabase } from "./supabase";
 import { calculateReadTime } from "./utils";
-
-// Extend the Article type to include comments_count
-type Article = Database["public"]["Tables"]["articles"]["Row"] & {
-  comments_count: number;
-};
-
-type ArticleTag = Database["public"]["Tables"]["article_tags"]["Row"] & {
-  tags: Database["public"]["Tables"]["tags"]["Row"];
-};
 
 export interface BlogPost {
   id: string;
@@ -20,149 +11,59 @@ export interface BlogPost {
   category: string;
   date: string;
   readTime: string;
-  comments: number;
   tags: string[];
   content: string;
-  markdownContent: string;
 }
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
-  const { data: articles } = await supabase
-    .from("articles")
-    .select(
-      `
-      *,
-      article_tags (
-        tags (
-          name
-        )
-      )
-    `
-    )
-    .order("date", { ascending: false });
+const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
-  if (!articles) return [];
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  if (!fs.existsSync(BLOG_DIR)) return [];
+
+  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
 
   const posts = await Promise.all(
-    articles.map(async (article) => {
-      const typedArticle = article as unknown as Article & { article_tags: ArticleTag[] };
-
-      // If we have cached HTML content, use it
-      if (typedArticle.html_content) {
-        const readTime = calculateReadTime(typedArticle.html_content);
-        return {
-          id: typedArticle.id,
-          slug: typedArticle.slug,
-          title: typedArticle.title,
-          excerpt: typedArticle.excerpt,
-          category: typedArticle.category,
-          date: typedArticle.date,
-          readTime,
-          comments: typedArticle.comments_count,
-          tags: typedArticle.article_tags.map((at) => at.tags.name),
-          content: typedArticle.html_content,
-          markdownContent: typedArticle.markdown_content,
-        };
-      }
-
-      // Otherwise, parse the markdown
-      const parsed = await parseMarkdown(typedArticle.markdown_content);
+    files.map(async (file) => {
+      const slug = file.replace(/\.md$/, "");
+      const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf-8");
+      const parsed = await parseMarkdown(raw);
       const readTime = calculateReadTime(parsed.content);
 
-      // Update the article with the parsed HTML and read time
-      await supabase
-        .from("articles")
-        .update({
-          html_content: parsed.content,
-          read_time: readTime,
-        })
-        .eq("id", typedArticle.id);
-
       return {
-        id: typedArticle.id,
-        slug: typedArticle.slug,
-        title: typedArticle.title,
-        excerpt: typedArticle.excerpt,
-        category: typedArticle.category,
-        date: typedArticle.date,
+        id: slug,
+        slug,
+        title: parsed.metadata.title,
+        excerpt: parsed.metadata.excerpt,
+        category: parsed.metadata.category,
+        date: parsed.metadata.date,
         readTime,
-        comments: typedArticle.comments_count,
-        tags: typedArticle.article_tags.map((at) => at.tags.name),
+        tags: parsed.metadata.tags,
         content: parsed.content,
-        markdownContent: typedArticle.markdown_content,
       };
     })
   );
 
-  return posts;
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const { data: article } = await supabase
-    .from("articles")
-    .select(
-      `
-      *,
-      article_tags (
-        tags (
-          name
-        )
-      )
-    `
-    )
-    .eq("slug", slug)
-    .single();
+  const filePath = path.join(BLOG_DIR, `${slug}.md`);
 
-  if (!article) return null;
+  if (!fs.existsSync(filePath)) return null;
 
-  const typedArticle = article as unknown as Article & { article_tags: ArticleTag[] };
-
-  // If we have cached HTML content, use it
-  if (typedArticle.html_content) {
-    const readTime = calculateReadTime(typedArticle.html_content);
-    // Update read time in database if it's different
-    if (readTime !== typedArticle.read_time) {
-      await supabase.from("articles").update({ read_time: readTime }).eq("id", typedArticle.id);
-    }
-    return {
-      id: typedArticle.id,
-      slug: typedArticle.slug,
-      title: typedArticle.title,
-      excerpt: typedArticle.excerpt,
-      category: typedArticle.category,
-      date: typedArticle.date,
-      readTime,
-      comments: typedArticle.comments_count,
-      tags: typedArticle.article_tags.map((at) => at.tags.name),
-      content: typedArticle.html_content,
-      markdownContent: typedArticle.markdown_content,
-    };
-  }
-
-  // Otherwise, parse the markdown
-  const parsed = await parseMarkdown(typedArticle.markdown_content);
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const parsed = await parseMarkdown(raw);
   const readTime = calculateReadTime(parsed.content);
 
-  // Update the article with the parsed HTML and read time
-  await supabase
-    .from("articles")
-    .update({
-      html_content: parsed.content,
-      read_time: readTime,
-    })
-    .eq("id", typedArticle.id);
-
   return {
-    id: typedArticle.id,
-    slug: typedArticle.slug,
-    title: typedArticle.title,
-    excerpt: typedArticle.excerpt,
-    category: typedArticle.category,
-    date: typedArticle.date,
+    id: slug,
+    slug,
+    title: parsed.metadata.title,
+    excerpt: parsed.metadata.excerpt,
+    category: parsed.metadata.category,
+    date: parsed.metadata.date,
     readTime,
-    comments: typedArticle.comments_count,
-    tags: typedArticle.article_tags.map((at) => at.tags.name),
+    tags: parsed.metadata.tags,
     content: parsed.content,
-    markdownContent: typedArticle.markdown_content,
   };
 }

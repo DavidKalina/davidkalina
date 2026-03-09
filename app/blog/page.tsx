@@ -12,14 +12,6 @@ export const metadata = {
   description: "Read my latest articles about software development, technology, and more.",
 };
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
