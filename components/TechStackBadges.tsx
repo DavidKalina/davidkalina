@@ -1,130 +1,97 @@
-import { Badge } from "@/components/ui/badge";
+import type { ComponentType, SVGProps } from "react";
 import {
-  SiAnthropic,
+  SiD3,
   SiDocker,
-  SiExpress,
-  SiGit,
-  SiHtml5,
   SiNextdotjs,
   SiNodedotjs,
   SiOpenai,
   SiPostgresql,
-  SiPython,
   SiReact,
   SiRedis,
+  SiSupabase,
   SiTailwindcss,
   SiTypescript,
-  SiAmazonwebservices
 } from "react-icons/si";
-import { motion } from "framer-motion";
+import { FaAws } from "react-icons/fa";
+import { HERO_MARQUEE } from "@/constants/hero";
 
-const techStack = [
-  {
-    name: "TYPESCRIPT",
-    icon: SiTypescript,
-    iconColor: "text-blue-400",
-  },
-  {
-    name: "AWS",
-    icon: SiAmazonwebservices,
-    iconColor: "text-orange-400"
-  },
-  {
-    name: "REACT",
-    icon: SiReact,
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "NODE.JS",
-    icon: SiNodedotjs,
-    iconColor: "text-emerald-400",
-  },
-  {
-    name: "DOCKER",
-    icon: SiDocker,
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "EXPRESS",
-    icon: SiExpress,
-    iconColor: "text-zinc-300",
-  },
-  {
-    name: "PSQL",
-    icon: SiPostgresql,
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "REDIS",
-    icon: SiRedis,
-    iconColor: "text-red-300",
-  },
-  {
-    name: "NEXT.JS",
-    icon: SiNextdotjs,
-    iconColor: "text-zinc-300",
-  },
-  {
-    name: "PYTHON",
-    icon: SiPython,
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "OPENAI",
-    icon: SiOpenai,
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "GIT",
-    icon: SiGit,
-    iconColor: "text-red-300",
-  },
-  {
-    name: "Anthropic",
-    icon: SiAnthropic,
-    iconColor: "text-blue-300",
-  },
-  {
-    name: "HTML",
-    icon: SiHtml5,
-    iconColor: "text-red-300",
-  },
-  {
-    name: "Tailwind",
-    icon: SiTailwindcss,
-    iconColor: "text-blue-300",
-  },
-];
+type IconComponent = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
-const TechBadges = () => {
+const ICONS: Record<string, { icon: IconComponent; color?: string }> = {
+  TYPESCRIPT: { icon: SiTypescript, color: "#3178C6" },
+  REACT: { icon: SiReact, color: "#61DAFB" },
+  "NEXT.JS": { icon: SiNextdotjs },
+  NODE: { icon: SiNodedotjs, color: "#5FA04E" },
+  POSTGRES: { icon: SiPostgresql, color: "#4169E1" },
+  SUPABASE: { icon: SiSupabase, color: "#3ECF8E" },
+  REDIS: { icon: SiRedis, color: "#DC382D" },
+  DOCKER: { icon: SiDocker, color: "#2496ED" },
+  AWS: { icon: FaAws, color: "#FF9900" },
+  TAILWIND: { icon: SiTailwindcss, color: "#06B6D4" },
+  OPENAI: { icon: SiOpenai },
+  D3: { icon: SiD3, color: "#F9A03C" },
+};
+
+const TILED_BRANDS = new Set(["TYPESCRIPT"]);
+
+const MarqueeRow = () => (
+  <span className="flex items-center gap-10 pr-10">
+    {HERO_MARQUEE.map((tech, i) => {
+      const entry = ICONS[tech];
+      const Icon = entry?.icon;
+      const tiled = TILED_BRANDS.has(tech);
+      return (
+        <span key={`${tech}-${i}`} className="contents">
+          <span className="inline-flex items-center gap-2.5">
+            {Icon ? (
+              tiled ? (
+                <span
+                  className="inline-flex items-center justify-center"
+                  style={{
+                    background: entry?.color ?? "var(--fg)",
+                    width: 16,
+                    height: 16,
+                    borderRadius: 2,
+                    color: "#ffffff",
+                  }}
+                >
+                  <Icon size={11} aria-hidden focusable="false" />
+                </span>
+              ) : (
+                <Icon
+                  size={14}
+                  style={{ color: entry?.color ?? "var(--fg)" }}
+                  aria-hidden
+                  focusable="false"
+                />
+              )
+            ) : null}
+            <span>{tech}</span>
+          </span>
+          <span aria-hidden>·</span>
+        </span>
+      );
+    })}
+  </span>
+);
+
+const TechStackMarquee = () => {
   return (
-    <div className="flex flex-wrap gap-2 sm:gap-3 max-w-2xl justify-start">
-      {techStack.map(({ name, icon: Icon, iconColor }) => (
-        <motion.div
-          key={name}
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <Badge
-            className="
-              bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800
-              text-white px-2.5 sm:px-3 py-1.5 sm:py-2
-              rounded-full text-[11px] sm:text-xs font-mono 
-              flex items-center gap-1.5 sm:gap-2
-              border border-zinc-600 dark:border-zinc-500
-              shadow-md transition-all duration-200
-              hover:from-[#444] hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500
-              hover:border-zinc-400 dark:hover:border-zinc-300 
-              hover:shadow-lg whitespace-nowrap
-            "
-          >
-            <Icon size={14} className={`${iconColor} flex-shrink-0`} />
-            <span>{name}</span>
-          </Badge>
-        </motion.div>
-      ))}
+    <div
+      className="py-6 overflow-hidden"
+      style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}
+    >
+      <div
+        className="flex marquee-track whitespace-nowrap font-mono text-[12px] tracking-[0.2em]"
+        style={{ color: "var(--fg-mute)" }}
+      >
+        <MarqueeRow />
+        <span aria-hidden="true" className="contents">
+          <MarqueeRow />
+        </span>
+      </div>
     </div>
   );
 };
 
-export default TechBadges;
+export default TechStackMarquee;

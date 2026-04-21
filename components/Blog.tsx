@@ -1,81 +1,69 @@
-import { ArticleCard } from "@/app/components/ArticleCard";
-import { Button } from "@/components/ui/button";
-import { type BlogPost } from "@/lib/blog-data";
-import { ArrowRight, BookOpen } from "lucide-react";
+"use client";
+
 import Link from "next/link";
+import { ArticleCard } from "@/app/components/ArticleCard";
+import { type BlogPost } from "@/lib/blog-data";
+import { useReveal } from "@/hooks/useReveal";
 
 interface BlogProps {
   posts: BlogPost[];
 }
 
 const ModernBlog = ({ posts }: BlogProps) => {
+  useReveal();
+  const featured = posts.slice(0, 3);
+
   return (
     <section
-      className="bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95"
-      id="blog"
+      id="journal"
+      className="py-32 md:py-40 relative"
+      style={{
+        background: "color-mix(in srgb, var(--bg-elev) 85%, transparent)",
+        backdropFilter: "blur(4px)",
+        WebkitBackdropFilter: "blur(4px)",
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
-        {/* Section Header */}
-        <div className="flex items-center gap-4 lg:gap-6 mb-8 lg:mb-16">
-          <div className="bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 p-3 lg:p-4 rounded-xl lg:rounded-2xl">
-            <BookOpen size={20} className="text-white lg:hidden" />
-            <BookOpen size={24} className="text-white hidden lg:block" />
-          </div>
-          <div>
-            <p className="md:text-sm lg:md:text-md font-mono text-zinc-500 dark:text-zinc-400 mb-1">
-              005 / BLOG
-            </p>
-            <h2 className="text-2xl lg:text-3xl font-mono font-bold text-zinc-900 dark:text-zinc-200">
-              Latest Articles
+      <div className="max-w-page mx-auto px-6 md:px-8">
+        <div className="flex items-center gap-3 mb-16 reveal">
+          <span className="idx">— 004 · JOURNAL</span>
+          <div className="flex-1 dotline" />
+          <Link
+            href="/blog"
+            className="font-mono text-[12px] tracking-[0.1em] arrow-link text-fg"
+          >
+            ALL ENTRIES →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-12 gap-8 mb-14">
+          <div className="col-span-12 md:col-span-6">
+            <h2 className="display text-[32px] md:text-[44px] leading-[1.05] reveal text-fg">
+              Notes from the <span className="italic-serif">workbench.</span>
             </h2>
           </div>
         </div>
 
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {posts?.length ? (
-            posts.map((post) => (
+        {featured.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 reveal-stagger">
+            {featured.map((post) => (
               <ArticleCard
                 key={post.slug}
                 slug={post.slug}
                 title={post.title}
-                excerpt={post.excerpt}
                 category={post.category}
                 readTime={post.readTime}
+                date={post.date}
               />
-            ))
-          ) : (
-            <div className="col-span-full flex flex-col items-center justify-center py-16 px-4 text-center">
-              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-full p-4 mb-6">
-                <BookOpen className="w-8 h-8 text-zinc-600 dark:text-zinc-400" />
-              </div>
-              <h3 className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-200 mb-2">
-                No Articles Yet
-              </h3>
-              <p className="font-mono text-zinc-600 dark:text-zinc-400 max-w-md">
-                I&apos;m currently working on some exciting articles. Check back soon for new
-                content!
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* View All Button */}
-        {posts?.length > 0 && (
-          <div className="flex justify-center mt-12">
-            <Link href="/blog">
-              <Button
-                className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600
-                  text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                  transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-              >
-                VIEW ALL ARTICLES
-                <ArrowRight
-                  className="ml-2 transition-transform group-hover:translate-x-1"
-                  size={18}
-                />
-              </Button>
-            </Link>
+            ))}
+          </div>
+        ) : (
+          <div
+            className="py-16 text-center"
+            style={{ borderTop: "1px solid var(--border)" }}
+          >
+            <p className="text-[16px] text-fg-dim">
+              New entries are drafting. Check back soon.
+            </p>
           </div>
         )}
       </div>

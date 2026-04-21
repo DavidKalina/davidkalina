@@ -1,28 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Mono } from "next/font/google";
+import { Space_Mono } from "next/font/google";
 import "./globals.css";
 import "prismjs/themes/prism-tomorrow.css";
 import ModernFooter from "@/components/Footer";
 import ModernNavbar from "@/components/Navbar";
-import AnimatedBackground from "@/components/AnimatedBackground.";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
   subsets: ["latin"],
   weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -41,11 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth`}>
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${spaceMono.variable} font-mono antialiased min-h-screen flex flex-col`}
       >
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider defaultTheme="dark" storageKey="dk-theme">
           <AnimatedBackground />
           <ModernNavbar />
           <main className="flex-1">{children}</main>

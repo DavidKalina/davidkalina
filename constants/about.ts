@@ -1,44 +1,49 @@
 export const ABOUT_CONSTANTS = {
   section: {
     number: "002",
-    title: "About Me",
+    eyebrow: "ABOUT",
   },
-  bio: {
-    heading: "Full-stack developer crafting thoughtful solutions that put people first",
-    paragraphs: [
-      "I believe in building technology that enhances rather than replaces human capabilities. With over four years of experience, I focus on creating applications that are both powerful and intuitive.",
-      "My approach combines technical expertise with a deep appreciation for human needs and experiences. I enjoy mentoring others and building tools that make a real difference in people's daily lives.",
-    ],
+  headline: {
+    before: "Full-stack developer crafting ",
+    accent: "thoughtful",
+    after: " solutions that put people first.",
   },
-  stats: {
-    coreSkills: {
-      title: "Core Skills",
-      content: "React, Next.js, TypeScript\nNode.js, SQL, Supabase",
+  paragraphs: [
+    "I believe in building technology that enhances rather than replaces human capability. Four-plus years in, I'm still most interested in the boring parts — latency budgets, failure modes, the seams between systems — because that's where user trust is actually earned.",
+    "My approach marries technical depth with a genuine appreciation for how people think, work, and get interrupted. I enjoy mentoring engineers early in their careers, and I like building tools that quietly make a day easier.",
+  ],
+  stats: [
+    {
+      label: "Core skills",
+      content: "React, Next.js, TypeScript\nNode.js, Postgres, Supabase",
     },
-    interests: {
-      title: "Interests",
-      content: "Human-Centered Design\nTool Creation",
+    {
+      label: "Interests",
+      content: "Human-centered design\nTool creation & DX",
     },
-  },
-  cta: {
-    contact: "GET IN TOUCH",
-    github: "GITHUB",
-  },
-  featuredWork: {
-    title: "FEATURED WORK",
-    project: {
-      name: "ALFAPHOX/REVIVE",
-      year: "2024",
-      description:
-        "Designed and launched a white-label review management tool, contributing to a $400k+ product sale",
+    {
+      label: "Based in",
+      content: "Cleveland, OH\nWorking remote (EST)",
     },
+    {
+      label: "Currently",
+      content: "Open to senior roles\n& select freelance",
+    },
+  ],
+  featured: {
+    eyebrow: "Featured — 2023",
+    quoteBefore: "“Designed and launched a white-label review-management tool, contributing to a ",
+    quoteAccent: "$400k+ product sale",
+    quoteAfter: ".”",
+    meta: "ALFAPHOX / REVIVE",
+    action: "SEE CASE",
   },
-  currentFocus: {
-    title: "CURRENT FOCUS",
+  focus: {
+    label: "Current focus",
     items: [
-      "Building tools that amplify human capabilities",
-      "Creating intuitive, accessible interfaces",
-      "Fostering collaborative development environments",
+      "Tools that amplify — rather than replace — human judgment.",
+      "Intuitive, accessible interfaces for technical audiences.",
+      "Collaborative development environments where engineers can grow.",
     ],
   },
 } as const;

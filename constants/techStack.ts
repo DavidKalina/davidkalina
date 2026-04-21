@@ -1,167 +1,72 @@
+export type Skill = {
+  name: string;
+  yrs: string;
+  note: string;
+};
+
+export type StackCategory = {
+  idx: string;
+  title: string;
+  lede: string;
+  skills: ReadonlyArray<Skill>;
+};
+
 export const TECH_STACK_CONSTANTS = {
   section: {
     number: "001",
-    title: "Tech Stack",
-    description:
-      "I mostly use Typescript for frontend and backend development, and here's a comprehensive list of the technologies I love to work with and have worked with professionally.",
+    eyebrow: "EXPERTISE",
+    headlinePrefix: "The ",
+    headlineAccent: "tools",
+    headlineSuffix: "",
+    headlineLine2: "I reach for.",
+    paragraph:
+      "TypeScript on both ends of the wire. A small, sharpened kit instead of a sprawling one — every tool here has earned its place through years of production use.",
+    quote: "“Mastery is a small pile of tools, well-kept.”",
   },
-  categories: {
-    frontend: {
-      icon: "Laptop",
-      title: "FRONTEND DEVELOPMENT",
-      description: "Specializing in modern, user-centric web applications",
+  categories: [
+    {
+      idx: "01",
+      title: "Frontend",
+      lede: "Applications that feel fast and stay out of the way.",
       skills: [
-        {
-          name: "TYPESCRIPT",
-          level: "Advanced",
-          proficiency: "5+ years of production experience",
-          icon: "SiTypescript",
-          iconColor: "text-blue-500 dark:text-blue-400",
-          details: "Type-safe development, advanced patterns, and complex state management",
-        },
-        {
-          name: "REACT",
-          level: "Advanced",
-          proficiency: "Enterprise-level applications",
-          icon: "SiReact",
-          iconColor: "text-blue-400 dark:text-blue-300",
-          details: "Custom hooks, performance optimization, and complex component architecture",
-        },
-        {
-          name: "VUE",
-          level: "Advanced",
-          proficiency: "Enterprise-level applications",
-          icon: "SiVue",
-          iconColor: "text-emerald-400 dark:text-emerald-300",
-          details: "Custom hooks, performance optimization, and complex component architecture",
-        },
-        {
-          name: "NEXT.JS",
-          level: "Advanced",
-          proficiency: "Full-stack applications",
-          icon: "SiNextdotjs",
-          iconColor: "text-black dark:text-white",
-          details: "Server components, streaming, and advanced routing patterns",
-        },
-        {
-          name: "HTML/CSS",
-          level: "Advanced",
-          proficiency: "Semantic markup and modern CSS",
-          icon: "Code2",
-          iconColor: "text-orange-500 dark:text-orange-400",
-          details: "Accessibility, responsive design, and modern CSS features",
-        },
-        {
-          name: "TAILWIND",
-          level: "Advanced",
-          proficiency: "Utility-first development",
-          icon: "SiTailwindcss",
-          iconColor: "text-cyan-500 dark:text-cyan-400",
-          details: "Custom configurations, component design, and responsive layouts",
-        },
+        { name: "TypeScript", yrs: "5+ yrs", note: "Advanced types, zod schemas, strict mode everywhere." },
+        { name: "React", yrs: "5+ yrs", note: "Hooks, suspense, perf tuning, complex component trees." },
+        { name: "Next.js", yrs: "3 yrs", note: "App router, RSC, streaming, ISR." },
+        { name: "Vue", yrs: "3 yrs", note: "Composition API, Pinia, enterprise SPAs." },
+        { name: "Tailwind", yrs: "3 yrs", note: "Design tokens, dark mode, component variants." },
+        { name: "HTML / CSS", yrs: "—", note: "Semantic markup, accessibility, modern layout." },
       ],
     },
-    backend: {
-      icon: "Database",
-      title: "BACKEND DEVELOPMENT",
-      description: "Building scalable server-side solutions",
+    {
+      idx: "02",
+      title: "Backend",
+      lede: "Servers that wake up, do one thing well, and go back to sleep.",
       skills: [
-        {
-          name: "NODE.JS",
-          level: "Proficient",
-          proficiency: "Production microservices",
-          icon: "SiNodedotjs",
-          iconColor: "text-emerald-500 dark:text-emerald-400",
-          details:
-            "Event-driven architecture, performance optimization, and security best practices",
-        },
-        {
-          name: "EXPRESS",
-          level: "Proficient",
-          proficiency: "REST API development",
-          icon: "SiExpress",
-          iconColor: "text-zinc-500 dark:text-zinc-300",
-          details: "Middleware patterns, error handling, and API security",
-        },
-        {
-          name: "BUN",
-          level: "Intermediate",
-          proficiency: "High-performance applications",
-          icon: "SiBun",
-          iconColor: "text-orange-500 dark:text-orange-400",
-          details: "Fast runtime, built-in bundler, and TypeScript support",
-        },
-        {
-          name: "WEBSOCKETS",
-          level: "Proficient",
-          proficiency: "Real-time applications",
-          icon: "Code2",
-          iconColor: "text-green-500 dark:text-green-400",
-          details: "Bi-directional communication, scaling strategies, and fallback mechanisms",
-        },
+        { name: "Node.js", yrs: "4+ yrs", note: "Event-driven services, perf optimization, security." },
+        { name: "Express", yrs: "4 yrs", note: "REST APIs, middleware patterns, error boundaries." },
+        { name: "Bun", yrs: "1 yr", note: "Fast runtime, built-in bundler, TS-first." },
+        { name: "WebSockets", yrs: "3 yrs", note: "Realtime channels, scaling, fallback strategies." },
       ],
     },
-    database: {
-      icon: "Layers",
-      title: "DATABASE & INFRASTRUCTURE",
-      description: "Database design and infrastructure management",
+    {
+      idx: "03",
+      title: "Data & Infrastructure",
+      lede: "Schemas that make sense in a year.",
       skills: [
-        {
-          name: "POSTGRESQL",
-          level: "Proficient",
-          proficiency: "Production databases",
-          icon: "Database",
-          iconColor: "text-blue-500 dark:text-blue-400",
-          details: "Query optimization, indexing strategies, and data modeling",
-        },
-        {
-          name: "SUPABASE",
-          level: "Proficient",
-          proficiency: "Full-stack integration",
-          icon: "SiSupabase",
-          iconColor: "text-emerald-500 dark:text-emerald-400",
-          details: "Real-time subscriptions, row-level security, and edge functions",
-        },
-        {
-          name: "REDIS",
-          level: "Intermediate",
-          proficiency: "Caching & queuing",
-          icon: "SiRedis",
-          iconColor: "text-red-500 dark:text-red-400",
-          details: "Caching strategies, pub/sub patterns, and session management",
-        },
+        { name: "PostgreSQL", yrs: "4 yrs", note: "Query tuning, indexing, data modeling." },
+        { name: "Supabase", yrs: "2 yrs", note: "RLS, realtime, edge functions, auth." },
+        { name: "Redis", yrs: "2 yrs", note: "Caching, pub/sub, session stores." },
       ],
     },
-    cloud: {
-      icon: "Cloud",
-      title: "CLOUD & DEVOPS",
-      description: "Cloud infrastructure and deployment automation",
+    {
+      idx: "04",
+      title: "Cloud & DevOps",
+      lede: "Deploying without waking anyone up.",
       skills: [
-        {
-          name: "AWS",
-          level: "Intermediate",
-          proficiency: "Cloud infrastructure",
-          icon: "Code2",
-          iconColor: "text-orange-500 dark:text-orange-400",
-          details: "EC2, S3, Lambda, and infrastructure as code",
-        },
-        {
-          name: "DIGITAL OCEAN",
-          level: "Intermediate",
-          proficiency: "Cloud hosting",
-          icon: "Code2",
-          iconColor: "text-blue-500 dark:text-blue-400",
-          details: "Droplets, managed databases, and container orchestration",
-        },
-        {
-          name: "DOCKER",
-          level: "Intermediate",
-          proficiency: "Container orchestration",
-          icon: "SiDocker",
-          iconColor: "text-blue-400 dark:text-blue-300",
-          details: "Containerization, multi-stage builds, and compose workflows",
-        },
+        { name: "AWS", yrs: "2+ yrs", note: "EC2, S3, Lambda, IaC fundamentals." },
+        { name: "DigitalOcean", yrs: "3 yrs", note: "Droplets, managed DBs, container hosting." },
+        { name: "Docker", yrs: "3 yrs", note: "Multi-stage builds, Compose, CI integration." },
       ],
     },
-  },
+  ] as ReadonlyArray<StackCategory>,
 } as const;
