@@ -26,48 +26,85 @@ export const HERO_CONSTANTS = {
   ],
 } as const;
 
-export type HeroNode = {
-  id: string;
-  label: string;
-  x: number;
-  y: number;
-  r: number;
-  primary?: boolean;
+import {
+  BookOpen,
+  Brain,
+  Cable,
+  CheckCheck,
+  Ear,
+  Eye,
+  FileText,
+  FlaskConical,
+  GitMerge,
+  Hammer,
+  HelpCircle,
+  Pencil,
+  PenLine,
+  Puzzle,
+  Rocket,
+  Ruler,
+  ScanEye,
+  Search,
+  type LucideIcon,
+} from "lucide-react";
+
+export type SubStep = { fn: string; icon: LucideIcon };
+
+export type ProcessStep = {
+  fn: string;
+  icon: LucideIcon;
+  sub: readonly [SubStep, SubStep];
 };
 
-export const HERO_GRAPH_NODES: HeroNode[] = [
-  { id: "ts", label: "TS", x: 250, y: 250, r: 30, primary: true },
-  { id: "react", label: "React", x: 140, y: 170, r: 20 },
-  { id: "next", label: "Next", x: 370, y: 170, r: 20 },
-  { id: "node", label: "Node", x: 140, y: 340, r: 20 },
-  { id: "pg", label: "PG", x: 370, y: 340, r: 20 },
-  { id: "tw", label: "Tw", x: 70, y: 100, r: 14 },
-  { id: "vue", label: "Vue", x: 80, y: 240, r: 14 },
-  { id: "bun", label: "Bun", x: 60, y: 400, r: 14 },
-  { id: "gql", label: "GQL", x: 250, y: 410, r: 14 },
-  { id: "rd", label: "Rd", x: 430, y: 400, r: 14 },
-  { id: "aws", label: "AWS", x: 440, y: 260, r: 14 },
-  { id: "tf", label: "TF", x: 420, y: 100, r: 14 },
-  { id: "ai", label: "AI", x: 240, y: 80, r: 14 },
-];
-
-export const HERO_GRAPH_EDGES: ReadonlyArray<readonly [string, string]> = [
-  ["ts", "react"],
-  ["ts", "next"],
-  ["ts", "node"],
-  ["ts", "pg"],
-  ["react", "tw"],
-  ["react", "vue"],
-  ["node", "bun"],
-  ["node", "gql"],
-  ["pg", "rd"],
-  ["pg", "aws"],
-  ["next", "tf"],
-  ["next", "ai"],
-  ["react", "next"],
-  ["node", "pg"],
-  ["pg", "gql"],
-  ["aws", "tf"],
+export const PROCESS_STEPS: readonly ProcessStep[] = [
+  {
+    fn: "listen",
+    icon: Ear,
+    sub: [
+      { fn: "parse", icon: Puzzle },
+      { fn: "reflect", icon: Brain },
+    ],
+  },
+  {
+    fn: "clarify",
+    icon: Search,
+    sub: [
+      { fn: "ask", icon: HelpCircle },
+      { fn: "confirm", icon: CheckCheck },
+    ],
+  },
+  {
+    fn: "sketch",
+    icon: Pencil,
+    sub: [
+      { fn: "model", icon: Ruler },
+      { fn: "outline", icon: FileText },
+    ],
+  },
+  {
+    fn: "build",
+    icon: Hammer,
+    sub: [
+      { fn: "write", icon: PenLine },
+      { fn: "wire", icon: Cable },
+    ],
+  },
+  {
+    fn: "review",
+    icon: ScanEye,
+    sub: [
+      { fn: "read", icon: BookOpen },
+      { fn: "test", icon: FlaskConical },
+    ],
+  },
+  {
+    fn: "ship",
+    icon: Rocket,
+    sub: [
+      { fn: "merge", icon: GitMerge },
+      { fn: "observe", icon: Eye },
+    ],
+  },
 ];
 
 export const HERO_MARQUEE = [

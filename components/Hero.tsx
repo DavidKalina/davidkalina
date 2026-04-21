@@ -87,7 +87,7 @@ const ModernHero = () => {
               className="absolute left-4 bottom-4 font-mono text-[10px] tracking-[0.14em]"
               style={{ color: "var(--fg-mute)" }}
             >
-              FIG. 01 — STACK TOPOLOGY
+              FIG. 01 — EVENT LOOP
             </div>
             <div
               className="absolute right-4 top-4 font-mono text-[10px] tracking-[0.14em]"

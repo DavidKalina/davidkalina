@@ -223,8 +223,18 @@
     }
     .floaty,
     .marquee-track,
-    .caret {
+    .caret,
+    .el-spin,
+    .el-pulse,
+    .el-queue-item,
+    .el-breath,
+    .el-core-pulse,
+    .el-core-flash,
+    .el-connector-flash {
       animation: none !important;
+    }
+    .el-queue-item {
+      transition: none !important;
     }
   }
 
@@ -270,6 +280,69 @@
   }
   .caret {
     animation: blink 1.1s steps(1) infinite;
+  }
+
+  /* Event-loop hero graphic */
+  @keyframes el-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .el-spin {
+    animation: el-spin 60s steps(60, end) infinite;
+  }
+
+  @keyframes el-pulse {
+    0% { opacity: 0; }
+    40% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+  .el-pulse {
+    animation: el-pulse 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  @keyframes el-queue-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .el-queue-item {
+    animation: el-queue-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  /* Reactor halo, core, and junction taps — breathing energy around the event loop */
+  @keyframes el-breath {
+    0%, 100% { opacity: 0.14; }
+    50% { opacity: 0.3; }
+  }
+  .el-breath {
+    animation: el-breath 2.8s ease-in-out infinite;
+  }
+
+  @keyframes el-core-pulse {
+    0%, 100% { opacity: 0.04; }
+    50% { opacity: 0.11; }
+  }
+  .el-core-pulse {
+    animation: el-core-pulse 2.8s ease-in-out infinite;
+  }
+
+  /* Expanding ring when the reactor processes an activation */
+  @keyframes el-core-flash {
+    0%   { transform: scale(0.72); opacity: 0.45; }
+    100% { transform: scale(1.95); opacity: 0; }
+  }
+  .el-core-flash {
+    animation: el-core-flash 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  /* Connector lane flash when the particle hits a junction */
+  @keyframes el-connector-flash {
+    0%   { opacity: 0.85; }
+    100% { opacity: 0; }
+  }
+  .el-connector-flash {
+    animation: el-connector-flash 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
 }
 
