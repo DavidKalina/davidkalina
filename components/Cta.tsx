@@ -117,7 +117,7 @@ const ModernCTA = () => {
                 <div>
                   <div className="eyebrow mb-2">Location</div>
                   <div className="serif text-[28px] leading-none text-fg">
-                    Cleveland, OH · UTC−5
+                    Colorado · UTC−7
                   </div>
                 </div>
               </div>

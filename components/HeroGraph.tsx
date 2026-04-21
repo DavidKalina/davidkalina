@@ -2,14 +2,15 @@ import type { ComponentType, SVGProps } from "react";
 import {
   SiBun,
   SiDocker,
+  SiGraphql,
   SiNextdotjs,
   SiNodedotjs,
   SiOpenai,
   SiPostgresql,
   SiReact,
   SiRedis,
-  SiSupabase,
   SiTailwindcss,
+  SiTerraform,
   SiTypescript,
   SiVuedotjs,
 } from "react-icons/si";
@@ -27,10 +28,10 @@ const ICONS: Record<string, IconComponent> = {
   tw: SiTailwindcss,
   vue: SiVuedotjs,
   bun: SiBun,
-  sb: SiSupabase,
+  gql: SiGraphql,
   rd: SiRedis,
   aws: FaAws,
-  dk: SiDocker,
+  tf: SiTerraform,
   ai: SiOpenai,
 };
 
@@ -43,10 +44,10 @@ const ICON_COLORS: Record<string, string> = {
   tw: "#06B6D4",
   vue: "#4FC08D",
   bun: "#FBF0DF",
-  sb: "#3ECF8E",
+  gql: "#E10098",
   rd: "#DC382D",
   aws: "#FF9900",
-  dk: "#2496ED",
+  tf: "#7B42BC",
 };
 
 const nodeMap = new Map(HERO_GRAPH_NODES.map((n) => [n.id, n]));

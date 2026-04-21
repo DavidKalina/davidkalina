@@ -1,5 +1,5 @@
 export const HERO_CONSTANTS = {
-  eyebrow: "Full-Stack Developer · Cleveland / Remote",
+  eyebrow: "Full-Stack Software Engineer · Colorado / Remote",
   availability: "AVAILABLE — Q2 2026",
   headline: {
     line1: "Human-centered",
@@ -19,10 +19,10 @@ export const HERO_CONSTANTS = {
     tertiary: "RESUME",
   },
   stats: [
-    { label: "Experience", value: "5", unit: "yrs" },
-    { label: "Product impact", value: "$400", unit: "k+" },
-    { label: "Shipped projects", value: "24", unit: "+" },
-    { label: "Devs mentored", value: "10", unit: "+" },
+    { label: "Professional exp.", value: "3+", unit: "yrs" },
+    { label: "Pipeline cost cut", value: "98", unit: "%" },
+    { label: "Saved annually", value: "$12", unit: "k+" },
+    { label: "Domains shipped", value: "3", unit: "+" },
   ],
 } as const;
 
@@ -44,10 +44,10 @@ export const HERO_GRAPH_NODES: HeroNode[] = [
   { id: "tw", label: "Tw", x: 70, y: 100, r: 14 },
   { id: "vue", label: "Vue", x: 80, y: 240, r: 14 },
   { id: "bun", label: "Bun", x: 60, y: 400, r: 14 },
-  { id: "sb", label: "Sb", x: 250, y: 410, r: 14 },
+  { id: "gql", label: "GQL", x: 250, y: 410, r: 14 },
   { id: "rd", label: "Rd", x: 430, y: 400, r: 14 },
   { id: "aws", label: "AWS", x: 440, y: 260, r: 14 },
-  { id: "dk", label: "Dk", x: 420, y: 100, r: 14 },
+  { id: "tf", label: "TF", x: 420, y: 100, r: 14 },
   { id: "ai", label: "AI", x: 240, y: 80, r: 14 },
 ];
 
@@ -59,27 +59,30 @@ export const HERO_GRAPH_EDGES: ReadonlyArray<readonly [string, string]> = [
   ["react", "tw"],
   ["react", "vue"],
   ["node", "bun"],
-  ["node", "sb"],
+  ["node", "gql"],
   ["pg", "rd"],
   ["pg", "aws"],
-  ["next", "dk"],
+  ["next", "tf"],
   ["next", "ai"],
   ["react", "next"],
   ["node", "pg"],
-  ["pg", "sb"],
+  ["pg", "gql"],
+  ["aws", "tf"],
 ];
 
 export const HERO_MARQUEE = [
   "TYPESCRIPT",
   "REACT",
   "NEXT.JS",
+  "VUE",
   "NODE",
+  "BUN",
+  "GRAPHQL",
   "POSTGRES",
-  "SUPABASE",
   "REDIS",
-  "DOCKER",
   "AWS",
+  "TERRAFORM",
+  "DOCKER",
   "TAILWIND",
-  "OPENAI",
-  "D3",
+  "REACT NATIVE",
 ] as const;
