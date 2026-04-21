@@ -1,44 +1,50 @@
 export const ABOUT_CONSTANTS = {
   section: {
     number: "002",
-    title: "About Me",
+    eyebrow: "ABOUT",
   },
-  bio: {
-    heading: "Full-stack developer crafting thoughtful solutions that put people first",
-    paragraphs: [
-      "I believe in building technology that enhances rather than replaces human capabilities. With over four years of experience, I focus on creating applications that are both powerful and intuitive.",
-      "My approach combines technical expertise with a deep appreciation for human needs and experiences. I enjoy mentoring others and building tools that make a real difference in people's daily lives.",
-    ],
+  headline: {
+    before: "Full-stack engineer building ",
+    accent: "thoughtful",
+    after: " systems across SaaS, logistics, and marketplaces.",
   },
-  stats: {
-    coreSkills: {
-      title: "Core Skills",
-      content: "React, Next.js, TypeScript\nNode.js, SQL, Supabase",
+  paragraphs: [
+    "Three-plus years of professional experience, with a focus on TypeScript, React, and Node.js — and a growing pull toward cloud infrastructure (AWS, Terraform) and AI-powered tooling. I'm most interested in the boring parts: latency budgets, failure modes, the seams between systems. That's where user trust is actually earned.",
+    "Lately I've been shipping AI-driven document pipelines, GraphQL APIs, and cross-platform mobile experiences — and exploring how Claude Code, the Anthropic Agent SDK, and custom MCP integrations change what a small team can build.",
+  ],
+  stats: [
+    {
+      label: "Core skills",
+      content: "TypeScript, React, Vue\nNode.js, GraphQL, Postgres",
     },
-    interests: {
-      title: "Interests",
-      content: "Human-Centered Design\nTool Creation",
+    {
+      label: "Cloud & AI",
+      content: "AWS, Terraform, Docker\nVercel AI SDK, MCP",
     },
-  },
-  cta: {
-    contact: "GET IN TOUCH",
-    github: "GITHUB",
-  },
-  featuredWork: {
-    title: "FEATURED WORK",
-    project: {
-      name: "ALFAPHOX/REVIVE",
-      year: "2024",
-      description:
-        "Designed and launched a white-label review management tool, contributing to a $400k+ product sale",
+    {
+      label: "Based in",
+      content: "Colorado\nWorking remote (MT)",
     },
+    {
+      label: "Currently",
+      content: "Open to senior roles\n& select freelance",
+    },
+  ],
+  featured: {
+    eyebrow: "Featured — 2025",
+    quoteBefore:
+      "“Designed an AI-powered document pipeline that reduced shipping-PDF processing costs by ",
+    quoteAccent: "98%",
+    quoteAfter: " — saving $20k+ annually.”",
+    meta: "EEL DATA SYSTEMS",
+    action: "SEE CASE",
   },
-  currentFocus: {
-    title: "CURRENT FOCUS",
+  focus: {
+    label: "Current focus",
     items: [
-      "Building tools that amplify human capabilities",
-      "Creating intuitive, accessible interfaces",
-      "Fostering collaborative development environments",
+      "AI-powered tooling that amplifies — rather than replaces — human judgment.",
+      "Event-driven, non-blocking infrastructure on AWS + Terraform.",
+      "Cross-platform mobile experiences with React Native.",
     ],
   },
 } as const;

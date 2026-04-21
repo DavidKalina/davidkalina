@@ -1,231 +1,115 @@
-"use client";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Github, Layout, Bell, Brain, Star, Globe, Mail } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-import { Project } from "@/constants/projectGrid";
-import { motion } from "framer-motion";
-import {
-  SiAnthropic,
-  SiDocker,
-  SiExpress,
-  SiGit,
-  SiHtml5,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiOpenai,
-  SiPostgresql,
-  SiPython,
-  SiReact,
-  SiRedis,
-  SiTailwindcss,
-  SiTypescript,
-  SiFirebase,
-  SiSupabase,
-  SiD3Dotjs,
-  SiExpo,
-  SiGoogle,
-  SiSendgrid,
-  SiPwa,
-} from "react-icons/si";
-
-// Helper function to map icon names to components
-const getIconComponent = (iconName: string, size: number = 24): React.ReactElement => {
-  const iconMap: { [key: string]: React.ReactElement } = {
-    Layout: <Layout size={size} className="text-white" />,
-    Bell: <Bell size={size} className="text-white" />,
-    Brain: <Brain size={size} className="text-white" />,
-    Star: <Star size={size} className="text-white" />,
-    Globe: <Globe size={size} className="text-white" />,
-    Mail: <Mail size={size} className="text-white" />,
-  };
-  return iconMap[iconName] || <Layout size={size} className="text-white" />;
-};
-
-// Helper function to map tag names to icons and colors
-const getTagIcon = (tag: string): { icon: React.ComponentType<{ size?: number; className?: string }>; color: string } => {
-  const tagMap: { [key: string]: { icon: React.ComponentType<{ size?: number; className?: string }>; color: string } } = {
-    // React ecosystem
-    "REACT": { icon: SiReact, color: "text-blue-300" },
-    "REACT NATIVE": { icon: SiReact, color: "text-blue-300" },
-    "NEXT.JS": { icon: SiNextdotjs, color: "text-zinc-300" },
-    "TYPESCRIPT": { icon: SiTypescript, color: "text-blue-400" },
-
-    // Backend & Database
-    "NODE.JS": { icon: SiNodedotjs, color: "text-emerald-400" },
-    "EXPRESS": { icon: SiExpress, color: "text-zinc-300" },
-    "PSQL": { icon: SiPostgresql, color: "text-blue-300" },
-    "SUPABASE": { icon: SiSupabase, color: "text-emerald-400" },
-    "FIREBASE": { icon: SiFirebase, color: "text-yellow-400" },
-    "REDIS": { icon: SiRedis, color: "text-red-300" },
-
-    // AI & APIs
-    "OPENAI": { icon: SiOpenai, color: "text-blue-300" },
-    "ANTHROPIC": { icon: SiAnthropic, color: "text-blue-300" },
-
-    // Development tools
-    "DOCKER": { icon: SiDocker, color: "text-blue-300" },
-    "GIT": { icon: SiGit, color: "text-red-300" },
-    "EXPO": { icon: SiExpo, color: "text-zinc-300" },
-
-    // APIs & Services
-    "GOOGLE PLACES API": { icon: SiGoogle, color: "text-blue-400" },
-    "SENDGRID": { icon: SiSendgrid, color: "text-blue-400" },
-    "WEBSOCKETS": { icon: SiExpress, color: "text-zinc-300" },
-
-    // Frontend & Styling
-    "HTML": { icon: SiHtml5, color: "text-red-300" },
-    "TAILWIND": { icon: SiTailwindcss, color: "text-blue-300" },
-    "PWA": { icon: SiPwa, color: "text-blue-400" },
-
-    // Data visualization
-    "D3.JS": { icon: SiD3Dotjs, color: "text-orange-400" },
-
-    // Programming languages
-    "PYTHON": { icon: SiPython, color: "text-blue-300" },
-  };
-
-  return tagMap[tag.toUpperCase()] || { icon: SiExpress, color: "text-zinc-300" };
-};
+import { Fragment } from "react";
+import type { Project } from "@/constants/projectGrid";
 
 interface ProjectCardProps {
   project: Project;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, isFirst, isLast }) => {
+  const clientHue = `oklch(0.7 0.08 ${project.hue})`;
+
+  const borderStyle: React.CSSProperties = {
+    borderTop: isFirst ? "1px solid var(--border)" : undefined,
+    borderBottom: "1px solid var(--border)",
+  };
+  if (!isFirst && !isLast) borderStyle.borderTop = "1px solid var(--border)";
+  if (!isFirst) borderStyle.borderTop = "1px solid var(--border)";
+
   return (
-    <Card
-      className="relative border-2 border-zinc-100 dark:border-zinc-700/50 
-        rounded-2xl lg:rounded-3xl overflow-hidden bg-white dark:bg-zinc-800
-        hover:border-transparent dark:hover:border-transparent
-        transition-all duration-300 group shadow-md
-        hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-zinc-900/50
-        hover:-translate-y-1 hover:scale-[1.01]"
+    <article
+      className="group grid grid-cols-12 gap-8 py-14"
+      style={borderStyle}
     >
-      <CardContent className="p-0 h-full relative z-10">
-        {/* Project Header */}
+      <div className="col-span-12 md:col-span-2">
         <div
-          className="p-6 lg:p-8 h-[180px] lg:h-[220px] relative"
-          style={{
-            background:
-              project.bgColor === "bg-gradient-to-br from-[#10B981] to-[#059669]"
-                ? "linear-gradient(to bottom right, #10B981, #059669)"
-                : project.bgColor === "bg-gradient-to-br from-[#F59E0B] to-[#D97706]"
-                  ? "linear-gradient(to bottom right, #F59E0B, #D97706)"
-                  : project.bgColor === "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]"
-                    ? "linear-gradient(to bottom right, #8B5CF6, #7C3AED)"
-                    : project.bgColor === "bg-gradient-to-br from-[#EC4899] to-[#DB2777]"
-                      ? "linear-gradient(to bottom right, #EC4899, #DB2777)"
-                      : project.bgColor === "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]"
-                        ? "linear-gradient(to bottom right, #14B8A6, #0D9488)"
-                        : "linear-gradient(to bottom right, #0EA5E9, #0284C7)",
-          }}
+          className="font-mono text-[11px] tracking-[0.14em]"
+          style={{ color: "var(--fg-mute)" }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.12),rgba(255,255,255,0))]" />
-          <div className="relative z-10 h-full flex flex-col">
-            <div className="flex items-center justify-between mb-4 lg:mb-6">
-              <div className="inline-block bg-gradient-to-br from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 rounded-lg lg:rounded-xl p-2">
-                <div className="lg:hidden">{getIconComponent(project.icon, 20)}</div>
-                <div className="hidden lg:block">{getIconComponent(project.icon)}</div>
-              </div>
-              <Badge className="bg-gradient-to-r from-[#333] to-zinc-700 dark:from-zinc-700 dark:to-zinc-800 text-white px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-[10px] lg:text-xs font-mono">
-                {project.year}
-              </Badge>
-            </div>
-            <h3 className="font-mono text-lg lg:text-xl font-bold text-white mb-2 line-clamp-2">
-              {project.title}
-            </h3>
-            <p className="font-mono text-xs lg:text-sm text-white/90 leading-relaxed line-clamp-3 flex-grow">
-              {project.description}
-            </p>
-          </div>
+          — {project.num}
         </div>
-
-        {/* Project Details */}
-        <div className="p-6 lg:p-8 bg-white dark:bg-zinc-800 h-full">
-          <div className="space-y-6 lg:space-y-8">
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => {
-                const { icon: Icon, color } = getTagIcon(tag);
-                return (
-                  <motion.div
-                    key={tag}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <Badge
-                      className="
-                        bg-gradient-to-r from-zinc-800 to-zinc-900 dark:from-zinc-800 dark:to-zinc-900
-                        text-zinc-100 px-2.5 sm:px-3 py-1.5 sm:py-2
-                        rounded-full text-[11px] sm:text-xs font-mono font-medium
-                        flex items-center gap-1.5 sm:gap-2
-                        border border-zinc-700 dark:border-zinc-600
-                        shadow-md transition-all duration-200
-                        hover:from-zinc-700 hover:to-zinc-800 dark:hover:from-zinc-700 dark:hover:to-zinc-800
-                        hover:border-zinc-500 dark:hover:border-zinc-400 
-                        hover:shadow-lg whitespace-nowrap
-                      "
-                    >
-                      <Icon size={14} className={`${color} flex-shrink-0`} />
-                      <span className="text-zinc-50 font-semibold">{tag}</span>
-                    </Badge>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-
-
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
-              {project.href && (
-                <Link target="_blank" href={project.href} className={!project.source ? "w-full" : ""}>
-                  <Button
-                    className={`bg-gradient-to-r from-black via-zinc-900 to-black dark:from-zinc-900 dark:via-black dark:to-zinc-900
-                      text-white rounded-full font-mono font-bold md:text-md 2xl:text-lg px-8 py-6 group 
-                      border-2 border-black dark:border-zinc-800
-                      transition-all duration-300 
-                      hover:border-white dark:hover:border-zinc-300
-                      hover:from-zinc-800 hover:via-zinc-900 hover:to-zinc-800 
-                      dark:hover:from-zinc-800 dark:hover:via-zinc-900 dark:hover:to-zinc-800
-                      hover:shadow-[0_0_25px_rgba(255,255,255,0.8)] dark:hover:shadow-[0_0_25px_rgba(255,255,255,1)]
-                      hover:-translate-y-1 disabled:opacity-50 ${!project.source ? "w-full" : ""}`}
-                  >
-                    VIEW PROJECT
-                    <ArrowRight
-                      className="ml-2 transition-transform group-hover:translate-x-1"
-                      size={14}
-                    />
-                  </Button>
-                </Link>
-              )}
-              {project.source && (
-                <Link target="_blank" href={project.source} className={!project.href ? "w-full" : ""}>
-                  <Button
-                    variant="outline"
-                    className={`bg-gradient-to-r from-zinc-100 to-white dark:from-zinc-900 dark:to-zinc-800
-                      text-zinc-900 dark:text-zinc-100 rounded-full font-mono text-xs lg:text-sm 
-                      px-4 lg:px-6 py-5 lg:py-6
-                      border-2 border-zinc-300 dark:border-zinc-600
-                      transition-all duration-300 
-                      hover:border-zinc-900 dark:hover:border-zinc-300
-                      hover:from-white hover:to-zinc-50 dark:hover:from-zinc-800 dark:hover:to-zinc-900
-                      hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] ${!project.href ? "w-full" : "w-full sm:w-auto"}`}
-                  >
-                    <Github className="mr-2" size={14} />
-                    SOURCE
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </div>
+        <div
+          className="mt-2 font-mono text-[11px] tracking-[0.1em]"
+          style={{ color: "var(--fg-mute)" }}
+        >
+          {project.year}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+
+      <div className="col-span-12 md:col-span-5">
+        <div
+          className="font-mono text-[11px] tracking-[0.12em] mb-3"
+          style={{ color: clientHue }}
+        >
+          {project.client.toUpperCase()}
+        </div>
+        <h3 className="serif text-[26px] md:text-[30px] leading-[1.15] group-hover:italic transition-all duration-500 text-fg">
+          {project.title}
+        </h3>
+        <p className="mt-5 text-[15px] leading-[1.6] max-w-[42ch] text-fg-dim">
+          {project.blurb}
+        </p>
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-1">
+          {project.stack.map((tech, i) => (
+            <Fragment key={tech}>
+              {i > 0 && (
+                <span
+                  className="font-mono text-[11px]"
+                  style={{ color: "var(--border)" }}
+                  aria-hidden
+                >
+                  /
+                </span>
+              )}
+              <span
+                className="font-mono text-[11px] tracking-[0.08em]"
+                style={{ color: "var(--fg-mute)" }}
+              >
+                {tech.toUpperCase()}
+              </span>
+            </Fragment>
+          ))}
+        </div>
+      </div>
+
+      <div className="col-span-12 md:col-span-4">
+        <div className="eyebrow mb-4">Metrics</div>
+        <dl className="space-y-3">
+          {project.metrics.map(([k, v]) => (
+            <div
+              key={k}
+              className="flex items-baseline justify-between gap-4 pb-1.5"
+              style={{ borderBottom: "1px dotted var(--border)" }}
+            >
+              <dt className="text-[13px] text-fg-dim">{k}</dt>
+              <dd className="serif text-[22px] text-fg">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div className="col-span-12 md:col-span-1 flex md:justify-end items-start">
+        <Link
+          href={project.href}
+          target={project.href.startsWith("http") ? "_blank" : undefined}
+          className="font-mono text-[11px] tracking-[0.12em] inline-flex items-center gap-2 text-fg group-hover:text-[color:var(--signal)] transition-colors"
+        >
+          <span className="hidden md:inline">VIEW</span>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500"
+            aria-hidden
+          >
+            <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.3" />
+          </svg>
+        </Link>
+      </div>
+    </article>
   );
 };
 

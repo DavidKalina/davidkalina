@@ -1,94 +1,63 @@
-import { Badge } from "@/components/ui/badge";
 import { getBlogPosts } from "@/lib/blog-data";
-import { BookOpen, Clock } from "lucide-react";
 import { ArticleCard } from "../components/ArticleCard";
 
-// Configure static generation
 export const dynamic = "force-static";
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600;
 
 export const metadata = {
-  title: "Blog | David Kalina",
-  description: "Read my latest articles about software development, technology, and more.",
+  title: "Journal | David Kalina",
+  description: "Notes on software, tooling, and the seams between systems.",
 };
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <main className="min-h-screen pt-20 bg-gradient-to-b from-white/80 to-zinc-50/80 dark:from-zinc-800/95 dark:to-zinc-900/95">
-      {/* Hero Section */}
-      <div className="border-b border-zinc-100 dark:border-zinc-700/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-mono text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
-              Blog
+    <main className="min-h-screen pt-36 pb-32">
+      <div className="max-w-page mx-auto px-6 md:px-8">
+        <div className="flex items-center gap-3 mb-20">
+          <span className="idx">— JOURNAL · ALL ENTRIES</span>
+          <div className="flex-1 dotline" />
+          <span className="idx">{String(posts.length).padStart(2, "0")} TOTAL</span>
+        </div>
+
+        <div className="grid grid-cols-12 gap-8 mb-20">
+          <div className="col-span-12 md:col-span-7">
+            <h1 className="display text-[56px] md:text-[72px] leading-[1] text-fg">
+              Notes from the <span className="italic-serif">workbench.</span>
             </h1>
-            <p className="font-mono text-lg text-zinc-600 dark:text-zinc-400 mb-6">
-              Exploring software development, technology, and the intersection of code and
-              creativity.
+          </div>
+          <div className="col-span-12 md:col-span-5 pt-4">
+            <p className="text-[16px] leading-[1.6] text-fg-dim">
+              Writing about software development, tooling, and the intersection of code and the
+              humans who use it.
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-1 rounded-full font-mono text-sm">
-                Software Development
-              </Badge>
-              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-1 rounded-full font-mono text-sm">
-                Technology
-              </Badge>
-              <Badge className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-1 rounded-full font-mono text-sm">
-                Web Development
-              </Badge>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Blog Grid Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* Grid Header */}
-        <div className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-3">
-            <BookOpen className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
-            <h2 className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
-              Latest Articles
-            </h2>
-          </div>
-          <div className="flex items-center gap-4 text-sm text-zinc-600 dark:text-zinc-400">
-            <div className="flex items-center gap-2">
-              <Clock size={14} />
-              <span className="font-mono">Sort by Date</span>
-            </div>
           </div>
         </div>
 
-        {/* Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {posts?.length ? (
-            posts.map((post) => (
+        {posts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((post) => (
               <ArticleCard
                 key={post.slug}
                 slug={post.slug}
                 title={post.title}
-                excerpt={post.excerpt}
                 category={post.category}
                 readTime={post.readTime}
+                date={post.date}
               />
-            ))
-          ) : (
-            <div className="col-span-full flex flex-col items-center justify-center py-16 px-4 text-center">
-              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-full p-4 mb-6">
-                <BookOpen className="w-8 h-8 text-zinc-600 dark:text-zinc-400" />
-              </div>
-              <h3 className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-200 mb-2">
-                No Articles Yet
-              </h3>
-              <p className="font-mono text-zinc-600 dark:text-zinc-400 max-w-md">
-                I&apos;m currently working on some exciting articles. Check back soon for new
-                content!
-              </p>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            className="py-20 text-center"
+            style={{ borderTop: "1px solid var(--border)" }}
+          >
+            <p className="text-[16px] text-fg-dim max-w-md mx-auto">
+              New entries are drafting. Check back soon.
+            </p>
+          </div>
+        )}
       </div>
     </main>
   );

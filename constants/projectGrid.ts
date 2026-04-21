@@ -1,101 +1,96 @@
 export type Project = {
-  id: number;
-  title: string;
-  description: string;
-  tags: readonly string[];
-  icon: string;
-  bgColor: string;
-  metrics: Record<string, string>;
+  num: string;
   year: string;
-  href?: string;
-  source?: string | null;
+  title: string;
+  client: string;
+  role: string;
+  blurb: string;
+  metrics: ReadonlyArray<readonly [string, string]>;
+  stack: ReadonlyArray<string>;
+  hue: number;
+  href: string;
 };
 
 export const PROJECT_GRID_CONSTANTS = {
   section: {
-    number: "004",
-    title: "Recent Projects",
-    description:
-      "A selection of recent projects showcasing my expertise in full-stack development, from interactive user interfaces to robust backend systems.",
+    number: "003",
+    eyebrow: "SELECTED WORK",
+    counter: "04 / 04",
+    headlineLine1: "Recent",
+    headlineAccent: "work.",
+    paragraph:
+      "A selection of things shipped to real users — from AI-powered document pipelines and GraphQL backends to white-label SaaS, real-time marketplaces, and mobile apps. Case studies on request.",
   },
   projects: [
     {
-      id: 6,
-      title: "Flowty.io Real-Time Notification Center",
-      description:
-        "Built with Firebase and TypeScript, significantly improving engagement and retention.",
-      tags: ["FIREBASE", "TYPESCRIPT", "REACT"],
-      icon: "Bell",
-      bgColor: "bg-gradient-to-br from-[#F59E0B] to-[#D97706]",
-      metrics: {
-        "Notifications Sent": "1M+",
-        "Retention Increase": "15%",
-      },
+      num: "04",
+      year: "2026",
+      title: "Side Quests",
+      client: "Independent",
+      role: "Sole developer — design, architecture, implementation",
+      blurb:
+        "A mobile app helping people with social anxiety and habitual homebodies build the confidence and routine to get out, explore their interests, and find community. Agentic AI workflow combines guided onboarding with Google Places data to generate personalized, low-pressure activities. Targeting TestFlight beta April 2026.",
+      metrics: [
+        ["Beta target", "Apr 2026"],
+        ["Built with", "Claude Code"],
+      ],
+      stack: [
+        "React Native",
+        "TypeScript",
+        "Google Places",
+        "AI Agents",
+        "MCP",
+      ],
+      hue: 200,
+      href: "#",
+    },
+    {
+      num: "03",
+      year: "2025",
+      title: "AI Document Processing Pipeline",
+      client: "Eel Data Systems",
+      role: "Full-stack — pipeline, infra, GraphQL API",
+      blurb:
+        "Designed and shipped an event-driven pipeline that converts shipping PDFs into structured shipment data. Provisioned the underlying serverless infrastructure with Terraform, and exposed the data through a GraphQL API that powers the core product.",
+      metrics: [
+        ["Cost reduction", "98%"],
+        ["Saved annually", "$20k+"],
+      ],
+      stack: ["Vercel AI SDK", "AWS Lambda", "SQS", "Terraform", "GraphQL"],
+      hue: 75,
+      href: "#",
+    },
+    {
+      num: "02",
       year: "2024",
-      href: "https://flowty.io",
-      source: null,
+      title: "Floaty.io — Real-time Marketplace",
+      client: "K-Optional Software",
+      role: "Frontend lead",
+      blurb:
+        "Built the React frontend for a real-time digital asset marketplace, collaborating closely with a designer to deliver a polished UI for buying, selling, and trading. Handled complex state management and real-time transaction flows.",
+      metrics: [
+        ["Surface", "Marketplace UI"],
+        ["Realtime", "Transactions"],
+      ],
+      stack: ["React", "TypeScript", "Realtime"],
+      hue: 265,
+      href: "https://floaty.io",
     },
     {
-      id: 2,
-      title: "AI Content Optimization Tool",
-      description:
-        "AI-powered content categorization tool using OpenAI's GPT-4, enhancing engagement workflows for Kent State University's OEOC.",
-      tags: ["OPENAI", "NEXT.JS", "SUPABASE", "D3.JS"],
-      icon: "Brain",
-      bgColor: "bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]",
-      metrics: {
-        "Content Analyzed": "100K+",
-        accuracy: "95%",
-        performance: "97",
-      },
-      year: "2024",
-      source: null,
-    },
-    {
-      id: 3,
-      title: "Alfaphox/Revive Ratings",
-      description:
-        "A white-label review management tool that contributed to a product sale valued at over $400,000.",
-      tags: ["REACT", "NODE.JS", "TYPESCRIPT", "FIREBASE"],
-      icon: "Star",
-      bgColor: "bg-gradient-to-br from-[#EC4899] to-[#DB2777]",
-      metrics: {
-        users: "5K+",
-        revenue: "$400K+",
-        retention: "80%",
-      },
+      num: "01",
       year: "2023",
-      source: null,
+      title: "Alpha Fox / Revive Ratings",
+      client: "K-Optional Software",
+      role: "Core feature engineer",
+      blurb:
+        "White-label SaaS review platform for local businesses. Shipped multi-tenant onboarding, email and SMS campaign tooling, and business-facing dashboards. Authored a Storybook-driven React component library used across multiple product teams.",
+      metrics: [
+        ["Tenancy", "Multi-tenant"],
+        ["Channels", "Email + SMS"],
+      ],
+      stack: ["React", "TypeScript", "Storybook", "Node.js"],
+      hue: 340,
+      href: "#",
     },
-    {
-      id: 4,
-      title: "Progressive Web App for Maxwell Pipeline Services",
-      description:
-        "A PWA designed to streamline operations, achieving several thousand monthly uses.",
-      tags: ["REACT", "PWA", "SUPABASE"],
-      icon: "Globe",
-      bgColor: "bg-gradient-to-br from-[#14B8A6] to-[#0D9488]",
-      metrics: {
-        "Monthly Uses": "10K+",
-        "Efficiency Boost": "40%",
-      },
-      year: "2023",
-      source: null,
-    },
-    {
-      id: 5,
-      title: "Automated Email Distribution System",
-      description:
-        "SendGrid API-based automation reducing email processing time from 4-5 hours to 20-30 minutes.",
-      tags: ["PYTHON", "SENDGRID", "NODE.JS"],
-      icon: "Mail",
-      bgColor: "bg-gradient-to-br from-[#0EA5E9] to-[#0284C7]",
-      metrics: {
-        emailsProcessed: "500K+",
-        speedImprovement: "10x",
-      },
-      year: "2021",
-      source: null,
-    },
-  ] as readonly Project[],
+  ] as ReadonlyArray<Project>,
 } as const;
