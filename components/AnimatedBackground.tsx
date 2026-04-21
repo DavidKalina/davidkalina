@@ -36,14 +36,14 @@ const getZoneMovement = (index: number, total: number): Movement => {
   const cx = zoneW * (col + 0.5);
   const cy = zoneH * (row + 0.5);
 
-  const driftX = zoneW * 0.3;
-  const driftY = zoneH * 0.3;
+  const driftX = zoneW * 0.75;
+  const driftY = zoneH * 0.75;
 
   const ox = (Math.random() - 0.5) * 2 * driftX;
   const oy = (Math.random() - 0.5) * 2 * driftY;
   const start = { x: cx + ox, y: cy + oy };
   const end = { x: cx - ox, y: cy - oy };
-  const duration = getRandomFloat(18, 36);
+  const duration = getRandomFloat(10, 20);
   return { start, end, duration };
 };
 
