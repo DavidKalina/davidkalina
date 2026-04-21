@@ -29,12 +29,36 @@ export const TECH_STACK_CONSTANTS = {
       title: "Frontend",
       lede: "Applications that feel fast and stay out of the way.",
       skills: [
-        { name: "TypeScript", yrs: "3+ yrs", note: "Advanced types, strict mode, schema-driven contracts." },
-        { name: "React", yrs: "3+ yrs", note: "Hooks, suspense, perf tuning, complex component trees." },
-        { name: "Next.js", yrs: "3 yrs", note: "App router, RSC, streaming, ISR." },
-        { name: "Vue.js", yrs: "1+ yrs", note: "Composition API, production SPA maintenance." },
-        { name: "Storybook", yrs: "2 yrs", note: "Reusable component libraries, shared design systems." },
-        { name: "Tailwind", yrs: "3 yrs", note: "Design tokens, dark mode, component variants." },
+        {
+          name: "TypeScript",
+          yrs: "4+ yrs",
+          note: "Advanced types, strict mode, schema-driven contracts.",
+        },
+        {
+          name: "React",
+          yrs: "4+ yrs",
+          note: "Hooks, suspense, perf tuning, complex component trees.",
+        },
+        {
+          name: "Next.js",
+          yrs: "3 yrs",
+          note: "App router, RSC, streaming, ISR.",
+        },
+        {
+          name: "Vue.js",
+          yrs: "1+ yrs",
+          note: "Composition API, production SPA maintenance.",
+        },
+        {
+          name: "Storybook",
+          yrs: "2 yrs",
+          note: "Reusable component libraries, shared design systems.",
+        },
+        {
+          name: "Tailwind",
+          yrs: "3 yrs",
+          note: "Design tokens, dark mode, component variants.",
+        },
       ],
     },
     {
@@ -42,10 +66,26 @@ export const TECH_STACK_CONSTANTS = {
       title: "Backend",
       lede: "Servers that wake up, do one thing well, and go back to sleep.",
       skills: [
-        { name: "Node.js", yrs: "3+ yrs", note: "Event-driven services, perf optimization, security." },
-        { name: "Bun", yrs: "1 yr", note: "Fast runtime, built-in bundler, TS-first." },
-        { name: "Express", yrs: "3 yrs", note: "REST APIs, middleware patterns, error boundaries." },
-        { name: "GraphQL", yrs: "1+ yrs", note: "Schema design, resolver patterns, frontend DX." },
+        {
+          name: "Node.js",
+          yrs: "4+ yrs",
+          note: "Event-driven services, perf optimization, security.",
+        },
+        {
+          name: "Bun",
+          yrs: "1 yr",
+          note: "Fast runtime, built-in bundler, TS-first.",
+        },
+        {
+          name: "Express",
+          yrs: "3 yrs",
+          note: "REST APIs, middleware patterns, error boundaries.",
+        },
+        {
+          name: "GraphQL",
+          yrs: "1+ yrs",
+          note: "Schema design, resolver patterns, frontend DX.",
+        },
       ],
     },
     {
@@ -53,11 +93,31 @@ export const TECH_STACK_CONSTANTS = {
       title: "Cloud, Data & DevOps",
       lede: "Event-driven infrastructure that doesn't wake anyone up.",
       skills: [
-        { name: "AWS", yrs: "1+ yrs", note: "Lambda, SQS, S3 — serverless and queue-driven workflows." },
-        { name: "Terraform", yrs: "1+ yrs", note: "IaC for serverless functions, queues, and storage." },
-        { name: "Docker", yrs: "3 yrs", note: "Multi-stage builds, Compose, CI integration." },
-        { name: "PostgreSQL", yrs: "3 yrs", note: "Query tuning, indexing, data modeling." },
-        { name: "Redis", yrs: "2 yrs", note: "Caching, pub/sub, session stores." },
+        {
+          name: "AWS",
+          yrs: "1+ yrs",
+          note: "Lambda, SQS, S3 — serverless and queue-driven workflows.",
+        },
+        {
+          name: "Terraform",
+          yrs: "1+ yrs",
+          note: "IaC for serverless functions, queues, and storage.",
+        },
+        {
+          name: "Docker",
+          yrs: "3 yrs",
+          note: "Multi-stage builds, Compose, CI integration.",
+        },
+        {
+          name: "PostgreSQL",
+          yrs: "3 yrs",
+          note: "Query tuning, indexing, data modeling.",
+        },
+        {
+          name: "Redis",
+          yrs: "2 yrs",
+          note: "Caching, pub/sub, session stores.",
+        },
       ],
     },
     {
@@ -65,10 +125,26 @@ export const TECH_STACK_CONSTANTS = {
       title: "Mobile & AI",
       lede: "Cross-platform apps and AI-native tooling.",
       skills: [
-        { name: "React Native", yrs: "1+ yrs", note: "Driver-facing apps, App Store submissions." },
-        { name: "Vercel AI SDK", yrs: "1 yr", note: "Document processing pipelines, structured outputs." },
-        { name: "Claude Code", yrs: "1 yr", note: "Agentic dev workflows, custom skill authoring." },
-        { name: "Anthropic Agent SDK", yrs: "1 yr", note: "MCP integrations, tool authoring, prompt engineering." },
+        {
+          name: "React Native",
+          yrs: "1+ yrs",
+          note: "Driver-facing apps, App Store submissions.",
+        },
+        {
+          name: "Vercel AI SDK",
+          yrs: "1 yr",
+          note: "Document processing pipelines, structured outputs.",
+        },
+        {
+          name: "Claude Code",
+          yrs: "1 yr",
+          note: "Agentic dev workflows, custom skill authoring.",
+        },
+        {
+          name: "Anthropic Agent SDK",
+          yrs: "1 yr",
+          note: "MCP integrations, tool authoring, prompt engineering.",
+        },
       ],
     },
   ] as ReadonlyArray<StackCategory>,

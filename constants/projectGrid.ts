@@ -63,7 +63,7 @@ export const PROJECT_GRID_CONSTANTS = {
     {
       num: "02",
       year: "2024",
-      title: "Floaty.io — Real-time Marketplace",
+      title: "Flowty.io — Real-time Marketplace",
       client: "K-Optional Software",
       role: "Frontend lead",
       blurb:
@@ -74,7 +74,7 @@ export const PROJECT_GRID_CONSTANTS = {
       ],
       stack: ["React", "TypeScript", "Realtime"],
       hue: 265,
-      href: "https://floaty.io",
+      href: "https://Flowty.io",
     },
     {
       num: "01",

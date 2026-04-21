@@ -45,7 +45,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isFirst, isLast }) =
         >
           {project.client.toUpperCase()}
         </div>
-        <h3 className="serif text-[26px] md:text-[30px] leading-[1.15] group-hover:italic transition-all duration-500 text-fg">
+        <h3 className="serif text-[26px] md:text-[30px] leading-[1.15] text-fg">
           {project.title}
         </h3>
         <p className="mt-5 text-[15px] leading-[1.6] max-w-[42ch] text-fg-dim">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
-import "prismjs/themes/prism-tomorrow.css";
 import ModernFooter from "@/components/Footer";
 import ModernNavbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackground";

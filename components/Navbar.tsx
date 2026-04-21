@@ -10,7 +10,6 @@ const LINKS = [
   { href: "/#work", label: "WORK" },
   { href: "/#stack", label: "STACK" },
   { href: "/#about", label: "ABOUT" },
-  { href: "/blog", label: "JOURNAL" },
 ];
 
 const ModernNavbar = () => {

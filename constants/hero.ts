@@ -19,7 +19,7 @@ export const HERO_CONSTANTS = {
     tertiary: "RESUME",
   },
   stats: [
-    { label: "Professional exp.", value: "3+", unit: "yrs" },
+    { label: "Professional exp.", value: "4+", unit: "yrs" },
     { label: "Pipeline cost cut", value: "98", unit: "%" },
     { label: "Saved annually", value: "$12", unit: "k+" },
     { label: "Domains shipped", value: "3", unit: "+" },

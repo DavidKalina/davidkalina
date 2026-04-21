@@ -9,7 +9,6 @@ const META_COLUMNS = [
       { href: "/#work", text: "Work" },
       { href: "/#stack", text: "Stack" },
       { href: "/#about", text: "About" },
-      { href: "/blog", text: "Journal" },
     ],
   },
   {
