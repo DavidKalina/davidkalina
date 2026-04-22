@@ -7,7 +7,6 @@ const META_COLUMNS = [
     label: "Navigate",
     items: [
       { href: "/#work", text: "Work" },
-      { href: "/#stack", text: "Stack" },
       { href: "/#about", text: "About" },
     ],
   },
