@@ -277,28 +277,5 @@ export const PROJECT_GRID_CONSTANTS = {
         },
       ],
     },
-    {
-      num: "02",
-      year: "2024",
-      title: "Flowty.io — Real-time Marketplace",
-      client: "K-Optional Software",
-      role: "Frontend lead",
-      blurb:
-        "Built the React frontend for a real-time digital asset marketplace, collaborating closely with a designer to deliver a polished UI for buying, selling, and trading. Handled complex state management and real-time transaction flows.",
-      metrics: [],
-      stack: ["React", "TypeScript", "Realtime"],
-      hue: 265,
-      href: "https://Flowty.io",
-      tags: ["react", "typescript", "realtime"],
-      tech: [
-        { icon: "react", label: "React" },
-        { icon: "ts", label: "TypeScript" },
-        { icon: "realtime", label: "Realtime" },
-      ],
-      status: {
-        primary: "SHIPPED · REAL-TIME MARKETPLACE",
-        secondary: "role: frontend lead",
-      },
-    },
   ] as ReadonlyArray<Project>,
 } as const;
