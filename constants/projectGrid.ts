@@ -11,7 +11,10 @@ export type TechIconKey =
   | "node"
   | "realtime"
   | "vercel"
-  | "vue";
+  | "vue"
+  | "openai"
+  | "redis"
+  | "express";
 
 export type TechAnnotation = {
   icon: TechIconKey;
@@ -82,13 +85,14 @@ export const PROJECT_GRID_CONSTANTS = {
       stack: [
         "React Native",
         "TypeScript",
-        "Google Places",
-        "AI Agents",
+        "OpenAI",
         "MCP",
+        "Google Places",
+        "Redis",
       ],
       hue: 200,
       href: "#",
-      tags: ["react-native", "typescript", "ai-agents", "mcp", "google-places"],
+      tags: ["react-native", "typescript", "openai", "mcp", "google-places", "redis"],
       tech: [
         {
           icon: "react",
@@ -99,26 +103,26 @@ export const PROJECT_GRID_CONSTANTS = {
         {
           icon: "ts",
           label: "TypeScript",
-          role: "CONTRACT",
-          body: "<b>Zod</b> schemas shared between app and agent. One source of truth for quests, venues, and user profile.",
+          role: "LANGUAGE",
+          body: "Language of the entire <b>monorepo</b> — app, agent, tools, shared types. One toolchain top to bottom.",
         },
         {
-          icon: "ai",
-          label: "AI Agents",
+          icon: "openai",
+          label: "OpenAI",
           role: "PLANNER",
-          body: "Onboarding interviewer + quest generator. Reads social anxiety profile, proposes <b>low-pressure</b> outings tuned to energy level.",
-        },
-        {
-          icon: "mcp",
-          label: "MCP",
-          role: "TOOLS",
-          body: "Agent exposes <b>places.search</b>, <b>calendar.book</b>, <b>profile.recall</b> as tools. Clean boundary between reasoning and side-effects.",
+          body: "Onboarding interviewer + quest generator tuned to energy level. <b>MCP</b> exposes <b>places.search</b>, <b>calendar.book</b>, <b>profile.recall</b> — clean boundary between reasoning and side-effects.",
         },
         {
           icon: "gp",
           label: "Google Places",
           role: "REALITY",
           body: "Grounds every suggestion in a real venue — hours, crowd level, photos. <b>No hallucinated spots.</b>",
+        },
+        {
+          icon: "redis",
+          label: "Redis",
+          role: "CACHE",
+          body: "Caches Places responses per venue and query. Hot lookups skip the API entirely — <b>trimming spend</b> on repeat suggestions.",
         },
       ],
       journey: {
@@ -127,17 +131,17 @@ export const PROJECT_GRID_CONSTANTS = {
           {
             title: "Guided onboarding",
             sub: "Agent asks about interests, comfort zone, energy.",
-            tech: "AI · React Native",
+            tech: "OpenAI · React Native",
           },
           {
             title: "Quest proposed",
             sub: "'Walk past the Sunday market. Stay 10 min. No need to buy.'",
-            tech: "AI · MCP",
+            tech: "OpenAI · MCP",
           },
           {
             title: "Grounded in real venue",
-            sub: "Pulled hours, photos, and walking time from Places.",
-            tech: "Google Places",
+            sub: "Hours, photos, and walking time from Places — hot venues served from Redis.",
+            tech: "Google Places · Redis",
           },
           {
             title: "Low-pressure check-in",
@@ -147,7 +151,7 @@ export const PROJECT_GRID_CONSTANTS = {
           {
             title: "Next quest adapts",
             sub: "Agent tunes difficulty based on feedback + streak.",
-            tech: "AI · TypeScript",
+            tech: "OpenAI · TypeScript",
           },
         ],
       },
@@ -163,16 +167,16 @@ export const PROJECT_GRID_CONSTANTS = {
       client: "Eel Data Systems",
       role: "Full-stack — pipeline, infra, GraphQL API",
       blurb:
-        "Designed and shipped an event-driven pipeline that converts shipping PDFs into structured shipment data. Provisioned the underlying serverless infrastructure with Terraform, and exposed the data through a GraphQL API that powers the core product.",
+        "Designed and shipped an event-driven pipeline that converts shipping PDFs into structured shipment data. Provisioned the underlying serverless infrastructure with Terraform, and exposed the data through a Node/Express API that powers the core product.",
       metrics: [
         ["Token cost", "1/50th"],
         ["Saved annually", "$20k+"],
         ["Uses per day", "100s"],
       ],
-      stack: ["Vue", "GraphQL", "SQS", "AWS Lambda", "Vercel AI SDK", "Terraform"],
+      stack: ["Vue", "Express", "SQS", "AWS Lambda", "Vercel AI SDK", "Terraform"],
       hue: 75,
       href: "#",
-      tags: ["vue", "graphql", "sqs", "aws-lambda", "vercel-ai-sdk", "terraform"],
+      tags: ["vue", "express", "sqs", "aws-lambda", "vercel-ai-sdk", "terraform"],
       tech: [
         {
           icon: "vue",
@@ -181,10 +185,10 @@ export const PROJECT_GRID_CONSTANTS = {
           body: "PDF upload form, job status polling, and the <b>auto-fill</b> flow that saves operators hours of manual entry.",
         },
         {
-          icon: "graphql",
-          label: "GraphQL",
+          icon: "express",
+          label: "Express",
           role: "API",
-          body: "One schema for upload, poll, and hydrate. The form consumes the extracted shipment the moment it lands.",
+          body: "Plain REST — endpoints for upload, poll, and hydrate. Form fills the moment the worker finishes writing.",
         },
         {
           icon: "aws",
@@ -222,7 +226,7 @@ export const PROJECT_GRID_CONSTANTS = {
           {
             title: "Job queued",
             sub: "Record written, SQS message fired, response returns instantly.",
-            tech: "SQS · GraphQL",
+            tech: "SQS · Express",
           },
           {
             title: "Worker picks up",
@@ -237,7 +241,7 @@ export const PROJECT_GRID_CONSTANTS = {
           {
             title: "Form auto-fills",
             sub: "Frontend poll resolves; extracted data populates the operator's form.",
-            tech: "Vue · GraphQL",
+            tech: "Vue · Express",
           },
         ],
       },

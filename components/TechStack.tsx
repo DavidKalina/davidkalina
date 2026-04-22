@@ -3,9 +3,13 @@
 import type { ComponentType, SVGProps } from "react";
 import {
   SiAnthropic,
+  SiExpress,
+  SiGooglemaps,
   SiGraphql,
   SiNodedotjs,
+  SiOpenai,
   SiReact,
+  SiRedis,
   SiStorybook,
   SiTerraform,
   SiTypescript,
@@ -29,7 +33,7 @@ const ICON_MAP: Record<TechIconKey, { icon: IconComponent; color?: string }> = {
   ts: { icon: SiTypescript, color: "#3178C6" },
   ai: { icon: SiAnthropic, color: "#D97757" },
   mcp: { icon: SiAnthropic, color: "#D97757" },
-  gp: { icon: FaAws, color: "var(--fg-dim)" },
+  gp: { icon: SiGooglemaps, color: "#4285F4" },
   aws: { icon: FaAws, color: "#FF9900" },
   terraform: { icon: SiTerraform, color: "#7B42BC" },
   graphql: { icon: SiGraphql, color: "#E10098" },
@@ -38,6 +42,9 @@ const ICON_MAP: Record<TechIconKey, { icon: IconComponent; color?: string }> = {
   realtime: { icon: SiReact, color: "var(--signal)" },
   vercel: { icon: SiVercel },
   vue: { icon: SiVuedotjs, color: "#4FC08D" },
+  openai: { icon: SiOpenai },
+  redis: { icon: SiRedis, color: "#DC382D" },
+  express: { icon: SiExpress },
 };
 
 const TechIcon = ({ name }: { name: TechIconKey }) => {
