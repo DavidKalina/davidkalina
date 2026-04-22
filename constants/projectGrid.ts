@@ -74,7 +74,7 @@ export const PROJECT_GRID_CONSTANTS = {
   },
   projects: [
     {
-      num: "04",
+      num: "01",
       year: "2026",
       title: "Side Quests",
       client: "Independent",
@@ -92,7 +92,14 @@ export const PROJECT_GRID_CONSTANTS = {
       ],
       hue: 200,
       href: "#",
-      tags: ["react-native", "typescript", "openai", "mcp", "google-places", "redis"],
+      tags: [
+        "react-native",
+        "typescript",
+        "openai",
+        "mcp",
+        "google-places",
+        "redis",
+      ],
       tech: [
         {
           icon: "react",
@@ -161,7 +168,7 @@ export const PROJECT_GRID_CONSTANTS = {
       },
     },
     {
-      num: "03",
+      num: "02",
       year: "2025",
       title: "AI Document Processing Pipeline",
       client: "Eel Data Systems",
@@ -173,10 +180,24 @@ export const PROJECT_GRID_CONSTANTS = {
         ["Saved annually", "$20k+"],
         ["Uses per day", "100s"],
       ],
-      stack: ["Vue", "Express", "SQS", "AWS Lambda", "Vercel AI SDK", "Terraform"],
+      stack: [
+        "Vue",
+        "Express",
+        "SQS",
+        "AWS Lambda",
+        "Vercel AI SDK",
+        "Terraform",
+      ],
       hue: 75,
       href: "#",
-      tags: ["vue", "express", "sqs", "aws-lambda", "vercel-ai-sdk", "terraform"],
+      tags: [
+        "vue",
+        "express",
+        "sqs",
+        "aws-lambda",
+        "vercel-ai-sdk",
+        "terraform",
+      ],
       tech: [
         {
           icon: "vue",
@@ -250,7 +271,10 @@ export const PROJECT_GRID_CONSTANTS = {
         secondary: "role: full-stack · pipeline + infra + api",
       },
       links: [
-        { label: "app.cudacartagetms.com", href: "https://app.cudacartagetms.com" },
+        {
+          label: "app.cudacartagetms.com",
+          href: "https://app.cudacartagetms.com",
+        },
       ],
     },
     {
@@ -274,30 +298,6 @@ export const PROJECT_GRID_CONSTANTS = {
       status: {
         primary: "SHIPPED · REAL-TIME MARKETPLACE",
         secondary: "role: frontend lead",
-      },
-    },
-    {
-      num: "01",
-      year: "2023",
-      title: "Alpha Fox / Revive Ratings",
-      client: "K-Optional Software",
-      role: "Core feature engineer",
-      blurb:
-        "White-label SaaS review platform for local businesses. Shipped multi-tenant onboarding, email and SMS campaign tooling, and business-facing dashboards. Authored a Storybook-driven React component library used across multiple product teams.",
-      metrics: [],
-      stack: ["React", "TypeScript", "Storybook", "Node.js"],
-      hue: 340,
-      href: "#",
-      tags: ["react", "typescript", "storybook", "node"],
-      tech: [
-        { icon: "react", label: "React" },
-        { icon: "ts", label: "TypeScript" },
-        { icon: "storybook", label: "Storybook" },
-        { icon: "node", label: "Node.js" },
-      ],
-      status: {
-        primary: "SHIPPED · MULTI-TENANT SAAS",
-        secondary: "role: core feature engineer",
       },
     },
   ] as ReadonlyArray<Project>,
