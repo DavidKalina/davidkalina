@@ -30,7 +30,7 @@ export const SYSTEMS_CONSTANTS = {
       title: "AI Document Processing Pipeline",
       client: "Eel Data Systems",
       blurb:
-        "Event-driven pipeline that turns shipping PDFs into structured shipment data. Uploads fan out through a queue, get parsed by a Lambda that calls a multi-model AI extractor, and land in Postgres — all fronted by a GraphQL API powering the web app.",
+        "Event-driven pipeline that turns shipping PDFs into structured shipment data. Uploads fan out through a queue, get parsed by a Lambda that calls a multi-modal AI extractor, and land in Postgres — all fronted by a GraphQL API powering the web app.",
       pipeline: [
         { layer: "Client", nodes: ["Next.js"] },
         { layer: "API", nodes: ["GraphQL"] },
@@ -47,7 +47,7 @@ export const SYSTEMS_CONSTANTS = {
       title: "Side Quests — Agentic Mobile App",
       client: "Independent",
       blurb:
-        "A mobile app that nudges homebodies out into their city. An agentic workflow combines guided onboarding with Google Places data to generate low-pressure, personalized activities. Targeting TestFlight beta April 2026.",
+        "An 'anti-doomscroll' app that helps chronic homebodies, those struggling with social anxiety, and people looking for software to help funnel their attention more productively. An agentic workflow combines guided onboarding with Google Places data and user feedback to generate real-world activities in the user's zone of proximal development.",
       pipeline: [
         { layer: "Client", nodes: ["React Native", "TypeScript"] },
         { layer: "Agent", nodes: ["Anthropic Agent SDK"] },
