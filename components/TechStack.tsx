@@ -24,7 +24,6 @@ import {
   type TechIconKey,
 } from "@/constants/projectGrid";
 import { useReveal } from "@/hooks/useReveal";
-import TechStackMarquee from "./TechStackBadges";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
@@ -205,38 +204,35 @@ const ModernTechStack = () => {
   const { section, projects } = PROJECT_GRID_CONSTANTS;
 
   return (
-    <>
-      <TechStackMarquee />
-      <section id="work" className="py-32 md:py-48">
-        <div className="max-w-page mx-auto px-6 md:px-8">
-          <div className="mb-24 max-w-[58ch]">
-            <h2 className="display text-[36px] md:text-[52px] leading-[1] reveal text-fg">
-              {section.headlineLine1}
-              <br />
-              <span className="italic-serif">{section.headlineAccent}</span>
-            </h2>
-            <p className="mt-8 text-[16px] leading-[1.65] reveal text-fg-dim">
-              {section.paragraph}
-            </p>
-          </div>
-
-          <div
-            style={{
-              borderTop: "1px solid var(--border)",
-              borderBottom: "1px solid var(--border)",
-            }}
-          >
-            {projects.map((project, i) => (
-              <ProjectCard
-                key={project.num}
-                project={project}
-                isFirst={i === 0}
-              />
-            ))}
-          </div>
+    <section id="work" className="py-32 md:py-48">
+      <div className="max-w-page mx-auto px-6 md:px-8">
+        <div className="mb-24 max-w-[58ch]">
+          <h2 className="display text-[36px] md:text-[52px] leading-[1] reveal text-fg">
+            {section.headlineLine1}
+            <br />
+            <span className="italic-serif">{section.headlineAccent}</span>
+          </h2>
+          <p className="mt-8 text-[16px] leading-[1.65] reveal text-fg-dim">
+            {section.paragraph}
+          </p>
         </div>
-      </section>
-    </>
+
+        <div
+          style={{
+            borderTop: "1px solid var(--border)",
+            borderBottom: "1px solid var(--border)",
+          }}
+        >
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.num}
+              project={project}
+              isFirst={i === 0}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

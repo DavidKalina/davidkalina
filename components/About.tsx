@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ABOUT_CONSTANTS } from "@/constants/about";
 import { useReveal } from "@/hooks/useReveal";
+import TechStackMarquee from "./TechStackBadges";
 
 const ModernAbout = () => {
   useReveal();
@@ -33,6 +34,10 @@ const ModernAbout = () => {
               {paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
+            </div>
+
+            <div className="mt-14 reveal">
+              <TechStackMarquee />
             </div>
 
             <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-10 reveal">
