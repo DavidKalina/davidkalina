@@ -73,7 +73,10 @@ const AnnotRow = ({ icon, label, role, body }: TechAnnotation) => (
       {role ? <span className="pc-annot-role">{role}</span> : null}
     </div>
     {body ? (
-      <div className="pc-annot-body" dangerouslySetInnerHTML={{ __html: body }} />
+      <div
+        className="pc-annot-body"
+        dangerouslySetInnerHTML={{ __html: body }}
+      />
     ) : null}
   </div>
 );
@@ -106,7 +109,9 @@ const ProjectCard = ({
   project: Project;
   isFirst?: boolean;
 }) => {
-  const hasJourney = Boolean(project.journey && project.journey.steps.length > 0);
+  const hasJourney = Boolean(
+    project.journey && project.journey.steps.length > 0,
+  );
   return (
     <article
       className="pc-card reveal py-16 md:py-20"
@@ -205,7 +210,9 @@ const ModernTechStack = () => {
       <section id="work" className="py-32 md:py-48">
         <div className="max-w-page mx-auto px-6 md:px-8">
           <div className="flex items-center gap-3 mb-20 reveal">
-            <span className="idx">— {section.number} · {section.eyebrow}</span>
+            <span className="idx">
+              — {section.number} · {section.eyebrow}
+            </span>
             <div className="flex-1 dotline" />
             <span className="idx">{section.counter}</span>
           </div>
@@ -232,7 +239,11 @@ const ModernTechStack = () => {
             }}
           >
             {projects.map((project, i) => (
-              <ProjectCard key={project.num} project={project} isFirst={i === 0} />
+              <ProjectCard
+                key={project.num}
+                project={project}
+                isFirst={i === 0}
+              />
             ))}
           </div>
         </div>

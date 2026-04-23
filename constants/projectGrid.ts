@@ -80,7 +80,7 @@ export const PROJECT_GRID_CONSTANTS = {
       client: "Independent",
       role: "Sole developer — design, architecture, implementation",
       blurb:
-        "A mobile app helping people with social anxiety and habitual homebodies build the confidence and routine to get out, explore their interests, and find community. Agentic AI workflow combines guided onboarding with Google Places data to generate personalized, low-pressure activities. Targeting TestFlight beta April 2026.",
+        "Mobile app that turns real-world venues and activities into digital 'side quests' that challenge people to step out of their comfort zone and help them build a life they respect.",
       metrics: [],
       stack: [
         "React Native",
@@ -174,7 +174,7 @@ export const PROJECT_GRID_CONSTANTS = {
       client: "Eel Data Systems",
       role: "Full-stack — pipeline, infra, GraphQL API",
       blurb:
-        "Designed and shipped an event-driven pipeline that converts shipping PDFs into structured shipment data. Provisioned the underlying serverless infrastructure with Terraform, and exposed the data through a Node/Express API that powers the core product.",
+        "AI-powered pipeline for TMS software saving $2k+ a month. Extracts structured data from shipping documents in a non-blocking, asynchronous workflow.",
       metrics: [
         ["Token cost", "1/50th"],
         ["Saved annually", "$20k+"],

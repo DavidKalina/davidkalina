@@ -2,10 +2,10 @@ export const HERO_CONSTANTS = {
   eyebrow: "Full-Stack Software Engineer · Colorado / Remote",
   availability: "AVAILABLE — Q2 2026",
   headline: {
-    line1: "Human-centered",
-    accent: "innovation",
-    line2After: ", built on",
-    line3: "scalable tech.",
+    line1: "I build scalable",
+    accent: "systems ",
+    line2After: "and solve real-world ",
+    line3: "problems—end to end.",
   },
   description: {
     before: "I design and ship ",
