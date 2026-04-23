@@ -7,14 +7,22 @@ import { useReveal } from "@/hooks/useReveal";
 
 const ArrowGlyph = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-    <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" strokeWidth="1.3" />
+    <path
+      d="M1 11L11 1M11 1H3M11 1V9"
+      stroke="currentColor"
+      strokeWidth="1.3"
+    />
   </svg>
 );
 
 const ModernCTA = () => {
   useReveal();
   const [isPending, startTransition] = useTransition();
-  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [status, setStatus] = useState<{
     type: "success" | "error" | null;
     message: string | null;
@@ -51,8 +59,7 @@ const ModernCTA = () => {
               </span>
             </h2>
             <p className="mt-10 max-w-[52ch] text-[16px] leading-[1.6] reveal text-fg-dim">
-              Currently open to senior full-stack roles and a small number of freelance
-              engagements. Ideal project runway: 3–6 months.
+              Currently open to mid-level or senior full-stack roles.
             </p>
 
             <div className="mt-14 space-y-5 reveal">
@@ -123,7 +130,9 @@ const ModernCTA = () => {
                     required
                     placeholder="Your name"
                     value={formState.name}
-                    onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
+                    onChange={(e) =>
+                      setFormState((s) => ({ ...s, name: e.target.value }))
+                    }
                   />
                 </label>
                 <label className="block mt-8">
@@ -134,7 +143,9 @@ const ModernCTA = () => {
                     required
                     placeholder="you@company.com"
                     value={formState.email}
-                    onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
+                    onChange={(e) =>
+                      setFormState((s) => ({ ...s, email: e.target.value }))
+                    }
                   />
                 </label>
                 <label className="block mt-8">
@@ -146,7 +157,9 @@ const ModernCTA = () => {
                     placeholder="Tell me a bit about what you're building…"
                     style={{ resize: "none" }}
                     value={formState.message}
-                    onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
+                    onChange={(e) =>
+                      setFormState((s) => ({ ...s, message: e.target.value }))
+                    }
                   />
                 </label>
               </div>
@@ -156,10 +169,14 @@ const ModernCTA = () => {
                   className="mt-8 p-4 font-mono text-[12px]"
                   style={{
                     border: `1px solid ${
-                      status.type === "success" ? "var(--signal)" : "var(--destructive)"
+                      status.type === "success"
+                        ? "var(--signal)"
+                        : "var(--destructive)"
                     }`,
                     color:
-                      status.type === "success" ? "var(--signal)" : "var(--destructive)",
+                      status.type === "success"
+                        ? "var(--signal)"
+                        : "var(--destructive)",
                   }}
                 >
                   {status.message}
@@ -180,7 +197,7 @@ const ModernCTA = () => {
               className="mt-6 font-mono text-[11px] tracking-[0.1em]"
               style={{ color: "var(--fg-mute)" }}
             >
-              Prefer email? {" "}
+              Prefer email?{" "}
               <Link
                 href="mailto:davidkalina@proton.me"
                 className="arrow-link text-fg"
