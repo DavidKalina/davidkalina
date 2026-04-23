@@ -13,7 +13,11 @@ const META_COLUMNS = [
   {
     label: "Elsewhere",
     items: [
-      { href: "https://github.com/DavidKalina", text: "GitHub", external: true },
+      {
+        href: "https://github.com/DavidKalina",
+        text: "GitHub",
+        external: true,
+      },
       {
         href: "https://www.linkedin.com/in/david-kalina-b68854342/",
         text: "LinkedIn",
@@ -23,7 +27,9 @@ const META_COLUMNS = [
   },
   {
     label: "Say hi",
-    items: [{ href: "mailto:davidkalina@proton.me", text: "davidkalina@proton.me" }],
+    items: [
+      { href: "mailto:davidkalina@proton.me", text: "davidkalina@proton.me" },
+    ],
   },
 ];
 
@@ -40,7 +46,7 @@ const ModernFooter = () => {
           <span className="italic-serif">david</span> kalina.
         </div>
 
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="mt-16 flex flex-col md:flex-row md:justify-between gap-8">
           {META_COLUMNS.map((col) => (
             <div key={col.label}>
               <div className="eyebrow mb-3">{col.label}</div>
@@ -49,7 +55,11 @@ const ModernFooter = () => {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      target={"external" in item && item.external ? "_blank" : undefined}
+                      target={
+                        "external" in item && item.external
+                          ? "_blank"
+                          : undefined
+                      }
                       className="arrow-link text-fg"
                     >
                       {item.text}
@@ -59,12 +69,6 @@ const ModernFooter = () => {
               </ul>
             </div>
           ))}
-          <div>
-            <div className="eyebrow mb-3">Colophon</div>
-            <p className="font-mono text-[13px] leading-[1.6] text-fg-dim">
-              Set in Instrument Serif &amp; JetBrains Mono. Built with Next.js &amp; care.
-            </p>
-          </div>
         </div>
 
         <div

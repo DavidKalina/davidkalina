@@ -9,6 +9,7 @@ import { useTheme } from "@/context/ThemeProvider";
 const LINKS = [
   { href: "/#work", label: "WORK" },
   { href: "/#about", label: "ABOUT" },
+  { href: "/#contact", label: "CONTACT" },
 ];
 
 const ModernNavbar = () => {
