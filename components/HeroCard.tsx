@@ -3,7 +3,17 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { memo, useEffect, useRef, useState } from "react";
-import { Compass, Workflow, type LucideIcon } from "lucide-react";
+import {
+  CircleCheck,
+  Compass,
+  MapPin,
+  MessageCircle,
+  Sparkles,
+  Upload,
+  Workflow,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import type { IconType } from "react-icons";
 import { FaAws } from "react-icons/fa";
 import {
@@ -27,7 +37,10 @@ type DeckEntry = {
   category: string;
   theme: string;
   icon: LucideIcon;
+  title: string;
+  subtitle: string;
   stats: ReadonlyArray<{ label: string; value: string }>;
+  moves: ReadonlyArray<{ icon: LucideIcon; name: string; desc: string }>;
   tech: ReadonlyArray<string>;
   flavor: string;
   serial: string;
@@ -41,14 +54,20 @@ const DECK: ReadonlyArray<DeckEntry> = [
     category: "MOBILE · AI",
     theme: "AI × UX",
     icon: Compass,
+    title: "Side Quests",
+    subtitle: "INDEPENDENT",
     stats: [
       { label: "STACK", value: "6" },
       { label: "ROLE", value: "SOLO" },
       { label: "SHIP", value: "BETA" },
     ],
+    moves: [
+      { icon: MessageCircle, name: "ONBOARDING", desc: "Interviews interests + energy." },
+      { icon: MapPin, name: "GROUNDED", desc: "Real Places venues only." },
+      { icon: CircleCheck, name: "CHECK-IN", desc: "Tap to adapt next quest." },
+    ],
     tech: ["React Native", "TypeScript", "OpenAI", "MCP", "Google Places", "Redis"],
-    flavor:
-      "Built to help people get out and find community — one small quest at a time.",
+    flavor: "Helping people get out, one small quest at a time.",
     serial: "SQ · 001",
     tag: "BETA · Q2",
   },
@@ -58,34 +77,40 @@ const DECK: ReadonlyArray<DeckEntry> = [
     category: "PIPELINE",
     theme: "DATA × AI",
     icon: Workflow,
+    title: "AI Doc Pipeline",
+    subtitle: "EEL DATA SYSTEMS",
     stats: [
       { label: "COST", value: "1/50×" },
       { label: "SAVED", value: "$20K" },
       { label: "USES", value: "100/D" },
     ],
+    moves: [
+      { icon: Upload, name: "INGEST", desc: "PDF in, SQS fires in ms." },
+      { icon: Sparkles, name: "EXTRACT", desc: "Typed JSON from page image." },
+      { icon: Zap, name: "DELIVER", desc: "Form auto-fills on poll." },
+    ],
     tech: ["Vue", "Express", "SQS", "AWS Lambda", "Vercel AI SDK", "Terraform"],
-    flavor:
-      "Event-driven pipeline at 1/50th the token cost — ~$20k saved annually.",
+    flavor: "Event-driven pipeline at 1/50× the token cost.",
     serial: "DP · 002",
     tag: "SHIPPED",
   },
 ];
 
-type TechChip = { icon?: IconType; text: string };
+type TechChip = { icon?: IconType; text: string; color: string };
 
 const TECH: Record<string, TechChip> = {
-  "React Native": { icon: SiReact, text: "RN" },
-  TypeScript: { icon: SiTypescript, text: "TS" },
-  OpenAI: { icon: SiOpenai, text: "AI" },
-  MCP: { text: "MCP" },
-  "Google Places": { icon: SiGooglemaps, text: "GP" },
-  Redis: { icon: SiRedis, text: "RDS" },
-  Vue: { icon: SiVuedotjs, text: "V" },
-  Express: { icon: SiExpress, text: "EX" },
-  SQS: { icon: FaAws, text: "SQS" },
-  "AWS Lambda": { text: "λ" },
-  "Vercel AI SDK": { icon: SiVercel, text: "V-AI" },
-  Terraform: { icon: SiTerraform, text: "TF" },
+  "React Native": { icon: SiReact, text: "RN", color: "#61DAFB" },
+  TypeScript: { icon: SiTypescript, text: "TS", color: "#3178C6" },
+  OpenAI: { icon: SiOpenai, text: "AI", color: "#10A37F" },
+  MCP: { text: "MCP", color: "#D97757" },
+  "Google Places": { icon: SiGooglemaps, text: "GP", color: "#4285F4" },
+  Redis: { icon: SiRedis, text: "RDS", color: "#DC382D" },
+  Vue: { icon: SiVuedotjs, text: "V", color: "#4FC08D" },
+  Express: { icon: SiExpress, text: "EX", color: "var(--fg)" },
+  SQS: { icon: FaAws, text: "SQS", color: "#FF9900" },
+  "AWS Lambda": { text: "λ", color: "#FF9900" },
+  "Vercel AI SDK": { icon: SiVercel, text: "V-AI", color: "var(--fg)" },
+  Terraform: { icon: SiTerraform, text: "TF", color: "#7B42BC" },
 };
 
 const TONE_VARS: Record<Tone, {
@@ -275,7 +300,7 @@ const HeroCardFace = memo(function HeroCardFace({
   isTop: boolean;
   reduced: boolean;
 }) {
-  const { project, tone, category, theme, icon: ArtIcon, stats, tech, flavor, serial, tag } = entry;
+  const { project, tone, category, theme, icon: ArtIcon, title, subtitle, stats, moves, tech, flavor, serial } = entry;
   const t = TONE_VARS[tone];
 
   return (
@@ -364,7 +389,7 @@ const HeroCardFace = memo(function HeroCardFace({
 
           {/* HEADER — gold year, project-accent category, muted theme */}
           <div
-            className="relative flex items-center gap-1.5 px-4 pt-3 pb-2 font-mono text-[9px]"
+            className="relative flex items-center gap-1.5 px-4 pt-3 pb-2 font-mono text-[10px]"
             style={{ letterSpacing: "0.14em" }}
           >
             <span style={{ color: "var(--signal)" }}>★ {project.year}</span>
@@ -378,14 +403,14 @@ const HeroCardFace = memo(function HeroCardFace({
           <div
             className="relative mx-4 mt-1 rounded-[8px]"
             style={{
-              height: 82,
+              height: 80,
               border: `1px solid color-mix(in srgb, var(--card-accent) ${t.artBorder}, transparent)`,
               background: `radial-gradient(78% 80% at 50% 50%, color-mix(in srgb, var(--card-accent) ${t.artBg}, transparent) 0%, transparent 76%)`,
             }}
           >
             <div
               aria-hidden
-              className="absolute top-1.5 left-2 font-mono text-[8px]"
+              className="absolute top-1.5 left-2 font-mono text-[9px]"
               style={{
                 letterSpacing: "0.1em",
                 color: "var(--card-accent)",
@@ -397,7 +422,7 @@ const HeroCardFace = memo(function HeroCardFace({
             <div className="absolute inset-0 flex items-center justify-center">
               <ArtIcon
                 size={54}
-                strokeWidth={1.25}
+                strokeWidth={1.3}
                 aria-hidden
                 style={{
                   color: "var(--card-accent)",
@@ -408,18 +433,18 @@ const HeroCardFace = memo(function HeroCardFace({
           </div>
 
           {/* TITLE */}
-          <div className="relative px-4 pt-4 pb-1">
+          <div className="relative px-4 pt-4 pb-0.5">
             <div
-              className="font-mono font-semibold text-[20px] leading-tight"
+              className="font-mono font-semibold text-[22px] leading-[1.1]"
               style={{ color: "var(--fg)" }}
             >
-              {project.title}
+              {title}
             </div>
             <div
-              className="font-mono text-[10px] mt-1"
+              className="font-mono text-[11px] mt-1"
               style={{ letterSpacing: "0.1em", color: "var(--fg-mute)" }}
             >
-              {project.client.toUpperCase()}
+              {subtitle}
             </div>
           </div>
 
@@ -435,13 +460,13 @@ const HeroCardFace = memo(function HeroCardFace({
                 }}
               >
                 <div
-                  className="font-mono text-[8px]"
+                  className="font-mono text-[9px]"
                   style={{ letterSpacing: "0.14em", color: "var(--fg-mute)" }}
                 >
                   {label}
                 </div>
                 <div
-                  className="font-mono font-semibold text-[13px] leading-tight"
+                  className="font-mono font-semibold text-[16px] leading-tight"
                   style={{ color: "var(--card-accent)" }}
                 >
                   {value}
@@ -450,59 +475,58 @@ const HeroCardFace = memo(function HeroCardFace({
             ))}
           </div>
 
-          {/* TECH STRIP — 6 mini chips with brand icons or monogram fallback */}
-          <div className="relative px-4 pt-2 flex items-center justify-between gap-1">
-            {tech.map((name) => {
-              const entry = TECH[name];
-              const Icon = entry?.icon;
-              return (
+          {/* MOVES — trading-card ability list */}
+          <div className="relative px-4 pt-3.5 space-y-2.5">
+            {moves.map(({ icon: MoveIcon, name, desc }) => (
+              <div key={name} className="flex items-center gap-2.5">
                 <div
-                  key={name}
-                  aria-label={name}
-                  title={name}
-                  className="flex items-center justify-center shrink-0"
+                  className="flex items-center justify-center rounded-full shrink-0"
                   style={{
-                    width: 26,
-                    height: 26,
-                    borderRadius: 4,
+                    width: 24,
+                    height: 24,
                     border: `1px solid color-mix(in srgb, var(--card-accent) ${t.circleBorder}, transparent)`,
                     background: `color-mix(in srgb, var(--card-accent) ${t.circleBg}, transparent)`,
                   }}
                 >
-                  {Icon ? (
-                    <Icon
-                      size={13}
-                      style={{ color: "var(--card-accent)" }}
-                      aria-hidden
-                    />
-                  ) : (
-                    <span
-                      className="font-mono font-bold"
-                      style={{
-                        fontSize: entry?.text && entry.text.length > 2 ? 7 : 10,
-                        color: "var(--card-accent)",
-                        letterSpacing: "0.03em",
-                      }}
-                    >
-                      {entry?.text ?? name.slice(0, 2).toUpperCase()}
-                    </span>
-                  )}
+                  <MoveIcon
+                    size={13}
+                    strokeWidth={1.8}
+                    style={{ color: "var(--card-accent)" }}
+                    aria-hidden
+                  />
                 </div>
-              );
-            })}
+                <div className="flex-1 min-w-0 flex items-baseline gap-2">
+                  <span
+                    className="font-mono font-bold text-[11px] shrink-0"
+                    style={{
+                      letterSpacing: "0.1em",
+                      color: "var(--card-accent)",
+                    }}
+                  >
+                    {name}
+                  </span>
+                  <span
+                    className="font-mono text-[11px] truncate"
+                    style={{ color: "var(--fg-dim)" }}
+                  >
+                    {desc}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* FLAVOR */}
           <div className="relative px-4 mt-auto mb-2">
             <div
-              className="italic-serif text-[13px] leading-snug"
+              className="italic-serif text-[14px] leading-snug"
               style={{ color: "var(--fg-dim)" }}
             >
               &ldquo;{flavor}&rdquo;
             </div>
           </div>
 
-          {/* FOOTER — project-accent tag */}
+          {/* FOOTER — serial + brand-colored tech icons */}
           <div
             className="relative flex items-center gap-2 px-4 pb-3 pt-2 font-mono text-[8px]"
             style={{
@@ -512,11 +536,37 @@ const HeroCardFace = memo(function HeroCardFace({
                 "1px solid color-mix(in srgb, var(--signal) 24%, transparent)",
             }}
           >
-            <span style={{ opacity: 0.75 }}>
-              {serial} · {project.year}
-            </span>
+            <span style={{ opacity: 0.75 }}>{serial}</span>
             <div className="flex-1" />
-            <span style={{ color: "var(--card-accent)" }}>{tag}</span>
+            <div className="flex items-center gap-2">
+              {tech.map((name) => {
+                const t = TECH[name];
+                const Icon = t?.icon;
+                return Icon ? (
+                  <Icon
+                    key={name}
+                    size={12}
+                    title={name}
+                    aria-label={name}
+                    style={{ color: t.color }}
+                  />
+                ) : (
+                  <span
+                    key={name}
+                    title={name}
+                    aria-label={name}
+                    className="font-mono font-bold"
+                    style={{
+                      fontSize: 9,
+                      letterSpacing: "0.04em",
+                      color: t?.color ?? "var(--fg-mute)",
+                    }}
+                  >
+                    {t?.text ?? name.slice(0, 2).toUpperCase()}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
