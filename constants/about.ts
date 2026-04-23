@@ -5,7 +5,7 @@ export const ABOUT_CONSTANTS = {
     after: " systems across SaaS, logistics, and marketplaces.",
   },
   paragraphs: [
-    "Four-plus years of professional experience, with a focus on TypeScript, React, and Node.js — and a growing pull toward cloud infrastructure (AWS, Terraform) and AI-powered tooling. Recently, I've taken an interest in the more 'boring' parts, focusing  on reliability, latency, cutting down costs, and building durable software that stand the test of time. I've been working a lot with agentic flows, document processing and image-to-text extraction with AI, as well as GraphQL, and cross-platform mobile experiences. I'm currently also utilizing tools like Claude Code, Codex, and trying to find the sweet spot for productivity and learning.",
+    "Four-plus years of professional experience, with a focus on TypeScript, React, and Node.js — and a growing pull toward cloud infrastructure (AWS, Terraform) and AI-powered tooling. Recently, I've taken an interest in cutting down on unnecessary frameworks, packages, libraries, and abstractions while shipping lean, performant software that's easy to reason about.",
   ],
   stats: [
     {
