@@ -67,7 +67,7 @@ export const PROJECT_GRID_CONSTANTS = {
     headlineLine1: "Recent",
     headlineAccent: "work.",
     paragraph:
-      "Projects I've worked on recently that I'm proud to share. Either projects that have had a high impact on the company, or projects that I'm just super passionate about.",
+      "Compact case studies on what I built, how I built it, and the impact it had.",
   },
   projects: [
     {
