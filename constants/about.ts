@@ -1,8 +1,4 @@
 export const ABOUT_CONSTANTS = {
-  section: {
-    number: "002",
-    eyebrow: "ABOUT",
-  },
   headline: {
     before: "Full-stack engineer building ",
     accent: "thoughtful",

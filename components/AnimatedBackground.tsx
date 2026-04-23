@@ -254,17 +254,6 @@ const AnimatedBackground = () => {
         },
         animation: "animate-float-fast",
       },
-      {
-        className: "w-16 h-16 md:w-32 md:h-32 rounded-full",
-        parallax: 0.35,
-        style: {
-          background: "transparent",
-          border: "1px dashed var(--signal)",
-          opacity: 0.3,
-          filter: "blur(0.5px)",
-        },
-        animation: "animate-float-slow",
-      },
     ],
     [],
   );

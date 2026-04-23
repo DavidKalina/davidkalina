@@ -16,7 +16,6 @@ export type System = {
 
 export const SYSTEMS_CONSTANTS = {
   section: {
-    number: "001",
     eyebrow: "SYSTEMS",
     headlineLine1: "How I build",
     headlineAccent: "systems.",

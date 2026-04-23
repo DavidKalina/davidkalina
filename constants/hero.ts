@@ -1,6 +1,6 @@
 export const HERO_CONSTANTS = {
   eyebrow: "Full-Stack Software Engineer · Colorado / Remote",
-  availability: "AVAILABLE — Q2 2026",
+  availability: "",
   headline: {
     line1: "I build scalable",
     accent: "systems ",

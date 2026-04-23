@@ -39,19 +39,6 @@ const ModernCTA = () => {
   return (
     <section id="contact" className="py-32 md:py-48">
       <div className="max-w-page mx-auto px-6 md:px-8">
-        <div className="flex items-center gap-3 mb-20 reveal">
-          <span className="idx">— 005 · CONTACT</span>
-          <div className="flex-1 dotline" />
-          <span className="idx flex items-center gap-2">
-            <span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "var(--signal)" }}
-              aria-hidden
-            />
-            USUALLY REPLIES &lt; 24H
-          </span>
-        </div>
-
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-7">
             <h2 className="display text-[44px] md:text-[72px] leading-[0.98] reveal text-fg">

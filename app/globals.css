@@ -15,8 +15,8 @@
     --border: #e7e4dc;
     --fg: #16160f;
     --fg-dim: #52524c;
-    --fg-mute: #8a8a82;
-    --signal: #a86f18;
+    --fg-mute: #6d6d66;
+    --signal: #8a5a12;
 
     /* shadcn aliases — kept so primitives in components/ui continue to work. */
     --background: var(--bg);

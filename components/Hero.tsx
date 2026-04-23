@@ -22,24 +22,6 @@ const ModernHero = () => {
   return (
     <section className="relative pt-36 pb-28 md:pt-44 md:pb-40" id="top">
       <div className="max-w-page mx-auto px-6 md:px-8">
-        <div className="flex items-center gap-3 mb-14 reveal">
-          <span className="idx">— 000 · INDEX</span>
-          <div className="flex-1 dotline" />
-          <span className="idx flex items-center gap-2">
-            <span className="relative flex h-2 w-2" aria-hidden>
-              <span
-                className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
-                style={{ background: "var(--signal)" }}
-              />
-              <span
-                className="relative inline-flex rounded-full h-2 w-2"
-                style={{ background: "var(--signal)" }}
-              />
-            </span>
-            {HERO_CONSTANTS.availability}
-          </span>
-        </div>
-
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 lg:col-span-7">
             <p className="eyebrow mb-6 reveal">{HERO_CONSTANTS.eyebrow}</p>

@@ -64,9 +64,6 @@ export type Project = {
 
 export const PROJECT_GRID_CONSTANTS = {
   section: {
-    number: "003",
-    eyebrow: "SELECTED WORK",
-    counter: "04 / 04",
     headlineLine1: "Recent",
     headlineAccent: "work.",
     paragraph:

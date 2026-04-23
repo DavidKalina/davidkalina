@@ -6,7 +6,7 @@ import { useReveal } from "@/hooks/useReveal";
 
 const ModernAbout = () => {
   useReveal();
-  const { section, headline, paragraphs, stats, featured, focus } = ABOUT_CONSTANTS;
+  const { headline, paragraphs, stats, featured, focus } = ABOUT_CONSTANTS;
 
   return (
     <section
@@ -19,11 +19,6 @@ const ModernAbout = () => {
       }}
     >
       <div className="max-w-page mx-auto px-6 md:px-8">
-        <div className="flex items-center gap-3 mb-20 reveal">
-          <span className="idx">— {section.number} · {section.eyebrow}</span>
-          <div className="flex-1 dotline" />
-        </div>
-
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-7">
             <h2 className="display text-[32px] md:text-[44px] leading-[1.05] max-w-[22ch] reveal text-fg">
