@@ -74,101 +74,7 @@ export const PROJECT_GRID_CONSTANTS = {
   },
   projects: [
     {
-      num: "01",
-      year: "2026",
-      title: "Side Quests",
-      client: "Independent",
-      role: "Sole developer — design, architecture, implementation",
-      blurb:
-        "Mobile app that turns real-world venues and activities into digital 'side quests' that challenge people to step out of their comfort zone and help them build a life they respect.",
-      metrics: [],
-      stack: [
-        "React Native",
-        "TypeScript",
-        "OpenAI",
-        "MCP",
-        "Google Places",
-        "Redis",
-      ],
-      hue: 200,
-      href: "#",
-      tags: [
-        "react-native",
-        "typescript",
-        "openai",
-        "mcp",
-        "google-places",
-        "redis",
-      ],
-      tech: [
-        {
-          icon: "react",
-          label: "React Native",
-          role: "CLIENT",
-          body: "Quest card stack, check-in flow, <b>streak calendar</b>. Expo + Reanimated for low-friction micro-interactions.",
-        },
-        {
-          icon: "ts",
-          label: "TypeScript",
-          role: "LANGUAGE",
-          body: "Language of the entire <b>monorepo</b> — app, agent, tools, shared types. One toolchain top to bottom.",
-        },
-        {
-          icon: "openai",
-          label: "OpenAI",
-          role: "PLANNER",
-          body: "Onboarding interviewer + quest generator tuned to energy level. <b>MCP</b> exposes <b>places.search</b>, <b>calendar.book</b>, <b>profile.recall</b> — clean boundary between reasoning and side-effects.",
-        },
-        {
-          icon: "gp",
-          label: "Google Places",
-          role: "REALITY",
-          body: "Grounds every suggestion in a real venue — hours, crowd level, photos. <b>No hallucinated spots.</b>",
-        },
-        {
-          icon: "redis",
-          label: "Redis",
-          role: "CACHE",
-          body: "Caches Places responses per venue and query. Hot lookups skip the API entirely — <b>trimming spend</b> on repeat suggestions.",
-        },
-      ],
-      journey: {
-        label: "USER JOURNEY · 7 min first session",
-        steps: [
-          {
-            title: "Guided onboarding",
-            sub: "Agent asks about interests, comfort zone, energy.",
-            tech: "OpenAI · React Native",
-          },
-          {
-            title: "Quest proposed",
-            sub: "'Walk past the Sunday market. Stay 10 min. No need to buy.'",
-            tech: "OpenAI · MCP",
-          },
-          {
-            title: "Grounded in real venue",
-            sub: "Hours, photos, and walking time from Places — hot venues served from Redis.",
-            tech: "Google Places · Redis",
-          },
-          {
-            title: "Low-pressure check-in",
-            sub: "One tap. How'd it feel? 1–5.",
-            tech: "React Native",
-          },
-          {
-            title: "Next quest adapts",
-            sub: "Agent tunes difficulty based on feedback + streak.",
-            tech: "OpenAI · TypeScript",
-          },
-        ],
-      },
-      status: {
-        primary: "BUILDING · TESTFLIGHT BETA APR 2026",
-        secondary: "role: solo · design + eng + ai",
-      },
-    },
-    {
-      num: "02",
+      num: "01˝",
       year: "2025",
       title: "AI Document Processing Pipeline",
       client: "Eel Data Systems",
@@ -276,6 +182,100 @@ export const PROJECT_GRID_CONSTANTS = {
           href: "https://app.cudacartagetms.com",
         },
       ],
+    },
+    {
+      num: "02",
+      year: "2026",
+      title: "Side Quests",
+      client: "Independent",
+      role: "Sole developer — design, architecture, implementation",
+      blurb:
+        "Mobile app that turns real-world venues and activities into digital 'side quests' that challenge people to step out of their comfort zone and help them build a life they respect.",
+      metrics: [],
+      stack: [
+        "React Native",
+        "TypeScript",
+        "OpenAI",
+        "MCP",
+        "Google Places",
+        "Redis",
+      ],
+      hue: 200,
+      href: "#",
+      tags: [
+        "react-native",
+        "typescript",
+        "openai",
+        "mcp",
+        "google-places",
+        "redis",
+      ],
+      tech: [
+        {
+          icon: "react",
+          label: "React Native",
+          role: "CLIENT",
+          body: "Quest card stack, check-in flow, <b>streak calendar</b>. Expo + Reanimated for low-friction micro-interactions.",
+        },
+        {
+          icon: "ts",
+          label: "TypeScript",
+          role: "LANGUAGE",
+          body: "Language of the entire <b>monorepo</b> — app, agent, tools, shared types. One toolchain top to bottom.",
+        },
+        {
+          icon: "openai",
+          label: "OpenAI",
+          role: "PLANNER",
+          body: "Onboarding interviewer + quest generator tuned to energy level. <b>MCP</b> exposes <b>places.search</b>, <b>calendar.book</b>, <b>profile.recall</b> — clean boundary between reasoning and side-effects.",
+        },
+        {
+          icon: "gp",
+          label: "Google Places",
+          role: "REALITY",
+          body: "Grounds every suggestion in a real venue — hours, crowd level, photos. <b>No hallucinated spots.</b>",
+        },
+        {
+          icon: "redis",
+          label: "Redis",
+          role: "CACHE",
+          body: "Caches Places responses per venue and query. Hot lookups skip the API entirely — <b>trimming spend</b> on repeat suggestions.",
+        },
+      ],
+      journey: {
+        label: "USER JOURNEY · 7 min first session",
+        steps: [
+          {
+            title: "Guided onboarding",
+            sub: "Agent asks about interests, comfort zone, energy.",
+            tech: "OpenAI · React Native",
+          },
+          {
+            title: "Quest proposed",
+            sub: "'Walk past the Sunday market. Stay 10 min. No need to buy.'",
+            tech: "OpenAI · MCP",
+          },
+          {
+            title: "Grounded in real venue",
+            sub: "Hours, photos, and walking time from Places — hot venues served from Redis.",
+            tech: "Google Places · Redis",
+          },
+          {
+            title: "Low-pressure check-in",
+            sub: "One tap. How'd it feel? 1–5.",
+            tech: "React Native",
+          },
+          {
+            title: "Next quest adapts",
+            sub: "Agent tunes difficulty based on feedback + streak.",
+            tech: "OpenAI · TypeScript",
+          },
+        ],
+      },
+      status: {
+        primary: "BUILDING · TESTFLIGHT BETA APR 2026",
+        secondary: "role: solo · design + eng + ai",
+      },
     },
   ] as ReadonlyArray<Project>,
 } as const;

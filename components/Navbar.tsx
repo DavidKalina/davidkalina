@@ -70,6 +70,17 @@ const ModernNavbar = () => {
             {theme === "dark" ? "DARK" : "LIGHT"}
           </button>
 
+          <a
+            href="/resume.pdf"
+            download
+            className="hidden md:inline-flex font-mono text-[12px] tracking-[0.08em] items-center gap-2 px-4 py-2 rounded-full text-fg-dim hover:text-fg transition-colors"
+          >
+            RESUME
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+              <path d="M5 1V8M5 8L1.5 4.5M5 8L8.5 4.5M1 9H9" stroke="currentColor" strokeWidth="1.2" />
+            </svg>
+          </a>
+
           <Link
             href="/#contact"
             className="hidden md:inline-flex font-mono text-[12px] tracking-[0.08em] items-center gap-2 px-4 py-2 rounded-full text-fg border border-[var(--border)] hover:bg-signal hover:text-[var(--bg)] hover:border-signal transition-colors duration-300"
@@ -126,16 +137,29 @@ const ModernNavbar = () => {
                 />
                 {theme === "dark" ? "DARK" : "LIGHT"}
               </button>
-              <Link
-                href="/#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-mono text-[12px] tracking-[0.08em] inline-flex items-center gap-2 px-4 py-2 rounded-full text-fg border border-[var(--border)]"
-              >
-                CONTACT
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
-                  <path d="M1 9L9 1M9 1H2M9 1V8" stroke="currentColor" strokeWidth="1.2" />
-                </svg>
-              </Link>
+              <div className="flex items-center gap-3">
+                <a
+                  href="/resume.pdf"
+                  download
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-mono text-[12px] tracking-[0.08em] inline-flex items-center gap-2 px-4 py-2 rounded-full text-fg-dim"
+                >
+                  RESUME
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+                    <path d="M5 1V8M5 8L1.5 4.5M5 8L8.5 4.5M1 9H9" stroke="currentColor" strokeWidth="1.2" />
+                  </svg>
+                </a>
+                <Link
+                  href="/#contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-mono text-[12px] tracking-[0.08em] inline-flex items-center gap-2 px-4 py-2 rounded-full text-fg border border-[var(--border)]"
+                >
+                  CONTACT
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+                    <path d="M1 9L9 1M9 1H2M9 1V8" stroke="currentColor" strokeWidth="1.2" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
