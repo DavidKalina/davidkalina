@@ -58,9 +58,6 @@ const ModernCTA = () => {
                 worth using.
               </span>
             </h2>
-            <p className="mt-10 max-w-[52ch] text-[16px] leading-[1.6] reveal text-fg-dim">
-              Currently open to mid-level or senior full-stack roles.
-            </p>
 
             <div className="mt-14 space-y-5 reveal">
               <a
