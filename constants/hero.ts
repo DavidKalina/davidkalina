@@ -10,8 +10,7 @@ export const HERO_CONSTANTS = {
   description: {
     before: "I design and ship ",
     accent: "scalable, high-performing, non-blocking",
-    after:
-      " systems — quickly, quietly, and with an obsession for the humans who end up using them.",
+    after: " systems — quickly, and with care for the people that use them.",
   },
   cta: {
     primary: "VIEW SELECTED WORK",
