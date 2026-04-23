@@ -85,7 +85,7 @@ const ModernHero = () => {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-5 relative min-h-[500px] reveal">
+          <div className="hidden lg:block lg:col-span-5 relative lg:min-h-[500px] reveal">
             <HeroCard />
           </div>
         </div>
