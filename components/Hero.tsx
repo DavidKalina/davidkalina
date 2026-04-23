@@ -7,7 +7,11 @@ import HeroCard from "./HeroCard";
 
 const ArrowGlyph = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-    <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" strokeWidth="1.3" />
+    <path
+      d="M1 11L11 1M11 1H3M11 1V9"
+      stroke="currentColor"
+      strokeWidth="1.3"
+    />
   </svg>
 );
 
@@ -83,18 +87,6 @@ const ModernHero = () => {
 
           <div className="col-span-12 lg:col-span-5 relative min-h-[500px] reveal">
             <HeroCard />
-            <div
-              className="absolute left-4 bottom-4 font-mono text-[10px] tracking-[0.14em]"
-              style={{ color: "var(--fg-mute)" }}
-            >
-              FIG. 01 — CURRENT BUILD
-            </div>
-            <div
-              className="absolute right-4 top-4 font-mono text-[10px] tracking-[0.14em]"
-              style={{ color: "var(--fg-mute)" }}
-            >
-              ↻ TESTFLIGHT Q2
-            </div>
           </div>
         </div>
 

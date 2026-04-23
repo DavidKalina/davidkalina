@@ -70,7 +70,7 @@ export const PROJECT_GRID_CONSTANTS = {
     headlineLine1: "Recent",
     headlineAccent: "work.",
     paragraph:
-      "A selection of things shipped to real users — from AI-powered document pipelines and GraphQL backends to white-label SaaS, real-time marketplaces, and mobile apps. Case studies on request.",
+      "Projects I've worked on recently that I'm proud to share. Either projects that have had a high impact on the company, or projects that I'm just super passionate about.",
   },
   projects: [
     {
