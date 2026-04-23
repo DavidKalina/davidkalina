@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { HERO_CONSTANTS } from "@/constants/hero";
 import { useReveal } from "@/hooks/useReveal";
-import HeroGraph from "./HeroGraph";
+import HeroCard from "./HeroCard";
 
 const ArrowGlyph = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
@@ -81,19 +81,19 @@ const ModernHero = () => {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-5 relative min-h-[420px] reveal">
-            <HeroGraph />
+          <div className="col-span-12 lg:col-span-5 relative min-h-[500px] reveal">
+            <HeroCard />
             <div
               className="absolute left-4 bottom-4 font-mono text-[10px] tracking-[0.14em]"
               style={{ color: "var(--fg-mute)" }}
             >
-              FIG. 01 — EVENT LOOP
+              FIG. 01 — CURRENT BUILD
             </div>
             <div
               className="absolute right-4 top-4 font-mono text-[10px] tracking-[0.14em]"
               style={{ color: "var(--fg-mute)" }}
             >
-              ↻ LIVE
+              ↻ TESTFLIGHT Q2
             </div>
           </div>
         </div>
