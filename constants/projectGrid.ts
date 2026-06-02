@@ -1,3 +1,5 @@
+import { mediaUrl } from "@/constants/media";
+
 export type TechIconKey =
   | "react"
   | "ts"
@@ -159,31 +161,38 @@ export const PROJECT_GRID_CONSTANTS = {
       ],
       journey: {
         label: "USER JOURNEY · Upload → auto-filled form",
+        // TODO: tune `time` (seconds) to your screen recording — must ascend,
+        // last mark before the clip ends.
         steps: [
           {
             title: "Upload PDF",
             sub: "Operator drops a shipping document into the web app.",
             tech: "Vue",
+            time: 0,
           },
           {
             title: "Job queued",
             sub: "Record written, SQS message fired, response returns instantly.",
             tech: "SQS · Express",
+            time: 5,
           },
           {
             title: "Worker picks up",
             sub: "Lambda pulls the message and rasterizes the PDF via Ghostscript.",
             tech: "AWS Lambda",
+            time: 11,
           },
           {
             title: "AI extracts fields",
             sub: "Page image in, structured shipment JSON out.",
             tech: "Vercel AI SDK",
+            time: 17,
           },
           {
             title: "Form auto-fills",
             sub: "Frontend poll resolves; extracted data populates the operator's form.",
             tech: "Vue · Express",
+            time: 24,
           },
         ],
       },
@@ -197,6 +206,10 @@ export const PROJECT_GRID_CONSTANTS = {
           href: "https://app.cudacartagetms.com",
         },
       ],
+      // Landscape web-app capture (no demoOrientation = landscape). Upload the
+      // clip to object key `ai-pipeline/demo.mp4` in the bucket.
+      demoVideoSrc: mediaUrl("ai-pipeline/demo.mp4"),
+      demoPoster: mediaUrl("ai-pipeline/demo-poster.jpg"),
     },
     {
       num: "02",
@@ -269,31 +282,41 @@ export const PROJECT_GRID_CONSTANTS = {
       ],
       journey: {
         label: "USER JOURNEY · record → sync → King",
+        // `time` (seconds) syncs each beat to the demo video's playback. The
+        // scrubber jumps the <video> to these marks; as it plays, the caption
+        // advances when currentTime crosses the next mark. TODO: tune these to
+        // your actual screen recording — they must ascend and the last should
+        // sit before the clip ends.
         steps: [
           {
             title: "Start a ride",
             sub: "Pick a trail and a board. Broadcast goes live to your crew by default.",
             tech: "React Native · tRPC",
+            time: 0,
           },
           {
             title: "Captured on-device",
             sub: "GPS + accelerometer buffer locally and auto-pause when you stop — nothing lost to bad signal.",
             tech: "React Native",
+            time: 6,
           },
           {
             title: "Crew watches live",
             sub: "Pings stream over SSE; spectators see the dot move and send boosts.",
             tech: "tRPC · SSE",
+            time: 13,
           },
           {
             title: "Sync reconciles",
             sub: "Server runs gate-timing on the canonical track and awards segment Kings.",
             tech: "PostGIS",
+            time: 22,
           },
           {
             title: "Get your grade",
             sub: "Post-ride King Grade: speed-vs-King per segment plus how cleanly you rode.",
             tech: "TypeScript · PostGIS",
+            time: 30,
           },
         ],
       },
@@ -302,6 +325,12 @@ export const PROJECT_GRID_CONSTANTS = {
         secondary: "role: solo · design + eng + realtime",
       },
       demoOrientation: "portrait",
+      // Object keys in the portfolio Spaces bucket. Upload the files with
+      // scripts/upload-media.mjs, then these resolve to the public CDN URL.
+      // Until NEXT_PUBLIC_MEDIA_CDN_BASE is set, mediaUrl() returns a relative
+      // path and the panel falls back to its CSS placeholder — safe.
+      demoVideoSrc: mediaUrl("route-king/demo.mp4"),
+      demoPoster: mediaUrl("route-king/demo-poster.jpg"),
     },
   ] as ReadonlyArray<Project>,
 } as const;

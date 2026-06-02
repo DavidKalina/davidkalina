@@ -1,0 +1,15 @@
+# Copy to terraform.tfvars (gitignored) and fill in. terraform.tfvars is read
+# automatically by `terraform apply` — no -var flags needed.
+
+# DO Control Panel -> API -> Tokens (a full-access token; only used at apply time)
+do_token = "dop_v1_..."
+
+# DO Control Panel -> API -> Spaces Keys. MUST be UNSCOPED (no bucket grant) so
+# the bucket policy can be applied. Only used at apply time.
+do_spaces_key    = "..."
+do_spaces_secret = "..."
+
+# Optional overrides:
+# bucket_name          = "davidkalina-portfolio"
+# do_region            = "sfo3"
+# cors_allowed_origins = ["https://davidkalina.com", "http://localhost:3000"]
