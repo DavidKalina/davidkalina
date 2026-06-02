@@ -14,7 +14,12 @@ export type TechIconKey =
   | "vue"
   | "openai"
   | "redis"
-  | "express";
+  | "express"
+  | "trpc"
+  | "postgres"
+  | "expo"
+  | "fastify"
+  | "maplibre";
 
 export type TechAnnotation = {
   icon: TechIconKey;
@@ -183,95 +188,105 @@ export const PROJECT_GRID_CONSTANTS = {
     {
       num: "02",
       year: "2026",
-      title: "Side Quests",
+      title: "Route King",
       client: "Independent",
       role: "Sole developer — design, architecture, implementation",
       blurb:
-        "Mobile app that turns real-world venues and activities into digital 'side quests' that challenge people to step out of their comfort zone and help them build a life they respect.",
-      metrics: [],
+        "Discovery + tracking app for electric longboarders. Find trails, record rides offline-first, broadcast live to your crew, and compete for segment 'Kings' — best gate-to-gate time wins.",
+      metrics: [
+        ["Live stream", "SSE push"],
+        ["Ride capture", "offline-first"],
+        ["Every query", "spatial"],
+      ],
       stack: [
         "React Native",
         "TypeScript",
-        "OpenAI",
-        "MCP",
-        "Google Places",
+        "tRPC",
+        "PostGIS",
         "Redis",
+        "MapLibre",
       ],
-      hue: 200,
+      hue: 145,
       href: "#",
       tags: [
         "react-native",
         "typescript",
-        "openai",
-        "mcp",
-        "google-places",
+        "trpc",
+        "postgis",
         "redis",
+        "maplibre",
       ],
       tech: [
         {
-          icon: "react",
+          icon: "expo",
           label: "React Native",
           role: "CLIENT",
-          body: "Quest card stack, check-in flow, <b>streak calendar</b>. Expo + Reanimated for low-friction micro-interactions.",
+          body: "Expo Router app — trail discovery, the live ride HUD (<b>elapsed</b>, splits, vibration ribbon), and ride capture that buffers fully <b>on-device</b> so a session is never lost to a dead zone.",
         },
         {
           icon: "ts",
           label: "TypeScript",
           role: "LANGUAGE",
-          body: "Language of the entire <b>monorepo</b> — app, agent, tools, shared types. One toolchain top to bottom.",
+          body: "End to end across the <b>pnpm monorepo</b> — app, Fastify backend, shared Zod schemas. Types flow from the DB to the screen.",
         },
         {
-          icon: "openai",
-          label: "OpenAI",
-          role: "PLANNER",
-          body: "Onboarding interviewer + quest generator tuned to energy level. <b>MCP</b> exposes <b>places.search</b>, <b>calendar.book</b>, <b>profile.recall</b> — clean boundary between reasoning and side-effects.",
+          icon: "trpc",
+          label: "tRPC",
+          role: "API",
+          body: "tRPC v11 on Fastify. Location pings are mutations; viewers consume a <b>subscription over SSE</b> — typed end to end, auto-reconnecting, with a react-query polling fallback.",
         },
         {
-          icon: "gp",
-          label: "Google Places",
-          role: "REALITY",
-          body: "Grounds every suggestion in a real venue — hours, crowd level, photos. <b>No hallucinated spots.</b>",
+          icon: "postgres",
+          label: "PostGIS",
+          role: "DATA",
+          body: "Rides stored as PostGIS <b>geography</b> with a GIST index. Sync runs authoritative gate-timing on the canonical track and awards segment <b>Kings</b> — every core query is spatial.",
+        },
+        {
+          icon: "realtime",
+          label: "SSE",
+          role: "LIVE",
+          body: "Broadcast on by default. Each ping is persisted (late joiners replay) and published to an event bus; spectators render the <b>same server events</b> as the rider and can fire boosts.",
         },
         {
           icon: "redis",
           label: "Redis",
-          role: "CACHE",
-          body: "Caches Places responses per venue and query. Hot lookups skip the API entirely — <b>trimming spend</b> on repeat suggestions.",
+          role: "SCALE",
+          body: "Pub/sub seam behind the <b>EventBus interface</b> — swap the in-memory bus for Redis to fan the live stream out across multiple backend replicas.",
         },
       ],
       journey: {
-        label: "USER JOURNEY · 7 min first session",
+        label: "USER JOURNEY · record → sync → King",
         steps: [
           {
-            title: "Guided onboarding",
-            sub: "Agent asks about interests, comfort zone, energy.",
-            tech: "OpenAI · React Native",
+            title: "Start a ride",
+            sub: "Pick a trail and a board. Broadcast goes live to your crew by default.",
+            tech: "React Native · tRPC",
           },
           {
-            title: "Quest proposed",
-            sub: "'Walk past the Sunday market. Stay 10 min. No need to buy.'",
-            tech: "OpenAI · MCP",
-          },
-          {
-            title: "Grounded in real venue",
-            sub: "Hours, photos, and walking time from Places — hot venues served from Redis.",
-            tech: "Google Places · Redis",
-          },
-          {
-            title: "Low-pressure check-in",
-            sub: "One tap. How'd it feel? 1–5.",
+            title: "Captured on-device",
+            sub: "GPS + accelerometer buffer locally and auto-pause when you stop — nothing lost to bad signal.",
             tech: "React Native",
           },
           {
-            title: "Next quest adapts",
-            sub: "Agent tunes difficulty based on feedback + streak.",
-            tech: "OpenAI · TypeScript",
+            title: "Crew watches live",
+            sub: "Pings stream over SSE; spectators see the dot move and send boosts.",
+            tech: "tRPC · SSE",
+          },
+          {
+            title: "Sync reconciles",
+            sub: "Server runs gate-timing on the canonical track and awards segment Kings.",
+            tech: "PostGIS",
+          },
+          {
+            title: "Get your grade",
+            sub: "Post-ride King Grade: speed-vs-King per segment plus how cleanly you rode.",
+            tech: "TypeScript · PostGIS",
           },
         ],
       },
       status: {
-        primary: "BUILDING · TESTFLIGHT BETA APR 2026",
-        secondary: "role: solo · design + eng + ai",
+        primary: "BUILDING · TESTFLIGHT BETA 2026",
+        secondary: "role: solo · design + eng + realtime",
       },
     },
   ] as ReadonlyArray<Project>,

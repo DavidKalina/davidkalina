@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { memo, useEffect, useRef, useState } from "react";
 import {
-  CircleCheck,
-  Compass,
+  Crown,
   MapPin,
-  MessageCircle,
+  Radio,
+  Route,
   Sparkles,
   Upload,
   Workflow,
@@ -18,11 +18,12 @@ import type { IconType } from "react-icons";
 import { FaAws } from "react-icons/fa";
 import {
   SiExpress,
-  SiGooglemaps,
-  SiOpenai,
+  SiMaplibre,
+  SiPostgresql,
   SiReact,
   SiRedis,
   SiTerraform,
+  SiTrpc,
   SiTypescript,
   SiVercel,
   SiVuedotjs,
@@ -49,12 +50,12 @@ type DeckEntry = {
 
 const DECK: ReadonlyArray<DeckEntry> = [
   {
-    project: PROJECT_GRID_CONSTANTS.projects[0],
+    project: PROJECT_GRID_CONSTANTS.projects[1],
     tone: "gold",
-    category: "MOBILE · AI",
-    theme: "AI × UX",
-    icon: Compass,
-    title: "Side Quests",
+    category: "MOBILE · REALTIME",
+    theme: "MAPS × LIVE",
+    icon: Route,
+    title: "Route King",
     subtitle: "INDEPENDENT",
     stats: [
       { label: "STACK", value: "6" },
@@ -62,17 +63,17 @@ const DECK: ReadonlyArray<DeckEntry> = [
       { label: "SHIP", value: "BETA" },
     ],
     moves: [
-      { icon: MessageCircle, name: "ONBOARDING", desc: "Interviews interests + energy." },
-      { icon: MapPin, name: "GROUNDED", desc: "Real Places venues only." },
-      { icon: CircleCheck, name: "CHECK-IN", desc: "Tap to adapt next quest." },
+      { icon: Radio, name: "BROADCAST", desc: "Crew watches you ride live." },
+      { icon: MapPin, name: "OFFLINE", desc: "Rides captured on-device." },
+      { icon: Crown, name: "KINGS", desc: "Best gate-to-gate time wins." },
     ],
-    tech: ["React Native", "TypeScript", "OpenAI", "MCP", "Google Places", "Redis"],
-    flavor: "Helping people get out, one small quest at a time.",
-    serial: "SQ · 001",
-    tag: "BETA · Q2",
+    tech: ["React Native", "TypeScript", "tRPC", "PostGIS", "Redis", "MapLibre"],
+    flavor: "Ride together, even when you ride alone.",
+    serial: "RK · 001",
+    tag: "BETA · 2026",
   },
   {
-    project: PROJECT_GRID_CONSTANTS.projects[1],
+    project: PROJECT_GRID_CONSTANTS.projects[0],
     tone: "white",
     category: "PIPELINE",
     theme: "DATA × AI",
@@ -101,9 +102,9 @@ type TechChip = { icon?: IconType; text: string; color: string };
 const TECH: Record<string, TechChip> = {
   "React Native": { icon: SiReact, text: "RN", color: "#61DAFB" },
   TypeScript: { icon: SiTypescript, text: "TS", color: "#3178C6" },
-  OpenAI: { icon: SiOpenai, text: "AI", color: "#10A37F" },
-  MCP: { text: "MCP", color: "#D97757" },
-  "Google Places": { icon: SiGooglemaps, text: "GP", color: "#4285F4" },
+  tRPC: { icon: SiTrpc, text: "tRPC", color: "#2596BE" },
+  PostGIS: { icon: SiPostgresql, text: "PG", color: "#4169E1" },
+  MapLibre: { icon: SiMaplibre, text: "ML", color: "#3F73DF" },
   Redis: { icon: SiRedis, text: "RDS", color: "#DC382D" },
   Vue: { icon: SiVuedotjs, text: "V", color: "#4FC08D" },
   Express: { icon: SiExpress, text: "EX", color: "var(--fg)" },

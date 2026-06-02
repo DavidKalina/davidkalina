@@ -43,17 +43,17 @@ export const SYSTEMS_CONSTANTS = {
     {
       num: "02",
       year: "2026",
-      title: "Side Quests — Agentic Mobile App",
+      title: "Route King — Live Ride Tracking",
       client: "Independent",
       blurb:
-        "An 'anti-doomscroll' app that helps chronic homebodies, those struggling with social anxiety, and people looking for software to help funnel their attention more productively. An agentic workflow combines guided onboarding with Google Places data and user feedback to generate real-world activities in the user's zone of proximal development.",
+        "A discovery + tracking app for electric longboarders. Rides are captured offline-first on the phone, then synced to a PostGIS backend that runs authoritative gate-timing and awards segment 'Kings'. While a ride is in progress it broadcasts live to the rider's crew — location pings flow through a tRPC subscription over SSE, with a Redis pub/sub seam for multi-replica fan-out.",
       pipeline: [
-        { layer: "Client", nodes: ["React Native", "TypeScript"] },
-        { layer: "Agent", nodes: ["Anthropic Agent SDK"] },
-        { layer: "Services", nodes: ["Google Places"] },
-        { layer: "Data", nodes: ["PostgreSQL"] },
+        { layer: "Client", nodes: ["React Native", "Expo"] },
+        { layer: "API", nodes: ["tRPC", "Fastify"] },
+        { layer: "Realtime", nodes: ["SSE", "Redis"] },
+        { layer: "Data", nodes: ["PostgreSQL", "PostGIS"] },
       ],
-      infra: "Built with Claude Code",
+      infra: "pnpm monorepo · Docker · Terraform on AWS",
       href: "#",
     },
     {

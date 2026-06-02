@@ -3,15 +3,20 @@
 import type { ComponentType, SVGProps } from "react";
 import {
   SiAnthropic,
+  SiExpo,
   SiExpress,
+  SiFastify,
   SiGooglemaps,
   SiGraphql,
+  SiMaplibre,
   SiNodedotjs,
   SiOpenai,
+  SiPostgresql,
   SiReact,
   SiRedis,
   SiStorybook,
   SiTerraform,
+  SiTrpc,
   SiTypescript,
   SiVercel,
   SiVuedotjs,
@@ -44,6 +49,11 @@ const ICON_MAP: Record<TechIconKey, { icon: IconComponent; color?: string }> = {
   openai: { icon: SiOpenai },
   redis: { icon: SiRedis, color: "#DC382D" },
   express: { icon: SiExpress },
+  trpc: { icon: SiTrpc, color: "#2596BE" },
+  postgres: { icon: SiPostgresql, color: "#4169E1" },
+  expo: { icon: SiExpo },
+  fastify: { icon: SiFastify },
+  maplibre: { icon: SiMaplibre, color: "#3F73DF" },
 };
 
 const TechIcon = ({ name }: { name: TechIconKey }) => {
