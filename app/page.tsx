@@ -1,7 +1,7 @@
 import ModernAbout from "@/components/About";
 import ModernCTA from "@/components/Cta";
 import ModernHero from "@/components/Hero";
-import ModernTechStack from "@/components/TechStack";
+import ModernProjects from "@/components/Projects";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <ModernHero />
 
-      <ModernTechStack />
+      <ModernProjects />
 
       <ModernAbout />
 

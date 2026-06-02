@@ -189,267 +189,139 @@
 }
 
 @layer components {
-  /* ---- V2 Project Row ---- */
-  .pc-card {
+  /* ══ Projects · "Scrubber" (V3) ═════════════════════════════════════
+     A dark editorial stage with a story-player scrubber and a product-demo
+     "video". Dark-only: the stage redefines the theme tokens to the dark
+     palette locally, so it reads identically in either site theme.
+     pv-* = shell / scrubber chrome · demo-* = the product-demo placeholder. */
+  .pv-stage {
+    --bg: #0c0c08;
+    --bg-elev: #16160f;
+    --bg-card: #1b1b15;
+    --border: #2a2a22;
+    --fg: #ecece5;
+    --fg-dim: #a3a39c;
+    --fg-mute: #71716b;
+    --signal: #e5a93a;
+
     position: relative;
     width: 100%;
+    min-height: 100vh;
+    padding: 56px;
+    background: var(--bg);
     color: var(--fg);
-    display: grid;
-    grid-template-columns: minmax(340px, 1fr) 1.6fr;
-    gap: 56px;
-    align-items: start;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+  .pv-stage * {
+    box-sizing: border-box;
+  }
+  /* Centered editorial frame — content stays readable on ultra-wide screens
+     while the dark stage itself runs edge-to-edge / full-height. */
+  .pv-inner {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .pv-stage ::selection {
+    background: var(--signal);
+    color: var(--bg);
+  }
+  /* Fine grain overlay — mirrors the site's body::after, scoped to the stage. */
+  .pv-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    opacity: 0.022;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
-  .pc-meta {
-    position: relative;
-  }
-  .pc-index {
+  /* ── shared type ─────────────────────────────────────────────────── */
+  .pv-eyebrow {
     font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--fg-dim);
-    margin-bottom: 16px;
-  }
-  .pc-index::before {
-    content: "— ";
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--fg-mute);
   }
-  .pc-title {
-    font-weight: 500;
-    font-size: 52px;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin: 0 0 24px;
-    color: var(--fg);
+  .pv-idx {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--fg-mute);
+    font-variant-numeric: tabular-nums;
   }
-  .pc-desc {
+  .pv-display {
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+  .pv-italic {
     font-style: italic;
-    font-size: 18px;
-    line-height: 1.65;
-    color: var(--fg-dim);
-    max-width: 360px;
     letter-spacing: -0.02em;
   }
-  .pc-metrics {
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px dashed var(--border);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 20px 28px;
-    max-width: 360px;
-  }
-  .pc-metrics > * {
-    min-width: 0;
-  }
-  .pc-metric-value {
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--fg);
-    overflow-wrap: break-word;
-  }
-  .pc-metric-label {
-    margin-top: 8px;
-    font-size: 10.5px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
+  .pv-dotline {
+    background-image: radial-gradient(
+      circle,
+      var(--border) 1px,
+      transparent 1.5px
+    );
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+    background-position: 0 50%;
+    height: 1px;
   }
 
-  .pc-tags {
-    margin-top: 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 10px;
-    font-size: 10.5px;
-    color: var(--fg-mute);
-    letter-spacing: 0.12em;
-  }
-  .pc-tags span::before {
-    content: "# ";
-    color: var(--fg-mute);
-  }
-
-  .pc-links {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .pc-links-label {
-    font-size: 10.5px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
-    margin-bottom: 4px;
-  }
-  .pc-links-label::before {
-    content: "◦ ";
-    color: var(--signal);
-  }
-  .pc-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--fg);
-    width: fit-content;
-  }
-  .pc-link svg {
-    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .pc-link:hover svg {
-    transform: translate(2px, -2px);
-  }
-
-  .pc-right {
-    position: relative;
-    min-height: 340px;
-  }
-
-  .pc-v2 {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 36px;
-    min-height: 100%;
-  }
-  .pc-v2--single {
-    grid-template-columns: 1fr;
-  }
-
-  .pc-annot-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .pc-annot {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 14px;
-  }
-  .pc-annot-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    font-size: 17px;
-    color: var(--fg);
-  }
-  .pc-annot-icon {
-    width: 14px;
-    height: 14px;
-    display: inline-grid;
-    place-items: center;
-  }
-  .pc-annot-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .pc-annot-role {
-    font-size: 10.5px;
-    letter-spacing: 0.2em;
-    color: var(--fg-mute);
-  }
-  .pc-annot-body {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--fg-dim);
-    margin-top: 6px;
-    padding-left: 24px;
-    position: relative;
-  }
-  .pc-annot-body::before {
-    content: "↳";
-    position: absolute;
-    left: 6px;
-    top: 0;
-    color: var(--signal);
-    opacity: 0.7;
-  }
-  .pc-annot-body b {
-    color: var(--fg);
-    font-weight: 500;
-  }
-
-  .pc-journey {
-    border-left: 1px dashed var(--border);
-    padding-left: 28px;
-    position: relative;
-  }
-  .pc-journey-label {
-    font-size: 11.5px;
-    letter-spacing: 0.2em;
-    color: var(--fg-dim);
-    margin-bottom: 18px;
-  }
-  .pc-journey-label::before {
-    content: "◦ ";
-    color: var(--signal);
-  }
-
-  .pc-step {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    line-height: 1.55;
-  }
-  .pc-step-n {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--signal);
-    padding-top: 2px;
-  }
-  .pc-step-content {
-    color: var(--fg);
-  }
-  .pc-step-sub {
-    display: block;
-    color: var(--fg-dim);
-    font-size: 12px;
-    margin-top: 3px;
-  }
-  .pc-step-tech {
-    display: inline-block;
-    margin-top: 5px;
-    padding: 2px 7px;
+  /* ── project switcher + scrubber chrome ──────────────────────────── */
+  .pv-navbtn {
+    appearance: none;
     border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--fg-mute);
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
+    background: transparent;
+    color: var(--fg);
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    transition:
+      border-color 0.25s,
+      color 0.25s,
+      background 0.25s;
+  }
+  .pv-navbtn:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+  .pv-navbtn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    border-color: var(--border);
+    color: var(--fg);
   }
 
-  .pc-status {
-    grid-column: 1 / -1;
-    margin-top: 22px;
-    padding-top: 14px;
-    border-top: 1px dashed var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11.5px;
-    color: var(--fg-dim);
-    letter-spacing: 0.15em;
-  }
-  .pc-status-dot {
+  /* pulsing status dot (no-metrics fallback) */
+  .pv-dot {
     display: inline-block;
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: var(--signal);
     box-shadow: 0 0 8px var(--signal);
-    margin-right: 8px;
-    animation: pc-pulse 2.2s ease-in-out infinite;
+    animation: pv-pulse 2.2s ease-in-out infinite;
     vertical-align: middle;
   }
-  .pc-status-right {
-    color: var(--fg-mute);
-  }
-
-  @keyframes pc-pulse {
+  @keyframes pv-pulse {
     0%,
     100% {
       opacity: 1;
@@ -459,28 +331,481 @@
     }
   }
 
-  @media (max-width: 900px) {
-    .pc-card {
-      grid-template-columns: 1fr;
-      gap: 36px;
+  /* two-column body grid (collapses to one column on narrow viewports).
+     The single row is 1fr so the columns stretch to the full stage height —
+     the demo fills top-to-bottom and the left column's step detail is pushed
+     to the baseline via margin-top:auto. */
+  .pv-bodygrid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: 56px;
+    height: 100%;
+  }
+
+  /* enter fade for project / step swaps — base state is VISIBLE so content
+     never gets stuck hidden; the animation is a pure enhancement. */
+  @keyframes pv-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
     }
-    .pc-title {
-      font-size: 40px;
-    }
-    .pc-right {
-      min-height: 0;
+    to {
+      opacity: 1;
+      transform: none;
     }
   }
-  @media (max-width: 700px) {
-    .pc-v2 {
-      grid-template-columns: 1fr;
-      gap: 28px;
+  .pv-fade {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pv-fade {
+      animation: pv-fade-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .pc-journey {
-      border-left: 0;
-      border-top: 1px dashed var(--border);
-      padding-left: 0;
-      padding-top: 20px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pv-dot {
+      animation: none !important;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .pv-bodygrid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .pv-demo-col {
+      min-height: 340px;
+    }
+  }
+  @media (max-width: 680px) {
+    .pv-stage {
+      padding: 28px;
+    }
+  }
+
+  /* ══ Product-demo "video" placeholder ═══════════════════════════════
+     A faux SaaS screen-recording: window chrome + an auto-filling form loop
+     (reads as "watch the product work") + shimmer sweep + scrubbing progress.
+     Swap the inner .demo-stage for a real <video> / screen capture later. */
+  .demo-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .demo-bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .demo-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .demo-dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    display: block;
+  }
+  .demo-urlchip {
+    flex: 1;
+    min-width: 0;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--fg-mute);
+    background: color-mix(in srgb, var(--fg) 5%, transparent);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .demo-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    color: var(--signal);
+  }
+  .demo-rec b {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+    animation: demo-blink 1.6s steps(1) infinite;
+  }
+
+  .demo-stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0;
+    filter: blur(0.5px);
+  }
+  /* real-video mode: the <video> replaces the faux UI and fills the stage */
+  .demo-stage--video {
+    display: block;
+    filter: none;
+  }
+  .demo-videowrap {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+  .demo-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .demo-nav {
+    border-right: 1px solid var(--border);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .demo-nav span {
+    height: 7px;
+    background: color-mix(in srgb, var(--fg) 9%, transparent);
+    display: block;
+  }
+  .demo-nav span:first-child {
+    background: var(--signal);
+    opacity: 0.8;
+  }
+  .demo-main {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .demo-mainhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .demo-mainhead b {
+    display: block;
+    height: 10px;
+    width: 120px;
+    background: color-mix(in srgb, var(--fg) 16%, transparent);
+  }
+  .demo-mainhead em {
+    display: block;
+    height: 18px;
+    width: 54px;
+    background: color-mix(in srgb, var(--signal) 26%, transparent);
+    border: 1px solid var(--signal);
+  }
+
+  /* auto-filling rows */
+  .demo-row {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    position: relative;
+  }
+  .demo-row .lab {
+    height: 7px;
+    background: color-mix(in srgb, var(--fg) 12%, transparent);
+  }
+  .demo-row .val {
+    height: 9px;
+    background: color-mix(in srgb, var(--signal) 55%, transparent);
+    width: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .demo-row .val {
+      animation: demo-typein 7s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-row .val {
+      width: 70%;
+    }
+  }
+  .demo-row:nth-child(1) .val {
+    animation-delay: 0.2s;
+  }
+  .demo-row:nth-child(2) .val {
+    animation-delay: 0.9s;
+  }
+  .demo-row:nth-child(3) .val {
+    animation-delay: 1.6s;
+  }
+  .demo-row:nth-child(4) .val {
+    animation-delay: 2.3s;
+  }
+  .demo-row:nth-child(5) .val {
+    animation-delay: 3s;
+  }
+
+  /* active-row scan highlight */
+  .demo-scan {
+    position: absolute;
+    left: 12px;
+    right: 20px;
+    height: 30px;
+    top: 56px;
+    border-left: 2px solid var(--signal);
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--signal) 12%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .demo-scan {
+      animation: demo-scan 7s steps(1) infinite;
+    }
+  }
+
+  /* diagonal shimmer sweep */
+  .demo-shimmer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      color-mix(in srgb, #fff 7%, transparent) 48%,
+      transparent 62%
+    );
+    transform: translateX(-120%);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .demo-shimmer {
+      animation: demo-sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  }
+
+  /* vignette — darkens edges for a dreamlike, lensed look */
+  .demo-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    background:
+      radial-gradient(
+        130% 120% at 50% 40%,
+        transparent 48%,
+        color-mix(in srgb, #000 62%, transparent) 100%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, #fff 4%, transparent),
+        transparent 22%
+      );
+  }
+
+  /* synced caption chip */
+  .demo-caption {
+    position: absolute;
+    left: 20px;
+    bottom: 16px;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    backdrop-filter: blur(4px);
+    max-width: calc(100% - 40px);
+  }
+  .demo-caption b {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 6px var(--signal);
+    flex: 0 0 auto;
+  }
+
+  /* scrubbing progress bar */
+  .demo-progress {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .demo-progress .play {
+    color: var(--fg-mute);
+    display: flex;
+  }
+  .demo-track {
+    position: relative;
+    flex: 1;
+    height: 3px;
+    background: color-mix(in srgb, var(--fg) 10%, transparent);
+  }
+  .demo-track i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: var(--signal);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .demo-track i {
+      animation: demo-fill 9s linear infinite;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-track i {
+      width: 40%;
+    }
+  }
+  .demo-time {
+    font-size: 10px;
+    color: var(--fg-mute);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  /* angled, floating panel — 3D pitch for a sleek product-shot look */
+  .demo-tilt {
+    height: 100%;
+    perspective: 1700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .demo-tilt > .demo-frame {
+    height: 95%;
+    transform: rotateY(-12deg) rotateX(4deg) scale(0.95);
+    transform-origin: center;
+    box-shadow:
+      -30px 38px 70px -26px rgba(0, 0, 0, 0.75),
+      0 0 0 1px var(--border);
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .demo-tilt:hover > .demo-frame {
+    transform: rotateY(-7deg) rotateX(2deg) scale(0.97);
+  }
+  /* portrait capture (iPhone / mobile footage) — the frame becomes a tall,
+     phone-shaped column. Height-driven so it fits the demo row, with the
+     width derived from the 9:16 ratio and centered by .demo-tilt's flexbox. */
+  .demo-tilt--portrait > .demo-frame {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    aspect-ratio: 9 / 16;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-tilt > .demo-frame {
+      transition: none;
+    }
+  }
+
+  /* ambient background instance — big, blurred, dim wash biased toward the
+     copy side so the "video" reads as playing behind the editorial column. */
+  .demo-ambient {
+    position: absolute;
+    inset: -12% 22% -12% -24%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.3;
+    filter: blur(44px) saturate(1.35);
+    transform: scale(1.2);
+  }
+  .demo-ambient .demo-frame {
+    border: none;
+    background: transparent;
+  }
+  .demo-ambient .demo-bar,
+  .demo-ambient .demo-progress {
+    border: none;
+  }
+
+  @keyframes demo-typein {
+    0% {
+      width: 0;
+    }
+    28% {
+      width: var(--w, 72%);
+    }
+    82% {
+      width: var(--w, 72%);
+    }
+    92%,
+    100% {
+      width: 0;
+    }
+  }
+  @keyframes demo-sweep {
+    0% {
+      transform: translateX(-120%);
+    }
+    55%,
+    100% {
+      transform: translateX(220%);
+    }
+  }
+  @keyframes demo-fill {
+    0% {
+      width: 0;
+    }
+    96%,
+    100% {
+      width: 100%;
+    }
+  }
+  @keyframes demo-blink {
+    0%,
+    60% {
+      opacity: 1;
+    }
+    60.01%,
+    100% {
+      opacity: 0.25;
+    }
+  }
+  @keyframes demo-scan {
+    0% {
+      top: 56px;
+    }
+    25% {
+      top: 90px;
+    }
+    50% {
+      top: 124px;
+    }
+    75% {
+      top: 158px;
+    }
+    100% {
+      top: 192px;
     }
   }
 }

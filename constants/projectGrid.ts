@@ -32,6 +32,10 @@ export type JourneyStep = {
   title: string;
   sub: string;
   tech?: string;
+  /** Seconds into the demo video at which this beat becomes active. Markers
+   *  should ascend across a project's steps. Drives the scrubber when the
+   *  project has a `demoVideoSrc`; ignored for the CSS-placeholder fallback. */
+  time?: number;
 };
 
 export type ProjectJourney = {
@@ -65,6 +69,15 @@ export type Project = {
   journey?: ProjectJourney;
   status?: ProjectStatus;
   links?: ReadonlyArray<ProjectLink>;
+  /** Muted screen-capture for the demo panel. When set, the scrubber is driven
+   *  by the video's playback time (via each step's `time` marker) instead of
+   *  the auto-advance timer. Leave unset to keep the CSS-placeholder demo. */
+  demoVideoSrc?: string;
+  /** Optional poster frame shown before the demo video loads. */
+  demoPoster?: string;
+  /** Orientation of the demo capture. "portrait" renders a phone-shaped (9:16)
+   *  panel for footage shot on a mobile device; defaults to "landscape". */
+  demoOrientation?: "portrait" | "landscape";
 };
 
 export const PROJECT_GRID_CONSTANTS = {
@@ -288,6 +301,7 @@ export const PROJECT_GRID_CONSTANTS = {
         primary: "BUILDING · TESTFLIGHT BETA 2026",
         secondary: "role: solo · design + eng + realtime",
       },
+      demoOrientation: "portrait",
     },
   ] as ReadonlyArray<Project>,
 } as const;

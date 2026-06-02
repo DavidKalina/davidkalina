@@ -1,0 +1,326 @@
+/* Design tokens lifted verbatim from David's globals.css + tailwind.config.
+   Scoped helpers are prefixed pv- so they never collide with the design canvas. */
+:root {
+  --bg: #faf9f5;
+  --bg-elev: #ffffff;
+  --bg-card: #ffffff;
+  --border: #e7e4dc;
+  --fg: #16160f;
+  --fg-dim: #52524c;
+  --fg-mute: #6d6d66;
+  --signal: #8a5a12;
+  --mono: "Space Mono", ui-monospace, monospace;
+}
+
+/* Dark theme — verbatim from David's globals.css .dark block. Applied per-stage. */
+.pv-dark {
+  --bg: #0c0c08;
+  --bg-elev: #16160f;
+  --bg-card: #1b1b15;
+  --border: #2a2a22;
+  --fg: #ecece5;
+  --fg-dim: #a3a39c;
+  --fg-mute: #71716b;
+  --signal: #e5a93a;
+}
+
+/* ── Editorial stage: a fixed project frame on warm paper ───────────── */
+.pv-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--mono);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+/* Fine grain overlay — straight from David's body::after */
+.pv-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.022;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.pv-stage * { box-sizing: border-box; }
+.pv-stage ::selection { background: var(--signal); color: var(--bg); }
+
+/* ── Shared type ────────────────────────────────────────────────────── */
+.pv-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.pv-idx {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--fg-mute);
+  font-variant-numeric: tabular-nums;
+}
+.pv-display {
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+.pv-italic { font-style: italic; letter-spacing: -0.02em; }
+.pv-signal { color: var(--signal); }
+
+/* dotted leader, from .dotline */
+.pv-dotline {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1.5px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: 0 50%;
+  height: 1px;
+}
+
+/* ── Project switcher chrome ────────────────────────────────────────── */
+.pv-navbtn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-family: var(--mono);
+  transition: border-color .25s, color .25s, background .25s;
+}
+.pv-navbtn:hover { border-color: var(--signal); color: var(--signal); }
+.pv-navbtn:disabled { opacity: .3; cursor: default; border-color: var(--border); color: var(--fg); }
+
+/* pulsing status dot, from .pc-status-dot */
+.pv-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 8px var(--signal);
+  animation: pv-pulse 2.2s ease-in-out infinite;
+  vertical-align: middle;
+}
+@keyframes pv-pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+/* tech glyph chip */
+.pv-glyph {
+  display: inline-grid;
+  place-items: center;
+  color: var(--signal);
+  line-height: 1;
+}
+
+/* arrow link underline sweep, from .arrow-link */
+.pv-link {
+  position: relative;
+  color: var(--fg);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+.pv-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%; bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transition: right .5s cubic-bezier(.2,.7,.2,1);
+}
+.pv-link:hover::after { right: 0; }
+.pv-link svg { transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+.pv-link:hover svg { transform: translate(2px,-2px); }
+
+/* enter fade for project swaps — base state is VISIBLE so content never
+   gets stuck hidden if the entrance animation doesn't fire (focus-mount /
+   capture timing). The animation is a pure enhancement layered on top. */
+@keyframes pv-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.pv-fade { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .pv-fade { animation: pv-fade-up .6s cubic-bezier(.2,.7,.2,1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-dot { animation: none !important; }
+}
+
+/* ══ Product-demo video placeholder ═════════════════════════════════════
+   A faux SaaS screen-recording: window chrome + an auto-filling form loop
+   (reads as "watch the product work") + shimmer sweep + scrubbing progress.
+   Swap the inner .demo-stage for a real <video> / screen capture later. */
+.demo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.demo-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.demo-dots { display: flex; gap: 6px; }
+.demo-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: block; }
+.demo-urlchip {
+  flex: 1; min-width: 0;
+  font-size: 10.5px; letter-spacing: 0.04em; color: var(--fg-mute);
+  background: color-mix(in srgb, var(--fg) 5%, transparent);
+  border: 1px solid var(--border);
+  padding: 4px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.demo-rec {
+  display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto;
+  font-size: 9.5px; letter-spacing: 0.16em; color: var(--signal);
+}
+.demo-rec b { width: 6px; height: 6px; border-radius: 50%; background: var(--signal);
+  box-shadow: 0 0 8px var(--signal); animation: demo-blink 1.6s steps(1) infinite; }
+
+.demo-stage {
+  flex: 1 1 auto; min-height: 0; position: relative;
+  display: grid; grid-template-columns: 64px 1fr; gap: 0;
+  filter: blur(0.5px);
+}
+.demo-nav { border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 10px; }
+.demo-nav span { height: 7px; background: color-mix(in srgb, var(--fg) 9%, transparent); display: block; }
+.demo-nav span:first-child { background: var(--signal); opacity: .8; }
+.demo-main { padding: 18px 20px; display: flex; flex-direction: column; gap: 0; position: relative; }
+.demo-mainhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.demo-mainhead b { display: block; height: 10px; width: 120px; background: color-mix(in srgb, var(--fg) 16%, transparent); }
+.demo-mainhead em { display: block; height: 18px; width: 54px; background: color-mix(in srgb, var(--signal) 26%, transparent); border: 1px solid var(--signal); }
+
+/* auto-filling rows */
+.demo-row { display: grid; grid-template-columns: 86px 1fr; gap: 14px; align-items: center; padding: 9px 0; border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent); position: relative; }
+.demo-row .lab { height: 7px; background: color-mix(in srgb, var(--fg) 12%, transparent); }
+.demo-row .val { height: 9px; background: color-mix(in srgb, var(--signal) 55%, transparent); width: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .demo-row .val { animation: demo-typein 7s cubic-bezier(.2,.7,.2,1) infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-row .val { width: 70%; }
+}
+.demo-row:nth-child(1) .val { animation-delay: .2s; }
+.demo-row:nth-child(2) .val { animation-delay: .9s; }
+.demo-row:nth-child(3) .val { animation-delay: 1.6s; }
+.demo-row:nth-child(4) .val { animation-delay: 2.3s; }
+.demo-row:nth-child(5) .val { animation-delay: 3.0s; }
+
+/* active-row scan highlight */
+.demo-scan {
+  position: absolute; left: 12px; right: 20px; height: 30px; top: 56px;
+  border-left: 2px solid var(--signal);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--signal) 12%, transparent), transparent 70%);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .demo-scan { animation: demo-scan 7s steps(1) infinite; }
+}
+/* diagonal shimmer sweep */
+.demo-shimmer {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: linear-gradient(105deg, transparent 30%, color-mix(in srgb, #fff 7%, transparent) 48%, transparent 62%);
+  transform: translateX(-120%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .demo-shimmer { animation: demo-sweep 4.5s cubic-bezier(.4,0,.2,1) infinite; }
+}
+
+/* vignette — darkens edges for a dreamlike, lensed look */
+.demo-vignette {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  background:
+    radial-gradient(130% 120% at 50% 40%, transparent 48%, color-mix(in srgb, #000 62%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in srgb, #fff 4%, transparent), transparent 22%);
+}
+
+/* synced caption chip */
+.demo-caption {
+  position: absolute; left: 20px; bottom: 16px; z-index: 4;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg); background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border: 1px solid var(--border); padding: 6px 10px; backdrop-filter: blur(4px);
+  max-width: calc(100% - 40px);
+}
+.demo-caption b { width: 5px; height: 5px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 6px var(--signal); flex: 0 0 auto; }
+
+/* scrubbing progress bar */
+.demo-progress { flex: 0 0 auto; display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-top: 1px solid var(--border); }
+.demo-progress .play { color: var(--fg-mute); display: flex; }
+.demo-track { position: relative; flex: 1; height: 3px; background: color-mix(in srgb, var(--fg) 10%, transparent); }
+.demo-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--signal); }
+@media (prefers-reduced-motion: no-preference) {
+  .demo-track i { animation: demo-fill 9s linear infinite; }
+}
+@media (prefers-reduced-motion: reduce) { .demo-track i { width: 40%; } }
+.demo-time { font-size: 10px; color: var(--fg-mute); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+
+/* angled, floating panel — 3D pitch for a sleek product-shot look */
+.demo-tilt {
+  height: 100%;
+  perspective: 1700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.demo-tilt > .demo-frame {
+  height: 95%;
+  transform: rotateY(-12deg) rotateX(4deg) scale(.95);
+  transform-origin: center;
+  box-shadow:
+    -30px 38px 70px -26px rgba(0,0,0,.75),
+    0 0 0 1px var(--border);
+  transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.demo-tilt:hover > .demo-frame {
+  transform: rotateY(-7deg) rotateX(2deg) scale(.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-tilt > .demo-frame { transition: none; }
+}
+
+/* ambient background instance — big, blurred, dim wash biased toward the
+   copy side so the "video" actually reads behind the editorial column. */
+.demo-ambient {
+  position: absolute; inset: -12% 22% -12% -24%;
+  z-index: 0; pointer-events: none;
+  opacity: 0.3;
+  filter: blur(44px) saturate(1.35);
+  transform: scale(1.2);
+}
+.demo-ambient .demo-frame { border: none; background: transparent; }
+.demo-ambient .demo-bar, .demo-ambient .demo-progress { border: none; }
+
+@keyframes demo-typein {
+  0% { width: 0; }
+  28% { width: var(--w, 72%); }
+  82% { width: var(--w, 72%); }
+  92%, 100% { width: 0; }
+}
+@keyframes demo-sweep { 0% { transform: translateX(-120%); } 55%, 100% { transform: translateX(220%); } }
+@keyframes demo-fill { 0% { width: 0; } 96%, 100% { width: 100%; } }
+@keyframes demo-blink { 0%, 60% { opacity: 1; } 60.01%, 100% { opacity: .25; } }
+@keyframes demo-scan {
+  0%   { top: 56px; }
+  25%  { top: 90px; }
+  50%  { top: 124px; }
+  75%  { top: 158px; }
+  100% { top: 192px; }
+}
