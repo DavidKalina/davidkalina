@@ -9,38 +9,54 @@ export const ABOUT_CONSTANTS = {
   ],
   stats: [
     {
-      label: "Core skills",
-      content: "TypeScript, React, Vue\nNode.js, GraphQL, Postgres",
+      label: "Experience",
+      content: "4+ years shipping\nproduction software",
     },
     {
-      label: "Cloud & AI",
-      content: "AWS, Terraform, Docker\nVercel AI SDK, MCP",
+      label: "Domains",
+      content: "SaaS, logistics,\nmarketplaces",
     },
     {
       label: "Based in",
-      content: "Colorado\nWorking Hybrid (MT)",
+      content: "Colorado\nMountain Time (hybrid)",
     },
     {
-      label: "Currently",
-      content: "Open to senior roles\n& select freelance",
+      label: "Open to",
+      content: "Mid-level & senior roles\nFull-time",
     },
   ],
   featured: {
-    eyebrow: "Featured — 2025",
+    eyebrow: "How I work",
     quoteBefore:
-      "“Designed an AI-powered document pipeline that reduced shipping-PDF processing costs by ",
-    quoteAccent: "98%",
-    quoteAfter: " — saving $20k+ annually.”",
-    meta: "EEL DATA SYSTEMS",
-    action: "SEE CASE",
+      "I want to be the guy where, the whole time I'm on the team, things just run smooth and ",
+    quoteAccent: "the hard parts never become anyone else's problem",
+    quoteAfter: ".",
+    meta: "STILL WORKING ON IT",
+    action: "SEE SYSTEMS",
   },
   focus: {
     label: "Current focus",
     items: [
-      "AI-powered tooling that amplifies — rather than replaces — human judgment.",
-      "Developing 'anti-doomscroll' mobile software to help people become well-adjusted and more intentional",
-      "Event-driven, non-blocking infrastructure on AWS + Terraform.",
-      "Cross-platform mobile experiences with React Native.",
+      "Building and shipping RouteKing, my own SaaS.",
+      "Making the app I build at work genuinely easy to use, and faster to work in.",
+      "A Jira integration that lets non-engineers tag a ticket and have Claude Code research the codebase and help build the product.",
+    ],
+  },
+  offClock: {
+    label: "Off the clock",
+    items: [
+      {
+        eyebrow: "Now playing",
+        title: "Mina the Hollower",
+        sub: "Steam",
+        image: "/off-clock/mina-the-hollower.png",
+      },
+      {
+        eyebrow: "Last boarded",
+        title: "Poudre River Trail",
+        sub: "Colorado",
+        image: "/off-clock/poudre-river-trail.jpg",
+      },
     ],
   },
 } as const;
