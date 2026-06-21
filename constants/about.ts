@@ -46,7 +46,7 @@ export const ABOUT_CONSTANTS = {
     label: "Off the clock",
     items: [
       {
-        eyebrow: "Now playing",
+        eyebrow: "Currently enjoying",
         title: "Mina the Hollower",
         sub: "Steam",
         image: "/off-clock/mina-the-hollower.png",
