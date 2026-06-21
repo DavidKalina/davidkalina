@@ -281,42 +281,36 @@ export const PROJECT_GRID_CONSTANTS = {
         },
       ],
       journey: {
-        label: "USER JOURNEY · record → sync → King",
+        label: "USER JOURNEY · discover → share → spectate",
         // `time` (seconds) syncs each beat to the demo video's playback. The
         // scrubber jumps the <video> to these marks; as it plays, the caption
-        // advances when currentTime crosses the next mark. TODO: tune these to
-        // your actual screen recording — they must ascend and the last should
-        // sit before the clip ends.
+        // advances when currentTime crosses the next mark. Marks below align to
+        // the burned-in section labels of the captured reel (discover / trail /
+        // share / live). They must ascend and the last sits before the clip ends.
         steps: [
           {
-            title: "Start a ride",
-            sub: "Pick a trail and a board. Broadcast goes live to your crew by default.",
+            title: "Discover trails",
+            sub: "A trail-first feed — heat-mapped surface, elevation gain, and your week's distance and Kings at a glance.",
             tech: "React Native · tRPC",
             time: 0,
           },
           {
-            title: "Captured on-device",
-            sub: "GPS + accelerometer buffer locally and auto-pause when you stop — nothing lost to bad signal.",
-            tech: "React Native",
-            time: 6,
+            title: "Read the trail",
+            sub: "Open any trail for a live terrain profile, surface smoothness from crack-density, and the segment King to beat.",
+            tech: "PostGIS · TypeScript",
+            time: 4,
           },
           {
-            title: "Crew watches live",
-            sub: "Pings stream over SSE; spectators see the dot move and send boosts.",
+            title: "Share a ride",
+            sub: "Post a photo straight to the trail — native picker, caption, and a direct-to-cloud upload the crew sees on the trail.",
+            tech: "React Native · tRPC",
+            time: 16,
+          },
+          {
+            title: "Watch live",
+            sub: "Spectate a rider in real time: a chase-cam glides over their track as pings stream in and the crew fires boosts.",
             tech: "tRPC · SSE",
-            time: 13,
-          },
-          {
-            title: "Sync reconciles",
-            sub: "Server runs gate-timing on the canonical track and awards segment Kings.",
-            tech: "PostGIS",
-            time: 22,
-          },
-          {
-            title: "Get your grade",
-            sub: "Post-ride King Grade: speed-vs-King per segment plus how cleanly you rode.",
-            tech: "TypeScript · PostGIS",
-            time: 30,
+            time: 42,
           },
         ],
       },

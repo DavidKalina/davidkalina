@@ -703,6 +703,11 @@
   }
   .demo-tilt > .demo-frame {
     height: 95%;
+    /* Definite ceiling: the height:100% chain up to .pv-stage collapses to
+       `auto` (the stage only sets min-height:100vh), so a real <video> — a
+       replaced element with intrinsic size — would otherwise render near its
+       natural dimensions and blow the panel up. vh is definite regardless. */
+    max-height: min(78vh, 660px);
     transform: rotateY(-12deg) rotateX(4deg) scale(0.95);
     transform-origin: center;
     box-shadow:
@@ -719,6 +724,10 @@
   .demo-tilt--portrait > .demo-frame {
     width: auto;
     height: 100%;
+    /* Same definite ceiling as the landscape frame — with aspect-ratio the
+       capped height also yields a definite width, so a portrait clip can't
+       drag the stage taller (see .demo-tilt > .demo-frame above). */
+    max-height: min(78vh, 660px);
     max-width: 100%;
     aspect-ratio: 9 / 16;
   }
