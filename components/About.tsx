@@ -7,7 +7,8 @@ import TechStackMarquee from "./TechStackBadges";
 
 const ModernAbout = () => {
   useReveal();
-  const { headline, paragraphs, stats, featured, focus } = ABOUT_CONSTANTS;
+  const { headline, paragraphs, stats, featured, focus, offClock } =
+    ABOUT_CONSTANTS;
 
   return (
     <section
@@ -54,17 +55,20 @@ const ModernAbout = () => {
 
           <div className="col-span-12 lg:col-span-5">
             <div
-              className="reveal p-10"
-              style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
+              className="reveal py-10"
+              style={{
+                borderTop: "1px solid var(--border)",
+                borderBottom: "1px solid var(--border)",
+              }}
             >
-              <div className="eyebrow mb-8">{featured.eyebrow}</div>
-              <p className="italic-serif text-[28px] leading-[1.25] text-fg">
+              <div className="eyebrow mb-7">{featured.eyebrow}</div>
+              <p className="italic-serif text-[26px] md:text-[28px] leading-[1.25] text-fg">
                 {featured.quoteBefore}
                 <span style={{ color: "var(--signal)" }}>{featured.quoteAccent}</span>
                 {featured.quoteAfter}
               </p>
               <div
-                className="mt-10 flex items-center justify-between pt-6"
+                className="mt-9 pt-5 flex items-center justify-between"
                 style={{ borderTop: "1px solid var(--border)" }}
               >
                 <span
@@ -82,24 +86,65 @@ const ModernAbout = () => {
               </div>
             </div>
 
-            <div className="mt-8 reveal">
-              <div className="eyebrow mb-5">{focus.label}</div>
-              <ul className="space-y-4">
+            <div className="mt-14 reveal">
+              <div className="eyebrow mb-6">{focus.label}</div>
+              <ul className="space-y-5">
                 {focus.items.map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-4 text-[15px] leading-[1.55] text-fg"
                   >
                     <span
-                      className="font-mono text-[11px] mt-1.5"
+                      className="font-mono text-[11px] tracking-[0.14em] mt-1.5 shrink-0"
                       style={{ color: "var(--fg-mute)" }}
                     >
-                      {String(i + 1).padStart(2, "0")}
+                      — {String(i + 1).padStart(2, "0")}
                     </span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="mt-14 reveal">
+              <div className="eyebrow mb-6">{offClock.label}</div>
+              <div
+                style={{
+                  borderTop: "1px solid var(--border)",
+                  borderBottom: "1px solid var(--border)",
+                }}
+              >
+                {offClock.items.map((item, i) => (
+                  <div
+                    key={item.title}
+                    className="flex items-center gap-5 py-5"
+                    style={
+                      i > 0 ? { borderTop: "1px solid var(--border)" } : undefined
+                    }
+                  >
+                    <div
+                      className="h-14 w-14 shrink-0 bg-cover bg-center"
+                      style={{
+                        backgroundImage: `url(${item.image})`,
+                        backgroundColor:
+                          "color-mix(in srgb, var(--fg-mute) 15%, transparent)",
+                      }}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="eyebrow mb-2">{item.eyebrow}</div>
+                      <div className="serif text-[18px] leading-tight text-fg truncate">
+                        {item.title}
+                      </div>
+                    </div>
+                    <span
+                      className="font-mono text-[11px] tracking-[0.12em] shrink-0"
+                      style={{ color: "var(--fg-mute)" }}
+                    >
+                      {item.sub.toUpperCase()}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
