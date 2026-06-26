@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { HERO_CONSTANTS } from "@/constants/hero";
 import { useReveal } from "@/hooks/useReveal";
-import HeroCard from "./HeroCard";
+
+// Decorative, desktop-only, and heavy (framer-motion + icon packs). Keep it out
+// of the critical path so the above-the-fold hero text paints first.
+const HeroCard = dynamic(() => import("./HeroCard"), { ssr: false });
 
 const ArrowGlyph = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
@@ -24,9 +28,9 @@ const ModernHero = () => {
       <div className="max-w-page mx-auto px-6 md:px-8">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 lg:col-span-7">
-            <p className="eyebrow mb-6 reveal">{HERO_CONSTANTS.eyebrow}</p>
+            <p className="eyebrow mb-6">{HERO_CONSTANTS.eyebrow}</p>
 
-            <h1 className="display text-[40px] sm:text-[56px] md:text-[72px] leading-[0.95] reveal text-fg">
+            <h1 className="display text-[40px] sm:text-[56px] md:text-[72px] leading-[0.95] text-fg">
               {headline.line1}
               <br />
               <span className="italic-serif" style={{ color: "var(--signal)" }}>
@@ -37,13 +41,13 @@ const ModernHero = () => {
               {headline.line3}
             </h1>
 
-            <p className="mt-10 max-w-[54ch] text-[17px] leading-[1.55] reveal text-fg-dim">
+            <p className="mt-10 max-w-[54ch] text-[17px] leading-[1.55] text-fg-dim">
               {description.before}
               <span className="italic-serif text-fg">{description.accent}</span>
               {description.after}
             </p>
 
-            <div className="mt-12 flex flex-wrap items-center gap-8 reveal">
+            <div className="mt-12 flex flex-wrap items-center gap-8">
               <Link
                 href="#work"
                 className="font-mono text-[12px] tracking-[0.1em] inline-flex items-center gap-3 px-6 py-4 rounded-full"

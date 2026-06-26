@@ -3,7 +3,7 @@ import { Space_Mono } from "next/font/google";
 import "./globals.css";
 import ModernFooter from "@/components/Footer";
 import ModernNavbar from "@/components/Navbar";
-import AnimatedBackground from "@/components/AnimatedBackground";
+import AnimatedBackground from "@/components/AnimatedBackgroundLazy";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
