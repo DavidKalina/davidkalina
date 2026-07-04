@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useEffect, useState, type CSSProperties } from "react";
-import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const getRandomFloat = (min: number, max: number) => Math.random() * (max - min) + min;
 
@@ -79,39 +79,6 @@ const getAnimationProps = (animation: ShapeConfig["animation"]) => {
   }
 };
 
-const RandomPulse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const controls = useAnimation();
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const pulse = async () => {
-      while (isMounted) {
-        const delay = getRandomFloat(8000, 20000);
-        await new Promise((resolve) => setTimeout(resolve, delay));
-        if (!isMounted) break;
-
-        const targetScale = Math.random() < 0.5 ? 0.9 : 1.1;
-        await controls.start({ scale: targetScale, transition: { duration: 0.3 } });
-        if (!isMounted) break;
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        if (!isMounted) break;
-
-        await controls.start({ scale: 1, transition: { duration: 0.3 } });
-      }
-    };
-
-    pulse();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [controls]);
-
-  return <motion.div animate={controls}>{children}</motion.div>;
-};
-
 /**
  * A single shape with its own zone drift + parallax scroll offset.
  * Hook-per-shape so each can own its own useTransform safely.
@@ -142,14 +109,12 @@ const Shape: React.FC<{
         }}
         className="absolute"
       >
-        <RandomPulse>
-          <motion.div
-            className={shape.className}
-            style={shape.style}
-            animate={animate}
-            transition={transition}
-          />
-        </RandomPulse>
+        <motion.div
+          className={shape.className}
+          style={shape.style}
+          animate={animate}
+          transition={transition}
+        />
       </motion.div>
     </motion.div>
   );
@@ -230,29 +195,6 @@ const AnimatedBackground = () => {
           opacity: 0.8,
           boxShadow: "0 16px 32px -8px rgba(0,0,0,0.25)",
         },
-      },
-
-      // Near layer — strongest parallax.
-      {
-        className: "w-10 h-10 md:w-16 md:h-16",
-        parallax: 0.4,
-        style: {
-          clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-          background: "var(--border)",
-          filter: "blur(1px)",
-          opacity: 0.7,
-        },
-        animation: "animate-float-medium",
-      },
-      {
-        className: "w-1.5 h-1.5 md:w-2 md:h-2 rounded-full",
-        parallax: 0.5,
-        style: {
-          background: "var(--signal)",
-          boxShadow: "0 0 10px var(--signal)",
-          opacity: 0.85,
-        },
-        animation: "animate-float-fast",
       },
     ],
     [],

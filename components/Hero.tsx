@@ -21,7 +21,7 @@ const ArrowGlyph = () => (
 
 const ModernHero = () => {
   useReveal();
-  const { headline, description, stats } = HERO_CONSTANTS;
+  const { headline, description } = HERO_CONSTANTS;
 
   return (
     <section className="relative pt-36 pb-28 md:pt-44 md:pb-40" id="top">
@@ -62,30 +62,12 @@ const ModernHero = () => {
               >
                 {HERO_CONSTANTS.cta.secondary}
               </Link>
-              <Link
-                href="/resume"
-                className="font-mono text-[12px] tracking-[0.1em] arrow-link text-fg-dim"
-              >
-                {HERO_CONSTANTS.cta.tertiary} ↓
-              </Link>
             </div>
           </div>
 
           <div className="hidden lg:block lg:col-span-5 relative lg:min-h-[500px] reveal">
             <HeroCard />
           </div>
-        </div>
-
-        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <div className="eyebrow mb-2">{stat.label}</div>
-              <div className="serif text-[40px] leading-none text-fg">
-                {stat.value}
-                <span style={{ color: "var(--fg-mute)" }}>{stat.unit}</span>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

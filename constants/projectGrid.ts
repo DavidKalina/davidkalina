@@ -91,7 +91,7 @@ export const PROJECT_GRID_CONSTANTS = {
   },
   projects: [
     {
-      num: "01˝",
+      num: "01",
       year: "2025",
       title: "AI Document Processing Pipeline",
       client: "Eel Data Systems",

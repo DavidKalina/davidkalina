@@ -15,14 +15,7 @@ export const HERO_CONSTANTS = {
   cta: {
     primary: "VIEW SELECTED WORK",
     secondary: "GET IN TOUCH",
-    tertiary: "RESUME",
   },
-  stats: [
-    { label: "Professional exp.", value: "4+", unit: "yrs" },
-    { label: "Pipeline cost cut", value: "98", unit: "%" },
-    { label: "Saved annually", value: "$20", unit: "k+" },
-    { label: "Domains shipped", value: "3", unit: "+" },
-  ],
 } as const;
 
 import {
