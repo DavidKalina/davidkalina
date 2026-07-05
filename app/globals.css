@@ -9,14 +9,14 @@
     --font-serif: var(--font-mono);
     --font-sans: var(--font-mono);
 
-    --bg: #faf9f5;
-    --bg-elev: #ffffff;
-    --bg-card: #ffffff;
-    --border: #e7e4dc;
-    --fg: #16160f;
-    --fg-dim: #52524c;
-    --fg-mute: #6d6d66;
-    --signal: #8a5a12;
+    --bg: #0c0c08;
+    --bg-elev: #16160f;
+    --bg-card: #1b1b15;
+    --border: #2a2a22;
+    --fg: #ecece5;
+    --fg-dim: #a3a39c;
+    --fg-mute: #71716b;
+    --signal: #e5a93a;
 
     /* shadcn aliases — kept so primitives in components/ui continue to work. */
     --background: var(--bg);
@@ -38,17 +38,6 @@
     --input: var(--border);
     --ring: var(--signal);
     --radius: 0px;
-  }
-
-  .dark {
-    --bg: #0c0c08;
-    --bg-elev: #16160f;
-    --bg-card: #1b1b15;
-    --border: #2a2a22;
-    --fg: #ecece5;
-    --fg-dim: #a3a39c;
-    --fg-mute: #71716b;
-    --signal: #e5a93a;
   }
 
   html {

@@ -5,7 +5,6 @@ import ModernFooter from "@/components/Footer";
 import ModernNavbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackgroundLazy";
 import { Analytics } from "@vercel/analytics/react";
-import { ThemeProvider } from "@/context/ThemeProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const spaceMono = Space_Mono({
@@ -36,14 +35,12 @@ export default function RootLayout({
       <body
         className={`${spaceMono.variable} font-mono antialiased min-h-screen flex flex-col`}
       >
-        <ThemeProvider defaultTheme="dark" storageKey="dk-theme">
-          <AnimatedBackground />
-          <ModernNavbar />
-          <main className="flex-1">{children}</main>
-          <Analytics />
-          <SpeedInsights />
-          <ModernFooter />
-        </ThemeProvider>
+        <AnimatedBackground />
+        <ModernNavbar />
+        <main className="flex-1">{children}</main>
+        <Analytics />
+        <SpeedInsights />
+        <ModernFooter />
       </body>
     </html>
   );

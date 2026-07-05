@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { useTheme } from "@/context/ThemeProvider";
 
 const LINKS = [
   { href: "/#work", label: "WORK" },
@@ -14,7 +13,6 @@ const LINKS = [
 
 const ModernNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
   const resolvedLinks = LINKS.map((link) => {
@@ -57,20 +55,6 @@ const ModernNavbar = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button
-            type="button"
-            aria-label="toggle theme"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="hidden md:inline-flex font-mono text-[11px] tracking-[0.1em] items-center gap-2 text-fg-dim hover:text-fg transition-colors"
-          >
-            <span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "var(--fg)" }}
-              aria-hidden
-            />
-            {theme === "dark" ? "DARK" : "LIGHT"}
-          </button>
-
           <a
             href="/resume.pdf"
             download
@@ -123,21 +107,9 @@ const ModernNavbar = () => {
               </Link>
             ))}
             <div
-              className="pt-5 flex items-center justify-between"
+              className="pt-5 flex items-center justify-end"
               style={{ borderTop: "1px solid var(--border)" }}
             >
-              <button
-                type="button"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="font-mono text-[11px] tracking-[0.1em] text-fg-dim inline-flex items-center gap-2"
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: "var(--fg)" }}
-                  aria-hidden
-                />
-                {theme === "dark" ? "DARK" : "LIGHT"}
-              </button>
               <div className="flex items-center gap-3">
                 <a
                   href="/resume.pdf"
