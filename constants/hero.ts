@@ -2,15 +2,15 @@ export const HERO_CONSTANTS = {
   eyebrow: "Full-Stack Software Engineer · Colorado / Remote",
   availability: "",
   headline: {
-    line1: "I build scalable",
-    accent: "systems ",
-    line2After: "and solve real-world ",
-    line3: "problems—end to end.",
+    line1: "I make things",
+    accent: "better and simpler ",
+    line2After: "than they were yesterday.",
+    line3: "Cheaper too, usually.",
   },
   description: {
-    before: "I design and ship ",
-    accent: "scalable, high-performing, non-blocking",
-    after: " systems — quickly, and with care for the people that use them.",
+    before: "I ask the tough questions and ",
+    accent: "narrow the scope.",
+    after: "AI handles the gruntwork.",
   },
   cta: {
     primary: "VIEW SELECTED WORK",
