@@ -5,9 +5,9 @@ import dynamic from "next/dynamic";
 import { HERO_CONSTANTS } from "@/constants/hero";
 import { useReveal } from "@/hooks/useReveal";
 
-// Decorative, desktop-only, and heavy (framer-motion + icon packs). Keep it out
-// of the critical path so the above-the-fold hero text paints first.
-const HeroCard = dynamic(() => import("./HeroCard"), { ssr: false });
+// Decorative, desktop-only, and heavy (three.js + the models). Keep it out of
+// the critical path so the above-the-fold hero text paints first.
+const HeroShowroom = dynamic(() => import("./HeroShowroom"), { ssr: false });
 
 const ArrowGlyph = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
@@ -66,7 +66,7 @@ const ModernHero = () => {
           </div>
 
           <div className="hidden lg:block lg:col-span-5 relative lg:min-h-[500px] reveal">
-            <HeroCard />
+            <HeroShowroom />
           </div>
         </div>
       </div>

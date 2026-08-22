@@ -5,7 +5,7 @@ export const ABOUT_CONSTANTS = {
     after: " systems across SaaS, logistics, and marketplaces.",
   },
   paragraphs: [
-    "Four-plus years of professional experience, with a focus on TypeScript, React, and Node.js — and a growing pull toward cloud infrastructure (AWS, Terraform) and AI-powered tooling. Recently, I've taken an interest in cutting down on unnecessary frameworks, packages, libraries, and abstractions while shipping lean, performant software that's easy to reason about.",
+    "5+ years across TypeScript, React, Node.js, and PostgreSQL. My current passion is figuring out how to combine the power of AI with software engineering philosophy to create pipelines that empower domain experts, project managers, and product owners to turn well-articulated vision into robust, shippable functionality.",
   ],
   stats: [
     {
@@ -27,10 +27,9 @@ export const ABOUT_CONSTANTS = {
   ],
   featured: {
     eyebrow: "How I work",
-    quoteBefore:
-      "I want to be the guy where, the whole time I'm on the team, things just run smooth and ",
-    quoteAccent: "the hard parts never become anyone else's problem",
-    quoteAfter: ".",
+    quoteBefore: "Move fast and break things.",
+    quoteAccent: "Behind the feature flag.",
+    quoteAfter: "",
     meta: "STILL WORKING ON IT",
     action: "SEE SYSTEMS",
   },
